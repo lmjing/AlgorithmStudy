@@ -1,3 +1,4 @@
+
 /**
  * Created by mijeong on 2016. 12. 1..
  * 셀프 넘버는 1949년 인도 수학자 D.R. Kaprekar가 이름 붙였다. 양의 정수 n에 대해서 d(n)을 n과 n의 각 자리수를 더하는 함수라고 정의하자. 예를 들어, d(75) = 75+7+5 = 87이다.
@@ -15,9 +16,32 @@
  10000보다 작거나 같은 셀프 넘버를 한 줄에 하나씩 출력하는 프로그램을 작성하시오.
  */
 public class num4673 {
+    public static boolean[] array = new boolean[10000];
     public static void main(String[] args){
+        for (int i =0;i<10000;i++) {
+            array[i] = true;
+        }
 
+        for(int i=1;i<=10000;i++){
+            if(array[i-1]==true)
+                d(i);
+        }
+
+        for(int i=0;i<10000;i++){
+            if(array[i] == true)
+                System.out.println(i+1);
+        }
     }
 
-    boolean test(int)
+    static void d(int num){
+        int result = num;
+        while(num>0){
+            result+=num%10;
+            num /= 10;
+        }
+        if(result<=10000) {
+            array[result - 1] = false;
+            d(result);
+        }
+    }
 }
