@@ -8,15 +8,19 @@ public class num2292 {
         Scanner stdin = new Scanner(System.in);
         int input = stdin.nextInt();
 
-        int before;
+        int before = 0;
         int num = 1;
         int i = 0;
-        do {
+        while (!(input>before&&input<=num))
+        {
             before = num;
-            num += i * 6;
+            num += (i) * 6;
             i++;
-        }while (!(input>before&&input<=num));
+        }
 
-        System.out.print(i);
+        if(input==1)
+            System.out.print(1);
+        else
+            System.out.print(i);
     }
 }
