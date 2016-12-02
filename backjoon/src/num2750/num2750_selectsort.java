@@ -1,9 +1,11 @@
+package num2750;
+
 import java.util.Scanner;
 
 /**
  * Created by mijeong on 2016. 12. 2..
  */
-public class num2750 {
+public class num2750_selectsort {
     public static void main(String[] args){
         Scanner stdin = new Scanner(System.in);
         int cnt = stdin.nextInt();
