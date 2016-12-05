@@ -6,7 +6,7 @@ import java.util.Scanner;
  * Created by mijeong on 2016. 12. 2..
  * 시간 복잡도 O(n^2) 버블 / 삽입 / 선택 정렬
  */
-public class sort_practice {
+public class num2750 {
     public static void main(String[] args){
         /* 입력 받기 */
         Scanner stdin = new Scanner(System.in);
