@@ -25,12 +25,34 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="num7287.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="num7287.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/num7287.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="45">
               <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="num10172.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/num10172.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="num11718.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/num11718.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="14" column="36" selection-start-line="14" selection-start-column="36" selection-end-line="14" selection-end-column="36" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -89,6 +111,8 @@
         <option value="$PROJECT_DIR$/src/num10828.java" />
         <option value="$PROJECT_DIR$/src/num10845.java" />
         <option value="$PROJECT_DIR$/src/num7287.java" />
+        <option value="$PROJECT_DIR$/src/num10172.java" />
+        <option value="$PROJECT_DIR$/src/num11718.java" />
       </list>
     </option>
   </component>
@@ -127,8 +151,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -199,7 +221,9 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -218,37 +242,7 @@
       <recent name="$PROJECT_DIR$/src/sort/num2751.java" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.num7287">
-    <configuration default="false" name="num1929" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="num1929" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="backjoon" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="false" name="num2747" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="num2747" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="backjoon" />
-      <envs />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Application.num11718">
     <configuration default="false" name="num10828" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="num10828" />
@@ -282,6 +276,36 @@
     <configuration default="false" name="num7287" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="num7287" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="backjoon" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="num10172" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" value="num10172" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="backjoon" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="num11718" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" value="num11718" />
       <option name="VM_PARAMETERS" />
       <option name="PROGRAM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" />
@@ -748,19 +772,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Application.num1929" />
-      <item index="1" class="java.lang.String" itemvalue="Application.num2747" />
-      <item index="2" class="java.lang.String" itemvalue="Application.num10828" />
-      <item index="3" class="java.lang.String" itemvalue="Application.num10845" />
-      <item index="4" class="java.lang.String" itemvalue="Application.num7287" />
+      <item index="0" class="java.lang.String" itemvalue="Application.num10828" />
+      <item index="1" class="java.lang.String" itemvalue="Application.num10845" />
+      <item index="2" class="java.lang.String" itemvalue="Application.num7287" />
+      <item index="3" class="java.lang.String" itemvalue="Application.num10172" />
+      <item index="4" class="java.lang.String" itemvalue="Application.num11718" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Application.num7287" />
-        <item index="1" class="java.lang.String" itemvalue="Application.num10845" />
-        <item index="2" class="java.lang.String" itemvalue="Application.num10828" />
-        <item index="3" class="java.lang.String" itemvalue="Application.num2747" />
-        <item index="4" class="java.lang.String" itemvalue="Application.num1929" />
+        <item index="0" class="java.lang.String" itemvalue="Application.num11718" />
+        <item index="1" class="java.lang.String" itemvalue="Application.num10172" />
+        <item index="2" class="java.lang.String" itemvalue="Application.num7287" />
+        <item index="3" class="java.lang.String" itemvalue="Application.num10845" />
+        <item index="4" class="java.lang.String" itemvalue="Application.num10828" />
       </list>
     </recent_temporary>
   </component>
@@ -794,12 +818,13 @@
       <workItem from="1481117239810" duration="193000" />
       <workItem from="1481685105510" duration="674000" />
       <workItem from="1481693405654" duration="173000" />
-      <workItem from="1482742100702" duration="257000" />
+      <workItem from="1482742100702" duration="1095000" />
+      <workItem from="1482820282341" duration="2147000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="60128000" />
+    <option name="totallyTimeSpent" value="63113000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -855,22 +880,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/num10809.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/num2675.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="35" selection-start-line="16" selection-start-column="35" selection-end-line="16" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/num2292.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1213,6 +1222,24 @@
         <state relative-caret-position="45">
           <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/num10172.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/num11718.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="36" selection-start-line="14" selection-start-column="36" selection-end-line="14" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
