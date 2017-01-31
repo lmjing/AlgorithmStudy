@@ -13,22 +13,82 @@ public class num1011 {
 
             int result = 0;
             int index = 1;
-            boolean flag = true;
+            int half = (y-x)/2;
+
+            while(half>index){
+                half -= index;
+                x+=index*2;
+                index++;
+                result+=2;
+            }
+
+            if(y-x<index-1){
+                --index;
+                x-=index*2;
+                result-=2;
+                if(y-x>=index*2+1){
+                    x+=index+1;
+                    result+=1;
+                }
+            }
 
             while (x<y){
-                if(flag==true){
+                if(y-x>=index){
                     x+=index;
                     ++result;
-                    flag = false;
-                }else{
-                    x+=index;
-                    ++result;
-                    index++;
-                    flag = true;
-                }
+                }else --index;
             }
 
             System.out.println(result);
         }
     }
 }
+
+/*
+#include <stdio.h>
+
+int main(void) {
+
+    int T = 0;
+    scanf("%d",&T);
+    int i=0;
+
+    for(i=0;i<T;i++){
+    	int x=0, y=0;
+    	scanf("%d",&x);
+    	scanf("%d",&y);
+
+        int result = 0;
+        int index = 1;
+        int half = (y-x)/2;
+        int flag = 0;
+
+        while(half>index){
+        	half -= index;
+        	x+=index*2;
+        	index++;
+        	result+=2;
+        }
+
+        if(y-x<index-1){
+        	--index;
+        	x-=index*2;
+        	result-=2;
+        	if(y-x>=index*2+1){
+        		x+=index+1;
+        		result+=1;
+        	}
+        }
+
+         while (x<y){
+         	if(y-x>=index){
+         		x+=index;
+         		++result;
+         	}else --index;
+        }
+
+        printf("%d\n",result);
+    }
+	return 0;
+}
+ */
