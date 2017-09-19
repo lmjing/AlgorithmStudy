@@ -14,7 +14,7 @@ class Kakao {
      MARK: Q1. 비밀지도
      모두 맞음
      */
-    func Solution1(_ n:Int, _ arr1:[Int], _ arr2:[Int]) -> [String] {
+    func solution1(_ n:Int, _ arr1:[Int], _ arr2:[Int]) -> [String] {
         var answer: [String] = []
         
         func convertBinary(_ input: Int) -> String {
@@ -90,33 +90,83 @@ class Kakao {
         
         return totalScore
     }
-}
-
-//3번 교체시기가 언제인지 모르겠음
-func solution3(_ cacheSize:Int, _ cities:[String]) -> Int {
-    var count = [String:Int]()
-    var cache = [String]()
-    var answer = 0
     
-    for c in cities {
-        let city = c.uppercased()
-        if cache.contains(city) {
-            count[city] = count[city]! + 1
-            answer += 1
-            cache = cache.sorted(by: { count[$0]! < count[$1]! })
-        }else if cacheSize == 0 {
-            answer += 5
-        }else{
-            if cache.count >= cacheSize {
-                cache.removeFirst()
-            }
-            cache.append(city)
-            count[city] = count[city] != nil ? count[city]!+1 : 0
-            answer += 5
+    /*
+     MARK: Q3. 캐시
+     못품
+     
+     LRU 알고리즘 : 각 실행시간을 알아 둔 후, 제일 오래된 값과 교체한다. ( 기존에 있었다면, 나중 시간으로 변경됨 )
+     다시푸니깐 얼마 안걸림 ( 원리 이해 X )
+     */
+    func solution3(_ cacheSize:Int, _ cities:[String]) -> Int {
+        if cacheSize == 0 {
+            return cities.count * 5
         }
+        
+        var answer = 0
+        var cache = [String]()
+        
+        for c in cities {
+            let city = c.uppercased()
+            if let index = cache.index(of: city) {
+                //cache에 있다면 없앤 후 다시 넣어준다.
+                cache.remove(at: index)
+                cache.append(city)
+                answer += 1
+            }else {
+                if cache.count >= cacheSize {
+                    cache.removeFirst()
+                }
+                cache.append(city)
+                answer += 5
+            }
+        }
+        
+        return answer
     }
     
-    return answer
+    /*
+     MARK: Q4. 셔틀버스
+     못품
+     
+     input
+     n : 셔틀 운행 횟수, t: 셔틀 운행 간격, m : 한 셔틀에 탈 수 있는 최대 크루 수, timetable : 크루가 대기열에 도착하는 시각을 모은 배열
+     
+     조건
+     0 ＜ n ≦ 10, 0 ＜ t ≦ 60, 0 ＜ m ≦ 45
+     */
+    func solution4(_ n:Int, _ t:Int, _ m:Int, _ timetable:[String]) -> String {
+        var dp = [[String]]()
+        
+        var sortedTable = timetable.sorted()
+        var index = 0
+        
+        let defaultTime = "09:00"
+        var busTime = defaultTime
+        
+        for i in 0..<n {
+            var visit = [String]()
+            for j in 0..<m {
+                var stringTime = sortedTable[index].characters
+                //            if diff.minute! <= 0 {
+                //                visit.append(sortedTable[index])
+                //                index += 1
+                //            }
+            }
+            dp.append(visit)
+            //        busTime?.addTimeInterval(TimeInterval(t * 60))
+        }
+        //
+        //    var lastRow = dp.count - 1
+        //    while lastRow > 0 && dp[lastRow].count >= m {
+        //        lastRow -= 1
+        //    }
+        //    let enableLastTime = defaultTime?.addingTimeInterval(TimeInterval(t * 60 * lastRow))
+        //    let RowTime = format.string(from: enableLastTime!)
+        //    
+        return ""
+    }
+
 }
 
 // 시간 계산 못하겠음
@@ -159,38 +209,6 @@ func solution3(_ cacheSize:Int, _ cities:[String]) -> Int {
 //
 //    return RowTime
 //}
-
-func solution4(_ n:Int, _ t:Int, _ m:Int, _ timetable:[String]) -> String {
-    var dp = [[String]]()
-    
-    var sortedTable = timetable.sorted()
-    var index = 0
-    
-    let defaultTime = "09:00"
-    var busTime = defaultTime
-    
-    for i in 0..<n {
-        var visit = [String]()
-        for j in 0..<m {
-            var stringTime = sortedTable[index].characters
-//            if diff.minute! <= 0 {
-//                visit.append(sortedTable[index])
-//                index += 1
-//            }
-        }
-        dp.append(visit)
-//        busTime?.addTimeInterval(TimeInterval(t * 60))
-    }
-//    
-//    var lastRow = dp.count - 1
-//    while lastRow > 0 && dp[lastRow].count >= m {
-//        lastRow -= 1
-//    }
-//    let enableLastTime = defaultTime?.addingTimeInterval(TimeInterval(t * 60 * lastRow))
-//    let RowTime = format.string(from: enableLastTime!)
-//    
-    return ""
-}
 
 func solution5(_ str1:String, _ str2:String) -> Int {
     

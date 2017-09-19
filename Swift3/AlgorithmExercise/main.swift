@@ -10,3 +10,5 @@ import Foundation
 
 let kakaoTest = KakaoTest()
 kakaoTest.testSolution1()
+kakaoTest.testSolution2()
+kakaoTest.testSolution3()
