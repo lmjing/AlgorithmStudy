@@ -144,13 +144,6 @@ class Kakao {
         var startTime = 900
         var busTime = startTime
         
-        //TODO : blog에 string 관련 포스팅하기 ( at remove에 대해 )
-//        for s in timetable {
-//            var strTime = s
-//            let ee = strTime.remove(at: strTime.index(strTime.startIndex, offsetBy: 2))
-////            print(strTime) // 삭제된 값 저장
-////            print(ee) //삭제된 위치에 있던 값만 저장됨
-//        }
         func parseStringTime(hour: Int, minute: Int) -> String {
             let strHour = hour < 10 ? "0" + String(hour) : String(hour)
             let strMinute = minute < 10 ? "0" + String(minute) : String(minute)
