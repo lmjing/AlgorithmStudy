@@ -136,34 +136,74 @@ class Kakao {
      0 ＜ n ≦ 10, 0 ＜ t ≦ 60, 0 ＜ m ≦ 45
      */
     func solution4(_ n:Int, _ t:Int, _ m:Int, _ timetable:[String]) -> String {
-        var dp = [[String]]()
+        var resultTable: [[Int]] = {
+            let row = [Int]()
+            return Array(repeating: row, count: n)
+        }()
+        var inputTimeTable = timetable.sorted()
+        var startTime = 900
+        var busTime = startTime
         
-        var sortedTable = timetable.sorted()
-        var index = 0
-        
-        let defaultTime = "09:00"
-        var busTime = defaultTime
-        
-        for i in 0..<n {
-            var visit = [String]()
-            for j in 0..<m {
-                var stringTime = sortedTable[index].characters
-                //            if diff.minute! <= 0 {
-                //                visit.append(sortedTable[index])
-                //                index += 1
-                //            }
-            }
-            dp.append(visit)
-            //        busTime?.addTimeInterval(TimeInterval(t * 60))
+        //TODO : blog에 string 관련 포스팅하기 ( at remove에 대해 )
+//        for s in timetable {
+//            var strTime = s
+//            let ee = strTime.remove(at: strTime.index(strTime.startIndex, offsetBy: 2))
+////            print(strTime) // 삭제된 값 저장
+////            print(ee) //삭제된 위치에 있던 값만 저장됨
+//        }
+        func parseStringTime(hour: Int, minute: Int) -> String {
+            let strHour = hour < 10 ? "0" + String(hour) : String(hour)
+            let strMinute = minute < 10 ? "0" + String(minute) : String(minute)
+            
+            return strHour + ":" + strMinute
         }
-        //
-        //    var lastRow = dp.count - 1
-        //    while lastRow > 0 && dp[lastRow].count >= m {
-        //        lastRow -= 1
-        //    }
-        //    let enableLastTime = defaultTime?.addingTimeInterval(TimeInterval(t * 60 * lastRow))
-        //    let RowTime = format.string(from: enableLastTime!)
-        //    
+        
+        for bus in 0..<n {
+            for _ in 0..<m {
+                guard var strTime = inputTimeTable.first else { break }
+                strTime.remove(at: strTime.index(strTime.startIndex, offsetBy: 2))
+                if let intTime = Int(strTime) {
+                    //작거나 같을 경우에만 저장
+                    if intTime <= busTime {
+                        resultTable[bus].append(intTime)
+                        inputTimeTable.removeFirst()
+                    }else {
+                        break
+                    }
+                }
+            }
+            busTime += t
+        }
+        
+        for row in (0..<resultTable.count).reversed() {
+            let rowCount = resultTable[row].count
+            let time = startTime + t * row
+
+            if rowCount >= m {
+                //꽉 차 자리가 없는 경우
+                if let last = resultTable[row].last {
+                    //마지막 사람이 이전+1 ~ 해당 시간에 해당하는 사람일 경우
+                    //맨 처음일 경우 am00:01부터
+                    if last <= time && (row == 0 ? last > 0 : last > time - 10 ) {
+                        //TODO : 마지막 사람 - 1 분 구현한 후 리턴
+                        let resultTime = last % 100 > 0 ? last - 1 : last - 100 + 59
+                        let hour = resultTime / 100, minute = resultTime % 100
+                        return parseStringTime(hour: hour, minute: minute)
+                    }else {
+                        //윗 행으로 올라가 확인
+                        continue
+                    }
+                }
+            }else {
+                //자리가 있는 경우(비었거나)
+                //TODO : 시작시간 + t * row 시간 계산하여 리턴
+                let add = t * row
+                let hour = startTime / 100 + add / 60
+                let minute = startTime % 100 + add % 60
+                return parseStringTime(hour: hour, minute: minute)
+            }
+        }
+        
         return ""
     }
 

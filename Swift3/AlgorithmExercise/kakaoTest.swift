@@ -62,4 +62,20 @@ class KakaoTest {
         test.equal(answer: kakao.solution3(0, ["Jeju", "Pangyo", "Seoul", "NewYork", "LA"]), expect: 25, funcName: funcName)
     }
     
+    func testSolution4() {
+        let funcName = "kakao Solution4"
+        test.equal(answer: kakao.solution4(1, 1, 5, ["08:00", "08:01", "08:02", "08:03"]),
+                   expect: "09:00", funcName: funcName)
+        test.equal(answer: kakao.solution4(2, 10, 2, ["09:10", "09:09", "08:00"]),
+                   expect: "09:09", funcName: funcName)
+        test.equal(answer: kakao.solution4(2, 1, 2, ["09:00", "09:00", "09:00", "09:00"]),
+                   expect: "08:59", funcName: funcName)
+        test.equal(answer: kakao.solution4(1, 1, 5, ["00:01", "00:01", "00:01", "00:01", "00:01"]),
+                   expect: "00:00", funcName: funcName)
+        test.equal(answer: kakao.solution4(1, 1, 1, ["23:59"]),
+                   expect: "09:00", funcName: funcName)
+        test.equal(answer: kakao.solution4(10, 60, 45, ["23:59","23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59"]),
+                   expect: "18:00", funcName: funcName)
+    }
+    
 }
