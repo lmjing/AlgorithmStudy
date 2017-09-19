@@ -8,84 +8,88 @@
 
 import Foundation
 
-/*
- 비밀지도
- 1. 2진수 변환
- 
- 2.
- OR 벽 -> 벽(1)
- AND 공백 -> 공백(0)
- --> OR 처리
- */
-func solution1(_ n:Int, _ arr1:[Int], _ arr2:[Int]) -> [String] {
-    var answer: [String] = []
+class Kakao {
     
-    func convertBinary(_ input: Int) -> String {
-        var result = ""
-        var num = input
+    /*
+     MARK: Q1. 비밀지도
+     모두 맞음
+     */
+    func Solution1(_ n:Int, _ arr1:[Int], _ arr2:[Int]) -> [String] {
+        var answer: [String] = []
         
-        while num > 0 {
-            let str = num % 2 == 1 ? "#" : " "
-            num /= 2
-            result = str + result
+        func convertBinary(_ input: Int) -> String {
+            var result = ""
+            var num = input
+            
+            //2. 2진수로 변환하고 1일 경우 벽(#), 0일 경우 공백( )으로 변환한다.
+            while num > 0 {
+                let str = num % 2 == 1 ? "#" : " "
+                num /= 2
+                result = str + result
+            }
+            //3. 수로 변환하여 n만큼의 자리수를 못 채우는 경우 앞 부분을 모두 공백으로 채워준다.
+            let diff = n - result.characters.count
+            
+            return String(repeatElement(" ", count: diff)) + result
         }
-        let diff = n - result.characters.count
         
-        return String(repeatElement(" ", count: diff)) + result
+        for index in 0..<n {
+            //1. 숫자상태에서 OR 처리해준다.
+            let orResult = arr1[index] | arr2[index]
+            answer.append(convertBinary(orResult))
+        }
+        
+        return answer
     }
     
-    for index in 0..<n {
-        let orResult = arr1[index] | arr2[index]
-        answer.append(convertBinary(orResult))
-    }
-    
-    return answer
-}
-
-//2개 틀림
-func solution2(_ dartResult:String) -> Int {
-    let input = dartResult.characters
-    var scoreList:[Int] = [Int]()
-    var checkTen = false
-    
-    for c in input {
-        let cursor = scoreList.count - 1
-        if let score = Int(String(c)) {
-            if score == 0 && checkTen == true {
-                scoreList[cursor] = 10
-            }else {
-                if score == 1 {
-                    checkTen = true
+    /*
+     MARK: Q2. 다트 게임
+     시험 채점 때 2개 틀림
+     */
+    func solution2(_ dartResult:String) -> Int {
+        let input = dartResult.characters
+        var scoreList:[Int] = [Int]()
+        var checkTen = false
+        
+        for c in input {
+            let cursor = scoreList.count - 1
+            if let score = Int(String(c)) {
+                if score == 0 && checkTen == true {
+                    scoreList[cursor] = 10
                 }else {
-                    checkTen = false
+                    if score == 1 {
+                        checkTen = true
+                    }else {
+                        checkTen = false
+                    }
+                    scoreList.append(score)
                 }
-                scoreList.append(score)
-            }
-        }else {
-            let score = scoreList[cursor]
-            switch c {
-            case "D":
-                scoreList[cursor] = score * score
-            case "T":
-                scoreList[cursor] = score * score * score
-            case "*":
-                scoreList[cursor] = score * 2
-                if cursor > 0 {
-                    scoreList[cursor - 1] *= 2
+            }else {
+                let score = scoreList[cursor]
+                switch c {
+                case "D":
+                    scoreList[cursor] = score * score
+                case "T":
+                    scoreList[cursor] = score * score * score
+                case "*":
+                    scoreList[cursor] = score * 2
+                    if cursor > 0 {
+                        scoreList[cursor - 1] *= 2
+                    }
+                case "#":
+                    scoreList[cursor] = -score
+                default: continue
                 }
-            case "#":
-                scoreList[cursor] = -score
-            default: continue
             }
         }
+        
+        var totalScore = 0
+        for v in scoreList {
+            totalScore += v
+        }
+        
+        return totalScore
     }
-    
-    var totalScore = 0
-    for v in scoreList {
-        totalScore += v
-    }
-    
-    return totalScore
 }
 
 //3번 교체시기가 언제인지 모르겠음

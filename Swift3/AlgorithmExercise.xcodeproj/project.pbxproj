@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5048580E1F71044B00D57AD5 /* AlgorithmTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5048580D1F71044B00D57AD5 /* AlgorithmTest.swift */; };
+		504858111F7104AF00D57AD5 /* kakaoTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504858101F7104AF00D57AD5 /* kakaoTest.swift */; };
 		5084A6C61F68FC3400629A59 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5084A6C51F68FC3400629A59 /* main.swift */; };
-		50C33A981F6BB17700741AB8 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C33A971F6BB17700741AB8 /* Test.swift */; };
+		50C33A981F6BB17700741AB8 /* KaKaoDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C33A971F6BB17700741AB8 /* KaKaoDemo.swift */; };
 		50C33A9A1F6BB31C00741AB8 /* baekjun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C33A991F6BB31C00741AB8 /* baekjun.swift */; };
-		50C33A9E1F6CE75300741AB8 /* KaKao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C33A9D1F6CE75300741AB8 /* KaKao.swift */; };
+		50C33A9E1F6CE75300741AB8 /* kakaoAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C33A9D1F6CE75300741AB8 /* kakaoAlgorithm.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,11 +28,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5048580D1F71044B00D57AD5 /* AlgorithmTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlgorithmTest.swift; sourceTree = "<group>"; };
+		504858101F7104AF00D57AD5 /* kakaoTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = kakaoTest.swift; sourceTree = "<group>"; };
 		5084A6C21F68FC3400629A59 /* AlgorithmExercise */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = AlgorithmExercise; sourceTree = BUILT_PRODUCTS_DIR; };
 		5084A6C51F68FC3400629A59 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		50C33A971F6BB17700741AB8 /* Test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
+		50C33A971F6BB17700741AB8 /* KaKaoDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KaKaoDemo.swift; sourceTree = "<group>"; };
 		50C33A991F6BB31C00741AB8 /* baekjun.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = baekjun.swift; sourceTree = "<group>"; };
-		50C33A9D1F6CE75300741AB8 /* KaKao.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KaKao.swift; sourceTree = "<group>"; };
+		50C33A9D1F6CE75300741AB8 /* kakaoAlgorithm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = kakaoAlgorithm.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +48,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5048580F1F7104A000D57AD5 /* Kakao */ = {
+			isa = PBXGroup;
+			children = (
+				50C33A9D1F6CE75300741AB8 /* kakaoAlgorithm.swift */,
+				504858101F7104AF00D57AD5 /* kakaoTest.swift */,
+			);
+			name = Kakao;
+			sourceTree = "<group>";
+		};
 		5084A6B91F68FC3400629A59 = {
 			isa = PBXGroup;
 			children = (
@@ -64,9 +77,10 @@
 			isa = PBXGroup;
 			children = (
 				5084A6C51F68FC3400629A59 /* main.swift */,
-				50C33A9D1F6CE75300741AB8 /* KaKao.swift */,
-				50C33A971F6BB17700741AB8 /* Test.swift */,
+				5048580F1F7104A000D57AD5 /* Kakao */,
+				50C33A971F6BB17700741AB8 /* KaKaoDemo.swift */,
 				50C33A991F6BB31C00741AB8 /* baekjun.swift */,
+				5048580D1F71044B00D57AD5 /* AlgorithmTest.swift */,
 			);
 			path = AlgorithmExercise;
 			sourceTree = "<group>";
@@ -130,9 +144,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				50C33A9A1F6BB31C00741AB8 /* baekjun.swift in Sources */,
-				50C33A9E1F6CE75300741AB8 /* KaKao.swift in Sources */,
+				50C33A9E1F6CE75300741AB8 /* kakaoAlgorithm.swift in Sources */,
+				5048580E1F71044B00D57AD5 /* AlgorithmTest.swift in Sources */,
+				504858111F7104AF00D57AD5 /* kakaoTest.swift in Sources */,
 				5084A6C61F68FC3400629A59 /* main.swift in Sources */,
-				50C33A981F6BB17700741AB8 /* Test.swift in Sources */,
+				50C33A981F6BB17700741AB8 /* KaKaoDemo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
