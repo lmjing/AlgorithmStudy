@@ -80,13 +80,15 @@ class KakaoTest {
     
     func testSolution5() {
         let funcName = "kakao Solution5"
-        test.equal(answer: kakao.solution5("FRANCE", "french"), expect:
-            16384, funcName: funcName)
-        test.equal(answer: kakao.solution5("handshake", "shake hands"), expect:
-            65536, funcName: funcName)
-        test.equal(answer: kakao.solution5("aa1+aa2", "AAAA12"), expect:
-            43690, funcName: funcName)
-        test.equal(answer: kakao.solution5("E=M*C^2", "e=m*c^2"), expect:
-            65536, funcName: funcName)
+        test.equal(answer: kakao.solution5("FRANCE", "french"), expect: 16384, funcName: funcName)
+        test.equal(answer: kakao.solution5("handshake", "shake hands"), expect: 65536, funcName: funcName)
+        test.equal(answer: kakao.solution5("aa1+aa2", "AAAA12"), expect: 43690, funcName: funcName)
+        test.equal(answer: kakao.solution5("E=M*C^2", "e=m*c^2"), expect: 65536, funcName: funcName)
+    }
+    
+    func testSolution6() {
+        let funcName = "kakao Solution6"
+        test.equal(answer: kakao.solution6(4, 5, ["CCBDE", "AAADE", "AAABF", "CCBBF"]), expect: 14, funcName: funcName)
+        test.equal(answer: kakao.solution6(6, 6, ["TTTANT", "RRFACC", "RRRFCC", "TRRRAA", "TTMMMF", "TMMTTJ"]), expect: 15, funcName: funcName)
     }
 }

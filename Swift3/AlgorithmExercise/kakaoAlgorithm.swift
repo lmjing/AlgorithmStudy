@@ -224,7 +224,31 @@ class Kakao {
         
         return Int(answer * 65536)
     }
-}g
+    
+    func solution6(_ m:Int, _ n:Int, _ board:[String]) -> Int {
+        var answer = 0
+        var dp:[[Character?]] = [Array(board[0].characters)]
+        
+        for i in 0..<m-1 {
+            let currentWords = Array(board[i].characters)
+            let nextWords = Array(board[i+1].characters)
+            dp.append(nextWords)
+            for j in 0..<n-1 {
+                let word = currentWords[j]
+                
+                guard word == currentWords[j+1] else { continue }
+                guard word == nextWords[j] else { continue }
+                guard word == nextWords[j+1] else { continue }
+                //모두 동일
+                answer += 1
+                dp[i][j] = nil; dp[i][j+1] = nil
+                dp[i+1][j] = nil; dp[i+1][j+1] = nil
+            }
+        }
+        
+        return answer
+    }
+}
 // 시간 계산 못하겠음
 //func solution4(_ n:Int, _ t:Int, _ m:Int, _ timetable:[String]) -> String {
 //    var dp = [[String]]()
