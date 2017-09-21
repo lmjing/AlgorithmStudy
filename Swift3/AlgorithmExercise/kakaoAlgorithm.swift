@@ -199,9 +199,32 @@ class Kakao {
         
         return ""
     }
-
-}
-
+    
+    func solution5(_ str1:String, _ str2:String) -> Int {
+        //1. 문자 2자씩 끊기
+        func divSumWord(str: String) -> [String] {
+            let characterSet = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyz")
+            let originWords = Array(str.lowercased().characters)
+            var words = [String]()
+            for i in 1..<originWords.count {
+                let before = String(originWords[i-1]), current = String(originWords[i])
+                if characterSet.contains(before.unicodeScalars.first!) && characterSet.contains(current.unicodeScalars.first!) {
+                    words.append(before + current)
+                }
+            }
+            return words
+        }
+        
+        let str1Words = divSumWord(str: str1), str2Words = divSumWord(str: str2)
+        let temp = str1Words
+        let and = temp.filter({ str2Words.contains($0)})
+        let or = str2Words + (str1Words.filter({ !and.contains($0) }))
+        
+        let answer:Double = or.count == 0 ? 1.0 : Double(and.count) / Double(or.count)
+        
+        return Int(answer * 65536)
+    }
+}g
 // 시간 계산 못하겠음
 //func solution4(_ n:Int, _ t:Int, _ m:Int, _ timetable:[String]) -> String {
 //    var dp = [[String]]()
@@ -242,17 +265,6 @@ class Kakao {
 //
 //    return RowTime
 //}
-
-func solution5(_ str1:String, _ str2:String) -> Int {
-    
-    //1. 문자 2자씩 끊기
-    var test = str1.characters.reduce(" ", { String($0) + String($1) })
-    var str1Array = [String]()
-    
-    print(test)
-    
-    return 0
-}
 
 func solution6(_ m:Int, _ n:Int, _ board:[String]) -> Int {
     var answer = 0
