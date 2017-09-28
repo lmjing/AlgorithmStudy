@@ -226,25 +226,43 @@ class Kakao {
     }
     
     func solution6(_ m:Int, _ n:Int, _ board:[String]) -> Int {
-        var answer = 0
-        var dp:[[Character?]] = [Array(board[0].characters)]
-        
-        for i in 0..<m-1 {
-            let currentWords = Array(board[i].characters)
-            let nextWords = Array(board[i+1].characters)
-            dp.append(nextWords)
-            for j in 0..<n-1 {
-                let word = currentWords[j]
-                
-                guard word == currentWords[j+1] else { continue }
-                guard word == nextWords[j] else { continue }
-                guard word == nextWords[j+1] else { continue }
-                //모두 동일
-                answer += 1
-                dp[i][j] = nil; dp[i][j+1] = nil
-                dp[i+1][j] = nil; dp[i+1][j+1] = nil
+        var answer = 0, check = 0
+        var oldBoard:[[Character?]] = {
+            var result = [[Character?]]()
+            for b in board {
+                result.append(Array(b.characters))
             }
-        }
+            return result
+        }()
+        var newBoard:[[Character?]] = oldBoard
+        
+        
+        
+        repeat {
+            // 새로 검사하는 경우, 추후 비교를 위해 check를 answer로 초기화
+            check = answer
+            //전체를 순회하며 확인한다.
+            for i in 0..<m-1 {
+                for j in 0..<n-1 {
+                    let word = oldBoard[i][j]
+                    
+                    guard word == oldBoard[i][j+1] else { continue }
+                    guard word == oldBoard[i+1][j] else { continue }
+                    guard word == oldBoard[i+1][j+1] else { continue }
+                    //모두 동일
+                    answer += 1
+                    
+                    //가장 위에 있는거 모두 내린다.
+                    for k in (0..<i).reversed() {
+                        newBoard[k+2][j] = newBoard[k][j]
+                        newBoard[k+2][j+1] = newBoard[k+2][j+1]
+                    }
+                    newBoard[0][j] = nil; newBoard[1][j] = nil;
+                    newBoard[0][j+1] = nil; newBoard[1][j+1] = nil;
+                }
+            }
+        } while answer - check > 0
+
         
         return answer
     }
