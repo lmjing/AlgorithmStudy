@@ -50,11 +50,3 @@ import Foundation
 //}
 //print(low-1)
 
-
-// beakjun 2293
-let input = readLine()!.characters.split(separator: " ").map{ Int(String($0))! }
-let n = input[0]
-let k = input[1]
-let coin = readLine()!.characters.split(separator: " ").map{ Int(String($0))! }
-
-for 
