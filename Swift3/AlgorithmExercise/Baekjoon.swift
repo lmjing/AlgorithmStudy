@@ -39,4 +39,57 @@ class Baekjun {
             print(s)
         }
     }
+    
+//    func num1562() -> Decimal{
+//        func gettt(n: Int) {
+//            if n < 10 {
+//                return 0
+//            }else if n == 10{
+//                return 1
+//            }else {
+//                let rest = n - 10
+//                let available = pow(2, rest / 2)
+//                if rest % 2 == 0 {
+//                    return available * 11 * 9
+//                }else {
+//                    return available * 2 * 9
+//                }
+//            }
+//        }
+//        
+//        var sum:Decimal = 0
+//        for i in 1...40 {
+//            sum += gettt(n: i)
+//        }
+//        return sum
+//    }
+    
+    func num6378() {
+        var array: [String] = []
+        while true {
+            guard let input = readLine() else { break }
+            if input == "0" {
+                break
+            }else {
+                array.append(input)
+            }
+        }
+        
+        for input in array {
+            var strArray = Array(input)
+            while true {
+                var sum = 0
+                for su in strArray {
+                    sum += Int(su.description)!
+                }
+                
+                if sum >= 10 {
+                    strArray = Array(String(sum))
+                }else {
+                    print(sum)
+                    break
+                }
+            }
+        }
+    }
 }
