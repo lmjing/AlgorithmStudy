@@ -21,40 +21,6 @@
 ////
 //import Foundation
 //
-//let line1 = readLine()
-//let line2 = readLine()
-//
-//func sumOfHeightTree(_ height: Int, tree: [Int]) -> Int{
-//    var sum = 0
-//    for t in tree {
-//        sum += t - height > 0 ? t - height : 0
-//    }
-//    return sum
-//}
-//
-//if let line1 = line1, let line2 = line2 {
-//    let line1Characters = line1.characters.split(separator: " ")
-//    let line2Characters = line2.characters.split(separator: " ")
-//
-//    let m = Int(String(line1Characters[0]))!
-//    let n = Int(String(line1Characters[1]))!
-//    let numbers = line2Characters.map { Int(String($0))! }
-//
-//    let sortedTree = numbers.sorted()
-//    var low = sortedTree[0] - 1; var high = sortedTree[1];
-//    var mid = 0
-//    while low < high {
-//        mid = ( low + high ) / 2
-//        let sum = sumOfHeightTree(mid, tree: sortedTree)
-//        if sum <= n {
-//            high = mid
-//        }else {
-//            low = mid + 1
-//        }
-//    }
-//    print(mid - 1)
-//}
-//
 //
 ////import Foundation
 ////var sol = 0
@@ -90,31 +56,41 @@
 
 import Foundation
 
-var sum = 0
-var input:[Int] = []
-for _ in 0..<9 {
-    let su = Int(readLine()!)!
-    input.append(su)
-    sum += su
-}
+//let n = Int(readLine()!)!
 
-func getAnswer() -> [Int] {
-    for i in 0..<9 {
-        let one = input[i]
-        for j in ( i + 1 )..<9 {
-                let two = input[j]
-                let sub = sum - one - two
-                if sub == 100 {
-                    input.remove(at: j)
-                    input.remove(at: i)
-
-                    return input.sorted()
-                }
-            }
+func num1562(n: Int) -> Decimal{
+    if n < 10 {
+        return 0
+    }else if n == 10{
+        return 1
+    }else {
+        let rest = n - 10
+        let available = pow(2, rest / 2)
+        if rest % 2 == 0 {
+            return available * 11 * 9
+        }else {
+            return available * 2 * 9
+        }
     }
-    return []
 }
 
-for s in getAnswer() {
-    print(s)
+var sum:Decimal = 0
+for i in 1...40 {
+    sum += num1562(n: i)
 }
+print(sum)
+
+//if n < 10 {
+//    print(0)
+//}else if n == 10{
+//    print(1)
+//}else {
+//    let rest = n - 10
+//    let available = pow(2, rest / 2)
+//    if rest % 2 == 0 {
+//        print(available * 11)
+//    }else {
+//        print(available * 2)
+//    }
+//}
+

@@ -35,6 +35,8 @@ class Baekjun {
             return []
         }
         
-        print(getAnswer())
+        for s in getAnswer() {
+            print(s)
+        }
     }
 }
