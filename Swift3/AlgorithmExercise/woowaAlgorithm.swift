@@ -40,4 +40,14 @@ class WoowaAlgorithm {
         
         return answer
     }
+    
+    public func solution2(_ A : Int, _ B : Int, _ K : Int) -> Int {
+        var count = 0
+        for i in A...B {
+            if i % K == 0 {
+                count += 1
+            }
+        }
+        return count
+    }
 }

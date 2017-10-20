@@ -7,3 +7,9 @@
 //
 
 import Foundation
+
+class Baekjun {
+    func num2293() -> Int {
+        <#function body#>
+    }
+}
