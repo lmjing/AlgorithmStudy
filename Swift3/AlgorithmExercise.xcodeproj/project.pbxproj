@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		502848E21F99ACD900172767 /* baekjunTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502848E11F99ACD900172767 /* baekjunTest.swift */; };
 		5048580E1F71044B00D57AD5 /* AlgorithmTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5048580D1F71044B00D57AD5 /* AlgorithmTest.swift */; };
 		504858111F7104AF00D57AD5 /* kakaoTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504858101F7104AF00D57AD5 /* kakaoTest.swift */; };
 		50501CDD1F98C49900A2BEAC /* Baekjoon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50501CDC1F98C49900A2BEAC /* Baekjoon.swift */; };
@@ -14,7 +15,6 @@
 		50B39BE31F96F961006A9DE2 /* woowaAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B39BE21F96F961006A9DE2 /* woowaAlgorithm.swift */; };
 		50B39BE51F96FA42006A9DE2 /* woowaTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B39BE41F96FA42006A9DE2 /* woowaTest.swift */; };
 		50C33A981F6BB17700741AB8 /* KaKaoDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C33A971F6BB17700741AB8 /* KaKaoDemo.swift */; };
-		50C33A9A1F6BB31C00741AB8 /* baekjun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C33A991F6BB31C00741AB8 /* baekjun.swift */; };
 		50C33A9E1F6CE75300741AB8 /* kakaoAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C33A9D1F6CE75300741AB8 /* kakaoAlgorithm.swift */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +31,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		502848E11F99ACD900172767 /* baekjunTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = baekjunTest.swift; sourceTree = "<group>"; };
 		5048580D1F71044B00D57AD5 /* AlgorithmTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlgorithmTest.swift; sourceTree = "<group>"; };
 		504858101F7104AF00D57AD5 /* kakaoTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = kakaoTest.swift; sourceTree = "<group>"; };
 		50501CDC1F98C49900A2BEAC /* Baekjoon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Baekjoon.swift; sourceTree = "<group>"; };
@@ -39,7 +40,6 @@
 		50B39BE21F96F961006A9DE2 /* woowaAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = woowaAlgorithm.swift; sourceTree = "<group>"; };
 		50B39BE41F96FA42006A9DE2 /* woowaTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = woowaTest.swift; sourceTree = "<group>"; };
 		50C33A971F6BB17700741AB8 /* KaKaoDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KaKaoDemo.swift; sourceTree = "<group>"; };
-		50C33A991F6BB31C00741AB8 /* baekjun.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = baekjun.swift; sourceTree = "<group>"; };
 		50C33A9D1F6CE75300741AB8 /* kakaoAlgorithm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = kakaoAlgorithm.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -68,6 +68,7 @@
 			isa = PBXGroup;
 			children = (
 				50501CDC1F98C49900A2BEAC /* Baekjoon.swift */,
+				502848E11F99ACD900172767 /* baekjunTest.swift */,
 			);
 			name = Exercise;
 			sourceTree = "<group>";
@@ -96,7 +97,6 @@
 				50501CDB1F98C47E00A2BEAC /* Exercise */,
 				50B39BE11F96F947006A9DE2 /* Woowa */,
 				5048580F1F7104A000D57AD5 /* Kakao */,
-				50C33A991F6BB31C00741AB8 /* baekjun.swift */,
 			);
 			path = AlgorithmExercise;
 			sourceTree = "<group>";
@@ -168,8 +168,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				50C33A9A1F6BB31C00741AB8 /* baekjun.swift in Sources */,
 				50C33A9E1F6CE75300741AB8 /* kakaoAlgorithm.swift in Sources */,
+				502848E21F99ACD900172767 /* baekjunTest.swift in Sources */,
 				5048580E1F71044B00D57AD5 /* AlgorithmTest.swift in Sources */,
 				504858111F7104AF00D57AD5 /* kakaoTest.swift in Sources */,
 				50501CDD1F98C49900A2BEAC /* Baekjoon.swift in Sources */,

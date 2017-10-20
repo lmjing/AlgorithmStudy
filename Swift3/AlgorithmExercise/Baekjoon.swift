@@ -8,29 +8,33 @@
 
 import Foundation
 
-//func num2805(m: Int, n: Int, array: [Int]) -> Int{
-//    let sortedTree = array.sorted()
-//    var min = sortedTree[0]; var max = sortedTree[m-1]
-//    var mid = 0
-//    while( min < max ) {
-//        mid = (min + max) / 2
-//        let result = sumOfHeightTree(mid, tree: array)
-//        if result < n {
-//            min = mid + 1
-//        }else if result > n {
-//            max = mid - 1
-//        }else {
-//            return mid
-//        }
-//    }
-//    return 0
-//}
-//
-//func sumOfHeightTree(_ height: Int, tree: [Int]) -> Int{
-//    var sum = 0
-//    for t in tree {
-//        sum += t - height > 0 ? t - height : 0
-//    }
-//    return sum
-//}
-
+class Baekjun {
+    func num2309() {
+        var sum = 0
+        var input:[Int] = []
+        for _ in 0..<9 {
+            let su = Int(readLine()!)!
+            input.append(su)
+            sum += su
+        }
+        
+        func getAnswer() -> [Int] {
+            for i in 0..<9 {
+                let one = input[i]
+                for j in ( i + 1 )..<9 {
+                    let two = input[j]
+                    let sub = sum - one - two
+                    if sub == 100 {
+                        input.remove(at: j)
+                        input.remove(at: i)
+                        
+                        return input.sorted()
+                    }
+                }
+            }
+            return []
+        }
+        
+        print(getAnswer())
+    }
+}
