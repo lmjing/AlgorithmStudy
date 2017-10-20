@@ -70,4 +70,19 @@ class WoowaAlgorithm {
         }
         return max
     }
+    
+    public func minPerimeterRectangle(_ N : Int) -> Int {
+        let max = Int(sqrt(Double(N)))
+        var min = 2 * ( 1 + N )
+        var a = 2
+        while a <= max {
+            if N % a == 0 {
+                let b = N / a
+                let perimeter = 2 * ( a + b )
+                min = perimeter < min ? perimeter : min
+            }
+            a += 1
+        }
+        return min
+    }
 }

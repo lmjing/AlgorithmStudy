@@ -18,4 +18,6 @@ import Foundation
 
 let woowaTest = WoowaTest()
 //woowaTest.testSolution1()
-woowaTest.testLongestPassword()
+//woowaTest.testLongestPassword()
+woowaTest.testMinPerimeterRectangle()
+

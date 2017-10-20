@@ -24,6 +24,12 @@ class WoowaTest {
         let funcName = "LongestPassword"
         var s = "test 5 a0A pass007 ?xy1"
         test.equal(answer: algorithm.longestPassword(&s), expect: 7, funcName: funcName)
-        
+    }
+    
+    func testMinPerimeterRectangle() {
+        let funcName = "MinPerimeterRectangle"
+        test.equal(answer: algorithm.minPerimeterRectangle(30), expect: 22, funcName: funcName)
+        test.equal(answer: algorithm.minPerimeterRectangle(1), expect: 4, funcName: funcName)
+        print(algorithm.minPerimeterRectangle(40))
     }
 }
