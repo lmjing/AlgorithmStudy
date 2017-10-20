@@ -19,4 +19,10 @@ class WoowaTest {
         var a2 = [4, 4, 4, 4, 4, 4, 4, 4, 4, 6, 1, 6]
         test.equal(answer: algorithm.solution(5, &a2), expect: [10, 10, 10, 10, 10], funcName: funcName)
     }
+    
+    func testLongestPassword() {
+        let funcName = "LongestPassword"
+        var s = "test 5 a0A pass007 ?xy1"
+        algorithm.longestPassword(&s)
+    }
 }
