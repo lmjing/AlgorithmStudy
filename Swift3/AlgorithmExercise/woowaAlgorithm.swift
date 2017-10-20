@@ -54,6 +54,8 @@ class WoowaAlgorithm {
     //dynamic1 -LongestPassword
     public func longestPassword(_ S : inout String) -> Int {
         let input = S.characters.split(separator: " ").map{ String($0) }
+        var max = 0
+        
         for str in input {
             let englishRegex = try! NSRegularExpression(pattern: "[a-zA-Z]", options: [])
             let numRegex = try! NSRegularExpression(pattern: "[0-9]", options: [])
@@ -61,8 +63,11 @@ class WoowaAlgorithm {
             let englishCount = englishRegex.numberOfMatches(in: str, options: [], range: NSMakeRange(0, str.utf16.count))
             let numCount = numRegex.numberOfMatches(in: str, options: [], range: NSMakeRange(0, str.utf16.count))
             
-            print(str, englishCount, numCount)
+            if englishCount % 2 == 0 && numCount % 2 == 1 {
+                let length = str.characters.count
+                max = max < length ? length : max
+            }
         }
-        return 0
+        return max
     }
 }
