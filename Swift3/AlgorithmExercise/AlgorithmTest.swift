@@ -27,6 +27,12 @@ class Test {
         }
     }
     
+    func equal(answer: [Int],  expect: [Int], funcName: String) {
+        if answer != expect {
+            printError(answer: answer, expect: expect, funcName: funcName)
+        }
+    }
+    
     func printError(answer: Any,  expect: Any, funcName: String) {
         print("-------------------")
         print("\(funcName)틀림. ")
