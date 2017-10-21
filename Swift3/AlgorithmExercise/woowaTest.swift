@@ -12,12 +12,26 @@ class WoowaTest {
     let test = Test()
     let algorithm = WoowaAlgorithm()
     
+//    func testSolution1() {
+//        let funcName = "woowa Solution1"
+//        var a = [3, 4, 4, 6, 1, 4, 4]
+////        test.equal(answer: algorithm.solution(5, &a), expect: [3, 2, 2, 4, 2], funcName: funcName)
+//        var a2 = [4, 4, 4, 4, 4, 4, 4, 4, 4, 6, 1, 6]
+//        test.equal(answer: algorithm.solution(5, &a2), expect: [10, 10, 10, 10, 10], funcName: funcName)
+//    }
+    
     func testSolution1() {
         let funcName = "woowa Solution1"
-        var a = [3, 4, 4, 6, 1, 4, 4]
-//        test.equal(answer: algorithm.solution(5, &a), expect: [3, 2, 2, 4, 2], funcName: funcName)
-        var a2 = [4, 4, 4, 4, 4, 4, 4, 4, 4, 6, 1, 6]
-        test.equal(answer: algorithm.solution(5, &a2), expect: [10, 10, 10, 10, 10], funcName: funcName)
+        var temp = "(())"
+        var temp2 = "(())))("
+        var temp3 = "))"
+        var temp4 = ")))(((())"
+        var temp5 = "(("
+        test.equal(answer: algorithm.solution1(&temp), expect: 2, funcName: funcName)
+        test.equal(answer: algorithm.solution1(&temp2), expect: 4, funcName: funcName)
+        test.equal(answer: algorithm.solution1(&temp3), expect: 2, funcName: funcName)
+        test.equal(answer: algorithm.solution1(&temp4), expect: 5, funcName: funcName)
+        test.equal(answer: algorithm.solution1(&temp5), expect: 0, funcName: funcName)
     }
     
     func testLongestPassword() {

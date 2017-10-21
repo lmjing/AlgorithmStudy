@@ -5,7 +5,7 @@
 //  Created by 이미정 on 2017. 9. 13..
 //  Copyright © 2017년 이미정. All rights reserved.
 //
-
+g
 import Foundation
 
 //let kakaoTest = KakaoTest()
@@ -17,7 +17,4 @@ import Foundation
 //kakaoTest.testSolution6()
 
 let woowaTest = WoowaTest()
-//woowaTest.testSolution1()
-//woowaTest.testLongestPassword()
-woowaTest.testMinPerimeterRectangle()
-
+woowaTest.testSolution1()

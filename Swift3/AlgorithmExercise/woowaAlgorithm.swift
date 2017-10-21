@@ -1,4 +1,4 @@
-//
+
 //  woowaAlgorithm.swift
 //  AlgorithmExercise
 //
@@ -41,16 +41,6 @@ class WoowaAlgorithm {
         return answer
     }
     
-    public func solution2(_ A : Int, _ B : Int, _ K : Int) -> Int {
-        var count = 0
-        for i in A...B {
-            if i % K == 0 {
-                count += 1
-            }
-        }
-        return count
-    }
-    
     //dynamic1 -LongestPassword
     public func longestPassword(_ S : inout String) -> Int {
         let input = S.characters.split(separator: " ").map{ String($0) }
@@ -84,5 +74,54 @@ class WoowaAlgorithm {
             a += 1
         }
         return min
+    }
+    
+    public func solution1(_ S : inout String) -> Int {
+        let inputArray = Array(S.characters)
+        var leftCount = 0
+        var rightCount = 0
+        var leftTurn = true
+        
+        var divide = 0
+        
+        for i in 0..<inputArray.count {
+            let c = inputArray[i]
+            if leftTurn == true {
+                if c == "(" {
+                    leftCount += 1
+                }else {
+                    if leftCount > 0 {
+                        leftTurn = false
+                        rightCount += 1
+                        divide = i
+                    }
+                }
+            }else {
+                if c == ")" {
+                    rightCount += 1
+                }else {
+                    break
+                }
+            }
+        }
+        
+        if leftTurn {
+            if leftCount == 0 {
+                return inputArray.count
+            }
+            if rightCount == 0 {
+                return 0
+            }
+        }
+        
+        if leftCount < rightCount {
+            let diff = rightCount - leftCount
+            return divide + diff
+        }else if leftCount > rightCount {
+            let diff = leftCount - rightCount
+            return divide - diff
+        }else {
+            return divide
+        }
     }
 }
