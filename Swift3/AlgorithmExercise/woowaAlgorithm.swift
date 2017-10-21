@@ -124,4 +124,63 @@ class WoowaAlgorithm {
             return divide
         }
     }
+    
+    public func solution2(_ A : inout [Int]) -> Bool {
+        let originArray = A
+        let sortedArray = originArray.sorted()
+        var count = 0
+        
+        for i in 0..<A.count {
+            if originArray[i] != sortedArray[i] {
+                count += 1
+                if count > 2 {
+                    return false
+                }
+            }
+        }
+        return true
+    }
+    
+    public func solution3(_ S : inout String) -> Int {
+        let minute5 = 5 * 60
+        
+        var max = 0
+        var phoneBook: [String: Int] = [:]
+        // input 나누어 저장하기. & 저장하며 값 비교하기
+        for input in S.components(separatedBy: "\n") {
+            let divide = input.components(separatedBy: ",")
+            let time = divide[0].components(separatedBy: ":")
+            let phone = divide[1]
+            guard let hour = Int(time[0]), let minute = Int(time[1]), let second = Int(time[2]) else { return 0 }
+            let allSecond = hour * 24 * 60 + minute * 60 + second
+            if let beforeSecond = phoneBook[phone] {
+                phoneBook[phone] = beforeSecond + allSecond
+            }else {
+                phoneBook[phone] = allSecond
+            }
+            
+            // 값이 변경되었으니 최대값을 비교 후 갱신
+            max = max < phoneBook[phone]! ? phoneBook[phone]! : max
+        }
+        
+        var price = 0
+        for (_, time) in phoneBook {
+            // max는 제외한다.
+            if time != max {
+                if time > minute5 {
+                    var minute = time / 60
+                    // 1초 이상 넘어갔으면 올림 해준다.
+                    let rest = time % 60
+                    if rest > 0 {
+                        minute += 1
+                    }
+                    price += minute * 150
+                }else {
+                    price += time * 3
+                }
+            }
+        }
+        
+        return price
+    }
 }

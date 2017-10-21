@@ -34,6 +34,20 @@ class WoowaTest {
         test.equal(answer: algorithm.solution1(&temp5), expect: 0, funcName: funcName)
     }
     
+    func testSolution2() {
+        let funcName = "woowa Solution2"
+        var param = [1, 3, 5, 3, 4]
+        var param2 = [1, 5, 3, 3, 7]
+        test.equal(answer: algorithm.solution2(&param), expect: false, funcName: funcName)
+        test.equal(answer: algorithm.solution2(&param2), expect: true, funcName: funcName)
+    }
+    
+    func testSolution3() {
+        let funcName = "woowa Solution3"
+        var param = "00:01:07,400-234-090\n00:05:01,701-080-080\n00:05:00,400-234-090"
+        test.equal(answer: algorithm.solution3(&param), expect: 900, funcName: funcName)
+    }
+    
     func testLongestPassword() {
         let funcName = "LongestPassword"
         var s = "test 5 a0A pass007 ?xy1"
