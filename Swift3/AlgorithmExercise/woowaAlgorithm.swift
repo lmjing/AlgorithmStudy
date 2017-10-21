@@ -183,4 +183,33 @@ class WoowaAlgorithm {
         
         return price
     }
+    
+    public func solution4(_ A: inout [Int], _ B: inout [Int]) -> Int {
+        let n: Int = A.count
+        let m: Int = B.count
+        A.sort()
+        B.sort()
+        var k: Int = 0
+        var i: Int = 0
+        while k < n {
+            // Before -> 최대 2군데를 수정하여 올바른 코드로 만들어라.
+//            if i < m - 1 && B[i] < A[k] {
+            /*
+             1. After : ex - A = [2, 3], B = [1, 1, 2, 2] 인 경우
+             기존 코드에서 B[0] (1) < A[2] (2) 이므로 i가 한번 증가한다.
+             하지만 B[1] (1) != A[2] (2) 이므로 같지 않아 k가 증가한다.
+             즉, 한 타임에 i, k가 동시에 증가하여 -1을 리턴하게 된다.
+             => 그러므로 while문으로 고친다.
+             2. m - 1이면 전체를 돌 수 없어 m으로 수정.
+             */
+            while i < m && B[i] < A[k] {
+                i += 1
+            }
+            if A[k] == B[i] {
+                return A[k]
+            }
+            k += 1
+        }
+        return -1
+    }
 }
