@@ -9,6 +9,12 @@
 import Foundation
 
 class Test {
+    func equal(answer: Bool,  expect: Bool, funcName: String) {
+        if answer != expect {
+            printError(answer: answer, expect: expect, funcName: funcName)
+        }
+    }
+    
     func equal(answer: String,  expect: String, funcName: String) {
         if answer != expect {
             printError(answer: answer, expect: expect, funcName: funcName)
