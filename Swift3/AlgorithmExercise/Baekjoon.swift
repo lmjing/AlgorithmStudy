@@ -222,4 +222,49 @@ class Baekjun {
         let input = readLine()!.split(separator: " ").flatMap{ Int($0) }
         print( input[0] + input[1] )
     }
+    
+    func num1652() {
+        /*
+         문제 이해를 제대로 못함...!
+         중간에 짐이 있고 양 옆으로 공간이 있는 경우 한 줄에 공간은 여러개가 됨.
+         */
+        let count = Int(readLine()!)!
+        var room: [[Bool]] = []
+        var availabe: (Int, Int) = (0, 0)
+        for _ in 0..<count {
+            let input = readLine()!.characters.map{ $0 == "." ? true : false }
+            room.append(input)
+            //가로 검사
+            var status = false
+            for i in 0..<count - 1 {
+                //둘다 빈 공간이라면
+                if input[i] && input[i + 1] {
+                    if !status {
+                        availabe.0 += 1
+                    }
+                    status = true
+                }else {
+                    //둘 중에 하나라도 빈 공간이라면
+                    status = false
+                }
+            }
+        }
+        
+        //세로 검사
+        for j in 0..<count {
+            var status = false
+            for i in 0..<count - 1 {
+                if room[i][j] && room[i + 1][j] {
+                    if !status {
+                        availabe.1 += 1
+                    }
+                    status = true
+                }else {
+                    status = false
+                }
+            }
+        }
+        
+        print("\(availabe.0) \(availabe.1)")
+    }
 }
