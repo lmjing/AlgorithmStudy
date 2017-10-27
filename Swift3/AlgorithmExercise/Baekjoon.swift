@@ -267,4 +267,35 @@ class Baekjun {
         
         print("\(availabe.0) \(availabe.1)")
     }
+    
+    func num2839() {
+        /*
+         첫 시도: 무식하게 무조건 5로 나누고 남은게 3으로 나뉜다면 으로 접근하였는데
+         16을 예로 들면 16 % 5 == 1이고, 16자체가 3으로 나뉘지 않기 때문에 -1이 리턴되지만,
+         사실 5 * 2 + 3 * 2 로 해결 할 수 있다.
+         
+         test case : 33 = 7 / 50 = 10 / 12, 18 = 4 / 3 = 1 / 2,1,0 = -1
+         */
+        let input = Int(readLine()!)!
+        
+        var su = input
+        var five = 0, three = 0, count = 9999999
+        while su > 0 {
+            five += 1
+            su -= 5
+            
+            if su % 3 == 0, su > 0 {
+                three = su / 3
+                if count > three + five {
+                    count = three + five
+                }
+            }
+        }
+        
+        if five > 0, three > 0 {
+            print(input % 5 == 0 ? input / 5 : count)
+        }else {
+            print(input % 3 == 0 && input > 0 ? input / 3 : -1)
+        }
+    }
 }
