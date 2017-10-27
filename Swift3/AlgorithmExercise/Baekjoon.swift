@@ -141,6 +141,34 @@ class Baekjun {
             // 2)의 경우 수는 적어졌지만, 균등한 크기의 소시지를 못받았으므로 동일한 크기의 소시지를 제공하기 위해 loop를 돈다.
         }
         print(slice)
-
+    }
+    
+    func num1003() {
+        var save: [Int: (Int, Int)] = [:]
+        func fibonacci(_ n: Int) -> (Int, Int) {
+            if (n==0) {
+                return (1, 0)
+            } else if (n == 1) {
+                return (0, 1)
+            } else {
+                return ( save[n - 1]!.0 + save[n - 2]!.0, save[n - 1]!.1 + save[n - 2]!.1 )
+            }
+        }
+        for i in 0...40 {
+            save[i] = fibonacci(i)
+        }
+        
+        let count = Int(readLine()!)!
+        var result: [String] = []
+        for i in 0..<count {
+            let input = Int(readLine()!)!
+            if let r = save[input] {
+                result.append("\(r.0) \(r.1)")
+            }
+        }
+        
+        for r in result {
+            print(r)
+        }
     }
 }
