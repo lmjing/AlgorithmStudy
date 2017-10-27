@@ -212,4 +212,9 @@ class WoowaAlgorithm {
         }
         return -1
     }
+    
+    public func test1() {
+        let input = readLine()!
+        print("hello " + input)
+    }
 }
