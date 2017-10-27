@@ -53,4 +53,3 @@ import Foundation
 //print("\(input)" + result)
 
 //test3 약수 구하기
-기
