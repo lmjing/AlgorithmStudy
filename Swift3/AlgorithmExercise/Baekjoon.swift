@@ -171,4 +171,50 @@ class Baekjun {
             print(r)
         }
     }
+    
+    func num1463() {
+        func cal(_ n: Int) -> [Int]? {
+            var result: [Int] = []
+            if n % 3 == 0 {
+                result.append(n / 3)
+            }
+            if n % 2 == 0 {
+                result.append(n / 2)
+            }
+            result.append(n - 1)
+            
+            if result.contains(1) {
+                return nil
+            }else {
+                return result
+            }
+        }
+        
+        func foundLeast(_ input: Int) -> Int{
+            if input == 1 {
+                return 0
+            }else {
+                var count = 0
+                var resultArray: [Int] = [input]
+                while true {
+                    count += 1
+                    //이전에 저장되어 있던 수들을 새로운 결과로 변환한 후 새로운 배열에 담는다.
+                    var newArray:[Int] = []
+                    for n in resultArray {
+                        if let array = cal(n) {
+                            newArray += array
+                        }else {
+                            //빈 배열이 돌아오면 1이 되었다는 의미이므로 카운트를 리턴한다.
+                            return count
+                        }
+                    }
+                    resultArray = newArray
+                }
+            }
+        }
+        
+        let input = Int(readLine()!)!
+        print(foundLeast(input))
+
+    }
 }
