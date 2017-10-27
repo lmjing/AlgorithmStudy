@@ -217,4 +217,9 @@ class Baekjun {
         print(foundLeast(input))
 
     }
+    
+    func num1000() {
+        let input = readLine()!.split(separator: " ").flatMap{ Int($0) }
+        print( input[0] + input[1] )
+    }
 }
