@@ -108,7 +108,7 @@ func solution4(_ board:[[Int]]) -> Int
                 let left = column > 0 ? check[row][column - 1] : 0
                 let digonal = row > 0 && column > 0 ? check [row - 1][column - 1] : 0
                 
-                check[row][column] = min(top, left, digonal) + 1
+//                check[row][column] = min(top, left, digonal) + 1
                 if check[row][column] > max { max = check[row][column]}
             }else {
                 check[row][column] = 0;
@@ -138,7 +138,7 @@ func solution5(_ land:[[Int]]) -> Int{
             let crrentValue = land[row][column]
             for beforeColumn in 0..<4 {
                 if column != beforeColumn {
-                    maxValue = max(maxValue, dp[row-1][beforeColumn] + crrentValue)
+//                    maxValue = max(maxValue, dp[row-1][beforeColumn] + crrentValue)
                 }
             }
             dp[row][column] = maxValue
@@ -146,7 +146,7 @@ func solution5(_ land:[[Int]]) -> Int{
     }
     
     for v in dp[dp.count-1] {
-        answer = max(answer, v)
+//        answer = max(answer, v)
     }
     
     return answer
