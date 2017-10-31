@@ -377,8 +377,44 @@ class WoowaAlgorithm {
         print(section1 - section12 - section13 + section123)
     }
     
-    func codingTest2_1() -> Int {
-        return 0
+    public func codingTest2_1(_ S : inout String) -> String {
+        var cityPhotos: [String:[(String, String, Int)]] = [:]
+        
+        let inputArray: [String] = S.components(separatedBy: "\n")
+        for i in 0..<inputArray.count {
+            let photoComponents: [String] = inputArray[i].components(separatedBy: ", ")
+            
+            let city = photoComponents[1]
+            if cityPhotos[city] != nil {
+                cityPhotos[city]?.append((photoComponents[0], photoComponents[2], i))
+            }else {
+                cityPhotos[city] = [(photoComponents[0], photoComponents[2], i)]
+            }
+        }
+        
+        var answer: [(Int, String)] = []
+        
+        for (city, photos) in cityPhotos {
+            let sortedPhotos = photos.sorted{ $0.1 < $1.1 }
+            let test = String(photos.count).characters.count
+            let format = "%0\(test)d"
+            
+            var count = 1
+            for photo in sortedPhotos {
+                let photoExtension = photo.0.components(separatedBy: ".")[1]
+                let newPhotoName = city + String(format: format, count) + "." + photoExtension
+                answer.append((photo.2, newPhotoName))
+                
+                count += 1
+            }
+        }
+        
+        var result: String = ""
+        for (_, new) in answer.sorted(by: { $0.0 < $1.0 }) {
+            result += "\(new)\n"
+        }
+        let index = result.index(result.endIndex, offsetBy: -1)
+        return result.substring(to: index)
     }
     
     func codingTest2_2() -> Int {
