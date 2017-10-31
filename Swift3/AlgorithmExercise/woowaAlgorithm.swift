@@ -406,4 +406,128 @@ class WoowaAlgorithm {
         
         print(section1 - section12 - section13 + section123)
     }
+    
+    public func codingTest2_1(_ S : inout String) -> String {
+        var cityPhotos: [String:[(String, String, Int)]] = [:]
+        
+        let inputArray: [String] = S.components(separatedBy: "\n")
+        for i in 0..<inputArray.count {
+            let photoComponents: [String] = inputArray[i].components(separatedBy: ", ")
+            
+            let city = photoComponents[1]
+            if cityPhotos[city] != nil {
+                cityPhotos[city]?.append((photoComponents[0], photoComponents[2], i))
+            }else {
+                cityPhotos[city] = [(photoComponents[0], photoComponents[2], i)]
+            }
+        }
+        
+        var answer: [(Int, String)] = []
+        
+        for (city, photos) in cityPhotos {
+            let sortedPhotos = photos.sorted{ $0.1 < $1.1 }
+            let test = String(photos.count).characters.count
+            let format = "%0\(test)d"
+            
+            var count = 1
+            for photo in sortedPhotos {
+                let photoExtension = photo.0.components(separatedBy: ".")[1]
+                let newPhotoName = city + String(format: format, count) + "." + photoExtension
+                answer.append((photo.2, newPhotoName))
+                
+                count += 1
+            }
+        }
+        
+        var result: String = ""
+        for (_, new) in answer.sorted(by: { $0.0 < $1.0 }) {
+            result += "\(new)\n"
+        }
+        let index = result.index(result.endIndex, offsetBy: -1)
+        return result.substring(to: index)
+    }
+    
+    func codingTest2_2(_ S : inout String) -> Int {
+        var stack: [Int] = []
+        let inputArray: [String] = S.components(separatedBy: " ")
+        for input in inputArray {
+            switch(input) {
+            case "DUP":
+                guard let last = stack.last else { return -1 }
+                stack.append(last)
+            case "POP":
+                guard stack.popLast() != nil else { return -1 }
+            case "+":
+                guard let last1 = stack.popLast(), let last2 = stack.popLast() else { return -1 }
+                stack.append(last1 + last2)
+            case "-":
+                guard let last1 = stack.popLast(), let last2 = stack.popLast() else { return -1 }
+                let sub = last1 - last2
+                guard sub >= 0 else { return -1 }
+                stack.append(sub)
+            default:
+                guard let num = Int(input) else { return -1 }
+                stack.append(num)
+            }
+        }
+        
+        
+        return stack.last != nil ? stack.last! : -1
+    }
+    
+    public func codingTest2_3(_ N : Int, _ S : inout String) -> Int {
+        var checkSeat: [[(Bool, Int)]] = Array(repeating: Array(repeating: (true, 0), count: 3), count: N)
+        var available = N * 3
+        
+        let inputArray: [String] = S.components(separatedBy: " ")
+        for reserved in inputArray {
+            guard reserved.characters.count > 0 else { break }
+            let index = reserved.index(reserved.endIndex, offsetBy: -1)
+            let seat = reserved.substring(from: index)
+            guard let num = Int(reserved.substring(to: index)) else { return -1 }
+            var seatNum = -1
+            switch(seat) {
+            case "A","B","C" : seatNum = 0
+            case "D","G" :
+                if checkSeat[num - 1][1].1 > 0 {
+                    seatNum = 1
+                }
+                checkSeat[num - 1][1].1 += 1
+            case "E","F" : seatNum = 1
+            case "H","J","K": seatNum = 2
+            default: continue
+            }
+            
+            guard seatNum >= 0 else { continue }
+            if checkSeat[num - 1][seatNum].0 {
+                checkSeat[num - 1][seatNum].0 = false
+                available -= 1
+            }
+        }
+        return available
+    }
+    
+    public func codingTest2_4(_ A : inout [Int]) -> Int {
+        func addTo(_ n: Int) -> Int {
+            guard n > 0 else { return 0 }
+            return n + addTo(n - 1)
+        }
+        
+        var answer = 0
+        
+        var sameCount = 0
+        var before = A[1] - A[0]
+        for i in 2..<A.count {
+            let def = A[i] - A[i - 1]
+            if def == before {
+                sameCount += 1
+            }else {
+                answer += addTo(sameCount)
+                sameCount = 0
+            }
+            before = def
+        }
+        answer += addTo(sameCount)
+        return answer
+    }
 }
