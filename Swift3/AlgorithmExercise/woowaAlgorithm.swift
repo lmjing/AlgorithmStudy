@@ -477,7 +477,27 @@ class WoowaAlgorithm {
         return available
     }
     
-    func codingTest2_4() -> Int {
-        return 0
+    public func codingTest2_4(_ A : inout [Int]) -> Int {
+        func addTo(_ n: Int) -> Int {
+            guard n > 0 else { return 0 }
+            return n + addTo(n - 1)
+        }
+        
+        var answer = 0
+        
+        var sameCount = 0
+        var before = A[1] - A[0]
+        for i in 2..<A.count {
+            let def = A[i] - A[i - 1]
+            if def == before {
+                sameCount += 1
+            }else {
+                answer += addTo(sameCount)
+                sameCount = 0
+            }
+            before = def
+        }
+        answer += addTo(sameCount)
+        return answer
     }
 }

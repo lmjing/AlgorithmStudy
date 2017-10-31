@@ -17,6 +17,6 @@ let woowaTest = WoowaTest()
 //woowaTest.testSolution3()
 //woowaTest.testCodingTest2_1()
 //woowaTest.testCodingTest2_2()
-woowaTest.testCodingTest2_3()
-//woowaTest.testCodingTest2_4()
+//woowaTest.testCodingTest2_3()
+woowaTest.testCodingTest2_4()
 
