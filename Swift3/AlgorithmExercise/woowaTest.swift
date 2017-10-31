@@ -87,7 +87,7 @@ class WoowaTest {
     }
     
     func testCodingTest2_2() {
-        let funcName = "codingTest2_1"
+        let funcName = "codingTest2_2"
         var test1 = "13 DUP 4 POP 5 DUP + DUP + -"
         var test2 = "5 6 + -"
         var test3 = "3 DUP 5 - -"
@@ -97,14 +97,17 @@ class WoowaTest {
     }
     
     func testCodingTest2_3() {
-        let funcName = "codingTest2_1"
-        //        test.equal(answer: algorithm.minPerimeterRectangle(30), expect: 22, funcName: funcName)
-        //        test.equal(answer: algorithm.minPerimeterRectangle(1), expect: 4, funcName: funcName)
-        //        print(algorithm.minPerimeterRectangle(40))
+        let funcName = "codingTest2_3"
+        var test1 = "1A 2F 1C"
+        var test2 = ""
+        var test3 = "3D 1K 2D 3G"
+        test.equal(answer: algorithm.codingTest2_3(2, &test1), expect: 4, funcName: funcName)
+        test.equal(answer: algorithm.codingTest2_3(1, &test2), expect: 3, funcName: funcName)
+        test.equal(answer: algorithm.codingTest2_3(3, &test3), expect: 7, funcName: funcName)
     }
     
     func testCodingTest2_4() {
-        let funcName = "codingTest2_1"
+        let funcName = "codingTest2_4"
         //        test.equal(answer: algorithm.minPerimeterRectangle(30), expect: 22, funcName: funcName)
         //        test.equal(answer: algorithm.minPerimeterRectangle(1), expect: 4, funcName: funcName)
         //        print(algorithm.minPerimeterRectangle(40))

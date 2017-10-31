@@ -446,8 +446,35 @@ class WoowaAlgorithm {
     }
     
     public func codingTest2_3(_ N : Int, _ S : inout String) -> Int {
-        // write your code in Swift 3.0 (Linux)
-        return 0
+        var checkSeat: [[(Bool, Int)]] = Array(repeating: Array(repeating: (true, 0), count: 3), count: N)
+        var available = N * 3
+        
+        let inputArray: [String] = S.components(separatedBy: " ")
+        for reserved in inputArray {
+            guard reserved.characters.count > 0 else { break }
+            let index = reserved.index(reserved.endIndex, offsetBy: -1)
+            let seat = reserved.substring(from: index)
+            guard let num = Int(reserved.substring(to: index)) else { return -1 }
+            var seatNum = -1
+            switch(seat) {
+            case "A","B","C" : seatNum = 0
+            case "D","G" :
+                if checkSeat[num - 1][1].1 > 0 {
+                    seatNum = 1
+                }
+                checkSeat[num - 1][1].1 += 1
+            case "E","F" : seatNum = 1
+            case "H","J","K": seatNum = 2
+            default: continue
+            }
+            
+            guard seatNum >= 0 else { continue }
+            if checkSeat[num - 1][seatNum].0 {
+                checkSeat[num - 1][seatNum].0 = false
+                available -= 1
+            }
+        }
+        return available
     }
     
     func codingTest2_4() -> Int {
