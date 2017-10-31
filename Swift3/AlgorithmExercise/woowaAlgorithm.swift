@@ -417,11 +417,36 @@ class WoowaAlgorithm {
         return result.substring(to: index)
     }
     
-    func codingTest2_2() -> Int {
-        return 0
+    func codingTest2_2(_ S : inout String) -> Int {
+        var stack: [Int] = []
+        let inputArray: [String] = S.components(separatedBy: " ")
+        for input in inputArray {
+            switch(input) {
+            case "DUP":
+                guard let last = stack.last else { return -1 }
+                stack.append(last)
+            case "POP":
+                guard stack.popLast() != nil else { return -1 }
+            case "+":
+                guard let last1 = stack.popLast(), let last2 = stack.popLast() else { return -1 }
+                stack.append(last1 + last2)
+            case "-":
+                guard let last1 = stack.popLast(), let last2 = stack.popLast() else { return -1 }
+                let sub = last1 - last2
+                guard sub >= 0 else { return -1 }
+                stack.append(sub)
+            default:
+                guard let num = Int(input) else { return -1 }
+                stack.append(num)
+            }
+        }
+        
+        
+        return stack.last != nil ? stack.last! : -1
     }
     
-    func codingTest2_3() -> Int {
+    public func codingTest2_3(_ N : Int, _ S : inout String) -> Int {
+        // write your code in Swift 3.0 (Linux)
         return 0
     }
     

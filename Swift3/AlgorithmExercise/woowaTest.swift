@@ -64,16 +64,36 @@ class WoowaTest {
     func testCodingTest2_1() {
         let funcName = "codingTest2_1"
         var test1 = "photo.jpg, Warsaw, 2013-09-05 14:08:15\njohn.png, London, 2015-06-20 15:13:22\nmyFriends.png, Warsaw, 2013-09-05 14:07:13\nEiffel.jpg, Paris, 2015-07-23 08:03:02\npisatower.jpg, Paris, 2015-07-22 23:59:59\nBOB.jpg, London, 2015-08-05 00:02:03\nnotredame.png, Paris, 2015-09-01 12:00:00\nme.jpg, Warsaw, 2013-09-06 15:40:22\na.png, Warsaw, 2016-02-13 13:33:50\nb.jpg, Warsaw, 2016-01-02 15:12:22\nc.jpg, Warsaw, 2016-01-02 14:34:30\nd.jpg, Warsaw, 2016-01-02 15:15:01\ne.png, Warsaw, 2016-01-02 09:49:09\nf.png, Warsaw, 2016-01-02 10:55:32\ng.jpg, Warsaw, 2016-02-29 22:13:11"
+        
+        //result
+        /*
+         Warsaw02.jpg
+         London1.png
+         Warsaw01.png
+         Paris2.jpg
+         Paris1.jpg
+         London2.jpg
+         Paris3.png
+         Warsaw03.jpg
+         Warsaw09.png
+         Warsaw07.jpg
+         Warsaw06.jpg
+         Warsaw08.jpg
+         Warsaw04.png
+         Warsaw05.png
+         Warsaw10.jpg
+ */
         test.equal(answer: algorithm.codingTest2_1(&test1), expect: "22", funcName: funcName)
-//        test.equal(answer: algorithm.minPerimeterRectangle(1), expect: 4, funcName: funcName)
-//        print(algorithm.minPerimeterRectangle(40))
     }
     
     func testCodingTest2_2() {
         let funcName = "codingTest2_1"
-        //        test.equal(answer: algorithm.minPerimeterRectangle(30), expect: 22, funcName: funcName)
-        //        test.equal(answer: algorithm.minPerimeterRectangle(1), expect: 4, funcName: funcName)
-        //        print(algorithm.minPerimeterRectangle(40))
+        var test1 = "13 DUP 4 POP 5 DUP + DUP + -"
+        var test2 = "5 6 + -"
+        var test3 = "3 DUP 5 - -"
+        test.equal(answer: algorithm.codingTest2_2(&test1), expect: 7, funcName: funcName)
+        test.equal(answer: algorithm.codingTest2_2(&test2), expect: -1, funcName: funcName)
+        test.equal(answer: algorithm.codingTest2_2(&test3), expect: -1, funcName: funcName)
     }
     
     func testCodingTest2_3() {
