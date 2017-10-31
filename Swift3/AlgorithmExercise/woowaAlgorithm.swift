@@ -376,4 +376,20 @@ class WoowaAlgorithm {
         
         print(section1 - section12 - section13 + section123)
     }
+    
+    func codingTest2_1() -> Int {
+        return 0
+    }
+    
+    func codingTest2_2() -> Int {
+        return 0
+    }
+    
+    func codingTest2_3() -> Int {
+        return 0
+    }
+    
+    func codingTest2_4() -> Int {
+        return 0
+    }
 }

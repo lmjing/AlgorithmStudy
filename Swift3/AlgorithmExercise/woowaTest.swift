@@ -60,4 +60,32 @@ class WoowaTest {
         test.equal(answer: algorithm.minPerimeterRectangle(1), expect: 4, funcName: funcName)
         print(algorithm.minPerimeterRectangle(40))
     }
+    
+    func testCodingTest2_1() {
+        let funcName = "codingTest2_1"
+//        test.equal(answer: algorithm.minPerimeterRectangle(30), expect: 22, funcName: funcName)
+//        test.equal(answer: algorithm.minPerimeterRectangle(1), expect: 4, funcName: funcName)
+//        print(algorithm.minPerimeterRectangle(40))
+    }
+    
+    func testCodingTest2_2() {
+        let funcName = "codingTest2_1"
+        //        test.equal(answer: algorithm.minPerimeterRectangle(30), expect: 22, funcName: funcName)
+        //        test.equal(answer: algorithm.minPerimeterRectangle(1), expect: 4, funcName: funcName)
+        //        print(algorithm.minPerimeterRectangle(40))
+    }
+    
+    func testCodingTest2_3() {
+        let funcName = "codingTest2_1"
+        //        test.equal(answer: algorithm.minPerimeterRectangle(30), expect: 22, funcName: funcName)
+        //        test.equal(answer: algorithm.minPerimeterRectangle(1), expect: 4, funcName: funcName)
+        //        print(algorithm.minPerimeterRectangle(40))
+    }
+    
+    func testCodingTest2_4() {
+        let funcName = "codingTest2_1"
+        //        test.equal(answer: algorithm.minPerimeterRectangle(30), expect: 22, funcName: funcName)
+        //        test.equal(answer: algorithm.minPerimeterRectangle(1), expect: 4, funcName: funcName)
+        //        print(algorithm.minPerimeterRectangle(40))
+    }
 }
