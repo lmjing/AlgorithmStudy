@@ -329,4 +329,12 @@ class Baekjun {
         result += "\(array.first!)>"
         print(result)
     }
+    
+    func num2965() {
+        let input = readLine()!.split(separator: " ").map{ Int($0)! }
+        let diff1 = input[1] - input[0]
+        let diff2 = input[2] - input[1]
+        let max = diff1 < diff2 ? diff2 : diff1
+        print(max - 1)
+    }
 }
