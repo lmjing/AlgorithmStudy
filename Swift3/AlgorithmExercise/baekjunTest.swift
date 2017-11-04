@@ -15,4 +15,5 @@ class BaekjunTest {
     func testNum2309() {
 //        test.equal(answer: algorithm.num2309(), expect: [7, 8, 10, 13, 19, 20, 23], funcName: funcName)
     }
+    
 }
