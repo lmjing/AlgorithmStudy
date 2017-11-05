@@ -16,7 +16,7 @@ import Foundation
 //woowaTest.testSolution2()
 //woowaTest.testSolution3()
 
-Baekjun().num2965()
+Baekjun().num1149()
 
 //var dp: [[[Int]]] = []
 //
