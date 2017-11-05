@@ -20,7 +20,7 @@ let woowaTest = WoowaTest()
 //woowaTest.testCodingTest2_3()
 woowaTest.testCodingTest2_4()
 
-Baekjun().num2965()
+Baekjun().num1149()
 
 //var dp: [[[Int]]] = []
 //

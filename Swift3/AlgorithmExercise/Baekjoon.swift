@@ -337,4 +337,32 @@ class Baekjun {
         let max = diff1 < diff2 ? diff2 : diff1
         print(max - 1)
     }
+    
+    func num1149() {
+        // 자기 위에 있는 애 빼고 나머지를 각각 더해서 더 적은 애를 보존한다.
+        let count = Int(readLine()!)!
+        var rgb = Array(repeating: Array(repeating: 0, count: 3), count: count)
+        var minResult = 1000 * count
+        for i in 0..<count {
+            let input = readLine()!.split(separator: " ").map{ Int($0)! }
+            rgb[i] = input
+            guard i > 0 else { continue }
+            //2째줄 부터
+            for j in 0...2 {
+                //0,1,2중 자신과 같은 색은 제외한다.
+                var index = [0, 1, 2]
+                index.remove(at: j)
+                let su1 = rgb[i - 1][index[0]]
+                let su2 = rgb[i - 1][index[1]]
+                
+                let min = su1 < su2 ? su1 : su2
+                rgb[i][j] += min
+                
+                //마지막이라면
+                guard i == count - 1 else { continue }
+                minResult = minResult > rgb[i][j] ? rgb[i][j] : minResult
+            }
+        }
+        print(minResult)
+    }
 }
