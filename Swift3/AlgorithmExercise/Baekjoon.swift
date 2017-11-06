@@ -365,4 +365,40 @@ class Baekjun {
         }
         print(minResult)
     }
+    
+    func num1181() {
+        let count = Int(readLine()!)!
+        var set = Set<String>()
+        for _ in 0..<count {
+            let input = readLine()!
+            set.insert(input)
+        }
+        let sorted = set.sorted { (one, two) -> Bool in
+            if one.count == two.count {
+                return one < two
+            }else {
+                return one.count < two.count
+            }
+        }
+        for str in sorted {
+            print(str)
+        }
+        
+        // 첫 시도: dic에 count별로 저장해 두고 다시 일일이 sorted하는 방법 -> 시간초과
+//        let count = Int(readLine()!)!
+//        var dic: [Int:Set<String>] = [:]
+//        for _ in 0..<count {
+//            let input = readLine()!
+//            if dic[input.count] == nil {
+//                dic[input.count] = Set<String>()
+//            }
+//            dic[input.count]!.insert(input)
+//        }
+//        let sortedDic = dic.sorted{ $0.0 < $1.0 }
+//        for (_, set) in sortedDic {
+//            for str in set.sorted() {
+//                print(str)
+//            }
+//        }
+    }
 }
