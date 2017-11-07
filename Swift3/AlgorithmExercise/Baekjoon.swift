@@ -401,4 +401,51 @@ class Baekjun {
 //            }
 //        }
     }
+    
+    func num10866() {
+        var deque: [Int] = []
+        var result: [Int] = []
+        let count = Int(readLine()!)!
+        for _ in 0..<count {
+            let input = readLine()!.split(separator: " ")
+            switch(input[0]) {
+            case "push_front":
+                if let num = Int(input[1]) {
+                    deque.insert(num, at: 0)
+                }
+                break
+            case "push_back":
+                if let num = Int(input[1]) {
+                    deque.append(num)
+                }
+                break
+            case "pop_front":
+                result.append(deque.count > 0 ? deque.removeFirst() : -1)
+                break
+            case "pop_back":
+                if let num = deque.popLast() {
+                    result.append(num)
+                }else {
+                    result.append(-1)
+                }
+                break
+            case "size":
+                result.append(deque.count)
+                break
+            case "empty":
+                result.append(deque.isEmpty ? 1 : 0)
+                break
+            case "front":
+                result.append(deque.first != nil ? deque.first! : -1)
+                break
+            case "back":
+                result.append(deque.last != nil ? deque.last! : -1)
+                break
+            default: break
+            }
+        }
+        for i in result {
+            print(i)
+        }
+    }
 }
