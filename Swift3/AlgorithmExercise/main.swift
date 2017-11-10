@@ -15,7 +15,24 @@ import Foundation
 //woowaTest.testSolution1()
 //woowaTest.testSolution2()
 //woowaTest.testSolution3()
-Baekjun().num10866()
+Baekjun().num11050()
+
+let input = readLine()!.split(separator: " ").map{ Int($0)! }
+
+func fac(_ n: Int) -> Int {
+    if n == 1 || n == 0 {
+        return n
+    }
+    return n * fac(n - 1)
+}
+
+if input[0] < input[1] {
+    print(0)
+}else {
+    let diff = input[0] - input[1]
+    let result = fac(input[0]) / (fac(input[1]) * fac(diff))
+    print(result)
+}
 
 //var dp: [[[Int]]] = []
 //
