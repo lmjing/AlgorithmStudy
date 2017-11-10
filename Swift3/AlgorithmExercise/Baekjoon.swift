@@ -452,19 +452,13 @@ class Baekjun {
     func num11050() {
         let input = readLine()!.split(separator: " ").map{ Int($0)! }
         
-        func fac(_ n: Int) -> Int {
-            if n == 1 || n == 0 {
-                return n
+        func choose(n: Int, r: Int) -> Int {
+            if n == r || r == 0 {
+                return 1
             }
-            return n * fac(n - 1)
+            return choose(n: n-1, r: r-1) + choose(n: n-1, r: r)
         }
         
-        if input[0] < input[1] {
-            print(0)
-        }else {
-            let diff = input[0] - input[1]
-            let result = fac(input[0]) / (fac(input[1]) * fac(diff))
-            print(result)
-        }
+        print(choose(n: input[0], r: input[1]))
     }
 }
