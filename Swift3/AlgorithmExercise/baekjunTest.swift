@@ -12,7 +12,4 @@ class BaekjunTest {
     let test = Test()
     let algorithm = Baekjun()
     
-    func test2156() {
-    }
-    
 }
