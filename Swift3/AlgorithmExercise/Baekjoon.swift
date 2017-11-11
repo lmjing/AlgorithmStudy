@@ -465,68 +465,73 @@ class Baekjun {
 //    func num2156() {
 //        let count = Int(readLine()!)!
 //
-//        var sum: [Int] = Array(repeatElement(0, count: 3))
-//        var input: [Int] = []
+//        struct Check {
+//            var flag = true
+//            var count = 0
+//            var sum = 0
+//            var su = 0
 //
-//        input.append(Int(readLine()!)!)
-//        sum[0] += input[0]
-//        for i in 1..<count {
-//            input.append(Int(readLine()!)!)
-//            sum[i % 3] += input[i - 1] + input[i]
+//            init(su: Int, flag: Bool, sum: Int, count: Int) {
+//                self.su = su
+//                self.flag = flag
+//                self.sum += sum + (flag ? su : 0)
+//                self.count = flag ? count + 1 : 0
+//            }
 //        }
+//        var queue: [Check] = []
 //
-//        print(max(sum[0], sum[1], sum[2]))
+//        let first = Int(readLine()!)!
+//        queue.insert(Check(su: first, flag: true, sum: 0, count: 0), at: 0)
+//        queue.insert(Check(su: first, flag: false, sum: 0, count: 0), at: 0)
+//
+//        for _ in 1..<count - 1 {
+//            let input = Int(readLine()!)!
+//
+//            while queue.last?.su != input {
+//                let before = queue.popLast()!
+//                if before.flag == false {
+//                    queue.insert(Check(su: input, flag: true, sum: before.sum, count: before.count), at: 0)
+//                }else if before.count == 2 {
+//                    queue.insert(Check(su: input, flag: false, sum: before.sum, count: before.count), at: 0)
+//                }else {
+//                    queue.insert(Check(su: input, flag: true, sum: before.sum, count: before.count), at: 0)
+//                    queue.insert(Check(su: input, flag: false, sum: before.sum, count: before.count), at: 0)
+//                }
+//            }
+//
+//        }
+//        // 마지막
+//        var max = 0
+//        let last = Int(readLine()!)!
+//        for c in queue {
+//            var sum = c.sum
+//            if c.count < 2 {
+//                // 들어갈 수 있는 상황에 바로 들어간다
+//                sum += last
+//            }
+//            max = max < sum ? sum : max
+//        }
+//        print(max)
 //    }
     
     func num2156() {
         let count = Int(readLine()!)!
+        var wine: [Int] = []
+        var dp: [Int] = []
         
-        struct Check {
-            var flag = true
-            var count = 0
-            var sum = 0
-            var su = 0
-            
-            init(su: Int, flag: Bool, sum: Int, count: Int) {
-                self.su = su
-                self.flag = flag
-                self.sum += sum + (flag ? su : 0)
-                self.count = flag ? count + 1 : 0
+        for i in 0..<count {
+            wine.append(Int(readLine()!)!)
+            switch(i) {
+            case 0: dp.append(wine[0])
+            case 1: dp.append(wine[0] + wine[1])
+            case 2: dp.append(max(dp[1], wine[0] + wine[2], wine[1] + wine[2]))
+            default:
+                var m = max(dp[i-1], dp[i-2] + wine[i])
+                m = max(m, dp[i-3] + wine[i-1] + wine[i])
+                dp.append(m)
             }
         }
-        var queue: [Check] = []
         
-        let first = Int(readLine()!)!
-        queue.insert(Check(su: first, flag: true, sum: 0, count: 0), at: 0)
-        queue.insert(Check(su: first, flag: false, sum: 0, count: 0), at: 0)
-        
-        for _ in 1..<count - 1 {
-            let input = Int(readLine()!)!
-            
-            while queue.last?.su != input {
-                let before = queue.popLast()!
-                if before.flag == false {
-                    queue.insert(Check(su: input, flag: true, sum: before.sum, count: before.count), at: 0)
-                }else if before.count == 2 {
-                    queue.insert(Check(su: input, flag: false, sum: before.sum, count: before.count), at: 0)
-                }else {
-                    queue.insert(Check(su: input, flag: true, sum: before.sum, count: before.count), at: 0)
-                    queue.insert(Check(su: input, flag: false, sum: before.sum, count: before.count), at: 0)
-                }
-            }
-            
-        }
-        // 마지막
-        var max = 0
-        let last = Int(readLine()!)!
-        for c in queue {
-            var sum = c.sum
-            if c.count < 2 {
-                // 들어갈 수 있는 상황에 바로 들어간다
-                sum += last
-            }
-            max = max < sum ? sum : max
-        }
-        print(max)
+        print(dp[count-1])
     }
 }
