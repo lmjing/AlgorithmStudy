@@ -76,8 +76,3 @@ fastlane/test_output
 /*.gcno
 
 # End of https://www.gitignore.io/api/swift,xcode
-AlgorithmExercise/woowaTest.swift
-AlgorithmExercise/KaKaoDemo.swift
-AlgorithmExercise/kakaoAlgorithm.swift
-AlgorithmExercise/kakaoTest.swift
-AlgorithmExercise/woowaAlgorithm.swift
