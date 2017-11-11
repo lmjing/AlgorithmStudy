@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		502D34E41FB70A36001632F0 /* HackerRank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502D34E31FB70A36001632F0 /* HackerRank.swift */; };
 		5048580E1F71044B00D57AD5 /* AlgorithmTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5048580D1F71044B00D57AD5 /* AlgorithmTest.swift */; };
 		50501CDD1F98C49900A2BEAC /* Baekjoon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50501CDC1F98C49900A2BEAC /* Baekjoon.swift */; };
 		5084A6C61F68FC3400629A59 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5084A6C51F68FC3400629A59 /* main.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		502D34E31FB70A36001632F0 /* HackerRank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HackerRank.swift; sourceTree = "<group>"; };
 		5048580D1F71044B00D57AD5 /* AlgorithmTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlgorithmTest.swift; sourceTree = "<group>"; };
 		50501CDC1F98C49900A2BEAC /* Baekjoon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Baekjoon.swift; sourceTree = "<group>"; };
 		5084A6C21F68FC3400629A59 /* AlgorithmExercise */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = AlgorithmExercise; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,6 +64,7 @@
 			isa = PBXGroup;
 			children = (
 				50501CDC1F98C49900A2BEAC /* Baekjoon.swift */,
+				502D34E31FB70A36001632F0 /* HackerRank.swift */,
 			);
 			name = Exercise;
 			sourceTree = "<group>";
@@ -159,6 +162,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5048580E1F71044B00D57AD5 /* AlgorithmTest.swift in Sources */,
+				502D34E41FB70A36001632F0 /* HackerRank.swift in Sources */,
 				50501CDD1F98C49900A2BEAC /* Baekjoon.swift in Sources */,
 				5084A6C61F68FC3400629A59 /* main.swift in Sources */,
 			);

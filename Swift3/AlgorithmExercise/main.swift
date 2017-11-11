@@ -8,5 +8,4 @@
 
 import Foundation
 
-//let kakaoTest = KakaoTest()
-//kakaoTest.testSolution1()
+HackerRank.WarmUp.DiagonalDifference()
