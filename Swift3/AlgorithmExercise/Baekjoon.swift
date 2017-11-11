@@ -461,4 +461,20 @@ class Baekjun {
         
         print(choose(n: input[0], r: input[1]))
     }
+    
+    func num2156() {
+        let count = Int(readLine()!)!
+        
+        var sum: [Int] = Array(repeatElement(0, count: 3))
+        var input: [Int] = []
+        
+        input.append(Int(readLine()!)!)
+        sum[0] += input[0]
+        for i in 1..<count {
+            input.append(Int(readLine()!)!)
+            sum[i % 3] += input[i - 1] + input[i]
+        }
+        
+        print(max(sum[0], sum[1], sum[2]))
+    }
 }
