@@ -462,6 +462,7 @@ class Baekjun {
         print(choose(n: input[0], r: input[1]))
     }
     
+    // 시간초과
 //    func num2156() {
 //        let count = Int(readLine()!)!
 //
@@ -533,5 +534,27 @@ class Baekjun {
         }
         
         print(dp[count-1])
+    }
+    
+    // 2156과 매우 유사
+    func num2579() {
+        let count = Int(readLine()!)!
+        var step: [Int] = []
+        var dp: [Int] = []
+        
+        for i in 0..<count - 1 {
+            step.append(Int(readLine()!)!)
+            switch(i) {
+            case 0: dp.append(step[i])
+            case 1: dp.append(step[i] + step[i-1])
+            case 2: dp.append(max(dp[i-1], step[0] + step[2], step[1] + step[2]))
+            default:
+                var m = max(dp[i-1], dp[i-2] + step[i])
+                m = max(m, dp[i-3] + step[i-1] + step[i])
+                dp.append(m)
+            }
+        }
+        let last = Int(readLine()!)!
+        print(max(dp[count-3] + last, dp[count-4] + step.last! + last))
     }
 }
