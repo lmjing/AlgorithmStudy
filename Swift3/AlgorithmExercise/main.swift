@@ -10,8 +10,3 @@ import Foundation
 
 //let kakaoTest = KakaoTest()
 //kakaoTest.testSolution1()
-
-let woowaTest = WoowaTest()
-//woowaTest.testSolution1()
-//woowaTest.testSolution2()
-//woowaTest.testSolution3()
