@@ -536,7 +536,7 @@ class Baekjun {
         print(dp[count-1])
     }
     
-    // 2156과 매우 유사
+    // 2156과 매우 유사 - 못 품
     func num2579() {
         let count = Int(readLine()!)!
         var step: [Int] = []
@@ -557,5 +557,65 @@ class Baekjun {
         }
         
         print(dp.last!)
+    }
+    
+    func num1699() {
+        /* 첫 시도 : 큰 수 부터 뺐다.
+         -> 실패 : 52 = 49 + 1 + 1 + 1로 나오지만
+             성공 : 52 = 36 + 16
+         */
+//        func cal(_ n: Int) -> (Int, Int) {
+//            let s = Int(sqrt(Double(n)))
+//
+//            return (s, n - (s * s))
+//        }
+//
+//        var input = Int(readLine()!)!
+//        var count = 0
+//
+//        while input > 0 {
+//            let result = cal(input)
+//            count += 1
+//            input = result.1
+//        }
+//        print(count)
+        
+        // 두번 째: 실패 안됨 이유 불분명
+//        let input = Int(readLine()!)!
+//        let count = Int(sqrt(Double(input)))
+//        var min = input
+//        for i in 1...count {
+//            var num = input
+//            var count = 0
+//            var half = i
+//
+//            while num > 0 {
+//                if num >= half * half {
+//                    num -= half * half
+//                    count += 1
+//                }else {
+//                    half -= 1
+//                }
+//            }
+//
+//            min = min > count ? count : min
+//        }
+//        print(min)
+        
+        //세번째: 해답보고 따라한 거 ( 이전의 최소값을 활용해 구하는 방법 )
+        let input = Int(readLine()!)!
+        var dp: [Int] = Array(repeatElement(0, count: 100001))
+        
+        for i in 1...input {
+            var j = 1
+            while j*j <= i {
+                if dp[i] == 0 || dp[i] > dp[i - j*j] + 1 {
+                    dp[i] = dp[i - j*j] + 1
+                    print(i, i - j*j, dp[i])
+                }
+                j += 1
+            }
+        }
+        print(dp[input])
     }
 }
