@@ -536,7 +536,8 @@ class Baekjun {
         print(dp[count-1])
     }
     
-    // 2156과 매우 유사 - 못 품
+    // 2156과 매우 유사
+    // NOTE: 실패
     func num2579() {
         let count = Int(readLine()!)!
         var step: [Int] = []
@@ -645,6 +646,7 @@ class Baekjun {
         print(count)
     }
     
+    //NOTE: 실패
     func num1058() {
         /*
          testcase:
@@ -681,5 +683,58 @@ class Baekjun {
             max = friends > max ? friends : max
         }
         print(max)
+    }
+    
+    func num1260() {
+        let input = readLine()!.split(separator: " ").map{ Int($0)! }
+        let n = input[0]; let m = input[1]; let start = input[2];
+        var dp:[[Int]] = Array(repeatElement(Array(repeatElement(0, count: n + 1)), count: n + 1))
+        
+        for _ in 0..<m {
+            let mInput = readLine()!.split(separator: " ").map{ Int($0)! }
+            //대칭되는 점 잊지 말기!
+            dp[mInput[0]][mInput[1]] = 1
+            dp[mInput[1]][mInput[0]] = 1
+        }
+        
+        //dfs
+        /*
+         재귀 이용
+         방문 노드, 기록 노드를 구별지어 놓고
+         기록 노드에서 연결되어있고 방문하지 않은 경우 재귀호출한다.
+         */
+        var dfsResult = ""
+        var visited:[Bool] = Array(repeatElement(false, count: n + 1))
+        func dfs(v: Int) {
+            visited[v] = true
+            dfsResult += "\(v) "
+            for i in 1..<dp[v].count {
+                if dp[v][i] == 1 && visited[i] == false {
+                    dfs(v: i)
+                }
+            }
+        }
+        
+        dfs(v: start)
+        
+        //bfs
+        var queue: [Int] = [start]
+        visited = Array(repeatElement(false, count: n + 1))
+        visited[start] = true
+        var bfsResult = "\(start) "
+        
+        while !queue.isEmpty {
+            let v = queue.first!; queue.removeFirst()
+            for i in 1..<dp[v].count {
+                if dp[v][i] == 1 && visited[i] == false {
+                    queue.append(i)
+                    visited[i] = true
+                    bfsResult += "\(i) "
+                }
+            }
+        }
+        
+        print(dfsResult)
+        print(bfsResult)
     }
 }

@@ -16,4 +16,3 @@ import Foundation
 //woowaTest.testSolution2()
 //woowaTest.testSolution3()
 
-Baekjun().num1058()
