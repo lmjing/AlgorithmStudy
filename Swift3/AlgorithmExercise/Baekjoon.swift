@@ -644,4 +644,42 @@ class Baekjun {
         
         print(count)
     }
+    
+    func num1058() {
+        /*
+         testcase:
+         8
+         NNNYNNYN
+         NNNNYYNN
+         NNNYNNNN
+         YNYNNNNN
+         NYNNNYNN
+         NYNNYNNN
+         YNNNNNNY
+         NNNNNNYN
+         */
+        let count = Int(readLine()!)!
+        var dic:[Int:[Int]] = [:]
+        for i in 0..<count {
+            dic[i] = []
+            var input = readLine()!.characters
+            var j = 0
+            while !input.isEmpty {
+                if let c = input.popFirst(), c == "Y" {
+                    dic[i]!.append(j)
+                }
+                j += 1
+            }
+        }
+        
+        var max = 0
+        for i in 0..<count {
+            var friends = dic[i]!.count
+            for f in dic[i]! {
+                friends += dic[f]!.filter{ !dic[i]!.contains($0) }.count - 1
+            }
+            max = friends > max ? friends : max
+        }
+        print(max)
+    }
 }
