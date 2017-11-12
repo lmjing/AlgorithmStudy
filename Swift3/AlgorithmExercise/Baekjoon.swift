@@ -626,4 +626,22 @@ class Baekjun {
         }
         print(dp[input])
     }
+    
+    func num1789() {
+        /* 원리
+         i = 1부터 시작해서 1씩 증가시켜 차례대로 빼간 나머지를 비교한다.
+         => 더한 값의 개수가 최대가 되기 위해서는 최대한 작은 수 끼리 더해야하기 때문
+         나머지 값이 만약 i보다 작다면 그 값은 이미 사용된 값이므로 멈춘다.
+         */
+        var s = Int(readLine()!)!
+        var i = 1
+        var count = 1
+        while s - i > i {
+            s -= i
+            count += 1
+            i += 1
+        }
+        
+        print(count)
+    }
 }
