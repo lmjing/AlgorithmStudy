@@ -541,20 +541,21 @@ class Baekjun {
         let count = Int(readLine()!)!
         var step: [Int] = []
         var dp: [Int] = []
-        
-        for i in 0..<count - 1 {
+        for _ in 0..<count {
             step.append(Int(readLine()!)!)
+        }
+        
+        for i in (0..<count).reversed() {
             switch(i) {
-            case 0: dp.append(step[i])
-            case 1: dp.append(step[i] + step[i-1])
-            case 2: dp.append(max(dp[i-1], step[0] + step[2], step[1] + step[2]))
+            case count - 1: dp.append(step[i])
+            case count - 2: dp.append(step[i] + dp[0])
+            case count - 3: dp.append(max(dp[1], step[count - 1] + step[i]))
             default:
-                var m = max(dp[i-1], dp[i-2] + step[i])
-                m = max(m, dp[i-3] + step[i-1] + step[i])
+                var m = max(dp[count - i - 2], dp[count - i - 3] + step[i], dp[count - i - 4] + step[i] + step[i + 1])
                 dp.append(m)
             }
         }
-        let last = Int(readLine()!)!
-        print(max(dp[count-3] + last, dp[count-4] + step.last! + last))
+        
+        print(dp.last!)
     }
 }
