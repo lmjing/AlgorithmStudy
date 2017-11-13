@@ -1,26 +1,101 @@
 package baekjoon;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
  * Created by mijeong on 2016. 12. 2..
  */
 
-/*
-함정 : 공백 여러개일 경우 처리 따로 해주어야 함
- */
 public class num1152 {
-    public static void main(String[] args){
-        Scanner stdin = new Scanner(System.in);
-        String str = stdin.nextLine();
-        String[] word;
-        word = str.split(" ");
+    public static class LinkedListNode {
+        int val;
+        LinkedListNode next;
 
-        int result = word.length;
-        for(String a:word){
-            if(a.equals("")) result--;
+        LinkedListNode(int node_value) {
+            val = node_value;
+            next = null;
+        }
+    };
+
+    public static LinkedListNode _insert_node_into_singlylinkedlist(LinkedListNode head, LinkedListNode tail, int val) {
+        if(head == null) {
+            head = new LinkedListNode(val);
+            tail = head;
+        }
+        else {
+            tail.next = new LinkedListNode(val);
+            tail = tail.next;
+        }
+        return tail;
+    }
+
+    /*
+     * Complete the function below.
+     */
+    /*
+    For your reference:
+    LinkedListNode {
+        int val;
+        LinkedListNode next;
+    };
+    */
+    static LinkedListNode distinct(LinkedListNode head) {
+        ArrayList<Integer> checked = new ArrayList<>();
+        checked.add(head.val);
+
+        while (head.next != null) {
+            while (!checked.contains(head.next.val)) {
+                head = head.next;
+            }
+            head.next = head.next.next;
         }
 
-        System.out.print(result);
+        return head;
+    }
+
+    public static void main(String[] args) throws IOException {
+        Scanner in = new Scanner(System.in);
+        final String fileName = System.getenv("OUTPUT_PATH");
+        BufferedWriter bw = null;
+        if (fileName != null) {
+            bw = new BufferedWriter(new FileWriter(fileName));
+        }
+        else {
+            bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        }
+
+        LinkedListNode res;
+        int head_size = 0;
+
+        LinkedListNode head = null;
+        LinkedListNode head_tail = null;
+
+        head_size = Integer.parseInt(in.nextLine());
+
+        for(int i = 0; i < head_size; i++) {
+            int head_item;
+            head_item = Integer.parseInt(in.nextLine().trim());
+            head_tail = _insert_node_into_singlylinkedlist(head, head_tail, head_item);
+
+            if(i == 0) {
+                head = head_tail;
+            }
+        }
+
+
+        res = distinct(head);
+        while (res != null) {
+            bw.write(String.valueOf(res.val));
+            bw.newLine();
+            res = res.next;
+        }
+
+        bw.close();
     }
 }

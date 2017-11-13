@@ -462,6 +462,7 @@ class Baekjun {
         print(choose(n: input[0], r: input[1]))
     }
     
+    // 시간초과
 //    func num2156() {
 //        let count = Int(readLine()!)!
 //
@@ -533,5 +534,290 @@ class Baekjun {
         }
         
         print(dp[count-1])
+    }
+    
+    // 2156과 매우 유사
+    // NOTE: 실패
+    func num2579() {
+        let count = Int(readLine()!)!
+        var step: [Int] = []
+        var dp: [Int] = []
+        for _ in 0..<count {
+            step.append(Int(readLine()!)!)
+        }
+        
+        for i in (0..<count).reversed() {
+            switch(i) {
+            case count - 1: dp.append(step[i])
+            case count - 2: dp.append(step[i] + dp[0])
+            case count - 3: dp.append(max(dp[1], step[count - 1] + step[i]))
+            default:
+                var m = max(dp[count - i - 2], dp[count - i - 3] + step[i], dp[count - i - 4] + step[i] + step[i + 1])
+                dp.append(m)
+            }
+        }
+        
+        print(dp.last!)
+    }
+    
+    func num1699() {
+        /* 첫 시도 : 큰 수 부터 뺐다.
+         -> 실패 : 52 = 49 + 1 + 1 + 1로 나오지만
+             성공 : 52 = 36 + 16
+         */
+//        func cal(_ n: Int) -> (Int, Int) {
+//            let s = Int(sqrt(Double(n)))
+//
+//            return (s, n - (s * s))
+//        }
+//
+//        var input = Int(readLine()!)!
+//        var count = 0
+//
+//        while input > 0 {
+//            let result = cal(input)
+//            count += 1
+//            input = result.1
+//        }
+//        print(count)
+        
+        // 두번 째: 실패 안됨 이유 불분명
+//        let input = Int(readLine()!)!
+//        let count = Int(sqrt(Double(input)))
+//        var min = input
+//        for i in 1...count {
+//            var num = input
+//            var count = 0
+//            var half = i
+//
+//            while num > 0 {
+//                if num >= half * half {
+//                    num -= half * half
+//                    count += 1
+//                }else {
+//                    half -= 1
+//                }
+//            }
+//
+//            min = min > count ? count : min
+//        }
+//        print(min)
+        
+        //세번째: 해답보고 따라한 거 ( 이전의 최소값을 활용해 구하는 방법 )
+        /* 원리
+         1부터 자기 자신까지 각 수에 해당하는 최소값을 찾아 저장 시킴
+         검색범위는 1 ~ 구하고자 하는 수 >= 수 - j*j까지 이며
+         dp[i] 가 비었을 경우(0)는 구해졌던 값이 없으므로 무조건 넣어주고
+         dp[i - j*j] + 1보다 작을 때 넣어주는데 ( 최소값이 바뀐 것이므로 )
+         dp[i - j*j] + 1인 이유는 i - j*j는 구하고자 하는 값에서 제곱값 하나를 뺀 값(나머지)이므로
+         나머지의 최소dp와 (j*j = 제곱값 횟수1번)을 더해주는 것이다.
+         */
+        let input = Int(readLine()!)!
+        var dp: [Int] = Array(repeatElement(0, count: 100001))
+        
+        for i in 1...input {
+            var j = 1
+            while j*j <= i {
+                if dp[i] == 0 || dp[i] > dp[i - j*j] + 1 {
+                    dp[i] = dp[i - j*j] + 1
+                    print(i, i - j*j, dp[i])
+                }
+                j += 1
+            }
+        }
+        print(dp[input])
+    }
+    
+    func num1789() {
+        /* 원리
+         i = 1부터 시작해서 1씩 증가시켜 차례대로 빼간 나머지를 비교한다.
+         => 더한 값의 개수가 최대가 되기 위해서는 최대한 작은 수 끼리 더해야하기 때문
+         나머지 값이 만약 i보다 작다면 그 값은 이미 사용된 값이므로 멈춘다.
+         */
+        var s = Int(readLine()!)!
+        var i = 1
+        var count = 1
+        while s - i > i {
+            s -= i
+            count += 1
+            i += 1
+        }
+        
+        print(count)
+    }
+    
+    //NOTE: 실패
+    func num1058() {
+        /*
+         testcase:
+         8
+         NNNYNNYN
+         NNNNYYNN
+         NNNYNNNN
+         YNYNNNNN
+         NYNNNYNN
+         NYNNYNNN
+         YNNNNNNY
+         NNNNNNYN
+         */
+        let count = Int(readLine()!)!
+        var dic:[Int:[Int]] = [:]
+        for i in 0..<count {
+            dic[i] = []
+            var input = readLine()!.characters
+            var j = 0
+            while !input.isEmpty {
+                if let c = input.popFirst(), c == "Y" {
+                    dic[i]!.append(j)
+                }
+                j += 1
+            }
+        }
+        
+        var max = 0
+        for i in 0..<count {
+            var friends = dic[i]!.count
+            for f in dic[i]! {
+                friends += dic[f]!.filter{ !dic[i]!.contains($0) }.count - 1
+            }
+            max = friends > max ? friends : max
+        }
+        print(max)
+    }
+    
+    func num1260() {
+        let input = readLine()!.split(separator: " ").map{ Int($0)! }
+        let n = input[0]; let m = input[1]; let start = input[2];
+        var dp:[[Int]] = Array(repeatElement(Array(repeatElement(0, count: n + 1)), count: n + 1))
+        
+        for _ in 0..<m {
+            let mInput = readLine()!.split(separator: " ").map{ Int($0)! }
+            //대칭되는 점 잊지 말기!
+            dp[mInput[0]][mInput[1]] = 1
+            dp[mInput[1]][mInput[0]] = 1
+        }
+        
+        //dfs
+        /*
+         재귀 이용
+         방문 노드, 기록 노드를 구별지어 놓고
+         기록 노드에서 연결되어있고 방문하지 않은 경우 재귀호출한다.
+         */
+        var dfsResult = ""
+        var visited:[Bool] = Array(repeatElement(false, count: n + 1))
+        func dfs(v: Int) {
+            visited[v] = true
+            dfsResult += "\(v) "
+            for i in 1..<dp[v].count {
+                if dp[v][i] == 1 && visited[i] == false {
+                    dfs(v: i)
+                }
+            }
+        }
+        
+        dfs(v: start)
+        
+        //bfs
+        var queue: [Int] = [start]
+        visited = Array(repeatElement(false, count: n + 1))
+        visited[start] = true
+        var bfsResult = "\(start) "
+        
+        while !queue.isEmpty {
+            let v = queue.first!; queue.removeFirst()
+            for i in 1..<dp[v].count {
+                if dp[v][i] == 1 && visited[i] == false {
+                    queue.append(i)
+                    visited[i] = true
+                    bfsResult += "\(i) "
+                }
+            }
+        }
+        
+        print(dfsResult)
+        print(bfsResult)
+    }
+    
+    func num2875() {
+        let input = readLine()!.split(separator: " ").map{ Int($0)! }
+        let n = input[0]; let m = input[1]; let k = input[2]
+        
+        var min = n / 2 < m ? n / 2 : m
+        while n + m - min * 3 < k {
+            min -= 1
+        }
+        print(min)
+    }
+    
+    func num6064() {
+        /*
+         원리
+         1. 큰 수를 기준으로 가상의 정답 z년을 구한다.
+         2. z년일 경우 y가 어떤 답이 나오는지 확인 한 후 비교한다.
+         3. 정답일 경우 z를 리턴한다.
+         4. 2번의 답을 따로 담아둔 후 2번에서 이미 나왔던 경우이면 -1을 리턴한다. -> 계속 반복되어 정답이 없단 의미 이므로.
+         */
+        let count = Int(readLine()!)!
+        var resultArray: [Int] = []
+        
+        for _ in 0..<count {
+            var input = readLine()!.split(separator: " ").map{ Int($0)! }
+            guard input[2] <= input[0] && input[3] <= input[1] else {
+                resultArray.append(-1); break
+            }
+            
+            // m = x, n = y의 경우 나눈 값이 0이 나오므로 추후 쉬운 비교를 위해 0으로 바꾼다.
+            input[2] = input[2] == input[0] ? 0 : input[2]
+            input[3] = input[3] == input[1] ? 0 : input[3]
+
+            // 큰 값을 기준으로 잡아야 실행 횟수가 줄어든다. ( 해당 value가 아니라 index를 담아둔다. )
+            var standard = input[0]; var standardRest = input[2];
+            var find = input[1]; var findRest = input[3];
+            if input[0] < input[1] {
+                standard = input[1]; standardRest = input[3];
+                find = input[0]; findRest = input[2];
+            }
+            
+            var checked: [Int] = []
+            var i = 0
+            while true {
+                let num = standard * i + standardRest
+                guard num > 0 else { i += 1; continue }
+                guard num <= 1599960000 else { resultArray.append(-1); break }
+                let rest = num % find
+                if rest == findRest {
+                    resultArray.append(num); break
+                }else if checked.contains(rest) {
+                    resultArray.append(-1); break
+                }
+                checked.append(rest)
+                i += 1
+            }
+        }
+        
+        for r in resultArray {
+            print(r)
+        }
+    }
+    
+    func num2609() {
+        let input = readLine()!.split(separator: " ").map{ Int($0)! }
+        var large = input[0] > input[1] ? input[0] : input[1]
+        var small = input[0] > input[1] ? input[1] : input[0]
+        
+        func getGcd() -> Int {
+            while true {
+                let rest = large % small
+                if rest == 0 {
+                    return small
+                }
+                large = small
+                small = rest
+            }
+        }
+        
+        let gcd = getGcd()
+        print(gcd)
+        print(input[0] * input[1] / gcd)
     }
 }
