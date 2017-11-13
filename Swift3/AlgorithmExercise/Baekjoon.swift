@@ -799,4 +799,25 @@ class Baekjun {
             print(r)
         }
     }
+    
+    func num2609() {
+        let input = readLine()!.split(separator: " ").map{ Int($0)! }
+        var large = input[0] > input[1] ? input[0] : input[1]
+        var small = input[0] > input[1] ? input[1] : input[0]
+        
+        func getGcd() -> Int {
+            while true {
+                let rest = large % small
+                if rest == 0 {
+                    return small
+                }
+                large = small
+                small = rest
+            }
+        }
+        
+        let gcd = getGcd()
+        print(gcd)
+        print(input[0] * input[1] / gcd)
+    }
 }
