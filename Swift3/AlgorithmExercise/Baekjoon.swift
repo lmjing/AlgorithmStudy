@@ -822,25 +822,39 @@ class Baekjun {
         for _ in 0..<count {
             let input = readLine()!.split(separator: " ").map{ Int($0)! }
             
+            // 계산을 위해 m,n중 큰 값과 그에 따라 찾고자 하는 값을 구별 짓는다.
             var large = input[0]; var lRest = input[2]
             var small = input[1]; var sRest = input[3]
-            
-            guard lRest <= large && sRest <= small else { result.append(-1); continue }
-            
-            if lRest == sRest {
-                result.append(lRest)
-            }
-            
             if large < small {
                 large = input[1]; lRest = input[3]
                 small = input[0]; sRest = input[2]
             }
             
-            let i = Double(sRest + small - lRest) / Double(large - small)
-            print(i)
-            if Int(i * 10) % 10 > 0 {
+            // 찾고자 하는 일이 m, n보다 같거나 작지 않다면 -1을 저장하고 그만한다.
+            guard lRest <= large && sRest <= small else { result.append(-1); continue }
+            
+            let diff = large - small
+            
+            guard diff > 0 else {
+                // 예외 처리 : 0으로 나눌 수 없으므로 이 경우는 따로 처리해준다.
+                result.append(lRest == sRest ? lRest : -1); continue
+            }
+            
+            // 쉬운 계산을 위해 찾고자하는 일이 m, n과 같을 경우 0으로 변경한다. => 나머지 값이 0
+            lRest = large == lRest ? 0 : lRest
+            sRest = small == sRest ? 0 : sRest
+            
+            var top = sRest - lRest
+            if sRest < lRest {
+                top += small
+            }
+            let i = Double(top / diff)
+            
+            // i가 소수점을 가진다면 -1이 정답.
+            if Int(i * 10) % 10 != 0 {
                 result.append(-1)
             }else {
+                // 정수로 딱 나눠 떨어진다면 '큰 수*횟수 + 큰수 나머지'가 정답
                 result.append(large * Int(i) + lRest)
             }
         }
