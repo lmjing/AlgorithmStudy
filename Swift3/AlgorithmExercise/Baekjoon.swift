@@ -749,53 +749,103 @@ class Baekjun {
         print(min)
     }
     
+//    func num6064() {
+//        /*
+//         원리
+//         1. 큰 수를 기준으로 가상의 정답 z년을 구한다.
+//         2. z년일 경우 y가 어떤 답이 나오는지 확인 한 후 비교한다.
+//         3. 정답일 경우 z를 리턴한다.
+//         4. 2번의 답을 따로 담아둔 후 2번에서 이미 나왔던 경우이면 -1을 리턴한다. -> 계속 반복되어 정답이 없단 의미 이므로.
+//         */
+//        func getLcm(n: Int, m: Int) -> Int {
+//            var large = n > m ? n : m
+//            var small = n < m ? n : m
+//            var gcd = 0
+//            while true {
+//                let rest = large % small
+//                if rest == 0 {
+//                    gcd = small; break
+//                }
+//                large = small
+//                small = rest
+//            }
+//            return n * (m / gcd)
+//        }
+//
+//        let count = Int(readLine()!)!
+//        var resultArray: [Int] = []
+//
+//        for _ in 0..<count {
+//            var input = readLine()!.split(separator: " ").map{ Int($0)! }
+//            guard input[2] <= input[0] && input[3] <= input[1] else {
+//                resultArray.append(-1); break
+//            }
+//
+//            // m = x, n = y의 경우 나눈 값이 0이 나오므로 추후 쉬운 비교를 위해 0으로 바꾼다.
+//            input[2] = input[2] == input[0] ? 0 : input[2]
+//            input[3] = input[3] == input[1] ? 0 : input[3]
+//
+//            // 큰 값을 기준으로 잡아야 실행 횟수가 줄어든다. ( 해당 value가 아니라 index를 담아둔다. )
+//            var standard = input[0]; var standardRest = input[2];
+//            var find = input[1]; var findRest = input[3];
+//            if input[0] < input[1] {
+//                standard = input[1]; standardRest = input[3];
+//                find = input[0]; findRest = input[2];
+//            }
+//
+//            let lcm = getLcm(n: standard, m: find)
+//            var checked: [Int] = []
+//            var i = 0
+//            while true {
+//                let num = standard * i + standardRest
+//                guard num > 0 else { i += 1; continue }
+//                guard num <= lcm else { resultArray.append(-1); break }
+//                let rest = num % find
+//                print(rest)
+//                if rest == findRest {
+//                    resultArray.append(num); break
+//                }else if checked.contains(rest) {
+//                    resultArray.append(-1); break
+//                }
+//                checked.append(rest)
+//                i += 1
+//            }
+//        }
+//
+//        for r in resultArray {
+//            print(r)
+//        }
+//    }
     func num6064() {
-        /*
-         원리
-         1. 큰 수를 기준으로 가상의 정답 z년을 구한다.
-         2. z년일 경우 y가 어떤 답이 나오는지 확인 한 후 비교한다.
-         3. 정답일 경우 z를 리턴한다.
-         4. 2번의 답을 따로 담아둔 후 2번에서 이미 나왔던 경우이면 -1을 리턴한다. -> 계속 반복되어 정답이 없단 의미 이므로.
-         */
         let count = Int(readLine()!)!
-        var resultArray: [Int] = []
-        
+        var result: [Int] = []
         for _ in 0..<count {
-            var input = readLine()!.split(separator: " ").map{ Int($0)! }
-            guard input[2] <= input[0] && input[3] <= input[1] else {
-                resultArray.append(-1); break
+            let input = readLine()!.split(separator: " ").map{ Int($0)! }
+            
+            var large = input[0]; var lRest = input[2]
+            var small = input[1]; var sRest = input[3]
+            
+            guard lRest <= large && sRest <= small else { result.append(-1); continue }
+            
+            if lRest == sRest {
+                result.append(lRest)
             }
             
-            // m = x, n = y의 경우 나눈 값이 0이 나오므로 추후 쉬운 비교를 위해 0으로 바꾼다.
-            input[2] = input[2] == input[0] ? 0 : input[2]
-            input[3] = input[3] == input[1] ? 0 : input[3]
-
-            // 큰 값을 기준으로 잡아야 실행 횟수가 줄어든다. ( 해당 value가 아니라 index를 담아둔다. )
-            var standard = input[0]; var standardRest = input[2];
-            var find = input[1]; var findRest = input[3];
-            if input[0] < input[1] {
-                standard = input[1]; standardRest = input[3];
-                find = input[0]; findRest = input[2];
+            if large < small {
+                large = input[1]; lRest = input[3]
+                small = input[0]; sRest = input[2]
             }
             
-            var checked: [Int] = []
-            var i = 0
-            while true {
-                let num = standard * i + standardRest
-                guard num > 0 else { i += 1; continue }
-                guard num <= 1599960000 else { resultArray.append(-1); break }
-                let rest = num % find
-                if rest == findRest {
-                    resultArray.append(num); break
-                }else if checked.contains(rest) {
-                    resultArray.append(-1); break
-                }
-                checked.append(rest)
-                i += 1
+            let i = Double(sRest + small - lRest) / Double(large - small)
+            print(i)
+            if Int(i * 10) % 10 > 0 {
+                result.append(-1)
+            }else {
+                result.append(large * Int(i) + lRest)
             }
         }
         
-        for r in resultArray {
+        for r in result {
             print(r)
         }
     }
@@ -817,7 +867,9 @@ class Baekjun {
         }
         
         let gcd = getGcd()
+        let lcm = input[0] * input[1] / gcd
+        
         print(gcd)
-        print(input[0] * input[1] / gcd)
+        print(lcm)
     }
 }
