@@ -8,6 +8,3 @@
 
 import Foundation
 
-//let kakaoTest = KakaoTest()
-//kakaoTest.testSolution1()
-
