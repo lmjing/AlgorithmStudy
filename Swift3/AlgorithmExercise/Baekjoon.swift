@@ -40,29 +40,29 @@ class Baekjun {
         }
     }
     
-//    func num1562() -> Decimal{
-//        func gettt(n: Int) {
-//            if n < 10 {
-//                return 0
-//            }else if n == 10{
-//                return 1
-//            }else {
-//                let rest = n - 10
-//                let available = pow(2, rest / 2)
-//                if rest % 2 == 0 {
-//                    return available * 11 * 9
-//                }else {
-//                    return available * 2 * 9
-//                }
-//            }
-//        }
-//        
-//        var sum:Decimal = 0
-//        for i in 1...40 {
-//            sum += gettt(n: i)
-//        }
-//        return sum
-//    }
+    //    func num1562() -> Decimal{
+    //        func gettt(n: Int) {
+    //            if n < 10 {
+    //                return 0
+    //            }else if n == 10{
+    //                return 1
+    //            }else {
+    //                let rest = n - 10
+    //                let available = pow(2, rest / 2)
+    //                if rest % 2 == 0 {
+    //                    return available * 11 * 9
+    //                }else {
+    //                    return available * 2 * 9
+    //                }
+    //            }
+    //        }
+    //
+    //        var sum:Decimal = 0
+    //        for i in 1...40 {
+    //            sum += gettt(n: i)
+    //        }
+    //        return sum
+    //    }
     
     func num6378() {
         var array: [String] = []
@@ -215,7 +215,7 @@ class Baekjun {
         
         let input = Int(readLine()!)!
         print(foundLeast(input))
-
+        
     }
     
     func num1000() {
@@ -385,21 +385,21 @@ class Baekjun {
         }
         
         // 첫 시도: dic에 count별로 저장해 두고 다시 일일이 sorted하는 방법 -> 시간초과
-//        let count = Int(readLine()!)!
-//        var dic: [Int:Set<String>] = [:]
-//        for _ in 0..<count {
-//            let input = readLine()!
-//            if dic[input.count] == nil {
-//                dic[input.count] = Set<String>()
-//            }
-//            dic[input.count]!.insert(input)
-//        }
-//        let sortedDic = dic.sorted{ $0.0 < $1.0 }
-//        for (_, set) in sortedDic {
-//            for str in set.sorted() {
-//                print(str)
-//            }
-//        }
+        //        let count = Int(readLine()!)!
+        //        var dic: [Int:Set<String>] = [:]
+        //        for _ in 0..<count {
+        //            let input = readLine()!
+        //            if dic[input.count] == nil {
+        //                dic[input.count] = Set<String>()
+        //            }
+        //            dic[input.count]!.insert(input)
+        //        }
+        //        let sortedDic = dic.sorted{ $0.0 < $1.0 }
+        //        for (_, set) in sortedDic {
+        //            for str in set.sorted() {
+        //                print(str)
+        //            }
+        //        }
     }
     
     func num10866() {
@@ -463,57 +463,57 @@ class Baekjun {
     }
     
     // 시간초과
-//    func num2156() {
-//        let count = Int(readLine()!)!
-//
-//        struct Check {
-//            var flag = true
-//            var count = 0
-//            var sum = 0
-//            var su = 0
-//
-//            init(su: Int, flag: Bool, sum: Int, count: Int) {
-//                self.su = su
-//                self.flag = flag
-//                self.sum += sum + (flag ? su : 0)
-//                self.count = flag ? count + 1 : 0
-//            }
-//        }
-//        var queue: [Check] = []
-//
-//        let first = Int(readLine()!)!
-//        queue.insert(Check(su: first, flag: true, sum: 0, count: 0), at: 0)
-//        queue.insert(Check(su: first, flag: false, sum: 0, count: 0), at: 0)
-//
-//        for _ in 1..<count - 1 {
-//            let input = Int(readLine()!)!
-//
-//            while queue.last?.su != input {
-//                let before = queue.popLast()!
-//                if before.flag == false {
-//                    queue.insert(Check(su: input, flag: true, sum: before.sum, count: before.count), at: 0)
-//                }else if before.count == 2 {
-//                    queue.insert(Check(su: input, flag: false, sum: before.sum, count: before.count), at: 0)
-//                }else {
-//                    queue.insert(Check(su: input, flag: true, sum: before.sum, count: before.count), at: 0)
-//                    queue.insert(Check(su: input, flag: false, sum: before.sum, count: before.count), at: 0)
-//                }
-//            }
-//
-//        }
-//        // 마지막
-//        var max = 0
-//        let last = Int(readLine()!)!
-//        for c in queue {
-//            var sum = c.sum
-//            if c.count < 2 {
-//                // 들어갈 수 있는 상황에 바로 들어간다
-//                sum += last
-//            }
-//            max = max < sum ? sum : max
-//        }
-//        print(max)
-//    }
+    //    func num2156() {
+    //        let count = Int(readLine()!)!
+    //
+    //        struct Check {
+    //            var flag = true
+    //            var count = 0
+    //            var sum = 0
+    //            var su = 0
+    //
+    //            init(su: Int, flag: Bool, sum: Int, count: Int) {
+    //                self.su = su
+    //                self.flag = flag
+    //                self.sum += sum + (flag ? su : 0)
+    //                self.count = flag ? count + 1 : 0
+    //            }
+    //        }
+    //        var queue: [Check] = []
+    //
+    //        let first = Int(readLine()!)!
+    //        queue.insert(Check(su: first, flag: true, sum: 0, count: 0), at: 0)
+    //        queue.insert(Check(su: first, flag: false, sum: 0, count: 0), at: 0)
+    //
+    //        for _ in 1..<count - 1 {
+    //            let input = Int(readLine()!)!
+    //
+    //            while queue.last?.su != input {
+    //                let before = queue.popLast()!
+    //                if before.flag == false {
+    //                    queue.insert(Check(su: input, flag: true, sum: before.sum, count: before.count), at: 0)
+    //                }else if before.count == 2 {
+    //                    queue.insert(Check(su: input, flag: false, sum: before.sum, count: before.count), at: 0)
+    //                }else {
+    //                    queue.insert(Check(su: input, flag: true, sum: before.sum, count: before.count), at: 0)
+    //                    queue.insert(Check(su: input, flag: false, sum: before.sum, count: before.count), at: 0)
+    //                }
+    //            }
+    //
+    //        }
+    //        // 마지막
+    //        var max = 0
+    //        let last = Int(readLine()!)!
+    //        for c in queue {
+    //            var sum = c.sum
+    //            if c.count < 2 {
+    //                // 들어갈 수 있는 상황에 바로 들어간다
+    //                sum += last
+    //            }
+    //            max = max < sum ? sum : max
+    //        }
+    //        print(max)
+    //    }
     
     func num2156() {
         let count = Int(readLine()!)!
@@ -563,45 +563,45 @@ class Baekjun {
     func num1699() {
         /* 첫 시도 : 큰 수 부터 뺐다.
          -> 실패 : 52 = 49 + 1 + 1 + 1로 나오지만
-             성공 : 52 = 36 + 16
+         성공 : 52 = 36 + 16
          */
-//        func cal(_ n: Int) -> (Int, Int) {
-//            let s = Int(sqrt(Double(n)))
-//
-//            return (s, n - (s * s))
-//        }
-//
-//        var input = Int(readLine()!)!
-//        var count = 0
-//
-//        while input > 0 {
-//            let result = cal(input)
-//            count += 1
-//            input = result.1
-//        }
-//        print(count)
+        //        func cal(_ n: Int) -> (Int, Int) {
+        //            let s = Int(sqrt(Double(n)))
+        //
+        //            return (s, n - (s * s))
+        //        }
+        //
+        //        var input = Int(readLine()!)!
+        //        var count = 0
+        //
+        //        while input > 0 {
+        //            let result = cal(input)
+        //            count += 1
+        //            input = result.1
+        //        }
+        //        print(count)
         
         // 두번 째: 실패 안됨 이유 불분명
-//        let input = Int(readLine()!)!
-//        let count = Int(sqrt(Double(input)))
-//        var min = input
-//        for i in 1...count {
-//            var num = input
-//            var count = 0
-//            var half = i
-//
-//            while num > 0 {
-//                if num >= half * half {
-//                    num -= half * half
-//                    count += 1
-//                }else {
-//                    half -= 1
-//                }
-//            }
-//
-//            min = min > count ? count : min
-//        }
-//        print(min)
+        //        let input = Int(readLine()!)!
+        //        let count = Int(sqrt(Double(input)))
+        //        var min = input
+        //        for i in 1...count {
+        //            var num = input
+        //            var count = 0
+        //            var half = i
+        //
+        //            while num > 0 {
+        //                if num >= half * half {
+        //                    num -= half * half
+        //                    count += 1
+        //                }else {
+        //                    half -= 1
+        //                }
+        //            }
+        //
+        //            min = min > count ? count : min
+        //        }
+        //        print(min)
         
         //세번째: 해답보고 따라한 거 ( 이전의 최소값을 활용해 구하는 방법 )
         /* 원리
@@ -749,73 +749,73 @@ class Baekjun {
         print(min)
     }
     
-//    func num6064() {
-//        /*
-//         원리
-//         1. 큰 수를 기준으로 가상의 정답 z년을 구한다.
-//         2. z년일 경우 y가 어떤 답이 나오는지 확인 한 후 비교한다.
-//         3. 정답일 경우 z를 리턴한다.
-//         4. 2번의 답을 따로 담아둔 후 2번에서 이미 나왔던 경우이면 -1을 리턴한다. -> 계속 반복되어 정답이 없단 의미 이므로.
-//         */
-//        func getLcm(n: Int, m: Int) -> Int {
-//            var large = n > m ? n : m
-//            var small = n < m ? n : m
-//            var gcd = 0
-//            while true {
-//                let rest = large % small
-//                if rest == 0 {
-//                    gcd = small; break
-//                }
-//                large = small
-//                small = rest
-//            }
-//            return n * (m / gcd)
-//        }
-//
-//        let count = Int(readLine()!)!
-//        var resultArray: [Int] = []
-//
-//        for _ in 0..<count {
-//            var input = readLine()!.split(separator: " ").map{ Int($0)! }
-//            guard input[2] <= input[0] && input[3] <= input[1] else {
-//                resultArray.append(-1); break
-//            }
-//
-//            // m = x, n = y의 경우 나눈 값이 0이 나오므로 추후 쉬운 비교를 위해 0으로 바꾼다.
-//            input[2] = input[2] == input[0] ? 0 : input[2]
-//            input[3] = input[3] == input[1] ? 0 : input[3]
-//
-//            // 큰 값을 기준으로 잡아야 실행 횟수가 줄어든다. ( 해당 value가 아니라 index를 담아둔다. )
-//            var standard = input[0]; var standardRest = input[2];
-//            var find = input[1]; var findRest = input[3];
-//            if input[0] < input[1] {
-//                standard = input[1]; standardRest = input[3];
-//                find = input[0]; findRest = input[2];
-//            }
-//
-//            let lcm = getLcm(n: standard, m: find)
-//            var checked: [Int] = []
-//            var i = 0
-//            while true {
-//                let num = standard * i + standardRest
-//                guard num > 0 else { i += 1; continue }
-//                guard num <= lcm else { resultArray.append(-1); break }
-//                let rest = num % find
-//                print(rest)
-//                if rest == findRest {
-//                    resultArray.append(num); break
-//                }else if checked.contains(rest) {
-//                    resultArray.append(-1); break
-//                }
-//                checked.append(rest)
-//                i += 1
-//            }
-//        }
-//
-//        for r in resultArray {
-//            print(r)
-//        }
-//    }
+    //    func num6064() {
+    //        /*
+    //         원리
+    //         1. 큰 수를 기준으로 가상의 정답 z년을 구한다.
+    //         2. z년일 경우 y가 어떤 답이 나오는지 확인 한 후 비교한다.
+    //         3. 정답일 경우 z를 리턴한다.
+    //         4. 2번의 답을 따로 담아둔 후 2번에서 이미 나왔던 경우이면 -1을 리턴한다. -> 계속 반복되어 정답이 없단 의미 이므로.
+    //         */
+    //        func getLcm(n: Int, m: Int) -> Int {
+    //            var large = n > m ? n : m
+    //            var small = n < m ? n : m
+    //            var gcd = 0
+    //            while true {
+    //                let rest = large % small
+    //                if rest == 0 {
+    //                    gcd = small; break
+    //                }
+    //                large = small
+    //                small = rest
+    //            }
+    //            return n * (m / gcd)
+    //        }
+    //
+    //        let count = Int(readLine()!)!
+    //        var resultArray: [Int] = []
+    //
+    //        for _ in 0..<count {
+    //            var input = readLine()!.split(separator: " ").map{ Int($0)! }
+    //            guard input[2] <= input[0] && input[3] <= input[1] else {
+    //                resultArray.append(-1); break
+    //            }
+    //
+    //            // m = x, n = y의 경우 나눈 값이 0이 나오므로 추후 쉬운 비교를 위해 0으로 바꾼다.
+    //            input[2] = input[2] == input[0] ? 0 : input[2]
+    //            input[3] = input[3] == input[1] ? 0 : input[3]
+    //
+    //            // 큰 값을 기준으로 잡아야 실행 횟수가 줄어든다. ( 해당 value가 아니라 index를 담아둔다. )
+    //            var standard = input[0]; var standardRest = input[2];
+    //            var find = input[1]; var findRest = input[3];
+    //            if input[0] < input[1] {
+    //                standard = input[1]; standardRest = input[3];
+    //                find = input[0]; findRest = input[2];
+    //            }
+    //
+    //            let lcm = getLcm(n: standard, m: find)
+    //            var checked: [Int] = []
+    //            var i = 0
+    //            while true {
+    //                let num = standard * i + standardRest
+    //                guard num > 0 else { i += 1; continue }
+    //                guard num <= lcm else { resultArray.append(-1); break }
+    //                let rest = num % find
+    //                print(rest)
+    //                if rest == findRest {
+    //                    resultArray.append(num); break
+    //                }else if checked.contains(rest) {
+    //                    resultArray.append(-1); break
+    //                }
+    //                checked.append(rest)
+    //                i += 1
+    //            }
+    //        }
+    //
+    //        for r in resultArray {
+    //            print(r)
+    //        }
+    //    }
     func num6064() {
         let count = Int(readLine()!)!
         var result: [Int] = []
@@ -886,4 +886,20 @@ class Baekjun {
         print(gcd)
         print(lcm)
     }
+    
+    func num2455() {
+        var max = 0
+        var people = 0
+        for _ in 0..<4 {
+            let input = readLine()!.split(separator: " ").map{ Int($0)! }
+            people -= input[0]
+            people += input[1]
+            people = people > 10000 ? 10000 : people
+            max = max < people ? people : max
+        }
+        
+        print(max)
+    }
 }
+
+
