@@ -900,6 +900,13 @@ class Baekjun {
         
         print(max)
     }
+    
+    func num2163() {
+        // 세로로 잘릴 횟수 + 세로가 1인 상태에서 가로로 잘릴 횟수 * 세로가 1로 잘린 초콜릿의 개수
+        // (높이 - 1) + (넓이 - 1) * 높이
+        let input = readLine()!.split(separator: " ").map{ Int($0)! }
+        print(input[0] - 1 + (input[1] - 1) * input[0])
+    }
 }
 
 
