@@ -749,118 +749,48 @@ class Baekjun {
         print(min)
     }
     
-    //    func num6064() {
-    //        /*
-    //         원리
-    //         1. 큰 수를 기준으로 가상의 정답 z년을 구한다.
-    //         2. z년일 경우 y가 어떤 답이 나오는지 확인 한 후 비교한다.
-    //         3. 정답일 경우 z를 리턴한다.
-    //         4. 2번의 답을 따로 담아둔 후 2번에서 이미 나왔던 경우이면 -1을 리턴한다. -> 계속 반복되어 정답이 없단 의미 이므로.
-    //         */
-    //        func getLcm(n: Int, m: Int) -> Int {
-    //            var large = n > m ? n : m
-    //            var small = n < m ? n : m
-    //            var gcd = 0
-    //            while true {
-    //                let rest = large % small
-    //                if rest == 0 {
-    //                    gcd = small; break
-    //                }
-    //                large = small
-    //                small = rest
-    //            }
-    //            return n * (m / gcd)
-    //        }
-    //
-    //        let count = Int(readLine()!)!
-    //        var resultArray: [Int] = []
-    //
-    //        for _ in 0..<count {
-    //            var input = readLine()!.split(separator: " ").map{ Int($0)! }
-    //            guard input[2] <= input[0] && input[3] <= input[1] else {
-    //                resultArray.append(-1); break
-    //            }
-    //
-    //            // m = x, n = y의 경우 나눈 값이 0이 나오므로 추후 쉬운 비교를 위해 0으로 바꾼다.
-    //            input[2] = input[2] == input[0] ? 0 : input[2]
-    //            input[3] = input[3] == input[1] ? 0 : input[3]
-    //
-    //            // 큰 값을 기준으로 잡아야 실행 횟수가 줄어든다. ( 해당 value가 아니라 index를 담아둔다. )
-    //            var standard = input[0]; var standardRest = input[2];
-    //            var find = input[1]; var findRest = input[3];
-    //            if input[0] < input[1] {
-    //                standard = input[1]; standardRest = input[3];
-    //                find = input[0]; findRest = input[2];
-    //            }
-    //
-    //            let lcm = getLcm(n: standard, m: find)
-    //            var checked: [Int] = []
-    //            var i = 0
-    //            while true {
-    //                let num = standard * i + standardRest
-    //                guard num > 0 else { i += 1; continue }
-    //                guard num <= lcm else { resultArray.append(-1); break }
-    //                let rest = num % find
-    //                print(rest)
-    //                if rest == findRest {
-    //                    resultArray.append(num); break
-    //                }else if checked.contains(rest) {
-    //                    resultArray.append(-1); break
-    //                }
-    //                checked.append(rest)
-    //                i += 1
-    //            }
-    //        }
-    //
-    //        for r in resultArray {
-    //            print(r)
-    //        }
-    //    }
     func num6064() {
+        func getLcm(l: Int, s: Int) -> Int {
+            var large = l; var small = s
+            var rest = large % small
+            while rest > 0 {
+                large = small
+                small = rest
+                rest = large % small
+            }
+            return l * s / small
+        }
+        
         let count = Int(readLine()!)!
-        var result: [Int] = []
-        for _ in 0..<count {
-            let input = readLine()!.split(separator: " ").map{ Int($0)! }
-            
-            // 계산을 위해 m,n중 큰 값과 그에 따라 찾고자 하는 값을 구별 짓는다.
-            var large = input[0]; var lRest = input[2]
-            var small = input[1]; var sRest = input[3]
-            if large < small {
-                large = input[1]; lRest = input[3]
-                small = input[0]; sRest = input[2]
+        var answer = Array(repeatElement(-1, count: count))
+        for i in 0..<count {
+            var input = readLine()!.split(separator: " ").map{ Int($0)! }
+            var large = input[0]; var small = input[1];
+            var lFind = input[2]; var sFind = input[3];
+            if input[0] < input[1] {
+                large = input[1]; small = input[0];
+                lFind = input[3]; sFind = input[2];
             }
-            
-            // 찾고자 하는 일이 m, n보다 같거나 작지 않다면 -1을 저장하고 그만한다.
-            guard lRest <= large && sRest <= small else { result.append(-1); continue }
-            
-            let diff = large - small
-            
-            guard diff > 0 else {
-                // 예외 처리 : 0으로 나눌 수 없으므로 이 경우는 따로 처리해준다.
-                result.append(lRest == sRest ? lRest : -1); continue
+            if lFind == large {
+                lFind = 0
             }
-            
-            // 쉬운 계산을 위해 찾고자하는 일이 m, n과 같을 경우 0으로 변경한다. => 나머지 값이 0
-            lRest = large == lRest ? 0 : lRest
-            sRest = small == sRest ? 0 : sRest
-            
-            var top = sRest - lRest
-            if sRest < lRest {
-                top += small
+            if sFind == small {
+                sFind = 0
             }
-            let i = Double(top / diff)
+            let lcm = getLcm(l: large, s: small)
             
-            // i가 소수점을 가진다면 -1이 정답.
-            if Int(i * 10) % 10 != 0 {
-                result.append(-1)
-            }else {
-                // 정수로 딱 나눠 떨어진다면 '큰 수*횟수 + 큰수 나머지'가 정답
-                result.append(large * Int(i) + lRest)
+            var su = sFind > 0 ? sFind : small
+            while su <= lcm {
+                if su % large == lFind {
+                    answer[i] = su
+                    break
+                }
+                su += small
             }
         }
         
-        for r in result {
-            print(r)
+        for a in answer {
+            print(a)
         }
     }
     
