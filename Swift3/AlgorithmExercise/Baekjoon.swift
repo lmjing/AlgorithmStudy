@@ -750,6 +750,7 @@ class Baekjun {
     }
     
     func num6064() {
+        // 최대공약수 구하는 함수
         func getLcm(l: Int, s: Int) -> Int {
             var large = l; var small = s
             var rest = large % small
@@ -762,30 +763,31 @@ class Baekjun {
         }
         
         let count = Int(readLine()!)!
+        // 정답을 우선 -1로 모두 초기화 한다.
         var answer = Array(repeatElement(-1, count: count))
         for i in 0..<count {
             var input = readLine()!.split(separator: " ").map{ Int($0)! }
-            var large = input[0]; var small = input[1];
-            var lFind = input[2]; var sFind = input[3];
-            if input[0] < input[1] {
-                large = input[1]; small = input[0];
-                lFind = input[3]; sFind = input[2];
-            }
-            if lFind == large {
-                lFind = 0
-            }
-            if sFind == small {
-                sFind = 0
-            }
-            let lcm = getLcm(l: large, s: small)
             
-            var su = sFind > 0 ? sFind : small
-            while su <= lcm {
-                if su % large == lFind {
-                    answer[i] = su
+            // 쉬운 구현을 위해
+            // m = x, n = y인 경우 0으로 변경해준다.
+            input[2] = input[2] == input[0] ? 0 : input[2]
+            input[3] = input[3] == input[1] ? 0 : input[3]
+            
+            // m, n 중 큰 수와 작은 수의 인덱스를 각각 l, s에 저장한다.
+            // x, y의 위치는 l, s에 2를 더한 곳이다.
+            let l = input[0] > input[1] ? 0 : 1; let s = abs(l - 1)
+            let lcm = getLcm(l: input[l], s: input[s])
+            // num의 큰 수의 나머지 부터 시작하지만
+            // 나머지가 0인 경우 num은 자연수 이므로 큰 수부터 시작한다.
+            var num = input[l + 2] > 0 ? input[l + 2] : input[l]
+            
+            // num이 최대공약수보다 클 수 없다.
+            while num <= lcm {
+                if num % input[s] == input[s + 2] {
+                    answer[i] = num
                     break
                 }
-                su += small
+                num += input[l]
             }
         }
         
@@ -793,6 +795,7 @@ class Baekjun {
             print(a)
         }
     }
+    
     
     func num2609() {
         let input = readLine()!.split(separator: " ").map{ Int($0)! }
