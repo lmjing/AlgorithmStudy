@@ -840,6 +840,36 @@ class Baekjun {
         let input = readLine()!.split(separator: " ").map{ Int($0)! }
         print(input[0] - 1 + (input[1] - 1) * input[0])
     }
+    
+    func num2108() {
+        let n = Int(readLine()!)!
+        var array: [Int] = []
+        var sum = 0
+        var count: [Int:Int] = [:]
+        var mode = 0
+        
+        for _ in 0..<n {
+            let input = Int(readLine()!)!
+            sum += input
+            count[input] = ( count[input] != nil ? count[input]! : 0 ) + 1
+            mode = mode < count[input]! ? count[input]! : mode
+            array.append(input)
+        }
+        
+        array = array.sorted()
+        //let countSorted = count.filter{ $0.value == mode }.sorted{ $0.key < $1.key }
+        let filtered = count.filter{ $0.value == mode }
+        let countSorted = filtered.sorted{ $0.key < $1.key }
+        
+        print(Int(round(Double(sum) / Double(n))))
+        print(array[n / 2])
+        if countSorted.count > 1 {
+            print(countSorted[1].key)
+        }else {
+            print(countSorted[0].key)
+        }
+        print(array.last! - array.first!)
+    }
 }
 
 
