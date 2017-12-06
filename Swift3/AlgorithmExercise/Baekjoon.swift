@@ -857,17 +857,12 @@ class Baekjun {
         }
         
         array = array.sorted()
-        //let countSorted = count.filter{ $0.value == mode }.sorted{ $0.key < $1.key }
         let filtered = count.filter{ $0.value == mode }
         let countSorted = filtered.sorted{ $0.key < $1.key }
         
         print(Int(round(Double(sum) / Double(n))))
         print(array[n / 2])
-        if countSorted.count > 1 {
-            print(countSorted[1].key)
-        }else {
-            print(countSorted[0].key)
-        }
+        print(countSorted[countSorted.count > 1 ? 1 : 0].key)
         print(array.last! - array.first!)
     }
 }
