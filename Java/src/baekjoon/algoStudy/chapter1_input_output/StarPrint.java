@@ -102,4 +102,18 @@ public class StarPrint {
             System.out.println("");
         }
     }
+
+    public void num2446() {
+        //오른쪽 공백 없어야 함
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        for (int i=0; i<n*2-1; i++) {
+            int temp = i<n? i : n*2-2-i;
+            for(int j=0; j<n*2-temp-1; j++) {
+                if(j>=temp) System.out.print("*");
+                else System.out.print(" ");
+            }
+            System.out.println("");
+        }
+    }
 }

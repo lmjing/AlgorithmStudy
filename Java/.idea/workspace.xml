@@ -72,8 +72,8 @@
       <file leaf-file-name="StarPrint.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/baekjoon/algoStudy/chapter1_input_output/StarPrint.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="370">
-              <caret line="102" column="9" lean-forward="false" selection-start-line="102" selection-start-column="9" selection-end-line="102" selection-end-column="9" />
+            <state relative-caret-position="343">
+              <caret line="117" column="5" lean-forward="true" selection-start-line="117" selection-start-column="5" selection-end-line="117" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -888,7 +888,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="135214000" />
+    <option name="totallyTimeSpent" value="135862000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -1341,8 +1341,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/baekjoon/algoStudy/chapter1_input_output/StarPrint.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="102" column="9" lean-forward="false" selection-start-line="102" selection-start-column="9" selection-end-line="102" selection-end-column="9" />
+        <state relative-caret-position="343">
+          <caret line="117" column="5" lean-forward="true" selection-start-line="117" selection-start-column="5" selection-end-line="117" selection-end-column="5" />
           <folding />
         </state>
       </provider>
