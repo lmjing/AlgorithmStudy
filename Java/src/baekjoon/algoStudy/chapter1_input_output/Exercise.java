@@ -18,4 +18,13 @@ public class Exercise {
             System.out.println(i);
         }
     }
+
+    public void num2739() {
+        //구구단
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        for(int i=1; i<10; i++) {
+            System.out.println(n + " * " + i + " = " + (n * i));
+        }
+    }
 }
