@@ -144,4 +144,24 @@ public class StarPrint {
             System.out.println(str);
         }
     }
+
+    public void num10992() {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        for (int i=0; i<n-1; i++) {
+            for (int j=1; j<n-i; j++) {
+                System.out.print(" ");
+            }
+            String str = i==0 ? "" : "*";
+            for (int k=1; k<i*2; k++) {
+                str += " ";
+            }
+            str += "*";
+
+            System.out.println(str);
+        }
+        for(int i=1; i<n*2; i++) {
+            System.out.print("*");
+        }
+    }
 }
