@@ -15,5 +15,14 @@ public class Main {
             }
             System.out.println("");
         }
+        for(int i=n-1; i>0; i--) {
+            for(int j=n; j>i; j--) {
+                System.out.print(" ");
+            }
+            for(int k=1; k<2*i; k++) {
+                System.out.print("*");
+            }
+            System.out.println("");
+        }
     }
 }
