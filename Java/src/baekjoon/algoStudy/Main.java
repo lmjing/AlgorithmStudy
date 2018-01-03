@@ -10,6 +10,7 @@ public class Main {
 //        inputOuput.num2557();
 
         AddAB addAB = new AddAB();
-        addAB.num1000();
+//        addAB.num1000();
+        addAB.num2558();
     }
 }

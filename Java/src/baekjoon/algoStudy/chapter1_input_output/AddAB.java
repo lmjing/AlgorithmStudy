@@ -18,4 +18,16 @@ public class AddAB {
 //        br.read(test);
 //        System.out.print(Integer.parseInt(String.valueOf(test[0])) + Integer.parseInt(String.valueOf(test[2])));
     }
+
+    public void num2558() throws IOException {
+//        Scanner scanner = new Scanner(System.in);
+//        int a = Integer.parseInt(scanner.nextLine());
+//        int b = Integer.parseInt(scanner.nextLine());
+//        System.out.print(a + b);
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int a = Integer.parseInt(br.readLine());
+        int b = Integer.parseInt(br.readLine());
+        System.out.print(a + b);
+    }
 }
