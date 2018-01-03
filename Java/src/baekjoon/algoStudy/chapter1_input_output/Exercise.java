@@ -27,4 +27,20 @@ public class Exercise {
             System.out.println(n + " * " + i + " = " + (n * i));
         }
     }
+
+    public void num1924() {
+        //2007년 한정, 날짜 주어졌을 때 요일 맞추기
+        int[] dayCount = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        String[] weekOfDay = {"SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"};
+
+        Scanner sc = new Scanner(System.in);
+        int x = sc.nextInt();
+        int y = sc.nextInt();
+        int date = y;
+
+        for(int i=1; i<x; i++) {
+            date += dayCount[i];
+        }
+        System.out.println(weekOfDay[date % 7]);
+    }
 }
