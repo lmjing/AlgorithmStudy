@@ -70,4 +70,14 @@ public class AddAB {
             System.out.println(a + b);
         }
     }
+
+    public void num10953() {
+        //근데 이거 intellij에서 돌리면 마지막거 안됨 ㅋㅋㅋㅋ근데 성공
+        Scanner sc = new Scanner(System.in);
+        int T = Integer.parseInt(sc.nextLine());
+        for(int i=0; i<T; i++) {
+            String[] inputs = sc.nextLine().split(",");
+            System.out.println(Integer.parseInt(inputs[0]) + Integer.parseInt(inputs[1]));
+        }
+    }
 }
