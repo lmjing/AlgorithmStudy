@@ -10,4 +10,12 @@ public class Exercise {
             System.out.println(i);
         }
     }
+
+    public void num2742() {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        for(int i = n; i>0; i--) {
+            System.out.println(i);
+        }
+    }
 }
