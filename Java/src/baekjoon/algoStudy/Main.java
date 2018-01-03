@@ -11,6 +11,7 @@ public class Main {
 
         AddAB addAB = new AddAB();
 //        addAB.num1000();
-        addAB.num2558();
+//        addAB.num2558();
+        addAB.num10950();
     }
 }

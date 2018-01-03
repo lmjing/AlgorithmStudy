@@ -30,4 +30,21 @@ public class AddAB {
         int b = Integer.parseInt(br.readLine());
         System.out.print(a + b);
     }
+
+    public void num10950() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int T = Integer.parseInt(br.readLine());
+        int[] answer = new int[T];
+
+        for(int i=0; i<T; i++) {
+            char[] c = new char[3];
+            br.read(c);
+            br.skip(1);
+            answer[i] = Integer.parseInt(String.valueOf(c[0])) + Integer.parseInt(String.valueOf(c[2]));
+        }
+
+        for (int a:answer) {
+            System.out.println(a);
+        }
+    }
 }
