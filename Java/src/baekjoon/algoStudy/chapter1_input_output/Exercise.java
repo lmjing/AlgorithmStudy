@@ -1,8 +1,9 @@
-package baekjoon.algoStudy;
+package baekjoon.algoStudy.chapter1_input_output;
 
 import java.util.Scanner;
-public class Main {
-    public static void main(String[] args) {
+
+public class Exercise {
+    public void num2741() {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         for(int i = 1; i<=n; i++) {
