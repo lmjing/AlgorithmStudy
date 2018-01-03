@@ -38,4 +38,18 @@ public class StarPrint {
             System.out.println("");
         }
     }
+
+    public void num2441() {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        for(int i = n; i > 0; i--) {
+            for(int j = n - i; j > 0; j--) {
+                System.out.print(" ");
+            }
+            for(int k = 0; k < i; k++) {
+                System.out.print("*");
+            }
+            System.out.println("");
+        }
+    }
 }
