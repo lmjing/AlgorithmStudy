@@ -50,4 +50,18 @@ public class Exercise {
         int n = sc.nextInt();
         System.out.println(n * (n+1) / 2);
     }
+
+    public void num10818() {
+        // 최소, 최대
+        Scanner sc = new Scanner(System.in);
+        int n = Integer.parseInt(sc.nextLine());
+        int max = -1000001;
+        int min = 1000001;
+        for(int i = 0; i < n; i++) {
+            int input = sc.nextInt();
+            max = max < input ? input : max;
+            min = min > input ? input : min;
+        }
+        System.out.println(min + " " + max);
+    }
 }
