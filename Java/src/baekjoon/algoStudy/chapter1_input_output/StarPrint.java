@@ -1,9 +1,9 @@
-package baekjoon.algoStudy;
+package baekjoon.algoStudy.chapter1_input_output;
 
-import java.util.*;
+import java.util.Scanner;
 
-public class Main {
-    public static void main(String[] args) {
+public class StarPrint {
+    public void num2438() {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         for(int i = 0; i < n; i++) {
