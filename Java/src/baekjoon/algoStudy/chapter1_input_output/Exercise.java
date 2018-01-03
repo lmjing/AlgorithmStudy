@@ -43,4 +43,11 @@ public class Exercise {
         }
         System.out.println(weekOfDay[date % 7]);
     }
+
+    public void num8393() {
+        // 1부터 n까지의 합
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        System.out.println(n * (n+1) / 2);
+    }
 }
