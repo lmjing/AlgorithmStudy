@@ -85,4 +85,14 @@ public class AddAB {
             System.out.println("Case #" + i + ": " + (a + b));
         }
     }
+
+    public void num11022() {
+        Scanner sc = new Scanner(System.in);
+        int T = Integer.parseInt(sc.nextLine());
+        for(int i=1; i<=T; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            System.out.println("Case #" + i + ": " + a + " + " + b + " = " +(a + b));
+        }
+    }
 }
