@@ -27,4 +27,15 @@ public class InputOuput {
         }
         System.out.println(sum);
     }
+
+    public void num11721() {
+        Scanner sc = new Scanner(System.in);
+        String str = sc.nextLine();
+
+        while (str.length() > 10) {
+            System.out.println(str.substring(0, 10));
+            str = str.substring(10, str.length());
+        }
+        System.out.println(str);
+    }
 }
