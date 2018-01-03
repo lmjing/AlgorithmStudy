@@ -3,6 +3,7 @@ package baekjoon.algoStudy.chapter1_input_output;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class AddAB {
@@ -45,6 +46,18 @@ public class AddAB {
 
         for (int a:answer) {
             System.out.println(a);
+        }
+    }
+
+    public void num10951() throws IOException {
+        // Scanner만 hasNext 함수가 있기 때문에 EOF를 알 수 있다.
+        // 백준에서 입력, 출력 나눠서 한꺼번에 보여줄 필요가 없다...
+        Scanner sc = new Scanner(System.in);
+
+        while (sc.hasNextInt()) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            System.out.println(a + b);
         }
     }
 }
