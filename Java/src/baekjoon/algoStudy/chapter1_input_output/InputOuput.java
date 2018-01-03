@@ -7,7 +7,7 @@ public class InputOuput {
         System.out.print("Hello World!");
     }
 
-    public void num11718() {
+    public void num11718_11719() {
         //그대로 출력하기
 
         Scanner sc = new Scanner(System.in);
