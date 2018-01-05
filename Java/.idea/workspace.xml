@@ -59,7 +59,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/baekjoon/algoStudy/Main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="75">
@@ -79,11 +79,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BitMask.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/baekjoon/algoStudy/chapter2_brute_force_search/BitMask.java">
+      <file leaf-file-name="Chapter2.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/baekjoon/algoStudy/chapter2_brute_force_search/Chapter2.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="163" lean-forward="false" selection-start-line="11" selection-start-column="163" selection-end-line="11" selection-end-column="163" />
+            <state relative-caret-position="164">
+              <caret line="47" column="32" lean-forward="true" selection-start-line="47" selection-start-column="32" selection-end-line="47" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -113,7 +113,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/sort/num2751_mergesort.java" />
         <option value="$PROJECT_DIR$/src/sort/sort_practice.java" />
         <option value="$PROJECT_DIR$/src/sort/num2751.java/num2750.java" />
         <option value="$PROJECT_DIR$/src/sort/num2751.java/num2751.java" />
@@ -162,8 +161,9 @@
         <option value="$PROJECT_DIR$/src/baekjoon/algoStudy/chapter1_input_output/InputOuput.java" />
         <option value="$PROJECT_DIR$/src/baekjoon/algoStudy/chapter1_input_output/Exercise.java" />
         <option value="$PROJECT_DIR$/src/baekjoon/algoStudy/chapter1_input_output/StarPrint.java" />
-        <option value="$PROJECT_DIR$/src/baekjoon/algoStudy/Main.java" />
         <option value="$PROJECT_DIR$/src/baekjoon/algoStudy/chapter2_brute_force_search/BitMask.java" />
+        <option value="$PROJECT_DIR$/src/baekjoon/algoStudy/chapter2_brute_force_search/Chapter2.java" />
+        <option value="$PROJECT_DIR$/src/baekjoon/algoStudy/Main.java" />
       </list>
     </option>
   </component>
@@ -172,13 +172,6 @@
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
-  </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="mavenHome" value="Bundled (Maven 3)" />
-      </MavenGeneralSettings>
-    </option>
   </component>
   <component name="ProjectFrameBounds" fullScreen="true">
     <option name="width" value="1280" />
@@ -901,7 +894,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="141516000" />
+    <option name="totallyTimeSpent" value="144091000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -1279,6 +1272,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1323,18 +1317,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/baekjoon/algoStudy/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/baekjoon/algoStudy/chapter2_brute_force_search/Chapter2.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="63" lean-forward="false" selection-start-line="5" selection-start-column="63" selection-end-line="5" selection-end-column="63" />
+        <state relative-caret-position="164">
+          <caret line="47" column="32" lean-forward="true" selection-start-line="47" selection-start-column="32" selection-end-line="47" selection-end-column="32" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/baekjoon/algoStudy/chapter2_brute_force_search/BitMask.java">
+    <entry file="file://$PROJECT_DIR$/src/baekjoon/algoStudy/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="163" lean-forward="false" selection-start-line="11" selection-start-column="163" selection-end-line="11" selection-end-column="163" />
+        <state relative-caret-position="75">
+          <caret line="5" column="63" lean-forward="false" selection-start-line="5" selection-start-column="63" selection-end-line="5" selection-end-column="63" />
           <folding />
         </state>
       </provider>

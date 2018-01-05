@@ -2,8 +2,8 @@ package baekjoon.algoStudy.chapter2_brute_force_search;
 
 import java.io.*;
 
-public class BitMask {
-    public void num11723() throws IOException {
+public class Chapter2 {
+    public void num11723_bitmask() throws IOException {
         /*
         비트 마스크 연습
         문제 : java Scanner, System.out은 너무 느려서 계속 시간초과가 떴다.
@@ -37,5 +37,50 @@ public class BitMask {
             }
         }
         pw.close();
+    }
+
+    public void num10972_next_permutation() throws IOException {
+        //다음 순열
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
+        int[] input = new int[n];
+        int index = 0;
+        for (String s : br.readLine().split(" ")) {
+            input[index++] = Integer.parseInt(s);
+        }
+
+        String answer = null;
+        for (int i=n-1; i>0; i--) {
+            if (input[i] > input[i-1]) {
+                for(int j=n-1; j>0; j--) {
+                    if (i <= j && input[i-1] < input[j]) {
+                        swap(input, i-1, j);
+                        answer = makeAnswer(input, i);
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+
+        System.out.println(answer != null ? answer : -1);
+    }
+
+    void swap(int[] array, int i, int j) {
+        //배열은 call by reference
+        int temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+
+    String makeAnswer(int[] array, int i) {
+        String answer = "";
+        for (int j=0; j<i; j++) {
+            answer += array[j] + " ";
+        }
+        for (int j=array.length-1; j>=i; j--) {
+            answer += array[j] + " ";
+        }
+        return answer;
     }
 }
