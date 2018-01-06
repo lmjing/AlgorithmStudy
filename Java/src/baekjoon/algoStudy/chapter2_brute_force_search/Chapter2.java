@@ -1,6 +1,7 @@
 package baekjoon.algoStudy.chapter2_brute_force_search;
 
 import java.io.*;
+import java.util.Scanner;
 
 public class Chapter2 {
     public void num11723_bitmask() throws IOException {
@@ -109,5 +110,53 @@ public class Chapter2 {
             answer += array[j] + " ";
         }
         return answer;
+    }
+
+    public void num10974_all_permutation() {
+        Scanner sc = new Scanner(System.in);
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        PrintWriter pw = new PrintWriter(bw);
+
+        int n = sc.nextInt();
+        int[] permutation = new int[n];
+        for (int i=0; i<n; i++) {
+            permutation[i] = i+1;
+            pw.print(i+1 + " ");
+        }
+        pw.println("");
+
+        while (permutation != null) {
+            permutation = next_permutation(pw, permutation);
+        }
+        pw.close();
+    }
+
+    private int[] next_permutation(PrintWriter pw, int[] permutation) {
+        int i = permutation.length - 1;
+        while (i > 0 && permutation[i-1] >= permutation[i]) i--;
+        if (i<=0) {
+            permutation[0] = -1;
+        }else {
+            int j = permutation.length - 1;
+            while (i > j || permutation[i-1] > permutation[j]) j--;
+            swap(permutation, i-1, j);
+            return printArray(pw, permutation, i);
+        }
+        return null;
+    }
+
+    private int[] printArray(PrintWriter pw, int[] permutation, int i) {
+        int[] newPermutation = new int[permutation.length];
+        int index = 0;
+        for (int z=0; z<i; z++) {
+            newPermutation[index++] = permutation[z];
+            pw.print(permutation[z] + " ");
+        }
+        for (int z=permutation.length-1; z>=i; z--) {
+            newPermutation[index++] = permutation[z];
+            pw.print(permutation[z] + " ");
+        }
+        pw.println("");
+        return newPermutation;
     }
 }
