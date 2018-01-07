@@ -1,6 +1,7 @@
 package baekjoon.algoStudy.chapter2_brute_force_search;
 
 import java.io.*;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Chapter2 {
@@ -131,5 +132,60 @@ public class Chapter2 {
         }
         pw.println("");
         return newPermutation;
+    }
+
+    public void num1722() {
+        // 틀렸던 이유: int 타입으로 했더니 범위 초과해서 long으로 바꿨는데, 몇 개만 바꾸고 뭐는 안바꿔서 틀림.
+        Scanner sc = new Scanner(System.in);
+        int n = Integer.parseInt(sc.nextLine());
+        int q = sc.nextInt();
+
+        LinkedList<Integer> rest = new LinkedList<Integer>();
+        for (int i=1; i<=n; i++) {
+            rest.add(i);
+        }
+        int index = 0;
+        long fac = factorial(n-1);
+
+        if (q == 1) {
+            long k = sc.nextLong();
+            String answer = "";
+            // i는 남은 자리 수(앞이 rest(index)로 채워 진 경우 가능한 순열의 수)
+            for (int i=n-1; i>0; i--) {
+                long count = fac;
+                while (count < k) {
+                    // rest(index)는 해당 자리의 주인이 아님. 따라서, 해당자리의 주인은 더 큰 값이다.
+                    k -= count;
+                    index++;
+                }
+                // rest(index)는 해당 자리의 주인이므로 정답에 추가하고 rest에서 제외시킨다.
+                answer += rest.get(index) + " ";
+                rest.remove(index);
+                // 해당 자리의 값이 확정되었으므로, 다음 자리의 값을 같은 방식으로 구한다.
+                index = 0; // 각 자리의 값은 최소값부터 가정해 시작해야 하므로 초기화 해준다.
+                fac /= i; // 남은 자리 factorial 다시 구하지 않고 나눔
+            }
+            answer += rest.getLast();
+            System.out.println(answer);
+        }else {
+            long answer = 0;
+            for (int i=n-1; i>0; i--) {
+                int find = sc.nextInt();
+
+                while (rest.get(index) < find) {
+                    answer += fac;
+                    index++;
+                }
+                rest.remove(index);
+                index = 0;
+                fac /= i;
+            }
+            System.out.println(answer + 1);
+        }
+    }
+
+    private long factorial(long i) {
+        if (i<=1) return 1;
+        return i * factorial(i-1);
     }
 }
