@@ -68,6 +68,33 @@ public class Chapter2 {
         System.out.println(answer != null ? answer : -1);
     }
 
+    public void num10973_pre_permutation() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
+        int[] input = new int[n];
+        int index = 0;
+        for (String s : br.readLine().split(" ")) {
+            input[index++] = Integer.parseInt(s);
+        }
+
+        String answer = null;
+        for (int i=n-1; i>0; i--) {
+            if (input[i] < input[i-1]) {
+                for(int j=n-1; j>=i; j--) {
+                    if (input[i-1] > input[j]) {
+                        swap(input, i-1, j);
+                        answer = makeAnswer(input, i);
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+
+        System.out.println(answer != null ? answer : -1);
+    }
+
+    //num10972_next_permutation와 num10973_pre_permutation에 필요한 함수
     void swap(int[] array, int i, int j) {
         //배열은 call by reference
         int temp = array[i];
