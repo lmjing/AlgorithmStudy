@@ -1,4 +1,4 @@
-package baekjoon.algoStudy.chapter2_brute_force_search;
+package baekjoon.algoStudy.chapter2_brute_force_search0;
 
 import java.io.*;
 import java.util.LinkedList;
