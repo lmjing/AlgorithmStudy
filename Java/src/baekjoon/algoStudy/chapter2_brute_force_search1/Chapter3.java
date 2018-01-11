@@ -22,7 +22,8 @@ public class Chapter3 {
         }
     }
 
-    public void num1107() {
+    public void num1107_fail1() {
+        // 짧게 풀려다가 복잡해져서 망한 케이스
         LinkedList<Integer> enableKeys = new LinkedList<Integer>();
         for (int i = 0; i < 10; i++) {
             enableKeys.add(i);
@@ -96,5 +97,48 @@ public class Chapter3 {
             return Integer.toString(nearNum).length() + Math.abs(inputNum - nearNum);
         }
         return -1;
+    }
+
+    static boolean[] ableKeys = new boolean[10];
+    static int input = 0;
+    public void num1107_fail2() {
+        // 알고리즘 풀이 방법 활용해서 했는데 안되는 반례를 못찾겠음
+        Scanner sc = new Scanner(System.in);
+        input = Integer.parseInt(sc.nextLine());
+        int n = Integer.parseInt(sc.nextLine());
+        for (int i=0; i<n; i++) {
+            ableKeys[sc.nextInt()] = true;
+        }
+
+        int choose = input;
+        //1. 번호만 눌러서 가는 경우
+        int answer = possible(input);
+        if (n == 10) choose = 100;
+        else if (answer == 0) {
+            // 바로 채널을 이동 할 수 없는 경우 근접한 수를 찾는다.
+            int large = input+1;
+            while (possible(large) == 0) large++;
+
+            int small = input-1;
+            while (possible(small) == 0) small--;
+
+            choose = Math.abs(large - input) < Math.abs(small - input) ? large : small;
+        }
+        choose = Math.abs(choose - input) < Math.abs(100 - input) ? choose : 100;
+        answer = possible(choose);
+        // 정답 : choose(눌리는 근접한 수)의 자리수 + | choose - input |
+        answer += Math.abs(choose - input);
+        System.out.println(answer);
+    }
+
+    private static int possible(int n) {
+        if (n == 0) return ableKeys[0] ? 0 : 1;
+        int len = 0;
+        while (n > 0) {
+            if (ableKeys[n % 10]) return 0;
+            len++;
+            n /= 10;
+        }
+        return len;
     }
 }
