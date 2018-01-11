@@ -131,6 +131,27 @@ public class Chapter3 {
         System.out.println(answer);
     }
 
+    public void num1107_answer() {
+        // PDF에 C++ 답보고 따라한거임 더 빠른 방법 있을 것 같은데 뭔지 모르겠음
+        Scanner sc = new Scanner(System.in);
+        input = Integer.parseInt(sc.nextLine());
+        int n = Integer.parseInt(sc.nextLine());
+        for (int i=0; i<n; i++) {
+            ableKeys[sc.nextInt()] = true;
+        }
+
+        int answer = Math.abs(input - 100);
+        for (int i=0; i<=1000000; i++) {
+            int len = possible(i);
+            if (len > 0) {
+                int temp = len + Math.abs(i - input);
+                if (answer > temp) answer = temp;
+            }
+        }
+        System.out.println(answer);
+    }
+
+
     private static int possible(int n) {
         if (n == 0) return ableKeys[0] ? 0 : 1;
         int len = 0;
