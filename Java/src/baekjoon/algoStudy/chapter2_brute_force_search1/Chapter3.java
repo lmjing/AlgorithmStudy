@@ -152,7 +152,7 @@ public class Chapter3 {
     }
 
 
-    private static int possible(int n) {
+    private int possible(int n) {
         if (n == 0) return ableKeys[0] ? 0 : 1;
         int len = 0;
         while (n > 0) {
@@ -161,5 +161,30 @@ public class Chapter3 {
             n /= 10;
         }
         return len;
+    }
+
+    private void num9095() {
+        int[] countArray = new int[11];
+        countArray[0] = 1;
+        countArray[1] = 1;
+
+        for (int n=2; n<11; n++) {
+            count(countArray, n);
+        }
+
+        Scanner sc = new Scanner(System.in);
+        int count = Integer.parseInt(sc.nextLine());
+        for (int i=0; i<count; i++) {
+            int n = Integer.parseInt(sc.nextLine());
+            System.out.println(countArray[n]);
+        }
+    }
+
+    void count(int[] countArray, int n) {
+        int sum = 0;
+        for (int i=1; i<=3 && i<=n; i++) {
+            sum += countArray[n-i];
+        }
+        countArray[n] = sum;
     }
 }
