@@ -164,11 +164,15 @@ public class Chapter3 {
     }
 
     private void num9095() {
+        // 몇 개 되지 않아 미리 다 해 구해놓음
+        // countArray에는 n을 만들기 위해 필요한 개수 저장하는 공간
+        // n이 양수기 때문에 0에는 접근할 일이 없고 0은 예외적으로 1로 함. 이유는 아래에 설명
         int[] countArray = new int[11];
         countArray[0] = 1;
         countArray[1] = 1;
 
         for (int n=2; n<11; n++) {
+            // 작은 값 부터 시작하기 때문에 아래 count 함수에서 n-i에 접근하는데 문제가 없다.
             count(countArray, n);
         }
 
@@ -183,6 +187,9 @@ public class Chapter3 {
     void count(int[] countArray, int n) {
         int sum = 0;
         for (int i=1; i<=3 && i<=n; i++) {
+            // n을 만들 때 맨 앞자리가 i라고 가정하면 n-i을 만들기 위해 필요한 값은 countArray[n-i]에 저장되어 있으니깐 써먹음
+            // 앞이 i로 채워졌기 때문에 예를 들어 n = 2; 이고 i = 2;일때 2로만 나타낼 수 있을 것
+            // 즉, 앞에 i로 이미 채워 졌기 때문에 countArray[0]이 될 경우 [0]은 1로 예외적으로 저장시킨다.
             sum += countArray[n-i];
         }
         countArray[n] = sum;

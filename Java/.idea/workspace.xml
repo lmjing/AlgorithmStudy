@@ -72,8 +72,8 @@
       <file leaf-file-name="Chapter3.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/baekjoon/algoStudy/chapter2_brute_force_search1/Chapter3.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="94">
-              <caret line="161" column="9" lean-forward="true" selection-start-line="161" selection-start-column="9" selection-end-line="161" selection-end-column="9" />
+            <state relative-caret-position="371">
+              <caret line="191" column="77" lean-forward="false" selection-start-line="191" selection-start-column="77" selection-end-line="191" selection-end-column="77" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#782#791#0" expanded="true" />
@@ -924,12 +924,12 @@
       <workItem from="1515334294276" duration="6518000" />
       <workItem from="1515341658892" duration="25000" />
       <workItem from="1515426126264" duration="4911000" />
-      <workItem from="1515651304658" duration="15171000" />
+      <workItem from="1515651304658" duration="15621000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="175895000" />
+    <option name="totallyTimeSpent" value="176345000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -1338,8 +1338,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/baekjoon/algoStudy/chapter2_brute_force_search1/Chapter3.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="94">
-          <caret line="161" column="9" lean-forward="true" selection-start-line="161" selection-start-column="9" selection-end-line="161" selection-end-column="9" />
+        <state relative-caret-position="371">
+          <caret line="191" column="77" lean-forward="false" selection-start-line="191" selection-start-column="77" selection-end-line="191" selection-end-column="77" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#782#791#0" expanded="true" />
