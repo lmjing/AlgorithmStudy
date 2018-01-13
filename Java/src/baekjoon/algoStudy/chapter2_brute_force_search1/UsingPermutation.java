@@ -104,4 +104,36 @@ public class UsingPermutation {
         array[i] = array[j];
         array[j] = temp;
     }
+
+    public static void num10971() {
+        // 방식 : n의 범위가 적어 이동 순열을 일일이 나열한 후 합을 구하고 최소값과 비교하였다.
+        // 첫번째 시도 틀린 이유 : 0일 경우 못간다는 예외처리를 하지 않음. 즉 0을 더해버렸으므로 이 값이 최소가 되어 다른 답이 나왔었음
+        // TODO : 나중에 나오겠지만, DP 식으로 재귀함수 사용해서 풀어 볼 것
+        Scanner sc = new Scanner(System.in);
+        int n = Integer.parseInt(sc.nextLine());
+        int[][] inputArray = new int[n][n];
+        int[] permutation = new int[n];
+        for (int i=0; i<n; i++) {
+            permutation[i] = i;
+            for (int j=0; j<n; j++) {
+                inputArray[i][j] = sc.nextInt();
+            }
+            sc.nextLine();
+        }
+
+        int min = 99999999;
+        do {
+            int sum = 0;
+            for (int i=0; i<n; i++) {
+                int start = permutation[i];
+                int end = permutation[i>=n-1 ? 0 : i+1];
+                if (inputArray[start][end] == 0) {
+                    sum = -1; break;
+                }
+                sum += inputArray[start][end];
+            }
+            min = min > sum && sum > 0 ? sum : min;
+        } while (next_permutation(permutation));
+        System.out.println(min);
+    }
 }
