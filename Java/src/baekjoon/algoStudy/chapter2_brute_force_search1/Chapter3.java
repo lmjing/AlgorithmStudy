@@ -1,5 +1,6 @@
 package baekjoon.algoStudy.chapter2_brute_force_search1;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Scanner;
 
