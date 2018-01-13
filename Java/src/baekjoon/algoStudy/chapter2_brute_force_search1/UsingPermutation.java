@@ -7,34 +7,50 @@ import java.util.Scanner;
 
 public class UsingPermutation {
     public void num10819_fail1() {
-        // 규칙 찾아 적용하였으나 테스트케이스 끝 부분쯤에 끝났다고 나옴.
+        // 규칙 찾아 적용하였으나 테스트케이스 끝 부분쯤에 틀렸다고 나옴.
         Scanner sc = new Scanner(System.in);
         int n = Integer.parseInt(sc.nextLine());
 
         LinkedList<Integer> arrayList = new LinkedList<Integer>();
+        LinkedList<Integer> minusList = new LinkedList<Integer>();
         for (int i=0; i<n; i++) {
-            arrayList.add(sc.nextInt());
+            int su = sc.nextInt();
+            if (su < 0) minusList.add(su);
+            else arrayList.add(su);
         }
-        Collections.sort(arrayList);
 
         int answer = 0;
-        int max = arrayList.removeLast();
-        int before = max;
-        while (arrayList.size() > 1) {
-            int small = arrayList.removeFirst();
-            answer += Math.abs(before - small);
-            before = small;
+        // 음수의 개수가 양수보다 1 작을 경우 -(-)가 되어 모두 + 가 된다.
+        // 따라서 처음 + 마지막 + (중간 값들의 합 x 2)을 하면 답
+        // 그러니 처음, 마지막이 당연히 가장 작은 양수들이여야 할 것
+        if (minusList.size() * 2 + 1 == n) {
+            Collections.sort(arrayList);
+            for (int i : minusList) answer += i * (-2);
+            answer += arrayList.removeFirst() + arrayList.removeFirst();
+            for (int i : arrayList) answer += i * 2;
+            System.out.println(answer);
+        }else {
+            arrayList.addAll(minusList);
+            Collections.sort(arrayList);
 
-            if (arrayList.size() == 1) break;
-            int large = arrayList.removeLast();
-            answer += Math.abs(before - large);
-            before = large;
+            int max = arrayList.removeLast();
+            int before = max;
+            while (arrayList.size() > 1) {
+                int small = arrayList.removeFirst();
+                answer += Math.abs(before - small);
+                before = small;
+
+                if (arrayList.size() == 1) break;
+                int large = arrayList.removeLast();
+                answer += Math.abs(before - large);
+                before = large;
+            }
+            int last = arrayList.getLast();
+            // 마지막에 남은 값은 위의 맨 마지막 값과 최대값과의 차이 중 큰 것의 값을 결과에 더하면 된다.
+            int diff1 = Math.abs(max - last); int diff2 = Math.abs(before - last);
+            answer += diff1 > diff2 ? diff1 : diff2;
+            System.out.println(answer);
         }
-        int last = arrayList.getLast();
-        // 마지막에 남은 값은 위의 맨 마지막 값과 최대값과의 차이 중 큰 것의 값을 결과에 더하면 된다.
-        int diff1 = Math.abs(max - last); int diff2 = Math.abs(before - last);
-        answer += diff1 > diff2 ? diff1 : diff2;
-        System.out.println(answer);
     }
 
     public static void num10819() {
