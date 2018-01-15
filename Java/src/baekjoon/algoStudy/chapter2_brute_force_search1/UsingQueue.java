@@ -1,8 +1,11 @@
 package baekjoon.algoStudy.chapter2_brute_force_search1;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Scanner;
+import baekjoon.algoStudy.Main;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
 
 public class UsingQueue {
     public static void num1697() {
@@ -101,6 +104,89 @@ public class UsingQueue {
                 majority.add(i);
                 if (i >= 1000) four_majority.add(i);
             }
+        }
+    }
+
+    public static void num9019_timeout1() {
+        Scanner sc = new Scanner(System.in);
+        int n = Integer.parseInt(sc.nextLine());
+        for (int i=0; i<n; i++) {
+            int[] visited = new int[10000];
+            LinkedList<DSLR> queue = new LinkedList<DSLR>();
+            queue.addLast(new DSLR(sc.nextInt(), ""));
+            int goal = sc.nextInt();
+            sc.nextLine();
+
+            while (!queue.isEmpty() && queue.getFirst().value != goal) {
+                DSLR current = queue.removeFirst();
+                visited[current.value] = 1;
+                int d = current.value * 2 % 10000;
+                if (visited[d] == 0) queue.addLast(new DSLR(d, current.route + "D"));
+                int s = current.value - 1 <= 0 ? 9999 : current.value - 1;
+                if (visited[s] == 0) queue.addLast(new DSLR(s, current.route + "S"));
+                int l = (current.value % 1000) * 10 + current.value/1000;
+                if (visited[l] == 0) queue.addLast(new DSLR(l, current.route + "L"));
+                int r = (current.value / 10) + (current.value%10)*1000;
+                if (visited[r] == 0) queue.addLast(new DSLR(r, current.route + "R"));
+            }
+            System.out.println(queue.isEmpty() ? "" : queue.getFirst().route);
+        }
+    }
+
+    public static void num9019_timeout2() throws IOException {
+        // 정답 : http://virusworld.tistory.com/83 과 비교했을 때 다를게 없는데 왜 얘는 시간초과일까
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
+        for (int i=0; i<n; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            int start = Integer.parseInt(st.nextToken());
+            int goal = Integer.parseInt(st.nextToken());
+
+            Queue<DSLR> queue = new LinkedList<>();
+            queue.offer(new DSLR(start, ""));
+
+            System.out.println(result(queue, goal));
+        }
+        br.close();
+    }
+    static String result(Queue<DSLR> queue, int goal) {
+        int[] visited = new int[10000];
+        while (!queue.isEmpty()) {
+            DSLR current = queue.poll();
+            if (current.value == goal) return current.route;
+            visited[current.value] = 1;
+
+            int d = current.value * 2 % 10000;
+            if (visited[d] == 0) {
+                StringBuilder beforeRoute = new StringBuilder(current.route);
+                queue.offer(new DSLR(d, beforeRoute.append("D").toString()));
+            }
+            int s = current.value - 1 <= 0 ? 9999 : current.value - 1;
+            if (visited[s] == 0) {
+                StringBuilder beforeRoute = new StringBuilder(current.route);
+                queue.offer(new DSLR(s,  beforeRoute.append("S").toString()));
+            }
+            int l = (current.value % 1000) * 10 + current.value/1000;
+            if (visited[l] == 0) {
+                StringBuilder beforeRoute = new StringBuilder(current.route);
+                queue.offer(new DSLR(l,  beforeRoute.append("L").toString()));
+            }
+            int r = (current.value / 10) + (current.value%10)*1000;
+            if (visited[r] == 0) {
+                StringBuilder beforeRoute = new StringBuilder(current.route);
+                queue.offer(new DSLR(r,  beforeRoute.append("R").toString()));
+            }
+        }
+        return null;
+    }
+
+    static class DSLR {
+        int value;
+        String route;
+
+        public DSLR(int value, String route) {
+            this.value = value;
+            this.route = route;
         }
     }
 }

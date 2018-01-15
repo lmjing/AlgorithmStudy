@@ -62,8 +62,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/baekjoon/algoStudy/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="5" lean-forward="false" selection-start-line="6" selection-start-column="5" selection-end-line="6" selection-end-column="5" />
+            <state relative-caret-position="15">
+              <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -72,14 +72,15 @@
       <file leaf-file-name="UsingQueue.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/baekjoon/algoStudy/chapter2_brute_force_search1/UsingQueue.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="67" column="9" lean-forward="false" selection-start-line="67" selection-start-column="9" selection-end-line="67" selection-end-column="9" />
+            <state relative-caret-position="293">
+              <caret line="173" column="67" lean-forward="true" selection-start-line="173" selection-start-column="20" selection-end-line="173" selection-end-column="67" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#356#362#0" expanded="true" />
-                <element signature="e#1427#1436#0" expanded="true" />
-                <element signature="e#1726#1738#0" expanded="true" />
-                <element signature="e#3033#3042#0" expanded="true" />
+                <element signature="e#419#425#0" expanded="true" />
+                <element signature="e#1490#1499#0" expanded="true" />
+                <element signature="e#1789#1801#0" expanded="true" />
+                <element signature="e#3096#3105#0" expanded="true" />
+                <element signature="e#3753#3759#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -961,7 +962,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="203421000" />
+    <option name="totallyTimeSpent" value="210426000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="6" />
@@ -1370,22 +1371,23 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/baekjoon/algoStudy/chapter2_brute_force_search1/UsingQueue.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="67" column="9" lean-forward="false" selection-start-line="67" selection-start-column="9" selection-end-line="67" selection-end-column="9" />
+        <state relative-caret-position="293">
+          <caret line="173" column="67" lean-forward="true" selection-start-line="173" selection-start-column="20" selection-end-line="173" selection-end-column="67" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#356#362#0" expanded="true" />
-            <element signature="e#1427#1436#0" expanded="true" />
-            <element signature="e#1726#1738#0" expanded="true" />
-            <element signature="e#3033#3042#0" expanded="true" />
+            <element signature="e#419#425#0" expanded="true" />
+            <element signature="e#1490#1499#0" expanded="true" />
+            <element signature="e#1789#1801#0" expanded="true" />
+            <element signature="e#3096#3105#0" expanded="true" />
+            <element signature="e#3753#3759#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/baekjoon/algoStudy/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="5" lean-forward="false" selection-start-line="6" selection-start-column="5" selection-end-line="6" selection-end-column="5" />
+        <state relative-caret-position="15">
+          <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding />
         </state>
       </provider>
