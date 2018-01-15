@@ -189,4 +189,67 @@ public class UsingQueue {
             this.route = route;
         }
     }
+
+    public static void num2251_fail() {
+        Scanner sc = new Scanner(System.in);
+        int[] volume = new int[3];
+        for (int i=0; i<3; i++) volume[i] = sc.nextInt();
+        Set<Integer> answer = new HashSet<>();
+
+        int[][] another = {{1, 2}, {0, 2}, {0, 1}};
+        boolean[][] visited = new boolean[volume[0]+1][volume[2]+1];
+
+        Queue<Bottle> queue = new LinkedList<>();
+        queue.offer(new Bottle(new int[]{0, 0, volume[2]}, -1, -1));
+
+        while (!queue.isEmpty()) {
+            Bottle current = queue.poll();
+            if (current.water[0] == 0 && !visited[current.water[0]][current.water[2]]) {
+                answer.add(current.water[2]);
+            }
+            visited[current.water[0]][current.water[2]] = true;
+
+            for (int s=0; s<3; s++) {
+                if (current.water[s] > 0) {
+                    for (int e : another[s]) {
+                        if (current.water[e] < volume[e] && !(current.to == s && e ==current.from)) {
+                            // 공간이 있으면서 직전 노드가 아닌 경우 일단 계산한다.
+                            int[] newWater = new int[3];
+                            if (current.water[s] > volume[e] - current.water[e]) {
+                                // 옮겨야 할 양이 더 많은 경우
+                                newWater[s] = current.water[s] - (volume[e] - current.water[e]);
+                                newWater[e] = volume[e];
+                            }else {
+                                newWater[e] = current.water[e] + current.water[s];
+                                newWater[s] = 0;
+                            }
+                            newWater[3-s-e] = current.water[3-s-e];
+                            if (!visited[newWater[0]][newWater[2]]) {
+                                queue.offer(new Bottle(newWater, s, e));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        StringBuilder result = new StringBuilder("");
+        for (int a:answer) {
+            result.append(a);
+            result.append(" ");
+        }
+        result.deleteCharAt(result.length()-1);
+        System.out.print(result);
+    }
+
+    static class Bottle {
+        int[] water = new int[3];
+        int from;
+        int to;
+
+        public Bottle(int[] water, int from, int to) {
+            this.water = water;
+            this.from = from;
+            this.to = to;
+        }
+    }
 }
