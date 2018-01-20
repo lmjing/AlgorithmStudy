@@ -164,7 +164,7 @@ public class Chapter3 {
         return len;
     }
 
-    private void num9095() {
+    public static void num9095() {
         // 몇 개 되지 않아 미리 다 해 구해놓음
         // countArray에는 n을 만들기 위해 필요한 개수 저장하는 공간
         // n이 양수기 때문에 0에는 접근할 일이 없고 0은 예외적으로 1로 함. 이유는 아래에 설명
@@ -185,7 +185,7 @@ public class Chapter3 {
         }
     }
 
-    void count(int[] countArray, int n) {
+    static void count(int[] countArray, int n) {
         int sum = 0;
         for (int i=1; i<=3 && i<=n; i++) {
             // n을 만들 때 맨 앞자리가 i라고 가정하면 n-i을 만들기 위해 필요한 값은 countArray[n-i]에 저장되어 있으니깐 써먹음
