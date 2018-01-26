@@ -1,5 +1,10 @@
 package baekjoon.algoStudy.chapter2_brute_force_search1;
 
+import baekjoon.algoStudy.Main;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -99,6 +104,52 @@ public class UsingRecursiveFunction {
                 newRestIndexList.remove(Integer.valueOf(i));
                 calc(row + 1, newBeforeRowList, newRestIndexList);
             }
+        }
+    }
+
+    static void num1987() throws IOException {
+        // NOTE : 시간초과 -> 수정 후 맞음
+        // NOTE : 시도 횟수 2
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] input = br.readLine().split(" ");
+        int r = Integer.parseInt(input[0]);
+        int c = Integer.parseInt(input[1]);
+
+        Alphabet alphabet = new Alphabet(r, c);
+        for (int i=0; i<r; i++) {
+            br.read(alphabet.map[i]);
+            br.readLine();
+        }
+        alphabet.go(0, 0, new boolean[26], 0);
+        System.out.println(alphabet.max);
+    }
+
+    static class Alphabet {
+        char[][] map;
+        int max;
+
+        public Alphabet(int r, int c) {
+            map = new char[r][c];
+        }
+
+        public void go(int x, int y, boolean[] visited, int count) {
+            visited[(int)map[x][y]-65] = true;
+            count++;
+
+            // BEFORE : 방문한 글자 Set에 저장해서 contains로 확인함 -> contains로 확인할 때 마다 O(N) 시간 소요 => 시간 초과
+            // AFTER : 알파벳은 26글자로 제한적이라는 특징 이용 -> 26개의 배열 확인 -> index로 접근해 방문 여부 확인 => 성공
+            if (x-1 >= 0 && !visited[map[x-1][y]-65]) go(x - 1, y, deepCopyArray(visited), count);
+            if (x+1 < map.length && !visited[map[x+1][y]-65]) go(x+1, y, deepCopyArray(visited), count);
+            if (y-1 >= 0 && !visited[map[x][y-1]-65]) go(x, y-1, deepCopyArray(visited), count);
+            if (y+1 < map[0].length && !visited[map[x][y+1]-65]) go(x, y+1, deepCopyArray(visited), count);
+
+            max = max < count ? count : max;
+        }
+
+        private boolean[] deepCopyArray(boolean[] before) {
+            boolean[] newArray = new boolean[before.length];
+            System.arraycopy(before, 0, newArray, 0, before.length);
+            return newArray;
         }
     }
 }
