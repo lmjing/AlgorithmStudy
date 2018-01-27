@@ -175,4 +175,33 @@ public class UsingRecursiveFunction {
             return getCount(i+1, sum, zeroCheck) + getCount(i+1, sum+input[i], true);
         }
     }
+
+    static void num6603() {
+        // NOTE : 시도횟수 1
+        // BEFORE : 나는 포함하지 않는 것 부터 호출해서 사전순 반대로 출력됨, 그래서 따로 배열을 만들어서 저장한 후 뒤에서 부터 출력하는 귀찮은 짓을 함
+        // AFTER : PDF 참고 -> 나를 포함할 경우부터 호출하면 사전순으로 호출된다.
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+            int k = sc.nextInt();
+            if (k == 0) break;
+            int[] array = new int[k];
+            for (int i=0; i<k; i++) array[i] = sc.nextInt();
+            sc.nextLine();
+            makeLotto(array, 0, new StringBuffer(""), 0);
+            System.out.println();
+        }
+    }
+
+    static void makeLotto(int[] array, int i, StringBuffer lotto, int j) {
+        if (j == 6) {
+            System.out.println(lotto);
+            return;
+        }
+        if (i >= array.length) return;
+
+        StringBuffer newLotto = new StringBuffer(lotto);
+        newLotto.append(" " + array[i]);
+        makeLotto(array,i+1, newLotto, j+1);
+        makeLotto(array,i+1, lotto, j);
+    }
 }
