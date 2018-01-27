@@ -152,4 +152,27 @@ public class UsingRecursiveFunction {
             return newArray;
         }
     }
+
+    static class num1182 {
+        // NOTE : 시도 횟수 1
+        // NOTE : 주의 사항 - s가 0인 경우 아래 로직대로 하면 전체다 포함되지 않아 sum = 0 으로 동일해지는 경우 count++ 가 된다.
+        // DIFF : 위의 주의사항을 PDF는 s=0인 경우 정답 -1하고 나는 그냥 재귀함수에 공집합인지 아닌지의 여부를 boolean으로 확인 함
+        int[] input;
+        int n;
+        int s;
+        void main() {
+            Scanner sc = new Scanner(System.in);
+            n = sc.nextInt();
+            s = sc.nextInt();
+            sc.nextLine();
+            input = new int[n];
+            for (int i=0; i<n; i++) input[i] = sc.nextInt();
+            System.out.println(getCount(0, 0, false));
+        }
+
+        int getCount(int i, int sum, boolean zeroCheck) {
+            if (i >= n) return sum == s && zeroCheck? 1 : 0;
+            return getCount(i+1, sum, zeroCheck) + getCount(i+1, sum+input[i], true);
+        }
+    }
 }
