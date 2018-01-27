@@ -59,21 +59,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/baekjoon/algoStudy/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="44" lean-forward="false" selection-start-line="5" selection-start-column="44" selection-end-line="5" selection-end-column="44" />
+            <state relative-caret-position="380">
+              <caret line="30" column="1" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="30" selection-end-column="1" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UsingRecursiveFunction.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="UsingRecursiveFunction.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/baekjoon/algoStudy/chapter2_brute_force_search1/UsingRecursiveFunction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="155">
-              <caret line="192" column="5" lean-forward="true" selection-start-line="192" selection-start-column="5" selection-end-line="192" selection-end-column="5" />
+            <state relative-caret-position="245">
+              <caret line="202" column="35" lean-forward="false" selection-start-line="202" selection-start-column="35" selection-end-line="202" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -217,8 +217,8 @@
         <option value="$PROJECT_DIR$/src/baekjoon/algoStudy/chapter2_brute_force_search1/UsingQueue.java" />
         <option value="$PROJECT_DIR$/src/baekjoon/algoStudy/chapter2_brute_force_search1/UsingPermutation.java" />
         <option value="$PROJECT_DIR$/src/baekjoon/algoStudy/chapter2_brute_force_search1/Chapter3.java" />
-        <option value="$PROJECT_DIR$/src/baekjoon/algoStudy/chapter2_brute_force_search1/UsingRecursiveFunction.java" />
         <option value="$PROJECT_DIR$/src/baekjoon/algoStudy/Main.java" />
+        <option value="$PROJECT_DIR$/src/baekjoon/algoStudy/chapter2_brute_force_search1/UsingRecursiveFunction.java" />
       </list>
     </option>
   </component>
@@ -972,12 +972,12 @@
       <workItem from="1516446287462" duration="10000" />
       <workItem from="1516540861354" duration="3733000" />
       <workItem from="1516695682082" duration="4793000" />
-      <workItem from="1517016117764" duration="4616000" />
+      <workItem from="1517016117764" duration="4705000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="236380000" />
+    <option name="totallyTimeSpent" value="236469000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -1385,21 +1385,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/baekjoon/algoStudy/chapter2_brute_force_search1/UsingRecursiveFunction.java">
+    <entry file="file://$PROJECT_DIR$/src/baekjoon/algoStudy/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="192" column="5" lean-forward="true" selection-start-line="192" selection-start-column="5" selection-end-line="192" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="380">
+          <caret line="30" column="1" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="30" selection-end-column="1" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/baekjoon/algoStudy/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/baekjoon/algoStudy/chapter2_brute_force_search1/UsingRecursiveFunction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="44" lean-forward="false" selection-start-line="5" selection-start-column="44" selection-end-line="5" selection-end-column="44" />
-          <folding />
+        <state relative-caret-position="245">
+          <caret line="202" column="35" lean-forward="false" selection-start-line="202" selection-start-column="35" selection-end-line="202" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -200,7 +200,7 @@ public class UsingRecursiveFunction {
         if (i >= array.length) return;
 
         StringBuffer newLotto = new StringBuffer(lotto);
-        newLotto.append(" " + array[i]);
+        newLotto.append(array[i] + " ");
         makeLotto(array,i+1, newLotto, j+1);
         makeLotto(array,i+1, lotto, j);
     }
