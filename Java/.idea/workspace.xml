@@ -63,8 +63,13 @@
         <entry file="file://$PROJECT_DIR$/src/baekjoon/algoStudy/Main.java">
           <provider selected="true" editor-type-id="text-editor">
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             <state relative-caret-position="380">
               <caret line="30" column="1" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="30" selection-end-column="1" />
+=======
+            <state relative-caret-position="615">
+              <caret line="41" column="25" lean-forward="false" selection-start-line="41" selection-start-column="25" selection-end-line="41" selection-end-column="25" />
+>>>>>>> Stashed changes
 =======
             <state relative-caret-position="615">
               <caret line="41" column="25" lean-forward="false" selection-start-line="41" selection-start-column="25" selection-end-line="41" selection-end-column="25" />
@@ -983,7 +988,11 @@
   </component>
   <component name="TimeTrackingManager">
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     <option name="totallyTimeSpent" value="236469000" />
+=======
+    <option name="totallyTimeSpent" value="214344000" />
+>>>>>>> Stashed changes
 =======
     <option name="totallyTimeSpent" value="214344000" />
 >>>>>>> Stashed changes
@@ -1397,8 +1406,13 @@
     <entry file="file://$PROJECT_DIR$/src/baekjoon/algoStudy/Main.java">
       <provider selected="true" editor-type-id="text-editor">
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         <state relative-caret-position="380">
           <caret line="30" column="1" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="30" selection-end-column="1" />
+=======
+        <state relative-caret-position="615">
+          <caret line="41" column="25" lean-forward="false" selection-start-line="41" selection-start-column="25" selection-end-line="41" selection-end-column="25" />
+>>>>>>> Stashed changes
 =======
         <state relative-caret-position="615">
           <caret line="41" column="25" lean-forward="false" selection-start-line="41" selection-start-column="25" selection-end-line="41" selection-end-column="25" />
