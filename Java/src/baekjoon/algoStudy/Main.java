@@ -24,6 +24,7 @@ public class Main {
             sc.nextLine();
         }
         go(blank, check, sudoku);
+//        print(sudoku);
     }
 
     static boolean go(LinkedList<int[]> blank, boolean[][][] check, int[][] sudoku) {
