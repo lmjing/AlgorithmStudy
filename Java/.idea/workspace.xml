@@ -50,7 +50,7 @@
       <file leaf-file-name="TwoPointerAlgorithms.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/baekjoon/algoStudy/chapter2_brute_force_search2/TwoPointerAlgorithms.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
+            <state relative-caret-position="855">
               <caret line="57" column="52" lean-forward="false" selection-start-line="57" selection-start-column="52" selection-end-line="57" selection-end-column="52" />
               <folding />
             </state>
@@ -961,12 +961,12 @@
       <workItem from="1517376259407" duration="6140000" />
       <workItem from="1517587740588" duration="1706000" />
       <workItem from="1517636419266" duration="3000" />
-      <workItem from="1517894169224" duration="677000" />
+      <workItem from="1517894169224" duration="689000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="223921000" />
+    <option name="totallyTimeSpent" value="223933000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -1386,7 +1386,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/baekjoon/algoStudy/chapter2_brute_force_search2/TwoPointerAlgorithms.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
+        <state relative-caret-position="855">
           <caret line="57" column="52" lean-forward="false" selection-start-line="57" selection-start-column="52" selection-end-line="57" selection-end-column="52" />
           <folding />
         </state>
