@@ -31,4 +31,30 @@ public class TwoPointerAlgorithms {
         }
         System.out.println(count);
     }
+
+    public static void num1806() {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int s = sc.nextInt();
+        int[] input = new int[n+1];
+        sc.nextLine();
+        for (int i=0; i<n; i++) input[i] = sc.nextInt();
+        int i = 0, j = 0;
+        int sum = input[0], min = 100000;
+        while (j < n && i <= j) {
+            if (sum < s) {
+                j++;
+                sum += input[j];
+            }else if (sum >= s) {
+                min = min > j-i+1 ? j-i+1 : min;
+                sum -= input[i];
+                i++;
+                if (i > j) {
+                    j++;
+                    sum += input[j];
+                }
+            }
+        }
+        System.out.println(min == 100000 ? 0 : min);
+    }
 }
