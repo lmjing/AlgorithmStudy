@@ -41,57 +41,42 @@ public class Chapter2 {
         pw.close();
     }
 
-    public void num10972_next_permutation() throws IOException {
-        //다음 순열
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int n = Integer.parseInt(br.readLine());
+    public void num10972_next_permutation() {
+        Scanner sc = new Scanner(System.in);
+        int n = Integer.parseInt(sc.nextLine());
         int[] input = new int[n];
-        int index = 0;
-        for (String s : br.readLine().split(" ")) {
-            input[index++] = Integer.parseInt(s);
+        for (int i=0; i<n; i++) {
+            input[i] = sc.nextInt();
         }
-
-        String answer = null;
-        for (int i=n-1; i>0; i--) {
-            if (input[i] > input[i-1]) {
-                for(int j=n-1; j>0; j--) {
-                    if (i <= j && input[i-1] < input[j]) {
-                        swap(input, i-1, j);
-                        answer = makeAnswer(input, i);
-                        break;
-                    }
-                }
-                break;
+        if (next_permutation(input)) {
+            StringBuilder answer = new StringBuilder();
+            for (int ans: input) {
+                answer.append(ans + " ");
             }
+            answer.delete(answer.length()-1,answer.length());
+            System.out.print(answer);
+        }else {
+            System.out.print(-1);
         }
-
-        System.out.println(answer != null ? answer : -1);
     }
 
     public void num10973_pre_permutation() throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int n = Integer.parseInt(br.readLine());
-        int[] input = new int[n];
-        int index = 0;
-        for (String s : br.readLine().split(" ")) {
-            input[index++] = Integer.parseInt(s);
+        Scanner sc = new Scanner(System.in);
+        int n = Integer.parseInt(sc.nextLine());
+        int[] permutation = new int[n];
+        for (int i=0; i<n; i++) {
+            permutation[i] = sc.nextInt();
         }
-
-        String answer = null;
-        for (int i=n-1; i>0; i--) {
-            if (input[i] < input[i-1]) {
-                for(int j=n-1; j>=i; j--) {
-                    if (input[i-1] > input[j]) {
-                        swap(input, i-1, j);
-                        answer = makeAnswer(input, i);
-                        break;
-                    }
-                }
-                break;
+        if (pre_permutation(permutation)) {
+            StringBuilder answer = new StringBuilder();
+            for (int ans: permutation) {
+                answer.append(ans + " ");
             }
+            answer.delete(answer.length()-1,answer.length());
+            System.out.println(answer);
+        }else {
+            System.out.println(-1);
         }
-
-        System.out.println(answer != null ? answer : -1);
     }
 
     //num10972_next_permutation와 num10973_pre_permutation에 필요한 함수
@@ -115,50 +100,50 @@ public class Chapter2 {
 
     public void num10974_all_permutation() {
         Scanner sc = new Scanner(System.in);
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        PrintWriter pw = new PrintWriter(bw);
-
-        int n = sc.nextInt();
+        int n = Integer.parseInt(sc.nextLine());
         int[] permutation = new int[n];
         for (int i=0; i<n; i++) {
             permutation[i] = i+1;
-            pw.print(i+1 + " ");
         }
-        pw.println("");
-
-        while (permutation != null) {
-            permutation = next_permutation(pw, permutation);
-        }
-        pw.close();
+        do {
+            StringBuilder answer = new StringBuilder();
+            for (int ans: permutation) {
+                answer.append(ans + " ");
+            }
+            answer.delete(answer.length()-1,answer.length());
+            System.out.println(answer);
+        }while (next_permutation(permutation));
     }
 
-    private int[] next_permutation(PrintWriter pw, int[] permutation) {
-        int i = permutation.length - 1;
-        while (i > 0 && permutation[i-1] >= permutation[i]) i--;
-        if (i<=0) {
-            permutation[0] = -1;
-        }else {
-            int j = permutation.length - 1;
-            while (i > j || permutation[i-1] > permutation[j]) j--;
-            swap(permutation, i-1, j);
-            return printArray(pw, permutation, i);
+    private boolean next_permutation(int[] input) {
+        int i = input.length-1;
+        int j = input.length-1;
+        while (i>0 && input[i] <= input[i-1]) i--;
+        if (i<=0) return false;
+        while (j>=i && input[j] <= input[i-1]) j--;
+        swap(input,i-1, j);
+        j = input.length-1;
+        while (i < j) {
+            swap(input, i, j);
+            i++; j--;
         }
-        return null;
+        return true;
     }
 
-    private int[] printArray(PrintWriter pw, int[] permutation, int i) {
-        int[] newPermutation = new int[permutation.length];
-        int index = 0;
-        for (int z=0; z<i; z++) {
-            newPermutation[index++] = permutation[z];
-            pw.print(permutation[z] + " ");
+    private boolean pre_permutation(int[] permutation) {
+        int n = permutation.length;
+        int i = n-1;
+        int j = n-1;
+        while (i>0 && permutation[i] >= permutation[i-1]) i--;
+        if (i<=0) return false;
+        while (j>=i && permutation[j] >= permutation[i-1]) j--;
+        swap(permutation,i-1, j);
+        j = n-1;
+        while (i < j) {
+            swap(permutation, i, j);
+            i++; j--;
         }
-        for (int z=permutation.length-1; z>=i; z--) {
-            newPermutation[index++] = permutation[z];
-            pw.print(permutation[z] + " ");
-        }
-        pw.println("");
-        return newPermutation;
+        return true;
     }
 
     public void num1722() {
@@ -211,6 +196,7 @@ public class Chapter2 {
         }
     }
 
+    //USE: factorial
     private long factorial(long i) {
         if (i<=1) return 1;
         return i * factorial(i-1);
