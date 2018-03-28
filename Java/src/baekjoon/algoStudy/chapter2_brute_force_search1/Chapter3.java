@@ -195,4 +195,56 @@ public class Chapter3 {
         }
         countArray[n] = sum;
     }
+
+    static void num10971_dfs() {
+        //USE : DFS, DP (전부다 갈 수 있는지 확인하고 전부 방문한 최소값 구하기) - TSP
+        //NOTE : PPT에는 순열로 구했는데 나는 DP, 로직은 짰는데 사소한거에서 실수 너무 많이한다. 예외처리 잘하자.
+        Scanner sc = new Scanner(System.in);
+        int n = Integer.parseInt(sc.nextLine());
+        Num10971 num10971 = new Num10971(n);
+        for (int i=0; i<n; i++) {
+            for (int j=0; j<n; j++) {
+                num10971.setCost(i, j, sc.nextInt());
+            }
+            sc.nextLine();
+        }
+        num10971.visited[0] = true;
+        num10971.go(0, 1, 0);
+        System.out.print(num10971.min);
+    }
+
+    public static class Num10971 {
+        public int n;
+        public int[][] cost;
+        public int min;
+        private boolean[] visited;
+
+        public Num10971(int n) {
+            this.n = n;
+            this.cost = new int[n][n];
+            this.min = 999999999;
+            this.visited = new boolean[n];
+        }
+
+        public void setCost(int i, int j, int c) {
+            cost[i][j] = c;
+        }
+
+        private void go(int c, int count, int sum) {
+            if (min <= sum) return;
+            if (count == n) {
+                if (cost[c][0] > 0) min = Math.min(min, sum + cost[c][0]);
+                return;
+            }
+
+            for (int i=0; i<n; i++) {
+                if (visited[i]) continue;
+                if (cost[c][i] == 0) continue;
+
+                visited[i] = true;
+                go(i, count+1, sum + cost[c][i]);
+                visited[i] = false;
+            }
+        }
+    }
 }
