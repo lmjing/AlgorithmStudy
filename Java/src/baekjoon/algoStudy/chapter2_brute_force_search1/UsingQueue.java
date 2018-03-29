@@ -252,4 +252,62 @@ public class UsingQueue {
             this.to = to;
         }
     }
+
+    public static void num1525() {
+        //NOTE : 답지 보고 한거나 다름 없음
+        Scanner sc = new Scanner(System.in);
+        int start = 0;
+        for (int i=0; i<3; i++) {
+            for (int j=0; j<3; j++) {
+                int input = sc.nextInt();
+                if (input == 0) input = 9;
+                start = start * 10 + input;
+            }
+        }
+
+        Puzzle puzzle = new Puzzle();
+        puzzle.queue.add(start);
+        puzzle.count.put(start, 0);
+        puzzle.check_next();
+    }
+
+    public static class Puzzle {
+        private int[] dx = {0, 0, -1, 1};
+        private int[] dy = {-1, 1, 0, 0};
+
+        Queue<Integer> queue = new LinkedList<Integer>();
+        HashMap<Integer, Integer> count = new HashMap<>();
+
+        public void check_next() {
+            while (!queue.isEmpty()) {
+                int nowInt = queue.remove();
+                if (nowInt == 123456789) break;
+                String now = String.valueOf(nowInt);
+                int idx = now.indexOf('9');
+
+                int x = idx/3, y = idx%3;
+                for (int i=0; i<4; i++) {
+                    int nx = x + dx[i];
+                    int ny = y + dy[i];
+                    if (nx >= 0 && nx <3 && ny >= 0 && ny < 3) {
+                        StringBuilder next = new StringBuilder(now);
+                        char temp = next.charAt(idx);
+                        next.setCharAt(x*3+y, next.charAt(nx*3+ny));
+                        next.setCharAt(nx*3+ny, temp);
+                        int nextInt = Integer.parseInt(next.toString());
+                        if (!count.containsKey(nextInt)) {
+                            queue.add(nextInt);
+                            count.put(nextInt, count.get(nowInt)+1);
+                        }
+                    }
+                }
+            }
+
+            if (count.containsKey(123456789)) {
+                System.out.println(count.get(123456789));
+            }else {
+                System.out.println(-1);
+            }
+        }
+    }
 }
