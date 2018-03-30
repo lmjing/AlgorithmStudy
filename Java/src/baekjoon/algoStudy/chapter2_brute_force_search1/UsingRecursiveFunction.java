@@ -5,10 +5,7 @@ import baekjoon.algoStudy.Main;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.Scanner;
+import java.util.*;
 
 public class UsingRecursiveFunction {
     static void num9095() {
@@ -203,5 +200,70 @@ public class UsingRecursiveFunction {
         newLotto.append(array[i] + " ");
         makeLotto(array,i+1, newLotto, j+1);
         makeLotto(array,i+1, lotto, j);
+    }
+
+    static void num2580() {
+        Scanner sc = new Scanner(System.in);
+        Sudoku sudoku = new Sudoku();
+
+        for (int i=0; i<9; i++) {
+            for (int j=0; j<9; j++) {
+                sudoku.init(i, j, sc.nextInt());
+            }
+            sc.nextLine();
+        }
+
+        sudoku.find(new LinkedList<>(sudoku.queue));
+    }
+
+    public static class Sudoku {
+        // 0 : 가로, 1 : 세로, 2 : 네모
+        public boolean[][][] check = new boolean[3][9][9];
+        public int [][] sudoku = new int[9][9];
+        private int count = 0;
+        public Queue<Integer> queue = new LinkedList<>();
+
+        public void init(int i, int j, int vaule) {
+            sudoku[i][j] = vaule;
+            if (vaule == 0) {
+                queue.add(i*10 + j);
+                count++;
+            }else {
+                vaule--; // 0~8인데 입력값은 1~9라서 하나 줄임
+                check[0][i][vaule] = true;
+                check[1][j][vaule] = true;
+                check[2][(i/3)* 3 + j/3][vaule] = true;
+            }
+        }
+
+        //TODO: queue 복사시간 걸리니깐, List에 저장하고 매개변수에 index 전달해서 다음 index -> 안해도 통과함
+        //BEFORE: 그냥 return으로 하면 가능한거 전부다 출력해버림
+        public boolean find(Queue<Integer> queue) {
+            if (count == 0) {
+                for (int i=0; i<9; i++) {
+                    StringBuilder res = new StringBuilder();
+                    for (int j=0; j<9; j++) {
+                        res.append(sudoku[i][j] + " ");
+                    }
+                    System.out.println(res);
+                }
+                return true;
+            }
+
+            int blank = queue.remove();
+            int x = blank / 10, y = blank % 10;
+            for (int i=0; i<9; i++) {
+                if (!check[0][x][i] && !check[1][y][i] && !check[2][(x/3)*3 + y/3][i]) {
+                    sudoku[x][y] = i+1; count--;
+                    check[0][x][i] = true; check[1][y][i] = true; check[2][(x/3)*3 + y/3][i] = true;
+                    //AFTER: boolean으로 정답 나온 경우 멈춰버림
+                    if (find(new LinkedList<>(queue))) break;
+                    //NOTE : 얘네 있어야 하는 이유는 만약 가능한게 2개라서 임의로 넣어서 하다가 아니면 그 전단계로 가야하니깐
+                    sudoku[x][y] = 0; count++;
+                    check[0][x][i] = false; check[1][y][i] = false; check[2][(x/3)*3 + y/3][i] = false;
+                }
+            }
+            return false;
+        }
     }
 }
