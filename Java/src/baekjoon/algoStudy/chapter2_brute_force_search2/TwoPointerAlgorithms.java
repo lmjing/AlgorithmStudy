@@ -1,5 +1,6 @@
 package baekjoon.algoStudy.chapter2_brute_force_search2;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TwoPointerAlgorithms {
@@ -56,5 +57,43 @@ public class TwoPointerAlgorithms {
             }
         }
         System.out.println(min == 100000 ? 0 : min);
+    }
+
+    public static void num1644() {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        ArrayList<Integer> primeList = getprime(n);
+        int l = 0, r = 0, ans = 0;
+        //BEFORE: primeList.get(0)으로 했더니 런타임 오류남
+        //AFTER: input이 자연수인데 1일 때 처리를 안해줌
+        int sum = primeList.isEmpty() ? 0 : primeList.get(0);
+        while (r < primeList.size() && l<=r) {
+            if (sum == n)
+                ans++;
+            if (sum > n) {
+                sum -= primeList.get(l);
+                l++;
+            }else {
+                r++;
+                if (r < primeList.size())
+                    sum += primeList.get(r);
+            }
+        }
+        System.out.println(ans);
+    }
+
+    static ArrayList<Integer> getprime(int n){
+        boolean[] check = new boolean[n+1];
+        ArrayList<Integer> prime = new ArrayList<Integer>();
+        for(int i=2; i<=n; i++){
+            if (!check[i]) {
+                prime.add(i);
+
+                for (int p=i*2; p<=n; p+=i) {
+                    check[p] = true;
+                }
+            }
+        }
+        return prime;
     }
 }

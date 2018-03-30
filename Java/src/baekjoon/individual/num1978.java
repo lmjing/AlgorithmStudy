@@ -5,14 +5,16 @@ import java.util.Scanner;
 /**
  * Created by mijeong on 2016. 12. 5..
  */
+//USE: 소수 찾기
+
 public class num1978 {
     public static void main(String[] args){
-        Scanner stdin = new Scanner(System.in);
-        int cnt = stdin.nextInt();
+        Scanner sc = new Scanner(System.in);
+        int cnt = sc.nextInt();
         int result = 0;
 
         for(int i=0;i<cnt;i++){
-            int a = stdin.nextInt();
+            int a = sc.nextInt();
             if(check(a)==true) result++;
         }
 
