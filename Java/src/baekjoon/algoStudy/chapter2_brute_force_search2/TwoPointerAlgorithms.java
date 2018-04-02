@@ -82,6 +82,7 @@ public class TwoPointerAlgorithms {
         System.out.println(ans);
     }
 
+    //USE: 소수 찾기(에라토스테네스의 체 이용)
     static ArrayList<Integer> getprime(int n){
         boolean[] check = new boolean[n+1];
         ArrayList<Integer> prime = new ArrayList<Integer>();
