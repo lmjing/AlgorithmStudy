@@ -96,4 +96,28 @@ public class D3 {
             }
         }
     }
+
+    // TODO: 성공한지 안한지 모름 관련 문제 있을경우 TEST 해보기
+    private static void qsort(int left, int right, int[] arr) {
+        if(left >= right) return;
+
+        int pivot = left;
+        int l = left+1; int r = right;
+
+        while(l<r) {
+            while(l <= right && arr[pivot] > arr[l]) l++;
+            while(r >= l && arr[pivot] <= arr[r]) r--;
+            if(l<r) swap(l, r, arr);
+        }
+        if(arr[r] < arr[pivot]) swap(r, pivot, arr);
+
+        qsort(left, r-1, arr);
+        qsort(r+1, right, arr);
+    }
+
+    private static void swap(int i, int j, int[] arr) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
 }
