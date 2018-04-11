@@ -310,4 +310,69 @@ public class UsingQueue {
             }
         }
     }
+
+
+    static int[] dx = {0, 0, -1, 1};
+    static int[] dy = {-1, 1, 0, 0};
+
+    static int[][] count;
+    static int[][] map;
+
+    static int n;
+    static int m;
+    public static void num1261() {
+        Scanner sc = new Scanner(System.in);
+        m = sc.nextInt();
+        n = sc.nextInt();
+        count = new int[n][m];
+        map = new int[n][m];
+
+        sc.nextLine();
+        for (int i=0; i<n; i++) {
+            String temp = sc.nextLine();
+            for (int j=0; j<m; j++) {
+                count[i][j] = -1;
+                map[i][j] = temp.charAt(j) - '0';
+            }
+        }
+
+        Queue<Position> q = new LinkedList<>();
+        Queue<Position> nextQueue = new LinkedList<>();
+        q.offer(new Position(0, 0));
+        count[0][0] = 0;
+
+        while (!q.isEmpty()) {
+            Position cur = q.remove();
+            for (int i=0; i<4; i++) {
+                int nx = cur.x + dx[i];
+                int ny = cur.y + dy[i];
+
+                if (nx >= 0 && nx < m && ny >= 0 && ny < n) {
+                    if (count[ny][nx] == -1) {
+                        if (map[ny][nx] == 0) {
+                            count[ny][nx] = count[cur.y][cur.x];
+                            q.offer(new Position(nx, ny));
+                        }else {
+                            count[ny][nx] = count[cur.y][cur.x] + 1;
+                            nextQueue.offer(new Position(nx, ny));
+                        }
+                    }
+                }
+            }
+
+            if (q.isEmpty()) {
+                q = nextQueue;
+                nextQueue = new LinkedList<>();
+            }
+        }
+        System.out.println(count[n-1][m-1]);
+    }
+
+    static class Position {
+        int x; int y;
+        public Position(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+    }
 }
