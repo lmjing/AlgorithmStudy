@@ -64,4 +64,36 @@ public class D3 {
         }
     }
 
+    //GNS
+    // NOTE: 세상에 너무 쉬운 문제였는데 이걸 오래 걸림 반성해라. 그리고 #1, #2 답 사이에 \n넣으니깐 에러였음 output은 \n있었는데 멘붕
+
+    // BEFORE: 무조건 정렬해야한다는 생각으로 qsort 직접 구현함.
+    // AFTER: 생각해보니깐 0~10수이니깐 count 세서 index로 접근하면 끝날일이였음
+    public static void num1221() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int T = Integer.parseInt(st.nextToken());
+        String[] numbers = { "ZRO", "ONE", "TWO", "THR", "FOR", "FIV", "SIX", "SVN", "EGT", "NIN" };
+        HashMap<String, Integer> numberMap = new HashMap<>();
+        for(int i=0; i<10; i++) {
+            numberMap.put(numbers[i], i);
+        }
+
+        for(int i=0; i<T; i++) {
+            st = new StringTokenizer(br.readLine());
+            String testCase = st.nextToken();
+            int n = Integer.parseInt(st.nextToken());
+            st = new StringTokenizer(br.readLine());
+            int[] count = new int[10];
+            for(int j=0; j<n; j++) {
+                count[numberMap.get(st.nextToken())]++;
+            }
+            System.out.println("#"+(i+1));
+            for(int j=0; j<10; j++) {
+                String s = numbers[j];
+                for(int jj=0; jj<count[j]; jj++)
+                    System.out.print(s + " ");
+            }
+        }
+    }
 }
