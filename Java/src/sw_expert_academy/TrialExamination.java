@@ -71,4 +71,62 @@ public class TrialExamination {
         }
         return true;
     }
+
+    //QUIZ : num4013 특이한 자석
+    //NOTE : 1시간 17분 걸림
+    public static void num4013_main() {
+        Scanner sc = new Scanner(System.in);
+        int T;
+        T=sc.nextInt();
+
+        for(int test_case = 1; test_case <= T; test_case++)
+        {
+            int K = sc.nextInt();
+            int[][] input = new int[4][8];
+            int[] directArray = new int[4];
+            for(int i=0; i<4; i++) {
+                for(int j=0; j<8; j++) {
+                    input[i][j] = sc.nextInt();
+                }
+            }
+            for(int i=0; i<K; i++) {
+                int mag = sc.nextInt() - 1;
+                int direct = sc.nextInt();
+                int[] moveD = new int[4];
+                moveD[mag] = direct;
+
+                //왼
+                int j = mag;
+                while(--j >= 0) {
+                    int r = (8+2-directArray[j]) % 8;
+                    int l = (8+6-directArray[j+1]) % 8;
+                    int left = input[j][r]; int right = input[j+1][l];
+                    if(left != right) {
+                        moveD[j] = moveD[j+1] * -1;
+                    }else break;
+                }
+                //오
+                j = mag;
+                while(++j < 4) {
+                    int r = (8+2-directArray[j-1]) % 8;
+                    int l = (8+6-directArray[j]) % 8;
+                    int left = input[j-1][r]; int right = input[j][l];
+                    if(left != right) {
+                        moveD[j] = moveD[j-1] * -1;
+                    }else break;
+                }
+                for(int k=0; k<4; k++)
+                    directArray[k] += moveD[k];
+            }
+
+            int score = 0;
+            for(int i=0; i<4; i++) {
+                int arrow = (-directArray[i] + 8) % 8;
+                if(input[i][arrow] == 1) {
+                    score += Math.pow(2, i);
+                }
+            }
+            System.out.println("#" + test_case + " " + score);
+        }
+    }
 }
