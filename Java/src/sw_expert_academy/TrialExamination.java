@@ -193,4 +193,73 @@ public class TrialExamination {
             }
         }
     }
+
+    //QUIZ : num4008 숫자 만들기
+    //NOTE : 1시간 걸림 - 더 빨리 할 수 있었는데 다음 순열 만드는법을 헷갈림
+    static class Num4008 {
+        static int max;
+        static int min;
+
+        public static void main() {
+            Scanner sc = new Scanner(System.in);
+            int T;
+            T=sc.nextInt();
+
+            for(int test_case = 1; test_case <= T; test_case++) {
+                int N = sc.nextInt();
+                int[] operators = new int[N-1];
+                int[] nums = new int[N];
+
+                int idx = 0;
+                for(int i=0; i<4; i++) {
+                    int n = sc.nextInt();
+                    for(int j=0; j<n; j++) operators[idx++] = i;
+                }
+                for(int i=0; i<N; i++) nums[i] = sc.nextInt();
+
+                max = -100000001;
+                min = 100000001;
+                do {
+                    int result = nums[0];
+                    for(int i=0; i<N-1; i++) {
+                        result = cal(operators[i], result, nums[i+1]);
+                    }
+                    max = max < result ? result : max;
+                    min = min > result ? result : min;
+                }while(next_per(operators));
+                System.out.println("#" + test_case + " " + (max-min));
+            }
+        }
+
+        static int cal(int oper, int i, int j) {
+            switch(oper) {
+                case 0: return i+j;
+                case 1: return i-j;
+                case 2: return i*j;
+                case 3: return i/j;
+                default: return 0;
+            }
+        }
+
+        static boolean next_per(int[] per) {
+            int i = per.length-1;
+            while(i>0 && per[i-1] >= per[i]) i--;
+            if(i == 0) return false;
+
+            int j = per.length-1;
+            while(j>=0 && per[i-1] >= per[j]) j--;
+            swap(per, i-1, j);
+            for(int k=per.length-1; k>i; i++, k--) {
+                swap(per, k, i);
+            }
+
+            return true;
+        }
+
+        static void swap(int[] array, int i, int j) {
+            int temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+    }
 }
