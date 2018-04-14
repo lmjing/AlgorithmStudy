@@ -129,4 +129,68 @@ public class TrialExamination {
             System.out.println("#" + test_case + " " + score);
         }
     }
+
+    //QUIZ : num4012 요리사
+    //NOTE : 1시간 15분 걸림
+    static class Num4012 {
+        static int min;
+        static int N;
+        static int allFoodTaste;
+        static int[][] synergy;
+        public static void main() {
+            Scanner sc = new Scanner(System.in);
+            int T;
+            T=sc.nextInt();
+
+            for(int test_case = 1; test_case <= T; test_case++) {
+                min = 99999999;
+                N = sc.nextInt();
+                synergy = new int[N][N];
+                for(int i=0; i<N; i++) {
+                    for(int j=0; j<N; j++) {
+                        synergy[i][j] = sc.nextInt();
+                        allFoodTaste += synergy[i][j];
+                    }
+                }
+
+                int half = N/2;
+                StringBuilder foods = new StringBuilder("0");
+                int[] foodCheck = new int[N];
+                makeFood(0, half-1, foods);
+                System.out.println("#" + test_case + " " + min);
+            }
+        }
+
+        static void makeFood(int i, int rest, StringBuilder foods) {
+            if(rest == 0) {
+                // 음식 구하기
+                boolean [] foodCheck = new boolean[N];
+                String[] foodsString = foods.toString().split(" ");
+                for(int j=0; j<N/2; j++) {
+                    int food = Integer.parseInt(foodsString[j]);
+                    foodCheck[food] = true;
+                }
+                int Ataste = 0;
+                int Btaste = 0;
+                for(int j=0; j<N; j++) {
+                    for(int k=0; k<N; k++) {
+                        // 같은 그룹일 경우에
+                        if(!(foodCheck[j] ^ foodCheck[k])) {
+                            if(foodCheck[j]) Ataste += synergy[j][k];
+                            else Btaste += synergy[j][k];
+                        }
+                    }
+                }
+                int diff = Math.abs(Ataste - Btaste);
+                min = diff < min ? diff : min;
+                return;
+            }
+
+            //조합의 경우 다 구하기
+            for(int j=i+1; j<N; j++) {
+                StringBuilder newFoods = new StringBuilder(foods);
+                makeFood(j, rest-1, newFoods.append(" " + j));
+            }
+        }
+    }
 }
