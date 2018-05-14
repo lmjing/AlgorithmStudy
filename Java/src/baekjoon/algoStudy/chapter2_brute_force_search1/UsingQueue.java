@@ -190,66 +190,73 @@ public class UsingQueue {
         }
     }
 
-    public static void num2251_fail() {
-        Scanner sc = new Scanner(System.in);
-        int[] volume = new int[3];
-        for (int i=0; i<3; i++) volume[i] = sc.nextInt();
-        Set<Integer> answer = new HashSet<>();
+    public static class Num2251 {
+        // USE : BFS, QUEUE
+        // TODO : a -> b로 온 후, b -> a로 가는 건 똑같은 상황이라 막는다면, 더 빨라질 수 있다고 생각함
+        /*
+        BEFORE : 방문했던 노드를 a * 100 + b * 10 + c로 했었음 근데 각 자리는 최대 200임
+        즉, 이 방법은 중복 인덱스를 불러옴
+         */
+        // AFTER : (레퍼런스 참고) a, b 값 만으로 c를 알 수 있으므로 a, b를 키로 하는 value를 저장하는 형식으로 진행
+        // NOTE : 접근방식은 맞았으나, 인덱스 접근이 틀려서 엄청 오래 걸림.. 그 틀린 이유를 전혀 알지 못했음
+        static boolean[][] visited;
+        static int[] answers;
+        static int N;
 
-        int[][] another = {{1, 2}, {0, 2}, {0, 1}};
-        boolean[][] visited = new boolean[volume[0]+1][volume[2]+1];
+        public static void main(String args[]) {
+            Scanner sc = new Scanner(System.in);
+            int[] bottleSize = new int[3];
+            for(int i=0; i<3; i++) bottleSize[i] = sc.nextInt();
+            N = bottleSize[2];
+            answers = new int[N+1];
+            visited = new boolean[bottleSize[0]+1][bottleSize[1]+1];
+            Queue<Bottles> queue = new LinkedList<>();
+            queue.add(new Bottles(0, 0));
 
-        Queue<Bottle> queue = new LinkedList<>();
-        queue.offer(new Bottle(new int[]{0, 0, volume[2]}, -1, -1));
+            while (!queue.isEmpty()) {
+                Bottles now = queue.remove();
 
-        while (!queue.isEmpty()) {
-            Bottle current = queue.poll();
-            if (current.water[0] == 0 && !visited[current.water[0]][current.water[2]]) {
-                answer.add(current.water[2]);
-            }
-            visited[current.water[0]][current.water[2]] = true;
-
-            for (int s=0; s<3; s++) {
-                if (current.water[s] > 0) {
-                    for (int e : another[s]) {
-                        if (current.water[e] < volume[e] && !(current.to == s && e ==current.from)) {
-                            // 공간이 있으면서 직전 노드가 아닌 경우 일단 계산한다.
-                            int[] newWater = new int[3];
-                            if (current.water[s] > volume[e] - current.water[e]) {
-                                // 옮겨야 할 양이 더 많은 경우
-                                newWater[s] = current.water[s] - (volume[e] - current.water[e]);
-                                newWater[e] = volume[e];
+                // i->j
+                for (int i=0; i<3; i++) {
+                    for (int j=0; j<3; j++) {
+                        if(i != j && now.bottles[i] > 0 && now.bottles[j] < bottleSize[j]) {
+                            int[] newBottles = {now.bottles[0], now.bottles[1], now.bottles[2]};
+                            int all = newBottles[i] + newBottles[j];
+                            if (all > bottleSize[j]) {
+                                newBottles[i] -= bottleSize[j] - newBottles[j];
+                                newBottles[j] = bottleSize[j];
                             }else {
-                                newWater[e] = current.water[e] + current.water[s];
-                                newWater[s] = 0;
+                                newBottles[j] = all;
+                                newBottles[i] = 0;
                             }
-                            newWater[3-s-e] = current.water[3-s-e];
-                            if (!visited[newWater[0]][newWater[2]]) {
-                                queue.offer(new Bottle(newWater, s, e));
+
+                            int a = newBottles[0];
+                            int b = newBottles[1];
+                            if (!visited[a][b]) {
+                                queue.add(new Bottles(a, b));
                             }
                         }
                     }
                 }
             }
-        }
-        StringBuilder result = new StringBuilder("");
-        for (int a:answer) {
-            result.append(a);
-            result.append(" ");
-        }
-        result.deleteCharAt(result.length()-1);
-        System.out.print(result);
-    }
 
-    static class Bottle {
-        int[] water = new int[3];
-        int from;
-        int to;
+            StringBuilder ans = new StringBuilder();
+            for(int i=0; i<N+1; i++) {
+                if(answers[i] > 0) ans.append(i + " ");
+            }
+            System.out.println(ans);
+        }
 
-        public Bottle(int[] water, int from, int to) {
-            this.water = water;
-            this.from = from;
-            this.to = to;
+        static class Bottles {
+            int[] bottles = new int[3];
+            public Bottles(int a, int b) {
+                bottles[0] = a;
+                bottles[1] = b;
+                int c = N - (a+b);
+                bottles[2] = c;
+                visited[a][b] = true;
+                if(a == 0) answers[c] = 1;
+            }
         }
     }
 
