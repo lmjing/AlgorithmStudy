@@ -42,16 +42,16 @@ public class Main {
             }
         }
 
-        int getAnswer() {
+        long getAnswer() {
             l = 0; r = rightArray.length - 1;
             Arrays.sort(leftArray);
             Arrays.sort(rightArray);
-            int count = 0;
+            long count = 0;
             while (l < leftArray.length && r >= 0) {
                 long ln = leftArray[l]; long rn = rightArray[r];
                 long sum = ln + rn;
                 if (sum == s) {
-                    int lc = 1, rc = 1;
+                    long lc = 1, rc = 1;
                     ++l; --r;
                     while (l < leftArray.length && leftArray[l] == ln) {
                         ++lc;
