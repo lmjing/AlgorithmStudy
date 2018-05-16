@@ -50,11 +50,7 @@ public class Main {
             while (l < leftArray.length && r >= 0) {
                 long ln = leftArray[l]; long rn = rightArray[r];
                 long sum = ln + rn;
-                if (ln == 0 && rn == 0) {
-                    if(s > 0) ++l;
-                    else --r;
-                }
-                else if (sum == s) {
+                if (sum == s) {
                     int lc = 1, rc = 1;
                     ++l; --r;
                     while (l < leftArray.length && leftArray[l] == ln) {
@@ -66,6 +62,7 @@ public class Main {
                         --r;
                     }
                     count += lc*rc;
+                    if(ln == 0 && rn == 0) --count;
                 }else if (sum > s) --r;
                 else ++l;
             }
