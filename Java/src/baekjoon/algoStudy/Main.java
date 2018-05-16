@@ -3,71 +3,73 @@ package baekjoon.algoStudy;
 import java.util.*;
 
 public class Main {
-
-    static int n;
-    static int s;
-    static int[] array;
-
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        n = sc.nextInt();
-        s = sc.nextInt();
-        array = new int[n];
-        for (int i=0; i<n; i++) {
-            array[i] = sc.nextInt();
-        }
-        Subset subset = new Subset();
+
+        int n = sc.nextInt();
+        int s = sc.nextInt();
+        Subset subset = new Subset(n, s);
+
+        for (int i=0; i<n/2; i++) subset.setLeftNum(sc.nextInt(), i);
+        for (int i=0; i<n-n/2; i++) subset.setRightNum(sc.nextInt(), i);
+
         System.out.println(subset.getAnswer());
     }
 
     static class Subset {
-        long[] frontHalf;
-        long[] afterHalf;
-        int frontArrow = 0;
-        int afterArrow = 0;
-        int idx = 0;
+        int n, s;
+        long[] leftArray;
+        long[] rightArray;
+        int l, r;
 
-        public Subset() {
-            int half = n / 2;
-            frontHalf = new long[(int) Math.pow(2, half)];
-            afterHalf = new long[(int) Math.pow(2, n - half)];
-
-            makeSubset(0, half, 0,true);
-            idx = 0;
-            makeSubset(half, n, 0, false);
-            Arrays.sort(frontHalf);
-            Arrays.sort(afterHalf);
-            afterArrow = afterHalf.length-1;
+        public Subset(int n, int s) {
+            this.n = n;
+            this.s = s;
+            leftArray = new long[(int) Math.pow(2, n/2)];
+            rightArray = new long[(int) Math.pow(2, n - n/2)];
+            l = 1; r = 1;
         }
 
-        public int getAnswer() {
+        void setLeftNum(long num, int k) {
+            for(int i = 0; i < Math.pow(2, k); i++) {
+                leftArray[l++] = leftArray[i] + num;
+            }
+        }
+
+        void setRightNum(long num, int k) {
+            for(int i = 0; i < Math.pow(2, k); i++) {
+                rightArray[r++] = rightArray[i] + num;
+            }
+        }
+
+        int getAnswer() {
+            l = 0; r = rightArray.length - 1;
+            Arrays.sort(leftArray);
+            Arrays.sort(rightArray);
             int count = 0;
-            while (frontArrow < frontHalf.length && afterArrow >= 0) {
-                long a = frontHalf[frontArrow];
-                long b = afterHalf[afterArrow];
-                long sum = a + b;
-                if(sum == s && !(a == 0 && b == 0))  {
-                    int i1 = 1; int i2 = 1;
-                    while (++frontArrow < frontHalf.length && frontHalf[frontArrow] == a) i1++;
-                    while (--afterArrow >= 0 && afterHalf[afterArrow] == b) i2++;
-                    count += i1 * i2;
-                }else {
-                    if (sum >= 0) afterArrow--;
-                    else frontArrow++;
+            while (l < leftArray.length && r >= 0) {
+                long ln = leftArray[l]; long rn = rightArray[r];
+                long sum = ln + rn;
+                if (ln == 0 && rn == 0) {
+                    if(s > 0) ++l;
+                    else --r;
                 }
+                else if (sum == s) {
+                    int lc = 1, rc = 1;
+                    ++l; --r;
+                    while (l < leftArray.length && leftArray[l] == ln) {
+                        ++lc;
+                        ++l;
+                    }
+                    while (r >= 0 && rightArray[r] == rn) {
+                        ++rc;
+                        --r;
+                    }
+                    count += lc*rc;
+                }else if (sum > s) --r;
+                else ++l;
             }
             return count;
-        }
-
-        private void makeSubset(int ai, int e, int sum, boolean flag) {
-            long[] halfArray = flag ? frontHalf : afterHalf;
-
-            if(ai == e) {
-                halfArray[idx++] = sum;
-                return;
-            }
-            makeSubset(ai + 1, e, sum, flag);
-            makeSubset(ai + 1, e, sum + array[ai], flag);
         }
     }
 }
