@@ -18,26 +18,37 @@ public class Main {
             }
         }
 
-        boolean nextFlag = false;
-        do {
-            nextFlag = false;
-            long sum = 0;
-            for (int i=3; i>=0; i--) {
-                int num = index[i];
-                sum += input[num][i];
-                if (num == n - 1) {
-                    index[i] = !nextFlag ? 0 : index[i];
-                } else if (num < n - 1) {
-                    if (!nextFlag) {
-                        nextFlag = true;
-                        index[i]++;
-                    }
-                }
+        int N = n*n;
+        int[] front = new int[N];
+        int[] back = new int[N];
+
+        for (int i=0; i<n; i++) {
+            for (int j=0; j<n; j++) {
+                front[i * n + j] = input[i][0] + input[j][1];
+                back[i * n + j] = input[i][2] + input[j][3];
             }
-            if (sum == 0)
-                count++;
-        } while (nextFlag);
-        
+        }
+
+        Arrays.sort(front);
+        Arrays.sort(back);
+
+        int fi = 0;
+        int bi = N - 1;
+
+        while (fi < N && bi >= 0) {
+            int f = front[fi]; int b = back[bi];
+            if (f * b == 1) break;
+
+            int sum = f + b;
+            if (sum == 0) {
+                int c1 = 1, c2 = 1;
+                while (++fi < N && front[fi] == f) c1++;
+                while (--bi >= 0 && back[bi] == b) c2++;
+                count += c1 * c2;
+            }else if (sum > 0) bi--;
+            else fi++;
+        }
+
         System.out.println(count);
     }
 }
