@@ -4,6 +4,7 @@ import java.util.*;
 
 public class Main {
     static int[][] input;
+    static int[] index = {0, 0, 0, 0};
     static int count = 0;
     static int n;
 
@@ -16,30 +17,33 @@ public class Main {
                 input[i][j]= sc.nextInt();
             }
         }
-        check(0);
+        check();
         System.out.println(count);
     }
 
-    public static void check(long i) {
-        long newI = 0;
+    public static void check() {
+        StringBuilder str = new StringBuilder();
+
         long sum = 0;
         boolean flag = true;
-        int position = 1;
-        for (int j=0; j<4; j++) {
-            long num = i % 10;
-            sum += input[(int) num][j];
-            if (num < n - 1) {
-                newI += position * num;
+        for (int i=3; i>=0; i--) {
+            int num = index[i];
+            sum += input[num][i];
+            if (num == n - 1) {
+                index[i] = flag ? 0 : index[i];
+            } else if (num < n - 1) {
                 if (flag) {
                     flag = false;
-                    newI += position;
+                    index[i]++;
                 }
-            }else if (!flag) newI += position * num;
-            i /= 10;
-            position *= 10;
+            }
+            str.append(index[i] + " ");
         }
         if (sum == 0)
             count++;
-        if (newI > 0) check(newI);
+        if (!flag) {
+            System.out.println(str);
+            check();
+        }
     }
 }
