@@ -37,6 +37,7 @@ public class Main {
 
         while (fi < N && bi >= 0) {
             long f = front[fi]; long b = back[bi];
+            if (f * b == 1) break;
 
             long sum = f + b;
             if (sum == 0) {
