@@ -5,7 +5,7 @@ import java.util.*;
 public class Main {
     static int[][] input;
     static int[] index = {0, 0, 0, 0};
-    static int count = 0;
+    static long count = 0;
     static int n;
 
     public static void main(String[] args) {
@@ -19,8 +19,8 @@ public class Main {
         }
 
         int N = n*n;
-        int[] front = new int[N];
-        int[] back = new int[N];
+        long[] front = new long[N];
+        long[] back = new long[N];
 
         for (int i=0; i<n; i++) {
             for (int j=0; j<n; j++) {
@@ -36,12 +36,11 @@ public class Main {
         int bi = N - 1;
 
         while (fi < N && bi >= 0) {
-            int f = front[fi]; int b = back[bi];
-            if (f * b == 1) break;
+            long f = front[fi]; long b = back[bi];
 
-            int sum = f + b;
+            long sum = f + b;
             if (sum == 0) {
-                int c1 = 1, c2 = 1;
+                long c1 = 1, c2 = 1;
                 while (++fi < N && front[fi] == f) c1++;
                 while (--bi >= 0 && back[bi] == b) c2++;
                 count += c1 * c2;
