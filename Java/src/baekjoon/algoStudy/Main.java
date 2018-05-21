@@ -17,33 +17,27 @@ public class Main {
                 input[i][j]= sc.nextInt();
             }
         }
-        check();
-        System.out.println(count);
-    }
 
-    public static void check() {
-        StringBuilder str = new StringBuilder();
-
-        long sum = 0;
-        boolean flag = true;
-        for (int i=3; i>=0; i--) {
-            int num = index[i];
-            sum += input[num][i];
-            if (num == n - 1) {
-                index[i] = flag ? 0 : index[i];
-            } else if (num < n - 1) {
-                if (flag) {
-                    flag = false;
-                    index[i]++;
+        boolean nextFlag = false;
+        do {
+            nextFlag = false;
+            long sum = 0;
+            for (int i=3; i>=0; i--) {
+                int num = index[i];
+                sum += input[num][i];
+                if (num == n - 1) {
+                    index[i] = !nextFlag ? 0 : index[i];
+                } else if (num < n - 1) {
+                    if (!nextFlag) {
+                        nextFlag = true;
+                        index[i]++;
+                    }
                 }
             }
-            str.append(index[i] + " ");
-        }
-        if (sum == 0)
-            count++;
-        if (!flag) {
-            System.out.println(str);
-            check();
-        }
+            if (sum == 0)
+                count++;
+        } while (nextFlag);
+        
+        System.out.println(count);
     }
 }
