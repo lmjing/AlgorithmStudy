@@ -19,9 +19,11 @@ public class Main {
 
         int result = 0;
 
-        int sKey = sIter.next(), fKey = fIter.next();
-        while (sIter.hasNext() || fIter.hasNext()) {
-            if (fKey >= T) break;
+        // 1개 이상이란 가정하에
+        int fKey = fIter.next();
+        int sKey = sIter.next();
+
+        do {
             int sum = sKey + fKey;
 
             if (sum == T) {
@@ -37,10 +39,9 @@ public class Main {
                 if (sIter.hasNext()) sKey = sIter.next();
                 else break;
             }
-        }
+        } while (sIter.hasNext() || fIter.hasNext());
 
         System.out.println(result);
-
     }
 
     static class Array {
