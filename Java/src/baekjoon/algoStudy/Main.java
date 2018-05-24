@@ -89,7 +89,7 @@ public class Main {
             long sum = f + s;
 
             if (sum == T) {
-                int cnt1 = 1; int cnt2 = 1;
+                long cnt1 = 1; long cnt2 = 1;
                 while (ai + 1 < a1.size() && a1.get(ai + 1) == f) {
                     cnt1++; ai++;
                 }
