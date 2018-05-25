@@ -1,10 +1,67 @@
 package baekjoon.algoStudy.chapter2_brute_force_search2;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 
 public class TwoPointerAlgorithms {
+    static class Num2632 {
+        // USE : Two Point, 부분 합
+        // NOTE : 한번에 품, 시간 50분 정도 걸림
+        // TODO : 다른 사람들거랑 비교 했을 때 비효율적인 알고리즘이다. 다시 풀어볼 것
+        static Scanner sc;
+        public static void main (String[] args) {
+            sc = new Scanner(System.in);
+            int T = sc.nextInt();
+            int m = sc.nextInt();
+            int n = sc.nextInt();
+            Pizza A = new Pizza(m);
+            Pizza B = new Pizza(n);
+
+            int ai = 0; int bi = B.subSumVector.size() - 1;
+            long result = 0;
+            while (ai < A.subSumVector.size() && bi >= 0) {
+                int a = A.subSumVector.get(ai);
+                int b = B.subSumVector.get(bi);
+                int sum = a + b;
+
+                if (sum == T) {
+                    long cnt1 = 1, cnt2 = 1;
+                    while (++ai < A.subSumVector.size() && A.subSumVector.get(ai) == a) cnt1++;
+                    while (--bi >= 0 && B.subSumVector.get(bi) == b) cnt2++;
+                    result += cnt1 * cnt2;
+                } else if (sum > T) bi--;
+                else ai++;
+            }
+            System.out.println(result);
+        }
+
+        static class Pizza {
+            int[] pizza;
+            int size;
+            Vector<Integer> subSumVector = new Vector<>();
+
+            public Pizza(int size) {
+                pizza = new int[size];
+                this.size = size;
+                for (int i=0; i<size; i++) pizza[i] = sc.nextInt();
+
+                makeNextSubSum(1, true, 0, pizza[0]);
+                makeNextSubSum(1, false, 0, 0);
+                Collections.sort(subSumVector);
+            }
+
+            public void makeNextSubSum (int i, boolean before, int diffCnt, int sum) {
+                if (diffCnt > 2) return;
+                if (i == size) {
+                    subSumVector.add(sum);
+                    return;
+                }
+                // ^ = XOR : 달라야 true
+                makeNextSubSum(i + 1, true, before ^ true ? diffCnt + 1 : diffCnt, sum + pizza[i]);
+                makeNextSubSum(i + 1, false, before ^ false ? diffCnt + 1 : diffCnt, sum);
+            }
+        }
+    }
+
     static class Num2143 {
         // Diff : 부분집합의 합과 다른 것 = 공집합이 없음
         // USE : Two Point, 부분 합
