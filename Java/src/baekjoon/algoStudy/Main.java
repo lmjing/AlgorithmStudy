@@ -4,13 +4,11 @@ import java.util.*;
 
 public class Main {
     static Scanner sc;
-    static boolean[] array;
     public static void main (String[] args) {
         sc = new Scanner(System.in);
         int n = sc.nextInt();
 
         Queue<Node> queue = new LinkedList<>();
-        array = new boolean[n+1];
         queue.add(new Node(n, 0));
 
         while (!queue.isEmpty()) {
@@ -20,8 +18,7 @@ public class Main {
                 System.out.println(node.count);
                 break;
             }
-            if (num > 1 && !array[num]) {
-                array[num] = true;
+            if (num > 1) {
                 int count = node.count + 1;
                 if (num % 3 == 0) queue.add(new Node(num / 3, count));
                 if (num % 2 == 0) queue.add(new Node(num / 2, count));
