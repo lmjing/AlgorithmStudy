@@ -6,36 +6,41 @@ import java.util.Scanner;
 
 public class DynamicProgramming {
     static class num1463 {
+        // NOTE : 자세한 로직 설명과 통과한 다른 코드들은 블로그에 기술되어 있음
         static Scanner sc;
         static boolean[] array;
         public static void main (String[] args) {
             sc = new Scanner(System.in);
             int n = sc.nextInt();
 
-            Queue<Integer> before = new LinkedList<>();
-            Queue<Integer> after = new LinkedList<>();
+            Queue<Node> queue = new LinkedList<>();
             array = new boolean[n+1];
-            int count = 0;
-            before.add(n);
+            queue.add(new Node(n, 0));
 
-            while (!before.isEmpty()) {
-                int num = before.remove();
+            while (!queue.isEmpty()) {
+                Node node = queue.remove();
+                int num = node.num;
                 if (num == 1) {
-                    System.out.println(count);
+                    System.out.println(node.count);
                     break;
                 }
                 if (num > 1 && !array[num]) {
                     array[num] = true;
-                    if (num % 3 == 0) after.add(num / 3);
-                    if (num % 2 == 0) after.add(num / 2);
-                    after.add(num - 1);
+                    int count = node.count + 1;
+                    if (num % 3 == 0) queue.add(new Node(num / 3, count));
+                    if (num % 2 == 0) queue.add(new Node(num / 2, count));
+                    queue.add(new Node(num - 1, count));
                 }
+            }
+        }
 
-                if (before.isEmpty()) {
-                    before = after;
-                    after = new LinkedList<>();
-                    count++;
-                }
+        static class Node {
+            int num;
+            int count;
+
+            public Node (int num, int count) {
+                this.num = num;
+                this.count = count;
             }
         }
     }
