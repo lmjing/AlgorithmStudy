@@ -4,33 +4,35 @@ import java.util.*;
 
 public class Main {
     static Scanner sc;
+    static boolean[] array;
     public static void main (String[] args) {
         sc = new Scanner(System.in);
         int n = sc.nextInt();
-        Queue<Number> queue = new LinkedList<>();
 
-        queue.add(new Number(n, 0));
-        while (!queue.isEmpty()) {
-            Number now = queue.remove();
-            if (now.num == 1) {
-                System.out.println(now.count);
+        Queue<Integer> before = new LinkedList<>();
+        Queue<Integer> after = new LinkedList<>();
+        array = new boolean[n+1];
+        int count = 0;
+        before.add(n);
+
+        while (!before.isEmpty()) {
+            int num = before.remove();
+            if (num == 1) {
+                System.out.println(count);
                 break;
             }
-            if (now.num > 1) {
-                if (n % 3 == 0) queue.add(new Number(now.num / 3, now.count + 1));
-                if (n % 2 == 0) queue.add(new Number(now.num / 2, now.count + 1));
-                queue.add(new Number(now.num - 1, now.count + 1));
+            if (num > 1 && !array[num]) {
+                array[num] = true;
+                if (num % 3 == 0) after.add(num / 3);
+                if (num % 2 == 0) after.add(num / 2);
+                after.add(num - 1);
             }
-        }
-    }
 
-    static class Number {
-        int num;
-        int count;
-
-        public Number (int num, int count) {
-            this.num = num;
-            this.count = count;
+            if (before.isEmpty()) {
+                before = after;
+                after = new LinkedList<>();
+                count++;
+            }
         }
     }
 }
