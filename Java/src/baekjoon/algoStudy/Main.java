@@ -16,9 +16,11 @@ public class Main {
                 System.out.println(now.count);
                 break;
             }
-            if (n % 3 == 0) queue.add(new Number(now.num / 3, now.count + 1));
-            if (n % 2 == 0) queue.add(new Number(now.num / 2, now.count + 1));
-            queue.add(new Number(now.num - 1, now.count + 1));
+            if (now.num > 1) {
+                if (n % 3 == 0) queue.add(new Number(now.num / 3, now.count + 1));
+                if (n % 2 == 0) queue.add(new Number(now.num / 2, now.count + 1));
+                queue.add(new Number(now.num - 1, now.count + 1));
+            }
         }
     }
 
