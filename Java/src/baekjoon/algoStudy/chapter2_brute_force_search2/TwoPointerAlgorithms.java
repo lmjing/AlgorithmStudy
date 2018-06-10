@@ -1,6 +1,12 @@
 package baekjoon.algoStudy.chapter2_brute_force_search2;
 
+<<<<<<< HEAD
 import java.util.*;
+=======
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
+>>>>>>> facf69d0f1ff6a791ba4aa612036520868bad7cf
 
 public class TwoPointerAlgorithms {
     static class Num2632 {
