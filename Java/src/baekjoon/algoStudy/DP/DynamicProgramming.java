@@ -1,47 +1,44 @@
 package baekjoon.algoStudy.DP;
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
+import java.util.*;
 
 public class DynamicProgramming {
-    static class num1463 {
-        // NOTE : 자세한 로직 설명과 통과한 다른 코드들은 블로그에 기술되어 있음
-        static Scanner sc;
-        static boolean[] array;
+    public void num1463_bottomUp() {
+        // USE : DP (Bottom-up)
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+
+        int[] minArray = new int[n+1];
+
+        for (int i = 2; i <= n; i++) {
+            int min = minArray[i-1] + 1;
+            if (i % 3 == 0) min = Math.min(min, minArray[i/3] + 1);
+            if (i % 2 == 0) min = Math.min(min, minArray[i/2] + 1);
+            minArray[i] = min;
+        }
+        System.out.println(minArray[n]);
+    }
+
+    static class Num1463_TopDown {
+        static int[] temp;
         public static void main (String[] args) {
-            sc = new Scanner(System.in);
+            Scanner sc = new Scanner(System.in);
             int n = sc.nextInt();
+            temp = new int[n+1];
 
-            Queue<Node> queue = new LinkedList<>();
-            array = new boolean[n+1];
-            queue.add(new Node(n, 0));
-
-            while (!queue.isEmpty()) {
-                Node node = queue.remove();
-                int num = node.num;
-                if (num == 1) {
-                    System.out.println(node.count);
-                    break;
-                }
-                if (num > 1 && !array[num]) {
-                    array[num] = true;
-                    int count = node.count + 1;
-                    if (num % 3 == 0) queue.add(new Node(num / 3, count));
-                    if (num % 2 == 0) queue.add(new Node(num / 2, count));
-                    queue.add(new Node(num - 1, count));
-                }
-            }
+            System.out.println(go(n));
         }
 
-        static class Node {
-            int num;
-            int count;
+        public static int go (int n) {
+            if (n <= 1) return 0;
+            if (temp[n] > 0) return temp[n];
 
-            public Node (int num, int count) {
-                this.num = num;
-                this.count = count;
-            }
+            int min = go(n - 1) + 1;
+            if (n % 3 == 0) min = Math.min(min, go(n / 3) + 1);
+            if (n % 2 == 0) min = Math.min(min, go(n / 2) + 1);
+            temp[n] = min;
+
+            return min;
         }
     }
 }
