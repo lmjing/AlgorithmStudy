@@ -1,34 +1,20 @@
 package baekjoon.algoStudy;
 
-import java.awt.font.ShapeGraphicAttribute;
-import java.sql.SQLType;
 import java.util.*;
 
 public class Main {
-    static long[] fac;
+    static long[] tile;
     public static void main (String[] args) {
         Scanner sc  = new Scanner(System.in);
 
         int n = sc.nextInt();
-        fac = new long[n+1];
+        tile = new long[n+1];
 
-        fac[1] = 1;
-        if (n > 1) fac[2] = 2;
-        getFac(n);
+        tile[1] = 1;
+        if (n > 1) tile[2] = 2;
 
-        long ans = 1;
-        for (int i=1; i<=n/2; i++) {
-//            System.out.println(i + " " + fac[n-i] + " " + fac[i] + " " + fac[n-2*i]);
-            ans += (n-i == i) ? n-i : fac[n-i] / (fac[i] * fac[n-2*i]);
-        }
-        System.out.println(ans);
-    }
+        for (int i = 3; i <= n; i++) tile[i] = (tile[i-2] + tile[i-1]) % 10007;
 
-    public static long getFac (int n) {
-        if (n == 1) return 1;
-
-        fac[n] = getFac(n-1) * n;
-        System.out.println(n + " " + fac[n]);
-        return fac[n];
+        System.out.println(tile[n]);
     }
 }
