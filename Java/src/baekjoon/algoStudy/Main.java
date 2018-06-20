@@ -13,8 +13,17 @@ public class Main {
         tile[1] = 1;
         if (n > 1) tile[2] = 2;
 
-        for (int i = 3; i <= n; i++) tile[i] = (tile[i-2] + tile[i-1]) % 10007;
+        System.out.println(goTo(n));
+    }
 
-        System.out.println(tile[n]);
+    public static long goTo (int n) {
+        if (n==1) return 1;
+        if (n==2) return 2;
+
+        long a = tile[n-1] > 0 ? tile[n-1] : goTo(n-1);
+        long b = tile[n-2] > 0 ? tile[n-2] : goTo(n-2);
+        tile[n] = (a + b) % 10007;
+
+        return tile[n];
     }
 }
