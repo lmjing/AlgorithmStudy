@@ -43,6 +43,7 @@ public class DynamicProgramming {
     }
 
     static class Num11726 {
+        // NOTE : 규칙이 단순한거였는데 너무 딥하게 들어가서 3~4시간 걸림..
         static long[] tile;
         public static void bottom_up () {
             Scanner sc  = new Scanner(System.in);
@@ -83,6 +84,7 @@ public class DynamicProgramming {
     }
 
     static class Num11727 {
+        //NOTE : 30분도 안걸림
         static int[] tile;
         public static void bottom_up () {
             Scanner sc = new Scanner(System.in);
@@ -97,6 +99,23 @@ public class DynamicProgramming {
             }
 
             System.out.println(tile[n]);
+        }
+
+        public static void top_down () {
+            Scanner sc = new Scanner(System.in);
+            int n = sc.nextInt();
+
+            tile = new int[n+1];
+            tile[1] = 1;
+            if (n > 1) tile[2] = 3;
+
+            System.out.println(goTo(n));
+        }
+
+        public static int goTo (int n) {
+            if (n > 2)
+                tile[n] = (goTo(n-1) + tile[n-2] * 2) % 10007;
+            return tile[n];
         }
     }
 }

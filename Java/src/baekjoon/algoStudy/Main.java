@@ -12,10 +12,12 @@ public class Main {
         tile[1] = 1;
         if (n > 1) tile[2] = 3;
 
-        for (int i = 3; i <= n; i++) {
-            tile[i] = (tile[i-2] * 2 + tile[i-1]) % 10007;
-        }
+        System.out.println(goTo(n));
+    }
 
-        System.out.println(tile[n]);
+    public static int goTo (int n) {
+        if (n > 2)
+            tile[n] = (goTo(n-1) + tile[n-2] * 2) % 10007;
+        return tile[n];
     }
 }
