@@ -8,18 +8,20 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         int T = sc.nextInt();
 
-        answer[1] = 1;
-        answer[2] = 1;
-        answer[3] = 1;
-        for (int i = 2; i <= 10; i++) {
-            for (int j = 1; j <= 3 && j < i; j++) {
-                answer[i] += answer[i - j];
-            }
-        }
+        goTo(10);
 
         for (int i = 0; i < T; i++) {
             int n = sc.nextInt();
             System.out.println(answer[n]);
         }
+    }
+
+    public static int goTo (int n) {
+        if (n == 1) return 1;
+        if (n <= 3) answer[n] = 1;
+        for (int i = 1; i <= 3 && i < n; i++) {
+            answer[n] += answer[n - i] == 0 ? goTo(n - i) : answer[n - i];
+        }
+        return answer[n];
     }
 }
