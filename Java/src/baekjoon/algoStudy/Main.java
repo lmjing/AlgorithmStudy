@@ -17,7 +17,6 @@ public class Main {
     }
 
     public static int goTo (int n) {
-        if (n == 1) return 1;
         if (n <= 3) answer[n] = 1;
         for (int i = 1; i <= 3 && i < n; i++) {
             answer[n] += answer[n - i] == 0 ? goTo(n - i) : answer[n - i];
