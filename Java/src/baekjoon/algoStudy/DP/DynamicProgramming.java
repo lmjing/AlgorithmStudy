@@ -118,4 +118,44 @@ public class DynamicProgramming {
             return tile[n];
         }
     }
+
+    static class Num9095 {
+        static int[] answer = new int[11];
+        public static void bottom_up () {
+            Scanner sc = new Scanner(System.in);
+            int T = sc.nextInt();
+
+            for (int i = 1; i <= 10; i++) {
+                if (i < 4) answer[i] = 1;
+                for (int j = 1; j <= 3 && j < i; j++) {
+                    answer[i] += answer[i - j];
+                }
+            }
+
+            for (int i = 0; i < T; i++) {
+                int n = sc.nextInt();
+                System.out.println(answer[n]);
+            }
+        }
+
+        public static void Top_down () {
+            Scanner sc = new Scanner(System.in);
+            int T = sc.nextInt();
+
+            goTo(10);
+
+            for (int i = 0; i < T; i++) {
+                int n = sc.nextInt();
+                System.out.println(answer[n]);
+            }
+        }
+
+        public static int goTo (int n) {
+            if (n <= 3) answer[n] = 1;
+            for (int i = 1; i <= 3 && i < n; i++) {
+                answer[n] += answer[n - i] == 0 ? goTo(n - i) : answer[n - i];
+            }
+            return answer[n];
+        }
+    }
 }
