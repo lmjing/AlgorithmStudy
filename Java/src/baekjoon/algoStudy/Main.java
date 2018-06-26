@@ -12,7 +12,6 @@ public class Main {
 
         price = new int[n + 1];
         max = new int[n + 1];
-        max[1] = price[1];
 
         for (int i = 1; i <= n; i++) {
             price[i] = sc.nextInt();
@@ -23,5 +22,17 @@ public class Main {
         }
 
         System.out.println(max[n]);
+    }
+
+    public static int goTo (int n) {
+        if (max[n] == 0) {
+            max[n] = price[n];
+            if (n > 1) {
+                for (int j = n - 1; j >= n / 2; j--) {
+                    if (goTo(j) + price[n - j] > max[n]) max[n] = max[j] + price[n - j];
+                }
+            }
+        }
+        return max[n];
     }
 }
