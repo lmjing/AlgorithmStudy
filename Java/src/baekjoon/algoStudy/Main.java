@@ -8,15 +8,18 @@ public class Main {
         int n = sc.nextInt();
 
         int[] temp = new int[10];
-        temp[0] = 1;
-        int sum = 0;
-        for (int i = 0; i < n; i++) {
-            sum = 1;
-            for (int j = 1; j < 10; j++) {
-                temp[j] += temp[j-1];
-                sum += temp[j] % 10007;
+        for (int i = 0; i < 10; i++) temp[i] = 1;
+
+        for (int j = 1; j < n; j++) {
+            for (int i = 1; i < 10; i++) {
+                temp[i] = (temp[i] + temp[i-1]) % 10007;
             }
         }
-        System.out.println(sum);
+
+        long sum = 0;
+        for (int i = 0; i < 10; i++) {
+            sum += temp[i];
+        }
+        System.out.println(sum % 10007);
     }
 }
