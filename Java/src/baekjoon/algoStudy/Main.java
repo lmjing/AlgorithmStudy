@@ -7,16 +7,16 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
 
-        int[] answer = new int[n+1];
-        int[] temp = new int[n+1];
-
-        answer[1] = 9;
-        temp[1] = 1;
-
-        for (int i=2; i<=n; i++) {
-            answer[i] = answer[i-1]*2-temp[i-1];
+        int[] temp = new int[10];
+        temp[0] = 1;
+        int sum = 0;
+        for (int i = 0; i < n; i++) {
+            sum = 1;
+            for (int j = 1; j < 10; j++) {
+                temp[j] += temp[j-1];
+                sum += temp[j] % 10007;
+            }
         }
-
-        System.out.println(answer[n]);
+        System.out.println(sum);
     }
 }
