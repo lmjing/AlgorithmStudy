@@ -1,8 +1,6 @@
 package baekjoon.algoStudy;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.*;
 
 public class Main {
@@ -21,6 +19,8 @@ public class Main {
             for (int j = 0; j < 2; j++) array[j] = br.readLine().split(" ");
             goTo(0, 0, 0);
             goTo(0, 1, 0);
+            goTo(1, 0, 0);
+            goTo(1, 1, 0);
             System.out.println(max);
         }
     }
@@ -32,6 +32,5 @@ public class Main {
         }
         goTo(x + 1, Math.abs(1 - y), sum + Integer.parseInt(array[y][x]));
         goTo(x + 2, Math.abs(1 - y), sum + Integer.parseInt(array[y][x]));
-        goTo(x + 1, y, sum);
     }
 }
