@@ -19,8 +19,6 @@ public class Main {
             for (int j = 0; j < 2; j++) array[j] = br.readLine().split(" ");
             goTo(0, 0, 0);
             goTo(0, 1, 0);
-            goTo(1, 0, 0);
-            goTo(1, 1, 0);
             System.out.println(max);
         }
     }
