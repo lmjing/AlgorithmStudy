@@ -1,5 +1,8 @@
 package baekjoon.algoStudy.DP;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 
 public class DynamicProgramming {
@@ -254,5 +257,33 @@ public class DynamicProgramming {
             for (int i = 1; i < 10; i++) current[i] = (current[i-1] + before[i]) % 10007;
         }
         return current;
+    }
+
+    public static class Num9465 {
+        // TODO : 답지 보고 품 다시 풀 것, 다시 혼자 풀어서 맞았을 경우에만 포스팅 실시. (틀린 코드도 함께 적어 포스팅)
+        // NOTE : 기존 방식 (백준에서 처음에 틀린 코드 보기)는 top-down으로 너무 많은 수가 생기는데, 이 경우는 n번만 돌아서 시간 초과 안 뜸.
+        static String[][] input;
+        static long[][] dp;
+        static int n;
+
+        public static void main(String[] args) throws IOException {
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            int T = Integer.parseInt(br.readLine());
+            for (int i = 0; i < T; i++) {
+                n = Integer.parseInt(br.readLine());
+                input = new String[2][n];
+                dp = new long[n+1][3];
+
+                for (int j = 0; j < 2; j++) input[j] = br.readLine().split(" ");
+
+                for (int j = 1; j <= n; j++) {
+                    dp[j][0] = Math.max(dp[j-1][1], dp[j-1][2]);
+                    dp[j][1] = Math.max(dp[j-1][0], dp[j-1][2]) + Integer.parseInt(input[0][j-1]);
+                    dp[j][2] = Math.max(dp[j-1][0], dp[j-1][1]) + Integer.parseInt(input[1][j-1]);
+                }
+
+                System.out.println(Math.max(dp[n][0], Math.max(dp[n][1], dp[n][2])));
+            }
+        }
     }
 }
