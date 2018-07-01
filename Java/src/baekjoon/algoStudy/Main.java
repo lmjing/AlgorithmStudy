@@ -3,27 +3,36 @@ package baekjoon.algoStudy;
 import java.util.*;
 
 public class Main {
+    static int[][] dp;
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int N = sc.nextInt();
 
-        long[] count = new long[10];
-        long sum = 9;
-        for (int i = 1; i < 10; i++) count[i] = 1;
+        dp = new int[N][10];
+        getTo(N);
 
-        for (int i = 2; i < N; i++) {
-            long[] temp = new long[10];
-            temp[0] = count[1];
-            temp[9] = count[8];
-            sum = temp[0] + temp[9];
-
-            for (int j = 1; j < 9; j++) {
-                temp[j] = (count[j-1] + count[j+1]) % 1000000000;
-                sum += temp[j];
-            }
-            count = temp;
+        long sum = 0;
+        long answer = 9;
+        if (N > 1) {
+            for (int i = 0; i < 10; i++) sum += dp[N-1][i];
+            answer = (sum * 2 - dp[N-1][0] - dp[N-1][9]) % 1000000000;
         }
+        System.out.println(answer);
+    }
 
-        System.out.println(N == 1 ? sum : (sum * 2 - count[0] - count[9]) % 1000000000);
+    static int[] getTo (int n) {
+        int[] temp = new int[10];
+        if (n == 1) {
+            for (int i = 1; i < 10; i++) temp[i] = 1;
+        }
+        else {
+            dp[n-1] = getTo(n-1);
+            temp[0] = dp[n-1][1];
+            temp[9] = dp[n-1][8];
+            for (int i = 1; i < 9; i++)
+                temp[i] = (dp[n-1][i-1] + dp[n-1][i+1]) % 1000000000;
+        }
+        return temp;
     }
 }
