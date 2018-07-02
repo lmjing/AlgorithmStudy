@@ -345,4 +345,39 @@ public class DynamicProgramming {
             System.out.println(N == 1 ? sum : (sum * 2 - count[0] - count[9]) % 1000000000);
         }
     }
+
+    static class Num2193 {
+        public static void top_down() {
+            Scanner sc = new Scanner(System.in);
+            int n = sc.nextInt();
+
+            System.out.println(goTo(n)[0]);
+        }
+
+        static long[] goTo(int n) {
+            if (n == 1) return new long[]{1, 0, 1};
+
+            long[] current = new long[3];
+            long[] before = goTo(n - 1);
+            current[0] = before[1] * 2 + before[2];
+            current[1] = before[1] + before[2];
+            current[2] = before[1];
+            return current;
+        }
+    }
+
+    public static void bottom_up() {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        long[][] dp = new long[n][3];
+        dp[0] = new long[]{1, 0, 1};
+
+        for (int i = 1; i < n; i++) {
+            dp[i][0] = dp[i-1][1] * 2 + dp[i-1][2];
+            dp[i][1] = dp[i-1][1] + dp[i-1][2];
+            dp[i][2] = dp[i-1][1];
+        }
+
+        System.out.println(dp[n-1][0]);
+    }
 }
