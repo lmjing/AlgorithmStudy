@@ -380,4 +380,51 @@ public class DynamicProgramming {
 
         System.out.println(dp[n-1][0]);
     }
+
+    static class Num2156 {
+        static int[] input;
+        static long[][] dp;
+        public static void top_down() {
+            Scanner sc = new Scanner(System.in);
+            int n = sc.nextInt();
+            input = new int[n + 1];
+            dp = new long[n + 1][2];
+
+            for (int i = 1; i <= n; i++) input[i] = sc.nextInt();
+            dp[n] = goTo(n);
+            System.out.println(Math.max(dp[n][0], dp[n][1]));
+        }
+
+        public static long[] goTo (int n) {
+            if (n == 1) return new long[] {0, input[1]};
+            else if (n == 2) return new long[] {input[1], input[1] + input[2]};
+
+            dp[n - 1] = goTo(n - 1);
+            long[] current = new long[2];
+            current[0] = Math.max(dp[n - 1][0], dp[n - 1][1]);
+            current[1] = input[n] + Math.max(dp[n - 2][0] + input[n - 1], dp[n - 1][0]);
+
+            return current;
+        }
+
+        public static void bottom_up() {
+            Scanner sc = new Scanner(System.in);
+            int n = sc.nextInt();
+            int[] input = new int[n];
+            long[][] dp = new long[n][2];
+
+            for (int i = 0; i < n; i++) {
+                input[i] = sc.nextInt();
+                if (i == 0) dp[0][1] = input[i];
+                else if (i == 1) {
+                    dp[1][0] = input[i-1];
+                    dp[1][1] = input[i-1] + input[i];
+                } else {
+                    dp[i][0] = Math.max(dp[i-1][0], dp[i-1][1]);
+                    dp[i][1] = input[i] + Math.max(dp[i-2][0] + input[i-1], dp[i-1][0]);
+                }
+            }
+            System.out.println(Math.max(dp[n-1][0], dp[n-1][1]));
+        }
+    }
 }
