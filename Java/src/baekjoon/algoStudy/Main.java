@@ -3,33 +3,39 @@ package baekjoon.algoStudy;
 import java.util.*;
 
 public class Main {
-    static int[] input;
-    static int N;
-    static int nonMax;
+    static long[][] count;
     static long max = 0;
-
+    static int N;
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         N = sc.nextInt();
-        input = new int[N];
-        nonMax = N / 3 + 1;
+        int size = (N + 2) / 3 * 3;
+        int[] input = new int[size];
+        count = new long[N/3 + 1][3];
 
-        for (int i = 0; i < N; i++) input[i] = sc.nextInt();
-
-        goTo(0, 0, 0, 0, 0);
+        long sum = 0;
+        for (int i = 0; i < size; i++) {
+            if (i < N)
+                input[i] = sc.nextInt();
+            sum += input[i];
+            if (i % 3 == 2) {
+                count[i/3][0] = sum - input[i - 2];
+                count[i/3][1] = sum - input[i - 1];
+                count[i/3][2] = sum - input[i];
+                sum = 0;
+            }
+        }
+        goTo(0, 3, 0);
         System.out.println(max);
     }
 
-    static void goTo (int n, int nonCount, int bn, int bo, long sum) {
-        if (nonCount > nonMax) return;
-        if (n == N) {
-            max = sum > max ? sum : max;
+    public static void goTo (int n, int before, long sum) {
+        if (n == count.length) {
+            max = max < sum ? sum : max;
             return;
         }
-
-        if (bn < 2) // x
-            goTo(n + 1, nonCount + 1, bn + 1, 0, sum);
-        if (bo < 2) // o
-            goTo(n + 1, nonCount, 0, bo + 1, sum + input[n]);
+        if (before >= 2) goTo(n + 1, 2, sum + count[n][2]);
+        if (before >= 1) goTo(n + 1, 1, sum + count[n][1]);
+        if (before >= 0) goTo(n + 1, 0, sum + count[n][0]);
     }
 }
