@@ -1,38 +1,40 @@
 package baekjoon.algoStudy;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int[] input = new int[n];
-        long[] count = new long[1000];
+        int[] sorted = new int[n];
+        int[][] dp = new int[1000][2]; // 0 : count, 1 : idx
 
         for (int i = 0; i < n; i++) {
             input[i] = sc.nextInt();
+            sorted[i] = input[i];
         }
-        count[input[0]] = 1;
-        long maxVaule = input[0];
-        long maxLength = 1;
+        Arrays.sort(sorted);
+        for (int i = 0; i < n; i++) dp[sorted[i]][1] = i;
 
+        dp[0][0] = 1;
+        int maxLength = 1;
         for (int i = 1; i < n; i++) {
-            if (input[i-1] < input[i]) {
-                count[i] = Math.max(count[i], count[input[i-1]] + 1);
-                System.out.println("a : " + count[i]);
-            } else {
-                if (count[i] == 0) {
-                    int idx = i-1;
-                    while (idx >= 0 && input[idx] >= input[i]) idx--;
-                    count[i] = idx == -1 ? 1 : count[idx] + 1;
-                    System.out.println("b : " + count[i]);
+            int v = input[i];
+            if (input[i-1] < v) {
+                dp[v][0] = Math.max(dp[v][0], dp[input[i-1]][0] + 1);
+                int maxSmallIdx = dp[v][1] - 1;
+                if (maxSmallIdx > -1) {
+                    dp[v][0] = Math.max(dp[v][0], dp[sorted[maxSmallIdx]][0] + 1);
                 }
+            } else if (input[i-1] > v && dp[v][0] == 0) {
+                int before = dp[v][1] - 1;
+                while (before >= 0 && dp[sorted[before]][0] == 0) --before;
+                dp[v][0] = before == -1 ? 1 : dp[sorted[before]][0] + 1;
             }
-            max = max < count[i] ? count[i] : max;
-            System.out.println("m : " + max);
+            maxLength = maxLength < dp[v][0] ? dp[v][0] : maxLength;
         }
-        System.out.println(max < count[n-1] ? count[n-1] : max);
+
+        System.out.println(maxLength);
     }
 }
