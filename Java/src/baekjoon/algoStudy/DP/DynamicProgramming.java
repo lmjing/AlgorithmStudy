@@ -509,4 +509,43 @@ public class DynamicProgramming {
         }
         System.out.println(maxLength);
     }
+
+    public static class Num1912 {
+        static int[] input;
+        static long max;
+        public static void top_down() {
+            Scanner sc = new Scanner(System.in);
+            int n = sc.nextInt();
+
+            input = new int[n + 1];
+            for (int i = 1; i <= n; i++) input[i] = sc.nextInt();
+            getMaxSum(n);
+
+            System.out.println(max);
+        }
+
+        static long getMaxSum (int n) {
+            if (n == 1) {
+                max = input[n];
+                return input[n];
+            }
+            long sum = Math.max(input[n], getMaxSum(n - 1) + input[n]);
+            max = Math.max(max, sum);
+            return sum;
+        }
+
+        public static void bottom_up() {
+            Scanner sc = new Scanner(System.in);
+            int n = sc.nextInt();
+
+            long max = -1000000001;
+            long[] dp = new long[n + 1];
+            for (int i = 1; i <= n; i++) {
+                int input = sc.nextInt();
+                dp[i] = Math.max(input, dp[i - 1] + input);
+                max = max < dp[i] ? dp[i] : max;
+            }
+            System.out.println(max);
+        }
+    }
 }
