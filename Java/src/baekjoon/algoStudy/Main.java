@@ -16,24 +16,10 @@ public class Main {
             if (coin[i] <= k) maxAble = i;
         }
 
-        int[][] dp = new int[maxAble + 2][2]; // 0 : count, 1 : restMoney
-        dp[maxAble + 1][1] = k;
         for (int i = maxAble; i >= 0; i--) {
-            // 뒤에서 부터 전체 탐색
-            for (int j = maxAble + 1; j > i; j--) {
-                if (dp[j][1] >= coin[i]) {
-                    int count = k / coin[i];
-                    dp[j][] += count;
-                    k -= count * coin[i];
-                }
-            }
-
-
-            if (k >= coin[i]) {
-                int count = k / coin[i];
-                answer += count;
-                k -= count * coin[i];
-            }
+            answer += k / coin[i];
+            k %= coin[i];
         }
+        System.out.println(answer);
     }
 }
