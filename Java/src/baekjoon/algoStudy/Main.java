@@ -7,43 +7,32 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         int N = sc.nextInt();
 
-        Reservation[] reservations = new Reservation[N];
-        int maxTime = 0;
-        for (int i = 0; i < N; i++) {
-            reservations[i] = new Reservation(sc.nextInt(), sc.nextInt());
-            maxTime = maxTime < reservations[i].end ? reservations[i].end : maxTime;
-        }
-        Arrays.sort(reservations);
+        int[][] reservations = new int[N][2];
 
-        LinkedList<Reservation> sucess = new LinkedList<>();
-        for (Reservation newR : reservations) {
+        for (int i = 0; i < N; i++) {
+            reservations[i][0] = sc.nextInt();
+            reservations[i][1] = sc.nextInt();
+        }
+        Arrays.sort(reservations, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                return (o1[1] - o1[0]) - (o2[1] - o2[0]);
+            }
+        });
+
+        LinkedList<int[]> sucess = new LinkedList<>();
+        for (int[] newR : reservations) {
             boolean flag = true;
             Iterator iterator = sucess.iterator();
 
             while (flag && iterator.hasNext()) {
-                Reservation oldR = (Reservation) iterator.next();
-                if (!(newR.start >= oldR.end || newR.end <= oldR.start))
+                int[] oldR = (int[]) iterator.next();
+                if (!(newR[0] >= oldR[1] || newR[1] <= oldR[0]))
                     flag = false;
             }
             if (flag) sucess.add(newR);
         }
 
         System.out.println(sucess.size());
-    }
-
-    static class Reservation implements Comparable<Reservation> {
-        int start, end;
-        int timeLength;
-
-        public Reservation (int s, int e) {
-            start = s;
-            end = e;
-            timeLength = e - s;
-        }
-
-        @Override
-        public int compareTo(Reservation o) {
-            return this.timeLength - o.timeLength;
-        }
     }
 }
