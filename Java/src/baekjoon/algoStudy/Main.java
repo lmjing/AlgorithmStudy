@@ -1,5 +1,6 @@
 package baekjoon.algoStudy;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class Main {
@@ -7,31 +8,40 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         int N = sc.nextInt();
 
-        int[][] reservations = new int[N][2];
+        Reservation[] reservations = new Reservation[N];
 
         for (int i = 0; i < N; i++) {
-            reservations[i][0] = sc.nextInt();
-            reservations[i][1] = sc.nextInt();
+            reservations[i] = new Reservation(sc.nextInt(), sc.nextInt());
         }
-        Arrays.sort(reservations, new Comparator<int[]>() {
-            @Override
-            public int compare(int[] o1, int[] o2) {
-                if (o1[1] < o2[1]) return -1; // 빨리 끝나는 시간 기준
-                else if (o1[1] == o2[1]){ // 같이 끝남
-                    // 늦게 시작하는 순
-                    return o2[0] - o1[0];
-                } else return 1; // 더 늦게 끝남
-            }
-        });
+        Arrays.sort(reservations);
 
         int result = 0;
         int last = -1;
-        for (int[] newR : reservations) {
-            if (last <= newR[0]) {
+        for (Reservation r : reservations) {
+            if (last <= r.start) {
                 result++;
-                last = newR[1];
+                last = r.end;
             }
         }
         System.out.println(result);
+    }
+
+    static class Reservation implements Comparable<Reservation> {
+        int start, end;
+
+        public Reservation (int s, int e) {
+            start = s;
+            end = e;
+        }
+
+        @Override
+        public int compareTo(Reservation o) {
+            if (this.end < o.end) return -1;
+            else if (this.end == o.end) {
+                if (this.start < o.start) return -1;
+                else if (this.start == o.start) return 0;
+                else return 1;
+            } else return 1;
+        }
     }
 }
