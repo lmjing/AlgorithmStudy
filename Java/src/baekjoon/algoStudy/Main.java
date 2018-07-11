@@ -16,23 +16,22 @@ public class Main {
         Arrays.sort(reservations, new Comparator<int[]>() {
             @Override
             public int compare(int[] o1, int[] o2) {
-                return (o1[1] - o1[0]) - (o2[1] - o2[0]);
+                if (o1[1] < o2[1]) return -1; // 빨리 끝나는 시간 기준
+                else if (o1[1] == o2[1]){ // 같이 끝남
+                    // 늦게 시작하는 순
+                    return o2[0] - o1[0];
+                } else return 1; // 더 늦게 끝남
             }
         });
 
-        LinkedList<int[]> sucess = new LinkedList<>();
+        int result = 0;
+        int last = -1;
         for (int[] newR : reservations) {
-            boolean flag = true;
-            Iterator iterator = sucess.iterator();
-
-            while (flag && iterator.hasNext()) {
-                int[] oldR = (int[]) iterator.next();
-                if (!(newR[0] >= oldR[1] || newR[1] <= oldR[0]))
-                    flag = false;
+            if (last <= newR[0]) {
+                result++;
+                last = newR[1];
             }
-            if (flag) sucess.add(newR);
         }
-
-        System.out.println(sucess.size());
+        System.out.println(result);
     }
 }
