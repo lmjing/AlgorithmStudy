@@ -8,12 +8,14 @@ public class Main {
         int N = sc.nextInt();
 
         Reservation[] reservations = new Reservation[N];
+        int maxTime = 0;
         for (int i = 0; i < N; i++) {
             reservations[i] = new Reservation(sc.nextInt(), sc.nextInt());
+            maxTime = maxTime < reservations[i].end ? reservations[i].end : maxTime;
         }
         Arrays.sort(reservations);
 
-        boolean[] timeCheck = new boolean[2 ^ 31];
+        boolean[] timeCheck = new boolean[maxTime];
         int answer = 0;
 
         // 일부러 끝나는 시간은 check하지 않는다.
