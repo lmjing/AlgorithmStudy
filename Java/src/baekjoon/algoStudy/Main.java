@@ -15,22 +15,20 @@ public class Main {
         }
         Arrays.sort(reservations);
 
-        boolean[] timeCheck = new boolean[maxTime];
-        int answer = 0;
+        LinkedList<Reservation> sucess = new LinkedList<>();
+        for (Reservation newR : reservations) {
+            boolean flag = true;
+            Iterator iterator = sucess.iterator();
 
-        // 일부러 끝나는 시간은 check하지 않는다.
-        for (Reservation r : reservations) {
-            boolean able = true;
-            for (int i = r.start; i < r.end && able; i++) {
-                if (timeCheck[i]) able = false;
+            while (flag && iterator.hasNext()) {
+                Reservation oldR = (Reservation) iterator.next();
+                if (newR.start < oldR.end && newR.start >= oldR.start) flag = false;
+                if (newR.end > oldR.start && newR.end <= oldR.end) flag = false;
             }
-            if (able) {
-                answer++;
-                for (int i = r.start; i < r.end; i++) timeCheck[i] = true;
-            }
+            if (flag) sucess.add(newR);
         }
 
-        System.out.println(answer);
+        System.out.println(sucess.size());
     }
 
     static class Reservation implements Comparable<Reservation> {
