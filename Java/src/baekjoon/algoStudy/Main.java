@@ -22,8 +22,8 @@ public class Main {
 
             while (flag && iterator.hasNext()) {
                 Reservation oldR = (Reservation) iterator.next();
-                if (newR.start < oldR.end && newR.start >= oldR.start) flag = false;
-                if (newR.end > oldR.start && newR.end <= oldR.end) flag = false;
+                if (!(newR.start >= oldR.end || newR.end <= oldR.start))
+                    flag = false;
             }
             if (flag) sucess.add(newR);
         }
