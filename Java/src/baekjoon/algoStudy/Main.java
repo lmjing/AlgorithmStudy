@@ -12,8 +12,11 @@ public class Main {
 
         int team = n / 2 < m ? n / 2 : m;
         int rest = (n + m) - team * 3;
-        if(k > rest) k -= rest;
-        if (k > 0) team -= ((k + 2) / 3);
-        System.out.println(team > 0 ? team : 0);
+        k -= rest;
+        if (k <= 0) System.out.println(team);
+        else {
+            team -= (k + 2) / 3;
+            System.out.println(team > 0 ? team : 0);
+        }
     }
 }
