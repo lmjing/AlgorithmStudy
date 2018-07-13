@@ -71,51 +71,63 @@ public class Greedy {
             Scanner sc = new Scanner(System.in);
             String input = sc.nextLine();
 
-            Stack<Integer> nums = new Stack<>();
-            Stack<Character> operators = new Stack<>();
+            Stack<Integer> nums = new Stack<>(); // 숫자를 넣어둘 스택
+            Stack<Character> operators = new Stack<>(); // 연산자 넣어둘 스택
             int num = 0;
             for (char c : input.toCharArray()) {
                 if (c == '-' || c == '+') {
                     operators.push(c);
                     nums.push(num);
-                    num = 0;
+                    num = 0; // 새로운 숫자를 받기 위해서
                 } else num = num * 10 + (c - '0');
             }
             nums.push(num);
 
             int answer = 0;
-            while (!operators.isEmpty()) {
+            /*
+            입력 값 기준으로 뒤에서 부터 차례대로 처리하게 된다.
+            + 는 일단 더해서 넣고 - 는 뒤에서 부터 다 더해진 값을 그냥 꺼내 최종 값에 빼준다.
+             */
+            while (!operators.isEmpty()) { // 연산자 기준으로 처리
                 char oper = operators.pop();
-                int su = nums.pop();
+                int su = nums.pop(); // 우선 숫자 하나는 무조건 활용하니 꺼내 놓는다.
                 if (oper == '-') answer -= su;
                 else nums.push(su + nums.pop());
             }
-            System.out.println(answer + nums.pop());
+            System.out.println(answer + nums.pop()); // 숫자가 하나 더 많고 해당 값은 항상 양수이므로 더해준다.
         }
 
         public static void shortVersion() {
             Scanner sc = new Scanner(System.in);
             String input = sc.nextLine();
 
-            int num = 0;
-            int sum = 0;
-            int answer = 0;
-            boolean flag = true;
+            int num = 0; // 입력 숫자 구분용
+            int sum = 0; // +연산을 위한 변수(괄호 안 숫자 합산용)
+            int answer = 0; // 최종 정답
+            /*
+             해당 flag는 - 부호가 나와서 앞서 계산된 값을 저장할 때,
+             해당 값의 부호를 나타내는 기호이다.
+             첫번째 값은 무조건 양수이므로 +인 true이고,
+             이후 한번이라도 -가 나온 경우 false를 유지한다.
+             중간에 나오는 +연산은 -를 위해 더 해주기만 할 뿐이므로 true로 바꾸지 않는다.
+              */
+            boolean flag = true; // +일 경우 true, -일 경우 false
             for (char c : input.toCharArray()) {
                 int su = c - '0';
                 if (su < 0) {
-                    sum += num;
-                    num = 0;
+                    sum += num; // 부호가 나오면 일단 sum에 더해준다. (-는 앞의 값에 영향을 주지 않음)
+                    num = 0; // 부호가 나왔으므로 새로운 숫자를 위해 초기화
                     if (c == '-') {
-                        if (flag) answer += sum;
-                        else answer -= sum;
-                        sum = 0;
+                        // -가 나오면 flag에 따라 최종 값에 더해준다.
+                        if (flag) answer += sum; // 음수
+                        else answer -= sum; // 양수
+                        sum = 0; // 괄호가 시작되었으므로 초기화 한다.
                         flag = false;
                     }
                 } else num = num * 10 + (c - '0');
             }
-            sum += num;
-            System.out.println(answer + (flag ? sum : -1 * sum));
+            sum += num; // 마지막 숫자 괄호 안 합산
+            System.out.println(answer + (flag ? sum : -1 * sum)); // 부호에 따라 마지막 값 처리
         }
     }
 }
