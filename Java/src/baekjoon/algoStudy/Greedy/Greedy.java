@@ -130,4 +130,44 @@ public class Greedy {
             System.out.println(answer + (flag ? sum : -1 * sum)); // 부호에 따라 마지막 값 처리
         }
     }
+
+    static class Num2875 {
+        public static void greedy() {
+            Scanner sc = new Scanner(System.in);
+
+            int n = sc.nextInt();
+            int m = sc.nextInt();
+            int k = sc.nextInt();
+
+            int team = 0;
+            while (n >= 2 && m >= 1 && n + m >= 3 + k) {
+                n -= 2;
+                m--;
+                team++;
+            }
+            System.out.println(team);
+        }
+
+        public static void myWay() {
+            Scanner sc = new Scanner(System.in);
+
+            int n = sc.nextInt();
+            int m = sc.nextInt();
+            int k = sc.nextInt();
+
+            // 2 : 1 기준으로 작은 값이 k를 제외하지 않았을 때 가능한 팀의 수
+            int team = n / 2 < m ? n / 2 : m;
+            // 팀원은 3명이므로 전체에서 팀이 된 사람을 제외한 나머지 수 구함
+            int rest = (n + m) - team * 3;
+            // 빼야할 사람들 중 팀이 안된 사람들의 수를 먼저 빼줌
+            k -= rest;
+            // (빼야 할 사람 < 남은 사람)인 경우 구했던 팀의 수를 출력
+            if (k <= 0) System.out.println(team);
+            else {
+                // 남은 사람보다 빼야할 사람이 더 많아 팀원 확정된 사람들 중에서 더 빼야할 때
+                team -= (k + 2) / 3; // 팀은 3명 단위이므로 2를 더하고 나누어 빼야할 팀의 수를 구함
+                System.out.println(team > 0 ? team : 0); // 팀 수가 음수인 경우엔 애초에 빼야할 수가 멤버 수 보다 많았던 경우이다.
+            }
+        }
+    }
 }

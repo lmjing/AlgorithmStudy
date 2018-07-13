@@ -4,19 +4,5 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
-        int n = sc.nextInt();
-        int m = sc.nextInt();
-        int k = sc.nextInt();
-
-        int team = n / 2 < m ? n / 2 : m;
-        int rest = (n + m) - team * 3;
-        k -= rest;
-        if (k <= 0) System.out.println(team);
-        else {
-            team -= (k + 2) / 3;
-            System.out.println(team > 0 ? team : 0);
-        }
     }
 }
