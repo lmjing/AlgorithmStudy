@@ -7,25 +7,24 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
-        Stack<Integer> nums = new Stack<>();
-        Stack<Character> operators = new Stack<>();
         int num = 0;
+        int sum = 0;
+        int answer = 0;
+        boolean flag = true;
         for (char c : input.toCharArray()) {
-            if (c == '-' || c == '+') {
-                operators.push(c);
-                nums.push(num);
+            int su = c - '0';
+            if (su < 0) {
+                sum += num;
                 num = 0;
+                if (c == '-') {
+                    if (flag) answer += sum;
+                    else answer -= sum;
+                    sum = 0;
+                    flag = false;
+                }
             } else num = num * 10 + (c - '0');
         }
-        nums.push(num);
-
-        int answer = 0;
-        while (!operators.isEmpty()) {
-            char oper = operators.pop();
-            int su = nums.pop();
-            if (oper == '-') answer -= su;
-            else nums.push(su + nums.pop());
-        }
-        System.out.println(answer + nums.pop());
+        sum += num;
+        System.out.println(answer + (flag ? sum : -1 * sum));
     }
 }
