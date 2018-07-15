@@ -6,35 +6,29 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        LinkedList<Integer> minus = new LinkedList<>();
-        LinkedList<Integer> plus = new LinkedList<>();
+        int[] input = new int[n];
 
         int minusCnt = 0;
         for (int i = 0; i < n; i++) {
-            int input = sc.nextInt();
-            if (input > 0) plus.add(input);
-            else minus.add(input);
+            input[i] = sc.nextInt();
+            if (input[i] <= 0) minusCnt++;
         }
 
         Arrays.sort(input);
-        int mi = 0;
-        int temp = 1; // 묶을 값들
-        boolean turn = true; // true : 1번 째 값
+        int i = -1;
         int answer = 0;
 
-        for (int su : input) {
-            if (su <= 0) {
-                mi++;
-                if (mi < minusCnt) {
-                    temp *= su;
-                    if (mi % 2 == 0) {
-                        answer += temp;
-                        temp = 1;
-                    }
-                } else answer += su;
-            } else {
-
-            }
+        while (++i < minusCnt) {
+            if (i + 1 < minusCnt) answer += input[i] * input[++i];
+            else answer += input[i];
         }
+
+        i = n;
+        while (--i >= minusCnt) {
+            if (i - 1 >= minusCnt && input[i - 1] > 1)
+                answer += input[i] * input[--i];
+            else answer += input[i];
+        }
+        System.out.println(answer);
     }
 }
