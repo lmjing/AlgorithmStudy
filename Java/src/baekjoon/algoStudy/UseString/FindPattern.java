@@ -29,4 +29,26 @@ public class FindPattern {
         } else
             System.out.println(diff > 0 ? "happy" : "sad");
     }
+
+    public static void num5525(String[] args) {
+        // 쉬운 문제라 (찾고자 하는 패턴이 짧게 반복되어 3개만 확인해 넘길 수 있었기 때문)
+        Scanner sc = new Scanner(System.in);
+        int n = Integer.parseInt(sc.nextLine());
+        int m = Integer.parseInt(sc.nextLine());
+        char[] s = sc.nextLine().toCharArray();
+
+        int result = 0;
+        int patternCnt = 0;
+        for (int i = 1; i < m - 1; i++) {
+            if (s[i - 1] == 'I' && s[i] == 'O' && s[i + 1] == 'I') {
+                patternCnt++;
+                if (patternCnt == n) {
+                    patternCnt--;
+                    result++;
+                }
+                i++;
+            } else patternCnt = 0;
+        }
+        System.out.println(result);
+    }
 }
