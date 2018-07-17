@@ -52,43 +52,94 @@ public class FindPattern {
         System.out.println(result);
     }
 
-    public static void num1786(String[] args) {
-        // USE : KMP 문자열 패턴 알고리즘
-        Scanner sc = new Scanner(System.in);
-        char[] T = sc.nextLine().toCharArray();
-        char[] P = sc.nextLine().toCharArray();
+    public static class Num1786 {
+        // USE : KMP (완전 설명하는 문제)
 
-        // 전처리
-        int[] p = new int[P.length];
-        for (int i = 1; i < P.length; i++) {
-            int compareIdx = p[i - 1];
-            while (compareIdx > 0 && P[compareIdx] != P[i])
-                compareIdx = p[compareIdx - 1];
+        public static void answer1(String[] args) {
+            // NOTE : 정답을 위한 코드 (더 빠르고 짧음)
+            Scanner sc = new Scanner(System.in);
+            char[] T = sc.nextLine().toCharArray();
+            char[] P = sc.nextLine().toCharArray();
 
-            if (P[compareIdx] == P[i])
-                p[i] = compareIdx + 1;
-        }
+            // 전처리
+            int[] p = new int[P.length];
+            for (int i = 1; i < P.length; i++) {
+                int compareIdx = p[i - 1];
+                while (compareIdx > 0 && P[compareIdx] != P[i])
+                    compareIdx = p[compareIdx - 1];
 
-        int i = -1;
-        int j = 0;
-        int count = 0;
-        StringBuilder answer = new StringBuilder("");
-        while (++i < T.length) {
-            while (j > 0 && T[i] != P[j]) {
-                j = p[j - 1];
+                if (P[compareIdx] == P[i])
+                    p[i] = compareIdx + 1;
             }
 
-            if (T[i] == P[j]) {
-                j++;
-                if (j == P.length) {
-                    count++;
-                    answer.append((i - P.length + 2) + " ");
+            int i = -1;
+            int j = 0;
+            int count = 0;
+            StringBuilder answer = new StringBuilder("");
+            while (++i < T.length) {
+                while (j > 0 && T[i] != P[j]) {
                     j = p[j - 1];
                 }
+
+                if (T[i] == P[j]) {
+                    j++;
+                    if (j == P.length) {
+                        count++;
+                        answer.append((i - P.length + 2) + " ");
+                        j = p[j - 1];
+                    }
+                }
             }
+
+            System.out.println(count);
+            System.out.println(answer);
         }
 
-        System.out.println(count);
-        System.out.println(answer);
+        public static void answer2() {
+            //NOTE : AKM 재사용 목적으로 컴포넌트 구분함.
+            Scanner sc = new Scanner(System.in);
+            char[] T = sc.nextLine().toCharArray();
+            char[] P = sc.nextLine().toCharArray();
+
+            ArrayList<Integer> result = kmp(T, P);
+            StringBuilder answer = new StringBuilder();
+            for (int i : result)
+                answer.append(i + " ");
+
+            System.out.println(result.size());
+            System.out.println(answer);
+        }
+
+        static int[] preprocessing(char[] P) {
+            int[] p = new int[P.length];
+            for (int i = 1; i < P.length; i++) {
+                int compareIdx = p[i - 1];
+                while (compareIdx > 0 && P[compareIdx] != P[i])
+                    compareIdx = p[compareIdx - 1];
+
+                if (P[compareIdx] == P[i])
+                    p[i] = compareIdx + 1;
+            }
+            return p;
+        }
+
+        static ArrayList<Integer> kmp(char[] T, char[] P) {
+            ArrayList<Integer> result = new ArrayList<>();
+            int[] pi = preprocessing(P);
+            int i = -1, j = 0;
+            while (++i < T.length) {
+                while (j > 0 && T[i] != P[j]) j = pi[j - 1];
+
+                if (T[i] == P[j]) {
+                    j++;
+                    if (j == P.length) {
+                        result.add(i - P.length + 2);
+                        j = pi[j - 1];
+                    }
+                }
+            }
+            return result;
+        }
     }
+
 }
