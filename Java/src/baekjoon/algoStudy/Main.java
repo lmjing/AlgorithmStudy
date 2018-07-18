@@ -8,27 +8,19 @@ public class Main {
         int L = Integer.parseInt(sc.nextLine());
         char[] screen = sc.nextLine().toCharArray();
 
-        LinkedList<Character> ad = new LinkedList<>();
-        LinkedList<Character> temp = new LinkedList<>();
-        ad.add(screen[0]);
-        Iterator iter = ad.iterator();
-        char compare = (char) iter.next();
-
         int i = 0;
+        int[] pi = new int[L];
+        int max = 0;
         while (++i < L) {
-            if (compare == screen[i] && iter.hasNext()) {
-                temp.add(screen[i]);
-                compare = (char) iter.next();
-            } else if (compare != screen[i]) {
-                if (!temp.isEmpty()) {
-                    ad.addAll(temp);
-                    temp = new LinkedList<>();
-                }
-                ad.add(screen[i++]);
-                iter = ad.iterator();
-                compare = (char) iter.next();
+            int compareIdx = pi[i - 1];
+            while (compareIdx > 0 && screen[i] != screen[compareIdx])
+                compareIdx = pi[compareIdx - 1];
+
+            if (screen[i] == screen[compareIdx]) {
+                pi[i] = compareIdx + 1;
+                max = max < pi[i] ? pi[i] : max;
             }
         }
-        System.out.println(ad.size());
+        System.out.println(L - max);
     }
 }
