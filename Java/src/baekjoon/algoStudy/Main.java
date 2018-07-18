@@ -17,10 +17,9 @@ public class Main {
         int i = 0;
         while (++i < L) {
             if (compare == screen[i] && iter.hasNext()) {
-                System.out.println(ad.size());
                 temp.add(screen[i]);
                 compare = (char) iter.next();
-            } else {
+            } else if (compare != screen[i]) {
                 if (!temp.isEmpty()) {
                     ad.addAll(temp);
                     temp = new LinkedList<>();
