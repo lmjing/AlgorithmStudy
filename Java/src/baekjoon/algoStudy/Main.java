@@ -7,12 +7,15 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         char[] p = sc.nextLine().toCharArray();
         int[] pi = new int[p.length];
-        Map<Character, Integer> charIdxs = new HashMap<>();
+        int[] alphabet = new int[26];
 
         int i = 0;
         int maxLength = 0;
         int startIdx = 0;
         int compareIdx = 0;
+
+        for (int k = 0; k < 26; k++)
+            alphabet[k] = -1;
 //        System.out.print(pi[i]);
         while (++i < pi.length) {
             while (compareIdx > 0 && p[compareIdx] != p[i])
@@ -21,12 +24,13 @@ public class Main {
             if (p[compareIdx] == p[i]) {
                 pi[i] = ++compareIdx - startIdx;
                 if (maxLength < pi[i]) maxLength = pi[i];
-            } else if (charIdxs.containsKey(p[i])){
-                startIdx = charIdxs.get(p[i]);
+            } else if (alphabet[p[i] - 'a'] > -1){
+                startIdx = alphabet[p[i] - 'a'];
                 compareIdx = startIdx + 1;
                 pi[i] = 1;
                 if (maxLength < 1) maxLength = 1;
-            } else charIdxs.put(p[i], i);
+            } else alphabet[p[i] - 'a'] = i;
+//                charIdxs.put(p[i], i);
 //            System.out.print(pi[i]);
         }
 //        System.out.println("");
