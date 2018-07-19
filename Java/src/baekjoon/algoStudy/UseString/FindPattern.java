@@ -3,6 +3,24 @@ package baekjoon.algoStudy.UseString;
 import java.util.*;
 
 public class FindPattern {
+    public static class KMP {
+        static int[] preprocessing (String str) {
+            char[] p = str.toCharArray();
+            int[] pi = new int[p.length];
+
+            int i = 0;
+            int compareIdx = 0;
+            while (++i < p.length) {
+                while (compareIdx > 0 && p[compareIdx] != p[i])
+                    compareIdx = pi[compareIdx - 1];
+
+                if (p[compareIdx] == p[i])
+                    pi[i] = ++compareIdx;
+            }
+            return pi;
+        }
+    }
+
     public static void num10769(String[] args) {
         // 쉬운 문제라 (찾고자 하는 패턴 내에 중복된 패턴이 없어 되돌아갈 필요가 없다.)
         Scanner sc = new Scanner(System.in);
@@ -99,7 +117,7 @@ public class FindPattern {
             //NOTE : AKM 재사용 목적으로 컴포넌트 구분함.
             Scanner sc = new Scanner(System.in);
             char[] T = sc.nextLine().toCharArray();
-            char[] P = sc.nextLine().toCharArray();
+            String P = sc.nextLine();
 
             ArrayList<Integer> result = kmp(T, P);
             StringBuilder answer = new StringBuilder();
@@ -110,30 +128,17 @@ public class FindPattern {
             System.out.println(answer);
         }
 
-        static int[] preprocessing(char[] P) {
-            int[] p = new int[P.length];
-            for (int i = 1; i < P.length; i++) {
-                int compareIdx = p[i - 1];
-                while (compareIdx > 0 && P[compareIdx] != P[i])
-                    compareIdx = p[compareIdx - 1];
-
-                if (P[compareIdx] == P[i])
-                    p[i] = compareIdx + 1;
-            }
-            return p;
-        }
-
-        static ArrayList<Integer> kmp(char[] T, char[] P) {
+        static ArrayList<Integer> kmp(char[] T, String P) {
             ArrayList<Integer> result = new ArrayList<>();
-            int[] pi = preprocessing(P);
+            int[] pi = KMP.preprocessing(P);
             int i = -1, j = 0;
             while (++i < T.length) {
-                while (j > 0 && T[i] != P[j]) j = pi[j - 1];
+                while (j > 0 && T[i] != P.indexOf(j)) j = pi[j - 1];
 
-                if (T[i] == P[j]) {
+                if (T[i] == P.indexOf(j)) {
                     j++;
-                    if (j == P.length) {
-                        result.add(i - P.length + 2);
+                    if (j == P.length()) {
+                        result.add(i - P.length() + 2);
                         j = pi[j - 1];
                     }
                 }
@@ -160,4 +165,47 @@ public class FindPattern {
         System.out.println(L - pi[L - 1]);
     }
 
+    public static class Num1701 {
+        public static void shortVersion() {
+            Scanner sc = new Scanner(System.in);
+            char[] p = sc.nextLine().toCharArray();
+            int result = 0;
+
+            for (int s = 0; s < p.length; s++) {
+                int i = 0;
+                int maxLength = 0;
+                int size = p.length - s;
+                int[] pi = new int[size];
+                int compareIdx = 0;
+                while (++i < size) {
+                    while (compareIdx > 0 && p[compareIdx + s] != p[i + s])
+                        compareIdx = pi[compareIdx - 1];
+
+                    if (p[compareIdx + s] == p[i + s]) {
+                        pi[i] = ++compareIdx;
+                        if (maxLength < pi[i]) maxLength = pi[i];
+                    }
+                }
+
+                if (result < maxLength) result = maxLength;
+            }
+            System.out.println(result);
+        }
+
+        public static void longVersion() {
+            Scanner sc = new Scanner(System.in);
+            StringBuilder str = new StringBuilder(sc.nextLine());
+            int result = 0;
+
+            while (str.length() > 0) {
+                int maxLength = 0;
+                for (int l : KMP.preprocessing(str.toString())) {
+                    if (maxLength < l) maxLength = l;
+                }
+                if (result < maxLength) result = maxLength;
+                str = str.deleteCharAt(0);
+            }
+            System.out.println(result);
+        }
+    }
 }
