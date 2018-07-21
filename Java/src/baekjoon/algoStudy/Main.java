@@ -16,13 +16,15 @@ public class Main {
         else if (k == 2) dp[n][k] = n + 1;
         else {
             int half = k / 2;
+            long sum = 0;
             for (int i = 0; i <= n; i++) {
                 if (dp[i][half] == 0)
-                    dp[i][half] = getCounts(i, half);
+                    dp[i][half] = getCounts(i, half) % 1000000000;
                 if (dp[n - i][k - half] == 0)
-                    dp[n - i][k - half] = getCounts(n - i, k - half);
-                dp[n][k] += dp[i][half] * dp[n - i][k - half];
+                    dp[n - i][k - half] = getCounts(n - i, k - half) % 1000000000;
+                sum += dp[i][half] * dp[n - i][k - half];
             }
+            dp[n][k] = (int)(sum % 1000000000);
         }
 
         return dp[n][k];
