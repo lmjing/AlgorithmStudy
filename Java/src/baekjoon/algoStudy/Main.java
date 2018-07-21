@@ -3,20 +3,28 @@ package baekjoon.algoStudy;
 import java.util.*;
 
 public class Main {
+    static int[][] dp = new int[201][201];
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        int m = sc.nextInt();
+        int k = sc.nextInt();
+        System.out.println(getCounts(n, k));
+    }
 
-        StringBuffer S = new StringBuffer();
-        for (int i = 0; i < n; i++)
-            S.append(sc.nextLine() + " ");
-
-        int result = 0;
-        for (int i = 0; i < m; i++) {
-            String str = sc.nextLine();
-            if (S.toString().contains(str)) result++;
+    static int getCounts (int n, int k) {
+        if (k == 1) dp[n][k] = 1;
+        else if (k == 2) dp[n][k] = n + 1;
+        else {
+            int half = k / 2;
+            for (int i = 0; i <= n; i++) {
+                if (dp[i][half] == 0)
+                    dp[i][half] = getCounts(i, half);
+                if (dp[n - i][k - half] == 0)
+                    dp[n - i][k - half] = getCounts(n - i, k - half);
+                dp[n][k] += dp[i][half] * dp[n - i][k - half];
+            }
         }
-        System.out.println(result);
+
+        return dp[n][k];
     }
 }
