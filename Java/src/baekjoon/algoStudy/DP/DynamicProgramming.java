@@ -548,4 +548,30 @@ public class DynamicProgramming {
             System.out.println(max);
         }
     }
+
+    static public class Num4811 {
+        // TODO : 다시풀기
+        static long[][] dp = new long[30][31];
+        public static void main(String[] args) {
+            Scanner sc = new Scanner(System.in);
+            int input = sc.nextInt();
+            while (input > 0) {
+                System.out.println(goTo(input - 1, 1));
+                input = sc.nextInt();
+            }
+
+        }
+
+        static long goTo (int w, int h) {
+            if (w == 0) dp[w][h] = 1;
+            else if (dp[w][h] == 0) {
+                long sum = 0;
+                sum += goTo(w - 1, h + 1);
+                if (h > 0)
+                    sum += goTo(w, h - 1);
+                dp[w][h] = sum;
+            }
+            return dp[w][h];
+        }
+    }
 }
