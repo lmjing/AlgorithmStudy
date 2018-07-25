@@ -3,11 +3,11 @@ package baekjoon.algoStudy;
 import java.util.*;
 
 public class Main {
-    static int[] dp = new int[101];
+    static long[] dp = new long[101];
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int T = sc.nextInt();
-        dp = new int[101];
+        dp = new long[101];
         dp[1] = dp[2] = 1;
         for (int i = 3; i <= 100; i++) {
             dp[i] = dp[i - 2] + dp[i - 3];
