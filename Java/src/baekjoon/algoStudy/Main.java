@@ -3,21 +3,23 @@ package baekjoon.algoStudy;
 import java.util.*;
 
 public class Main {
-    static int[] dp;
+    static int[] dp = new int[101];
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int T = sc.nextInt();
         dp = new int[101];
-        dp[1] = dp[2] = dp[3] = 1;
-        dp[4] = dp[5] = 2;
+        dp[1] = dp[2] = 1;
         for (int i = 0; i < T; i++) {
             System.out.println(goTo(sc.nextInt()));
         }
     }
 
     static int goTo (int n) {
-        if (dp[n] > 0) return dp[n];
-        dp[n] = goTo(n - 1) + goTo(n - 5);
+        if (n == 0) dp[n] = 0;
+        else if (n == 1 || n == 2) dp[n] = 1;
+        else if (dp[n] == 0) {
+            dp[n] = goTo(n - 2) + goTo(n - 3);
+        }
         return dp[n];
     }
 }
