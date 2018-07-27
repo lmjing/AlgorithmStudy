@@ -18,7 +18,7 @@ public class Main {
             dp[n][k] = k;
         else if (k == 1)
             dp[n][k] = 1;
-        else
+        else if (dp[n][k] == 0)
             dp[n][k] = goTo(n - 1, k) + goTo(n, k - 1);
        return dp[n][k] % 1000000000;
     }
