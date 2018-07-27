@@ -712,4 +712,43 @@ public class DynamicProgramming {
             return dp[n];
         }
     }
+
+    public static class Num2225 {
+        static int[][] dp;
+        public static void top_down() {
+            Scanner sc = new Scanner(System.in);
+            int n = sc.nextInt();
+            int k = sc.nextInt();
+
+            dp = new int[n + 1][k + 1];
+            System.out.println(goTo(n, k));
+        }
+
+        static int goTo (int n, int k) {
+            if (n == 1)
+                dp[n][k] = k;
+            else if (k == 1)
+                dp[n][k] = 1;
+            else if (dp[n][k] == 0)
+                dp[n][k] = goTo(n - 1, k) + goTo(n, k - 1);
+            return dp[n][k] % 1000000000;
+        }
+
+        public static void bottom_up() {
+            Scanner sc = new Scanner(System.in);
+            int n = sc.nextInt();
+            int k = sc.nextInt();
+
+            dp = new int[n + 1][k + 1];
+            for (int i = 1; i <= n; i++) {
+                for (int j = 1; j <= k; j++) {
+                    if (i == 1) dp[i][j] = j;
+                    else if (j == 1) dp[i][j] = 1;
+                    else dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+                    dp[i][j] %= 1000000000;
+                }
+            }
+            System.out.println(dp[n][k]);
+        }
+    }
 }
