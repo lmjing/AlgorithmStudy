@@ -18,6 +18,6 @@ public class Main {
             if (su >= 10 && su <= 26)
                 dp[i] = (dp[i] + dp[i - 2]) % mod;
         }
-        System.out.println(input != "0" ? dp[input.length()] : 0);
+        System.out.println(input.equals("0") ? 0 : dp[input.length()]);
     }
 }
