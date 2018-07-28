@@ -14,7 +14,7 @@ public class Main {
             if (input[now] > '0')
                 dp[i] = dp[i - 1];
             int su = (input[now - 1] - '0') * 10 + (input[now] - '0');
-            if (su > 0 && su <= 26)
+            if (su >= 10 && su <= 26)
                 dp[i] = (dp[i] + dp[i - 2]) % mod;
         }
         System.out.println(dp[input.length]);
