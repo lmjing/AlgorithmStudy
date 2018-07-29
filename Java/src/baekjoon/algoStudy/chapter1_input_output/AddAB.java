@@ -1,10 +1,7 @@
 package baekjoon.algoStudy.chapter1_input_output;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class AddAB {
     public void num1000() throws IOException {
@@ -94,5 +91,17 @@ public class AddAB {
             int b = sc.nextInt();
             System.out.println("Case #" + i + ": " + a + " + " + b + " = " +(a + b));
         }
+    }
+    
+    public static void num15552() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        int T = Integer.parseInt(br.readLine());
+        for (int i = 0; i < T; i++) {
+            String[] inputs = br.readLine().split(" ");
+            bw.append((Integer.parseInt(inputs[0]) + Integer.parseInt(inputs[1]) + "\n"));
+        }
+        bw.flush();
+        bw.close();
     }
 }
