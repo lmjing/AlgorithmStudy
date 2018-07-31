@@ -1,3 +1,5 @@
+package baekjoon.algoStudy;
+
 import java.util.*;
 
 public class Main {
@@ -8,9 +10,17 @@ public class Main {
             int n = sc.nextInt();
             boolean flag = true;
             Trie trie = new Trie();
+
+            String[] inputs = new String[n];
+            for (int j = 0; j < n; j++) inputs[j] = sc.next();
+            Arrays.sort(inputs, new Comparator<String>() {
+                @Override
+                public int compare(String o1, String o2) {
+                    return o1.length() - o2.length();
+                }
+            });
             for (int j = 0; j < n; j++) {
-                String input = sc.next();
-                if (flag) flag = trie.add(input);
+                if (flag) flag = trie.add(inputs[j]);
             }
             System.out.println(flag ? "YES" : "NO");
         }
