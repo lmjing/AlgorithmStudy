@@ -16,6 +16,6 @@ public class Main {
         else if (n < 7)
             System.out.println(Math.min(4, m));
         else
-            System.out.println(3 + (m - 5));
+            System.out.println(m - 2);
     }
 }
