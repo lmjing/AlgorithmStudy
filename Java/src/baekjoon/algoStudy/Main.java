@@ -5,10 +5,10 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int m = sc.nextInt();
+        long n = sc.nextInt();
+        long m = sc.nextInt();
 
-        int answer = 0;
+        long answer = 0;
         if (n > 2 ) {
             if (m > 4) {
                 answer = 3;
