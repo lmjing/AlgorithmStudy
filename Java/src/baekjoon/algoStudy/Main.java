@@ -11,7 +11,7 @@ public class Main {
         if (n == 1) System.out.println(1);
         else if (n == 2)
             System.out.println(Math.min(4, (m + 1) / 2));
-        else if (n < 7)
+        else if (m < 7)
             System.out.println(Math.min(4, m));
         else
             System.out.println(m - 2);
