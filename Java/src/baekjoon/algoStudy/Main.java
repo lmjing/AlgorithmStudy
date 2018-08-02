@@ -9,15 +9,17 @@ public class Main {
         long m = sc.nextInt();
 
         long answer = 0;
-        if (n > 2 ) {
+        if (n > 2) {
             if (m > 4) {
                 answer = 3;
-                if (m - 7 > 0)
-                    answer += (m - 5);
-                else
+                if (m <= 7)
                     answer += (m - 3) / 2;
+                else
+                    answer += (m - 5);
             } else answer = m;
-        } else answer = (m - 1) / 2 + 1;
+        }
+        else if (n == 1) answer = 1;
+        else answer = (m + 1) / 2;
         System.out.println(answer);
     }
 }
