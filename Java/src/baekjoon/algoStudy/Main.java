@@ -8,18 +8,14 @@ public class Main {
         long n = sc.nextInt();
         long m = sc.nextInt();
 
-        long answer = 0;
-        if (n > 2) {
-            if (m > 4) {
-                answer = 3;
-                if (m <= 7)
-                    answer += (m - 3) / 2;
-                else
-                    answer += (m - 5);
-            } else answer = m;
-        }
-        else if (n == 1) answer = 1;
-        else answer = (m + 1) / 2;
-        System.out.println(answer);
+        if (n == 1) System.out.println(1);
+        else if (n == 2)
+            System.out.println((m + 1) / 2);
+        else if (m <= 4)
+            System.out.println(m);
+        else if (n < 7)
+            System.out.println(3 + (m - 3) / 2);
+        else
+            System.out.println(3 + (m - 5));
     }
 }
