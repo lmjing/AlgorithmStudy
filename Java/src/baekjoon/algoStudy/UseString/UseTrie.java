@@ -30,11 +30,11 @@ public class UseTrie {
             root = init();
         }
 
-        public void add (String s) {
-            add(root, s, 0);
+        public boolean add (String s) {
+            return add(root, s, 0);
         }
 
-        abstract void add (int node, String s, int idx);
+        abstract boolean add (int node, String s, int idx);
 
         public boolean search (String s) {
             return search(root, s, 0);
@@ -47,10 +47,10 @@ public class UseTrie {
     public static class Num14425 {
         static class Trie extends UseTrie.Trie {
             @Override
-            void add (int node, String s, int idx) {
+            boolean add (int node, String s, int idx) {
                 if (s.length() == idx) {
                     trie.get(node).vaild = true;
-                    return;
+                    return true;
                 }
                 int c = s.charAt(idx) - 'a';
                 if (trie.get(node).children[c] == -1) {
@@ -58,7 +58,7 @@ public class UseTrie {
                     trie.get(node).children[c] = next;
                 }
                 int child = trie.get(node).children[c];
-                add(child, s, idx + 1);
+                return add(child, s, idx + 1);
             }
 
             @Override
@@ -90,5 +90,49 @@ public class UseTrie {
         }
     }
 
-    
+    public static class Num5052 {
+        static class Trie extends UseTrie.Trie {
+            @Override
+            boolean add (int node, String s, int idx) {
+                if (trie.get(node).vaild == true) return false;
+                if (s.length() == idx) {
+                    trie.get(node).vaild = true;
+                    return true;
+                }
+                int c = s.charAt(idx) - '0';
+                if (trie.get(node).children[c] == -1) {
+                    int next = init();
+                    trie.get(node).children[c] = next;
+                }
+                int child = trie.get(node).children[c];
+                return add(child, s, idx + 1);
+            }
+
+            @Override
+            boolean search (int node, String s, int idx) { return true; }
+        }
+
+        public static void main(String[] args) {
+            Scanner sc = new Scanner(System.in);
+            int t = sc.nextInt();
+            for (int i = 0; i < t; i++) {
+                int n = sc.nextInt();
+                boolean flag = true;
+                Trie trie = new Trie();
+
+                String[] inputs = new String[n];
+                for (int j = 0; j < n; j++) inputs[j] = sc.next();
+                Arrays.sort(inputs, new Comparator<String>() {
+                    @Override
+                    public int compare(String o1, String o2) {
+                        return o1.length() - o2.length();
+                    }
+                });
+                for (int j = 0; j < n; j++) {
+                    if (flag) flag = trie.add(inputs[j]);
+                }
+                System.out.println(flag ? "YES" : "NO");
+            }
+        }
+    }
 }
