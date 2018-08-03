@@ -15,8 +15,7 @@ public class Main {
         int count = 0;
         int Q = sc.nextInt();
         for (int i = 0; i < Q; i++)
-            count += ac.search(sc.next());
-        System.out.println(count);
+            System.out.println(ac.search(sc.next()) ? "YES" : "NO");
     }
 
     static class AhoCorasick {
@@ -83,43 +82,31 @@ public class Main {
         }
 
         private void check (int p, int q) {
-            System.out.println(p + " " + q);
-            if (p == 0) {
-                trie.get(q).fl = 0;
-                System.out.println(q + " failureLink : " + 0);
-            } else {
+            if (p == 0) trie.get(q).fl = 0;
+            else {
                 int pf = trie.get(p).fl;
                 int c = trie.get(q).c;
                 int fl = trie.get(pf).children[c];
 
-                if (fl != -1) {
-                    trie.get(q).fl = fl;
-                    System.out.println(q + " failureLink : " + fl);
-                }
+                if (fl != -1) trie.get(q).fl = fl;
                 else check(pf, q);
             }
         }
 
-        public int search (String str) {
-            return search(str, 0, 0 ,0);
+        public boolean search (String str) {
+            return search(str, 0, 0);
         }
 
-        private int search (String str, int idx, int node, int count) {
-            int j = node;
-            while (trie.get(j).vaild) {
-                count++;
-                j = trie.get(j).fl;
-            }
-            if (idx == str.length()) {
-                return count;
-            }
+        private boolean search (String str, int idx, int node) {
+            if (trie.get(node).vaild) return true;
+            if (idx == str.length()) return false;
 
             int c = str.charAt(idx) - 'a';
             if (trie.get(node).children[c] != -1) {
-                return search(str, idx + 1, trie.get(node).children[c], count);
+                return search(str, idx + 1, trie.get(node).children[c]);
             } else {
-                if (node == 0) return search(str, idx + 1, 0, count);
-                return search(str, idx, trie.get(node).fl, count);
+                if (node == 0) return search(str, idx + 1, 0);
+                return search(str, idx, trie.get(node).fl);
             }
         }
     }
