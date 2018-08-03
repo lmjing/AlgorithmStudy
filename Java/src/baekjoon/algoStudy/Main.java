@@ -10,9 +10,8 @@ public class Main {
         int N = sc.nextInt();
         for (int i = 0; i < N; i++)
             ac.add(sc.next());
-        ac.makeFailureLink();
+        ac.makeFailureLinks();
 
-        int count = 0;
         int Q = sc.nextInt();
         for (int i = 0; i < Q; i++)
             System.out.println(ac.search(sc.next()) ? "YES" : "NO");
@@ -65,7 +64,7 @@ public class Main {
             add(next, str, idx + 1);
         }
 
-        public void makeFailureLink () {
+        public void makeFailureLinks () {
             Queue<Integer> queue = new LinkedList<>();
             queue.add(0);
 
@@ -74,14 +73,14 @@ public class Main {
                 Node current = trie.get(p);
                 for (int i = 0; i < 26; i++) {
                     if (current.children[i] != -1) {
-                        check(p, current.children[i]);
+                        makeFailureLink(p, current.children[i]);
                         queue.add(current.children[i]);
                     }
                 }
             }
         }
 
-        private void check (int p, int q) {
+        private void makeFailureLink (int p, int q) {
             if (p == 0) trie.get(q).fl = 0;
             else {
                 int pf = trie.get(p).fl;
@@ -89,7 +88,7 @@ public class Main {
                 int fl = trie.get(pf).children[c];
 
                 if (fl != -1) trie.get(q).fl = fl;
-                else check(pf, q);
+                else makeFailureLink(pf, q);
             }
         }
 
@@ -98,7 +97,7 @@ public class Main {
         }
 
         private boolean search (String str, int idx, int node) {
-            if (trie.get(node).vaild) return true;
+            if (checkOutputLink(node)) return true;
             if (idx == str.length()) return false;
 
             int c = str.charAt(idx) - 'a';
@@ -108,6 +107,12 @@ public class Main {
                 if (node == 0) return search(str, idx + 1, 0);
                 return search(str, idx, trie.get(node).fl);
             }
+        }
+
+        private boolean checkOutputLink (int node) {
+            if (node == 0) return false;
+            if (trie.get(node).vaild) return true;
+            return checkOutputLink(trie.get(node).fl);
         }
     }
 }
