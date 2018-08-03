@@ -1,23 +1,23 @@
 package baekjoon.algoStudy;
 
-import javafx.geometry.Pos;
-
 import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
+        Solution solution = new Solution();
+//        int[] answer = solution.solution(6, 4, new int[][]{{1, 1, 1, 0}, {1, 2, 2, 0}, {1, 0, 0, 1}, {0, 0, 0, 1}, {0, 0, 0, 3}, {0, 0, 0, 3}});
+//        System.out.println(answer[0] + " " + answer[1]);
 
+        int[] answer2 = solution.solution(6, 4, new int[][]{{1, 1, 1, 0}, {1, 1, 1, 0}, {0, 0, 0, 1}, {0, 0, 0, 1}, {0, 0, 0, 1}, {0, 0, 0, 1}});
+        System.out.println(answer2[0] + " " + answer2[1]);
     }
 
-    class Solution {
+    static class Solution {
         class Position {
             int x, y;
-            int flag;
-            public Position(int x, int y, int flag) {
+            public Position(int x, int y) {
                 this.x = x;
                 this.y = y;
-                this.flag = flag;
-                check[x][y] = true;
             }
         }
 
@@ -28,32 +28,49 @@ public class Main {
         public int[] solution(int m, int n, int[][] picture) {
             check = new boolean[m][n];
 
-            Map<Integer, Integer> counts = new HashMap<>();
             Queue<Position> queue = new LinkedList<>();
-
-            // 1부터 시작.
-            int flag = picture[0][0] > 0 ? 1 : 0;
-            queue.add(new Position(0, 0, flag));
-
-            while (!queue.isEmpty()) {
-                Position p = queue.remove();
-                int v = picture[p.x][p.y];
-                for (int i = 0; i < 4; i++) {
-                    int nx = p.x + dx[i];
-                    int ny = p.y + dy[i];
-                    if (nx >= 0 && nx < m && ny < n && ny >= 0 && !check[nx][ny]) {
-
-                    }
-                }
-            }
+            queue.add(new Position(0, 0));
 
             int numberOfArea = 0;
             int maxSizeOfOneArea = 0;
+            while (!queue.isEmpty()) {
+                Position p = queue.remove();
+                if (check[p.x][p.y]) continue;
 
-            int[] answer = new int[2];
-            answer[0] = numberOfArea;
-            answer[1] = maxSizeOfOneArea;
-            return answer;
+                int v = picture[p.x][p.y];
+                int count = 0;
+
+                System.out.println("=============");
+                System.out.println(p.x + " " + p.y + " " + v);
+
+                Queue<Position> temp = new LinkedList<>();
+                temp.add(p);
+
+                while (!temp.isEmpty()) {
+                    Position cur = temp.remove();
+                    check[cur.x][cur.y] = true;
+                    count++;
+                    System.out.println("------------------");
+                    System.out.println(cur.x + " " + cur.y + " " + count);
+                    for (int i = 0; i < 4; i++) {
+                        int nx = p.x + dx[i];
+                        int ny = p.y + dy[i];
+                        if (nx >= 0 && nx < m && ny >= 0 && ny < n && !check[nx][ny]) {
+                            System.out.println(nx + " " + ny);
+                            if (picture[nx][ny] != v) queue.add(new Position(nx, ny));
+                            else temp.add(new Position(nx, ny));
+                        }
+                    }
+                }
+
+                if (v > 0) {
+                    if (maxSizeOfOneArea < count) maxSizeOfOneArea = count;
+                    numberOfArea++;
+                    System.out.println(numberOfArea + " " + count);
+                }
+            }
+
+            return new int[] {numberOfArea, maxSizeOfOneArea};
         }
     }
 }
