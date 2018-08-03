@@ -21,8 +21,8 @@ public class Main {
             }
         }
 
-        int[] dx = {0, 0, -1, 1};
-        int[] dy = {1, -1, 0, 0};
+        int[] dx = {0, 1};
+        int[] dy = {1, 0};
         boolean [][] check;
 
         public int[] solution(int m, int n, int[][] picture) {
@@ -48,17 +48,21 @@ public class Main {
 
                 while (!temp.isEmpty()) {
                     Position cur = temp.remove();
+                    if (check[cur.x][cur.y]) continue;
+
                     check[cur.x][cur.y] = true;
                     count++;
                     System.out.println("------------------");
                     System.out.println(cur.x + " " + cur.y + " " + count);
-                    for (int i = 0; i < 4; i++) {
-                        int nx = p.x + dx[i];
-                        int ny = p.y + dy[i];
+                    for (int i = 0; i < 2; i++) {
+                        int nx = cur.x + dx[i];
+                        int ny = cur.y + dy[i];
                         if (nx >= 0 && nx < m && ny >= 0 && ny < n && !check[nx][ny]) {
-                            System.out.println(nx + " " + ny);
                             if (picture[nx][ny] != v) queue.add(new Position(nx, ny));
-                            else temp.add(new Position(nx, ny));
+                            else {
+                                temp.add(new Position(nx, ny));
+                                System.out.println(nx + " " + ny);
+                            }
                         }
                     }
                 }
