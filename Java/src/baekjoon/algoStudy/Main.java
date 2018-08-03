@@ -23,14 +23,12 @@ public class Main {
         class Node {
             int c;
             boolean vaild;
-            int outputLink;
             int[] children;
             int fl;
 
             public Node() {
                 c = -1;
                 vaild = false;
-                outputLink = 0;
                 children = new int[26];
                 for (int i = 0; i < 26; i++)
                     children[i] = -1;
@@ -56,7 +54,6 @@ public class Main {
         private void add (int node, String str, int idx) {
             if (str.length() == idx) {
                 trie.get(node).vaild = true;
-                trie.get(node).outputLink = node;
                 return;
             }
             int i = str.charAt(idx) - 'a';
@@ -90,10 +87,7 @@ public class Main {
                 int c = trie.get(q).c;
                 int fl = trie.get(pf).children[c];
 
-                if (fl != -1) {
-                    trie.get(q).fl = fl;
-                    trie.get(q).outputLink = trie.get(fl).outputLink;
-                }
+                if (fl != -1) trie.get(q).fl = fl;
                 else makeFailureLink(pf, q);
             }
         }
@@ -103,18 +97,16 @@ public class Main {
         }
 
         private boolean search (String str, int idx, int node) {
-            int outPutLink = trie.get(node).outputLink;
-            if (trie.get(outPutLink).vaild) return true;
-//            if (checkOutputLink(node)) return true;
+            if (checkOutputLink(node)) return true;
             if (idx == str.length()) return false;
 
             int c = str.charAt(idx) - 'a';
-            if (trie.get(node).children[c] != -1) {
+            while (node > 0 && trie.get(node).children[c] == -1)
+                node = trie.get(node).fl;
+
+            if (trie.get(node).children[c] != -1)
                 return search(str, idx + 1, trie.get(node).children[c]);
-            } else {
-                if (node == 0) return search(str, idx + 1, 0);
-                return search(str, idx, trie.get(node).fl);
-            }
+            return search(str, idx + 1, node);
         }
 
         private boolean checkOutputLink (int node) {
