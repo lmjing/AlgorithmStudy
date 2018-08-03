@@ -23,12 +23,14 @@ public class Main {
         class Node {
             int c;
             boolean vaild;
+            int outputLink;
             int[] children;
             int fl;
 
             public Node() {
                 c = -1;
                 vaild = false;
+                outputLink = 0;
                 children = new int[26];
                 for (int i = 0; i < 26; i++)
                     children[i] = -1;
@@ -54,6 +56,7 @@ public class Main {
         private void add (int node, String str, int idx) {
             if (str.length() == idx) {
                 trie.get(node).vaild = true;
+                trie.get(node).outputLink = node;
                 return;
             }
             int i = str.charAt(idx) - 'a';
@@ -87,7 +90,11 @@ public class Main {
                 int c = trie.get(q).c;
                 int fl = trie.get(pf).children[c];
 
-                if (fl != -1) trie.get(q).fl = fl;
+                if (fl != -1) {
+                    trie.get(q).fl = fl;
+                    if (!trie.get(q).vaild)
+                        trie.get(q).outputLink = trie.get(fl).outputLink;
+                }
                 else makeFailureLink(pf, q);
             }
         }
@@ -97,7 +104,9 @@ public class Main {
         }
 
         private boolean search (String str, int idx, int node) {
-            if (checkOutputLink(node)) return true;
+//            if (checkOutputLink(node)) return true;
+            int outputLink = trie.get(node).outputLink;
+            if (trie.get(outputLink).vaild) return true;
             if (idx == str.length()) return false;
 
             int c = str.charAt(idx) - 'a';
