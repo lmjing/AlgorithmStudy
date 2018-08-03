@@ -105,14 +105,13 @@ public class Main {
         }
 
         private int search (String str, int idx, int node, int count) {
-            if (idx == str.length()) {
-                return count;
-            }
             int j = node;
             while (trie.get(j).vaild) {
-//                System.out.println(str.charAt(idx) + " " + node + " " + count);
                 count++;
                 j = trie.get(j).fl;
+            }
+            if (idx == str.length()) {
+                return count;
             }
 
             int c = str.charAt(idx) - 'a';
