@@ -40,9 +40,6 @@ public class Main {
                 int v = picture[p.x][p.y];
                 int count = 0;
 
-                System.out.println("=============");
-                System.out.println(p.x + " " + p.y + " " + v);
-
                 Queue<Position> temp = new LinkedList<>();
                 temp.add(p);
 
@@ -52,17 +49,12 @@ public class Main {
 
                     check[cur.x][cur.y] = true;
                     count++;
-                    System.out.println("------------------");
-                    System.out.println(cur.x + " " + cur.y + " " + count);
                     for (int i = 0; i < 2; i++) {
                         int nx = cur.x + dx[i];
                         int ny = cur.y + dy[i];
                         if (nx >= 0 && nx < m && ny >= 0 && ny < n && !check[nx][ny]) {
                             if (picture[nx][ny] != v) queue.add(new Position(nx, ny));
-                            else {
-                                temp.add(new Position(nx, ny));
-                                System.out.println(nx + " " + ny);
-                            }
+                            else temp.add(new Position(nx, ny));
                         }
                     }
                 }
@@ -70,7 +62,6 @@ public class Main {
                 if (v > 0) {
                     if (maxSizeOfOneArea < count) maxSizeOfOneArea = count;
                     numberOfArea++;
-                    System.out.println(numberOfArea + " " + count);
                 }
             }
 
@@ -78,4 +69,3 @@ public class Main {
         }
     }
 }
-
