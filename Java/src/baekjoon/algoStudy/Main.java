@@ -16,7 +16,7 @@ public class Main {
 
             long money = 0;
             int aSum = 0;
-            for (int j = 0; j < 6; j++) {
+            for (int j = 0; j < 6 && a > 0; j++) {
                 aSum += festival1[1][j];
                 if (a <= aSum) {
                     money += festival1[0][j] * 10000;
@@ -25,7 +25,7 @@ public class Main {
             }
 
             int bSum = 0;
-            for (int j = 0; j < 5; j++) {
+            for (int j = 0; j < 5 && b > 0; j++) {
                 bSum += festival2[1][j];
                 if (b <= bSum) {
                     money += festival2[0][j] * 10000;
