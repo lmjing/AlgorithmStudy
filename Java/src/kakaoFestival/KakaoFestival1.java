@@ -69,5 +69,35 @@ public class KakaoFestival1 {
 //        String answer = String.format("%.11f", Math.sqrt(smallTemp / k));
 //        System.out.println(answer);
 //        System.out.println(Math.sqrt(smallTemp / k));
+
+//        StringBuffer str = new StringBuffer(String.valueOf((int)Math.floor(answer) + "."));
+//        answer -= Math.floor(answer);
+//        for (int i = 1; i <= 11; i++) {
+//            answer *= 10;
+//            str.append(String.valueOf((int)Math.floor(answer)));
+//            answer -= Math.floor(answer);
+//        }
+    }
+
+    public static void num3(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        char[] inputs = sc.nextLine().toCharArray();
+
+        StringBuffer[] vals = {new StringBuffer(), new StringBuffer()};
+        int turn = 0;
+
+        char val1, val2;
+        for (int i = 0; i < inputs.length; i++) {
+            char c = inputs[i];
+            if (c == '&') {
+
+            } else if (c == '!') {
+                turn = 1;
+            } else if (c == '=') {
+                turn = 1;
+            } else {
+                vals[turn].append(c);
+            }
+        }
     }
 }
