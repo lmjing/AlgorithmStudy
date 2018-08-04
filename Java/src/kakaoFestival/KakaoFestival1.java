@@ -100,4 +100,42 @@ public class KakaoFestival1 {
             }
         }
     }
+
+    public static void num4(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int q = sc.nextInt();
+        int[][] checkPoints = new int[n + 1][2];
+        int rowSize = 0, colSize = 0;
+        for (int i = 1; i <= n; i++) {
+            checkPoints[i][0] = sc.nextInt();
+            if (rowSize < checkPoints[i][0] + 1) rowSize = checkPoints[i][0] + 1;
+            checkPoints[i][1] = sc.nextInt();
+            if (colSize < checkPoints[i][1] + 1) colSize = checkPoints[i][1] + 1;
+        }
+        for (int i = 0; i < q; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            int x = sc.nextInt();
+
+            ArrayList<Integer>[] row = new ArrayList[rowSize];
+
+            int[] cur = checkPoints[a];
+            int[] end = checkPoints[b];
+            boolean flag = true;
+            boolean boost = true; // 첫번째는 hp 채울필요 X
+            while (cur[0] != end[0] && cur[1] != end[1]) {
+                // 걸어가는 경우 구하기
+                //int walk =
+//                if (boost) // 있으면 각 좌표 차이 절대값 구해서 적은 수가 walk
+                    // else : 없으면 피타고라스의 함수 정리 이용해서 거리 구하기(최소)
+                    // walk가 hp보다 적으면 성공.
+
+                    // 1. 걸어가는 수
+                // 2. 날아가는 수
+                // 3. 날아 + 걸어가는 수
+            }
+            System.out.println(flag ? "YES" : "NO");
+        }
+    }
 }
