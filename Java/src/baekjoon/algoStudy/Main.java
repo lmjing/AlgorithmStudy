@@ -31,9 +31,9 @@ public class Main {
         for (int i = 0; i <= n - 3; i++) {
             for (int j = 0; j <= m - 3; j++) {
                 // 마지막 3개가 다 다를 경우 불가능하다.
-                if (i == n - 3 && !(check[i][j] == check[i + 1][j] == check[i + 2][j]))
+                if (i == n - 3 && !(check[i][j] == check[i + 1][j] && check[i][j] == check[i + 2][j]))
                     return -1;
-                if (j == m - 3 && !(check[i][j] == check[i][j + 1] == check[i][j + 2]))
+                if (j == m - 3 && !(check[i][j] == check[i][j + 1] && check[i][j] == check[i][j + 2]))
                     return -1;
                 // 가능한 경우 홀수 일때 3x3을 모두 뒤집는다.
                 if (check[i][j]) {
