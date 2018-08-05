@@ -15,18 +15,31 @@ public class Main {
             A[i] = sc.next().toCharArray();
         // B배열 인풋 받으면서 동시에 A와 비교
         // 동일할 경우 : 짝수번 뒤집힘, 다를 경우 : 홀수번 뒤집힘
+
+        int diff = 0;
         for (int i = 0; i < n; i++) {
             char[] inputs = sc.next().toCharArray();
             for (int j = 0; j < m; j++) {
-                if (inputs[j] != A[i][j]) check[i][j] = true;
+                if (inputs[j] != A[i][j]) {
+                    check[i][j] = true;
+                    diff++;
+                }
             }
         }
-        System.out.println(getAnswer(check));
+
+        if (diff == 0)
+            System.out.println(0);
+        else
+            System.out.println(getAnswer(check));
     }
 
     static int getAnswer (boolean[][] check) {
         int n = check.length;
         int m = check[0].length;
+
+        if (n < 3 || m < 3)
+            return -1;
+
         int count = 0;
         for (int i = 0; i <= n - 3; i++) {
             for (int j = 0; j <= m - 3; j++) {
