@@ -313,4 +313,22 @@ public class Greedy {
         }
         System.out.println(min);
     }
+
+    public static void num10610() {
+        Scanner sc = new Scanner(System.in);
+        char[] inputs = sc.next().toCharArray();
+        Arrays.sort(inputs);
+
+        if (inputs[0] == '0') {
+            StringBuffer result = new StringBuffer();
+            int sum = 0;
+            for (int i = inputs.length - 1; i >= 0; i--) {
+                sum += inputs[i] - '0';
+                result.append(inputs[i]);
+            }
+            if (sum % 3 == 0) System.out.println(result);
+            else System.out.println(-1);
+        } else System.out.println(-1);
+
+    }
 }
