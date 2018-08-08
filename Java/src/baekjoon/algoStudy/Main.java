@@ -4,5 +4,45 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int m = sc.nextInt();
+        int[] haved = new int[m];
+        for (int i = 0; i < m; i++)
+            haved[i] = sc.nextInt();
+
+        Arrays.sort(haved);
+
+        int n = sc.nextInt();
+        for (int i = 0; i < n; i++)
+            System.out.print(getCount(haved, sc.nextInt()) + " ");
+    }
+
+    static int getCount (int[] array, int find) {
+        int i = binary_search(array, find);
+        if (i == -1) return 0;
+
+        int count = 0;
+        for (int j = i; j < array.length && array[j] == find; j++)
+            count++;
+        for (int j = i - 1; j >= 0 && array[j] == find; j--)
+            count++;
+        return count;
+    }
+
+    static int binary_search (int[] array, int find) {
+        // NOTE : 찾은 idx 리턴하는 함수 (추후 활용하게 idx로 만듦)
+        int l = 0;
+        int r = array.length - 1;
+
+        while (l <= r) {
+            int half = (l + r) / 2;
+            if (array[half] == find)
+                return half;
+            else if (array[half] < find)
+                l = half + 1;
+            else
+                r = half - 1;
+        }
+        return -1;
     }
 }
