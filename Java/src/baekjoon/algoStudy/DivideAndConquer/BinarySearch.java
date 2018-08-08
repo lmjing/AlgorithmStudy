@@ -10,15 +10,44 @@ public class BinarySearch {
         int r = array.length - 1;
 
         while (l <= r) {
-            int half = (l + r) / 2;
-            if (array[half] == find)
-                return half;
-            else if (array[half] < find)
-                l = half + 1;
+            int m = (l + r) / 2;
+            if (array[m] == find)
+                return m;
+            else if (array[m] < find)
+                l = m + 1;
             else
-                r = half - 1;
+                r = m - 1;
         }
         return -1;
+    }
+
+
+    static int upper_bound (int[] array, int find) {
+        // NOTE : 찾고자 하는 값보다 큰 값이 처음 나오는 위치
+        int l = 0;
+        int r = array.length;
+
+        while (l < r) {
+            int m = (l + r) / 2;
+            if (array[m] <= find)
+                l = m + 1;
+            else r = m;
+        }
+        return r;
+    }
+
+    static int lower_bound (int[] array, int find) {
+        // NOTE : 찾고자 값이 처음 나오는 위치
+        int l = 0;
+        int r = array.length;
+
+        while (l < r) {
+            int m = (l + r) / 2;
+            if (array[m] < find)
+                l = m + 1;
+            else r = m;
+        }
+        return r;
     }
 
     public static void num10815 () {
@@ -36,7 +65,7 @@ public class BinarySearch {
         }
     }
 
-    public static void num10816() {
+    public static void num10816_userMap() {
         Scanner sc = new Scanner(System.in);
 
         Map<Integer, Integer> map = new HashMap<>();
@@ -59,6 +88,24 @@ public class BinarySearch {
                 System.out.print(0 + " ");
             else
                 System.out.print(map.get(find) + " ");
+        }
+    }
+
+    public static void num10816_useUpperLowerBound() {
+        Scanner sc = new Scanner(System.in);
+
+        int m = sc.nextInt();
+        int[] haved = new int[m];
+        for (int i = 0; i < m; i++)
+            haved[i] = sc.nextInt();
+        Arrays.sort(haved);
+
+        int n = sc.nextInt();
+        for (int i = 0; i < n; i++) {
+            int find = sc.nextInt();
+            int lb = lower_bound(haved, find);
+            int ub = upper_bound(haved, find);
+            System.out.print(ub - lb +" ");
         }
     }
 }
