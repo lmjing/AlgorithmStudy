@@ -210,4 +210,125 @@ public class Greedy {
         else
             System.out.println(m - 2);
     }
+
+    public class Num1080 {
+        public void main(String[] args) {
+            Scanner sc = new Scanner(System.in);
+            int n = sc.nextInt();
+            int m = sc.nextInt();
+            char[][] A = new char[n][m];
+            boolean[][] check = new boolean[n][m]; // 짝수 : false, 홀수 : true
+
+            // A배열 인풋
+            for (int i = 0; i < n; i++)
+                A[i] = sc.next().toCharArray();
+            // B배열 인풋 받으면서 동시에 A와 비교
+            // 동일할 경우 : 짝수번 뒤집힘, 다를 경우 : 홀수번 뒤집힘
+
+            int diff = 0;
+            for (int i = 0; i < n; i++) {
+                char[] inputs = sc.next().toCharArray();
+                for (int j = 0; j < m; j++) {
+                    if (inputs[j] != A[i][j]) {
+                        check[i][j] = true;
+                        diff++;
+                    }
+                }
+            }
+
+            if (diff == 0)
+                System.out.println(0);
+            else
+                System.out.println(getAnswer(check));
+        }
+
+        int getAnswer (boolean[][] check) {
+            int n = check.length;
+            int m = check[0].length;
+
+            if (n < 3 || m < 3)
+                return -1;
+
+            int count = 0;
+            for (int i = 0; i <= n - 3; i++) {
+                for (int j = 0; j <= m - 3; j++) {
+                    // 마지막 3개가 다 다를 경우 불가능하다.
+                    if (i == n - 3 && !(check[i][j] == check[i + 1][j] && check[i][j] == check[i + 2][j]))
+                        return -1;
+                    if (j == m - 3 && !(check[i][j] == check[i][j + 1] && check[i][j] == check[i][j + 2]))
+                        return -1;
+                    // 가능한 경우 홀수 일때 3x3을 모두 뒤집는다.
+                    if (check[i][j]) {
+                        reverse(check, i, j);
+                        count++;
+                    }
+                }
+            }
+            boolean flag = check[n - 3][m - 3];
+            for (int i = n - 1; i > n - 3; i--) {
+                for (int j = m - 1; j > n - 3; j--) {
+                    if (flag != check[i][j]) return -1;
+                }
+            }
+            return count;
+        }
+
+        void reverse (boolean[][] check, int x, int y) {
+            for (int i = x; i < x + 3; i++) {
+                for (int j = y; j < y + 3; j++)
+                    check[i][j] = !check[i][j];
+            }
+        }
+    }
+
+    public void num1285(String[] args) {
+        //TODO: 다시 안보고 풀어보기
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        boolean[][] coins = new boolean[n][n];
+
+        for (int i = 0; i < n; i++) {
+            String input = sc.next();
+            for (int j = 0; j < n; j ++) {
+                if (input.charAt(j) == 'T')
+                    coins[i][j] = true;
+            }
+        }
+
+        int min = n*n;
+        for (int state = 0; state < (1 << n); state++) {
+            int sum = 0;
+            for (int j = 0; j < n; j++) {
+                int count = 0;
+                for (int i = 0; i < n; i++) {
+                    boolean flag = coins[i][j];
+                    if ((state & (1 << i)) != 0)
+                        flag = !flag;
+
+                    if (flag) count++;
+                }
+                sum += Math.min(count, n - count);
+            }
+            if (min > sum) min = sum;
+        }
+        System.out.println(min);
+    }
+
+    public static void num10610() {
+        Scanner sc = new Scanner(System.in);
+        char[] inputs = sc.next().toCharArray();
+        Arrays.sort(inputs);
+
+        if (inputs[0] == '0') {
+            StringBuffer result = new StringBuffer();
+            int sum = 0;
+            for (int i = inputs.length - 1; i >= 0; i--) {
+                sum += inputs[i] - '0';
+                result.append(inputs[i]);
+            }
+            if (sum % 3 == 0) System.out.println(result);
+            else System.out.println(-1);
+        } else System.out.println(-1);
+
+    }
 }
