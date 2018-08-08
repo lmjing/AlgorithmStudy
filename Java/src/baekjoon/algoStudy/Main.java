@@ -6,26 +6,18 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        Map<Integer, Integer> map = new HashMap<>();
         int m = sc.nextInt();
         int[] haved = new int[m];
-        for (int i = 0; i < m; i++) {
+        for (int i = 0; i < m; i++)
             haved[i] = sc.nextInt();
-            Object before = map.get(haved[i]);
-            if (before != null)
-                map.put(haved[i], (int)before + 1);
-            else map.put(haved[i], 1);
-        }
-
         Arrays.sort(haved);
 
         int n = sc.nextInt();
         for (int i = 0; i < n; i++) {
             int find = sc.nextInt();
-            if (binary_search(haved, find) == -1)
-                System.out.print(0 + " ");
-            else
-                System.out.print(map.get(find) + " ");
+            int lb = lower_bound(haved, find);
+            int ub = upper_bound(haved, find);
+            System.out.print(ub - lb +" ");
         }
     }
 
@@ -44,5 +36,33 @@ public class Main {
                 r = half - 1;
         }
         return -1;
+    }
+
+    static int upper_bound (int[] array, int find) {
+        // NOTE : 찾고자 하는 값보다 큰 값이 처음 나오는 위치
+        int l = 0;
+        int r = array.length;
+
+        while (l < r) {
+            int half = (l + r) / 2;
+            if (array[half] <= find)
+                l = half + 1;
+            else r = half;
+        }
+        return r;
+    }
+
+    static int lower_bound (int[] array, int find) {
+        // NOTE : 찾고자 값이 처음 나오는 위치
+        int l = 0;
+        int r = array.length;
+
+        while (l < r) {
+            int half = (l + r) / 2;
+            if (array[half] < find)
+                l = half + 1;
+            else r = half;
+        }
+        return r;
     }
 }
