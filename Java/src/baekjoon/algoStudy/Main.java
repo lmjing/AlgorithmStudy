@@ -29,19 +29,6 @@ public class Main {
         }
     }
 
-//    static int getCount (int[] array, int find) {
-//        int i = binary_search(array, find);
-//        if (i == -1) return 0;
-//        else return
-//
-////        int count = 0;
-////        for (int j = i; j < array.length && array[j] == find; j++)
-////            count++;
-////        for (int j = i - 1; j >= 0 && array[j] == find; j--)
-////            count++;
-//        return count;
-//    }
-
     static int binary_search (int[] array, int find) {
         // NOTE : 찾은 idx 리턴하는 함수 (추후 활용하게 idx로 만듦)
         int l = 0;
