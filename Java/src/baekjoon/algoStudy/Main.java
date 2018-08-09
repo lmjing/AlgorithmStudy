@@ -31,10 +31,6 @@ public class Main {
             else if (bp >= b.length)
                 result[i] = a[ap++];
             else result[i] = a[ap] < b[bp] ? a[ap++] : b[bp++];
-            if (ap < a.length && a[ap] <= b[bp])
-                result[i] = a[ap++];
-            else
-                result[i] = b[bp++];
         }
         return result;
     }
