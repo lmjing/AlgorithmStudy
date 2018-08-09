@@ -5,64 +5,37 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-
-        int m = sc.nextInt();
-        int[] haved = new int[m];
-        for (int i = 0; i < m; i++)
-            haved[i] = sc.nextInt();
-        Arrays.sort(haved);
-
         int n = sc.nextInt();
-        for (int i = 0; i < n; i++) {
-            int find = sc.nextInt();
-            int lb = lower_bound(haved, find);
-            int ub = upper_bound(haved, find);
-            System.out.print(ub - lb +" ");
-        }
+        int m = sc.nextInt();
+        int[] array = new int[n + m];
+        for (int i = 0; i < n + m; i++)
+            array[i] = sc.nextInt();
+
+        for (int su : merge_sort(array, 0, m + n - 1))
+            System.out.print(su + " ");
     }
 
-    static int binary_search (int[] array, int find) {
-        // NOTE : 찾은 idx 리턴하는 함수 (추후 활용하게 idx로 만듦)
-        int l = 0;
-        int r = array.length - 1;
+    static int[] merge_sort (int[] array, int s, int e) {
+        if (s == e) return new int[]{array[s]};
 
-        while (l <= r) {
-            int half = (l + r) / 2;
-            if (array[half] == find)
-                return half;
-            else if (array[half] < find)
-                l = half + 1;
+        int m = (s + e) / 2;
+
+        int[] a = merge_sort(array, s, m);
+        int[] b = merge_sort(array, m + 1, e);
+
+        int [] result = new int[e - s + 1];
+        int ap = 0, bp = 0;
+        for (int i = 0; i < result.length; i++) {
+            if (ap >= a.length)
+                result[i] = b[bp++];
+            else if (bp >= b.length)
+                result[i] = a[ap++];
+            else result[i] = a[ap] < b[bp] ? a[ap++] : b[bp++];
+            if (ap < a.length && a[ap] <= b[bp])
+                result[i] = a[ap++];
             else
-                r = half - 1;
+                result[i] = b[bp++];
         }
-        return -1;
-    }
-
-    static int upper_bound (int[] array, int find) {
-        // NOTE : 찾고자 하는 값보다 큰 값이 처음 나오는 위치
-        int l = 0;
-        int r = array.length;
-
-        while (l < r) {
-            int half = (l + r) / 2;
-            if (array[half] <= find)
-                l = half + 1;
-            else r = half;
-        }
-        return r;
-    }
-
-    static int lower_bound (int[] array, int find) {
-        // NOTE : 찾고자 값이 처음 나오는 위치
-        int l = 0;
-        int r = array.length;
-
-        while (l < r) {
-            int half = (l + r) / 2;
-            if (array[half] < find)
-                l = half + 1;
-            else r = half;
-        }
-        return r;
+        return result;
     }
 }
