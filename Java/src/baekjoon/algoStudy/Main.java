@@ -3,36 +3,44 @@ package baekjoon.algoStudy;
 import java.util.*;
 
 public class Main {
+    static int[][] map;
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        int[] array = new int[n];
-        for (int i = 0; i < n; i++)
-            array[i] = sc.nextInt();
-
-        quickSort(array, 0 , array.length - 1);
-        for (int su : array)
-            System.out.println(su);
-    }
-
-    private static void quickSort(int[] array, int s, int e) {
-        if (s >= e) return;
-        int m = (s + e) / 2;
-        int pivot = array[m];
-        int l = s, r = e;
-        while (l < r) {
-            while (array[l] < pivot) l++;
-            while (array[r] > pivot) r--;
-            if (l < r)
-                swap(array, l, r);
+        map = new int[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                int input = sc.nextInt();
+                if (input == -1) input = 2;
+                map[i][j] = input;
+            }
         }
-        quickSort(array, s, l - 1);
-        quickSort(array, l + 1, e);
+        for (int c : getCount(new int[]{0, 0}, n))
+            System.out.println(c);
     }
 
-    private static void swap(int[] array, int l, int r) {
-        int temp = array[l];
-        array[l] = array[r];
-        array[r] = temp;
+    static int[] getCount (int[] s, int n) {
+        int[] count = new int[3];
+        if (n == 1) {
+            count[map[s[0]][s[1]]]++;
+            return count;
+        }
+        int last = 3;
+        for (int i = s[0]; i < s[0] + n; i += n / 3) {
+
+            for (int j = s[1]; j < s[1] + n; j += n / 3) {
+                int[] result = getCount(new int[]{i, j}, n / 3);
+                for (int k = 0; k < 3; k++) {
+                    if (result[k] > 0) last = k;
+                    count[k] += result[k];
+                }
+            }
+        }
+        if (count[last] == 9)
+            count[last] = 1;
+        return count;
     }
 }
+
+
+
