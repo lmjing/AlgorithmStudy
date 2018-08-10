@@ -16,8 +16,9 @@ public class Main {
             }
         }
         int[] result = getCount(new int[]{0, 0}, n);
-        for (int i = 2; i >= 0; i--)
-            System.out.println(result[i]);
+        System.out.println(result[2]);
+        System.out.println(result[0]);
+        System.out.println(result[1]);
     }
 
     static int[] getCount (int[] s, int n) {
