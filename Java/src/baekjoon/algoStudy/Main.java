@@ -15,8 +15,9 @@ public class Main {
                 map[i][j] = input;
             }
         }
-        for (int c : getCount(new int[]{0, 0}, n))
-            System.out.println(c);
+        int[] result = getCount(new int[]{0, 0}, n);
+        for (int i = 2; i >= 0; i--)
+            System.out.println(result[i]);
     }
 
     static int[] getCount (int[] s, int n) {
