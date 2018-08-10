@@ -10,15 +10,11 @@ public class Main {
         map = new int[n][n];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                int input = sc.nextInt();
-                if (input == -1) input = 2;
-                map[i][j] = input;
+                map[i][j] = sc.nextInt() + 1;
             }
         }
-        int[] result = getCount(new int[]{0, 0}, n);
-        System.out.println(result[2]);
-        System.out.println(result[0]);
-        System.out.println(result[1]);
+        for (int c : getCount(new int[]{0, 0}, n))
+            System.out.println(c);
     }
 
     static int[] getCount (int[] s, int n) {
@@ -43,6 +39,3 @@ public class Main {
         return count;
     }
 }
-
-
-
