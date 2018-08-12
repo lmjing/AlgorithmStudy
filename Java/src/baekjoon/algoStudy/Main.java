@@ -3,64 +3,53 @@ package baekjoon.algoStudy;
 import java.util.*;
 
 public class Main {
-    static int[][] sudoku = new int[9][9];
-    static boolean[][][] check = new boolean[3][9][9];
-    static LinkedList<Point> emptyPoints = new LinkedList<>();
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+
+        int[][] sudoku = new int[9][9];
+        boolean[][][] check = new boolean[3][9][9];
+        LinkedList<Point> emptyPoints = new LinkedList<>();
 
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 int su = sc.nextInt();
                 sudoku[i][j] = su;
                 if (su > 0) {
-                    check(i, j, su - 1);
+                    su--;
+                    int box = (i / 3) * 3 + (j / 3);
+                    check[0][i][su] = check[1][j][su] = check[2][box][su] = true;
                 } else emptyPoints.add(new Point(i, j));
             }
         }
-        solve();
+        solve(sudoku, check, emptyPoints);
     }
 
-    static void check (int x, int y, int v) {
-        sudoku[x][y] = v + 1;
-        check[0][x][v] = true;
-        check[1][y][v] = true;
-        check[2][(x / 3) * 3 + (y / 3)][v] = true;
-    }
-
-    static void reset (int x, int y, int v) {
-        sudoku[x][y] = 0;
-        check[0][x][v] = false;
-        check[1][y][v] = false;
-        check[2][(x / 3) * 3 + (y / 3)][v] = false;
-    }
-
-    static boolean solve () {
+    static boolean solve (int[][] sudoku, boolean[][][] check, LinkedList<Point> emptyPoints) {
         if (emptyPoints.isEmpty()) {
-            print();
+            for (int i = 0; i < 9; i++) {
+                StringBuilder str = new StringBuilder(String.valueOf(sudoku[i][0]));
+                for (int j = 1; j < 9; j++)
+                    str.append(" " + sudoku[i][j]);
+                System.out.println(str);
+            }
             return true;
         }
         Point p = emptyPoints.remove();
-        int temp = (p.x / 3) * 3 + (p.y / 3);
+        int box = (p.x / 3) * 3 + (p.y / 3);
         for (int i = 0; i < 9; i++) {
-            if (!check[0][p.x][i] && !check[1][p.y][i] && !check[2][temp][i]) {
-                check(p.x, p.y, i);
-                if (solve()) return true;
-                reset(p.x, p.y, i);
+            if (!check[0][p.x][i] && !check[1][p.y][i] && !check[2][box][i]) {
+                sudoku[p.x][p.y] = i + 1;
+                check[0][p.x][i] = check[1][p.y][i] = check[2][box][i] = true;
+
+                if (solve(sudoku, check, emptyPoints)) return true;
+
+                sudoku[p.x][p.y] = 0;
+                check[0][p.x][i] = check[1][p.y][i] = check[2][box][i] = false;
             }
         }
         emptyPoints.add(p);
         return false;
-    }
-
-    static void print() {
-        for (int i = 0; i < 9; i++) {
-            StringBuilder str = new StringBuilder(String.valueOf(sudoku[i][0]));
-            for (int j = 1; j < 9; j++)
-                str.append(" " + sudoku[i][j]);
-            System.out.println(str);
-        }
     }
 
     static class Point {
