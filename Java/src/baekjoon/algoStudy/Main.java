@@ -6,6 +6,7 @@ public class Main {
     static int[][] sudoku = new int[9][9];
     static boolean[][][] check = new boolean[3][9][9];
     static LinkedList<Point> emptyPoints = new LinkedList<>();
+    static boolean flag = false;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -36,24 +37,25 @@ public class Main {
         check[2][(x / 3) * 3 + (y / 3)][v] = false;
     }
 
-    static boolean solve () {
+    static void solve () {
         if (emptyPoints.isEmpty()) {
             print();
-            return true;
+            flag = true;
+            return;
         }
         Point p = emptyPoints.remove();
         int temp = (p.x / 3) * 3 + (p.y / 3);
         boolean result = true;
+        int count = 0;
         for (int i = 0; i < 9; i++) {
             if (!check[0][p.x][i] && !check[1][p.y][i] && !check[2][temp][i]) {
                 check(p.x, p.y, i);
-                result = solve();
-                if (result) break;
+                solve();
+                if (flag) return;
                 reset(p.x, p.y, i);
             }
         }
-        if (!result) emptyPoints.add(p);
-        return result;
+        emptyPoints.add(p);
     }
 
     static void print() {
