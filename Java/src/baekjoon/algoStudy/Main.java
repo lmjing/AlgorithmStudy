@@ -3,33 +3,60 @@ package baekjoon.algoStudy;
 import java.util.*;
 
 public class Main {
+    static int[][] sudoku = new int[9][9];
+    static boolean[][][] check = new boolean[3][9][9];
+    static LinkedList<Point> emptyPoints = new LinkedList<>();
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int[][] sudoku = new int[9][9];
-        boolean[][][] check = new boolean[3][9][9];
-        Queue<Point> emptyPoints = new LinkedList<>();
+
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 int su = sc.nextInt();
                 sudoku[i][j] = su;
                 if (su > 0) {
-                    su--;
-                    check[0][i][su] = true;
-                    check[1][j][su] = true;
-                    check[2][(i / 3) * 3 + (j / 3)][su] = true;
+                    check(i, j, su - 1);
                 } else emptyPoints.add(new Point(i, j));
             }
         }
+        solve();
+    }
 
-        while (!emptyPoints.isEmpty()) {
-            Point p = emptyPoints.remove();
-            int temp = (p.x / 3) * 3 + (p.y / 3);
-            for (int i = 0; i < 9; i++) {
-                if (!check[0][p.x][i] && !check[1][p.y][i] && !check[2][temp][i])
-                    sudoku[p.x][p.y] = i + 1;
+    static void check (int x, int y, int v) {
+        sudoku[x][y] = v + 1;
+        check[0][x][v] = true;
+        check[1][y][v] = true;
+        check[2][(x / 3) * 3 + (y / 3)][v] = true;
+    }
+
+    static void reset (int x, int y, int v) {
+        sudoku[x][y] = 0;
+        check[0][x][v] = false;
+        check[1][y][v] = false;
+        check[2][(x / 3) * 3 + (y / 3)][v] = false;
+    }
+
+    static boolean solve () {
+        if (emptyPoints.isEmpty()) {
+            print();
+            return true;
+        }
+        Point p = emptyPoints.remove();
+        int temp = (p.x / 3) * 3 + (p.y / 3);
+        boolean result = true;
+        for (int i = 0; i < 9; i++) {
+            if (!check[0][p.x][i] && !check[1][p.y][i] && !check[2][temp][i]) {
+                check(p.x, p.y, i);
+                result = solve();
+                if (result) break;
+                reset(p.x, p.y, i);
             }
         }
+        if (!result) emptyPoints.add(p);
+        return result;
+    }
 
+    static void print() {
         for (int i = 0; i < 9; i++) {
             StringBuilder str = new StringBuilder(String.valueOf(sudoku[i][0]));
             for (int j = 1; j < 9; j++)
@@ -40,10 +67,12 @@ public class Main {
 
     static class Point {
         int x, y;
+        boolean check;
 
         public Point (int x, int y) {
             this.x = x;
             this.y = y;
+            check = false;
         }
     }
 }
