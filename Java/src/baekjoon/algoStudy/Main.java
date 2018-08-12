@@ -3,7 +3,6 @@ package baekjoon.algoStudy;
 import java.util.*;
 
 public class Main {
-
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -26,6 +25,7 @@ public class Main {
     }
 
     static boolean solve (int[][] sudoku, boolean[][][] check, LinkedList<Point> emptyPoints) {
+        // NOTE : 틀린 이유는 빈칸 리스트가 잘못됨. 아예 중간에 틀리면 뒤에 add가 되버려서... 이상해짐....순서가..
         if (emptyPoints.isEmpty()) {
             for (int i = 0; i < 9; i++) {
                 StringBuilder str = new StringBuilder(String.valueOf(sudoku[i][0]));
@@ -48,7 +48,7 @@ public class Main {
                 check[0][p.x][i] = check[1][p.y][i] = check[2][box][i] = false;
             }
         }
-        emptyPoints.add(p);
+        emptyPoints.addFirst(p);
         return false;
     }
 
