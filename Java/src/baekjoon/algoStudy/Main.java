@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Main {
     static int[][] sudoku = new int[9][9];
-    static boolean[][][] check = new boolean[9][9][9];
+    static boolean[][][] check = new boolean[3][9][9];
     static LinkedList<Point> emptyPoints = new LinkedList<>();
 
     public static void main(String[] args) {
@@ -14,12 +14,26 @@ public class Main {
             for (int j = 0; j < 9; j++) {
                 int su = sc.nextInt();
                 sudoku[i][j] = su;
-                if (su > 0)
-                    check[i][j][su - 1] = true;
-                else emptyPoints.add(new Point(i, j));
+                if (su > 0) {
+                    check(i, j, su - 1);
+                } else emptyPoints.add(new Point(i, j));
             }
         }
         solve();
+    }
+
+    static void check (int x, int y, int v) {
+        sudoku[x][y] = v + 1;
+        check[0][x][v] = true;
+        check[1][y][v] = true;
+        check[2][(x / 3) * 3 + (y / 3)][v] = true;
+    }
+
+    static void reset (int x, int y, int v) {
+        sudoku[x][y] = 0;
+        check[0][x][v] = false;
+        check[1][y][v] = false;
+        check[2][(x / 3) * 3 + (y / 3)][v] = false;
     }
 
     static boolean solve () {
@@ -28,13 +42,12 @@ public class Main {
             return true;
         }
         Point p = emptyPoints.remove();
+        int temp = (p.x / 3) * 3 + (p.y / 3);
         for (int i = 0; i < 9; i++) {
-            if (!check[p.x][p.y][i]) {
-                check[p.x][p.y][i] = true;
-                sudoku[p.x][p.y] = i + 1;
+            if (!check[0][p.x][i] && !check[1][p.y][i] && !check[2][temp][i]) {
+                check(p.x, p.y, i);
                 if (solve()) return true;
-                check[p.x][p.y][i] = false;
-                sudoku[p.x][p.y] = 0;
+                reset(p.x, p.y, i);
             }
         }
         emptyPoints.add(p);
@@ -52,12 +65,9 @@ public class Main {
 
     static class Point {
         int x, y;
-        boolean check;
-
         public Point (int x, int y) {
             this.x = x;
             this.y = y;
-            check = false;
         }
     }
 }
