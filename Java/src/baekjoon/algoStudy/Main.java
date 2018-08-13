@@ -9,10 +9,12 @@ public class Main {
         int m = sc.nextInt();
         int k = sc.nextInt();
 
-        if ((m == 1 && k != n) || (k == 1 && m != n) || m + k > n + 1)
+        if (m + k != n + 1)
             System.out.print(-1);
         else {
-            StringBuilder result = new StringBuilder();
+            int i = 1;
+            while (i < m)
+            
             int s = 1, e = n;
 
             // 오름차순
