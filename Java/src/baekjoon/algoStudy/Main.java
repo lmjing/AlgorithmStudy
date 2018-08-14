@@ -9,9 +9,42 @@ public class Main {
         int m = sc.nextInt();
         int k = sc.nextInt();
 
-        // TODO : 어떻게 푸는지 알았거든? 내일 상기 시키면서 시도해보기.
+        StringBuilder str = new StringBuilder();
         if (n < m * k && n + 1 >= m + k) {
+            str.append(flip(1, k));
 
-        }
+            int i = k + 1;
+            m--;
+            n -= k;
+            boolean flag = true;
+
+            while (m > 0 && n >= m) {
+                System.out.println(n + " " + m + " " + i);
+                int h = n / m;
+                m--;
+                if (h == 1) {
+                    if (flag) {
+                        str.append((i++) + " ");
+                        flag = false;
+                        n -= 1;
+                        continue;
+                    }
+                    h++;
+                }
+                str.append(flip(i, h));
+                i += h;
+                n -= h;
+                flag = true;
+            }
+
+            System.out.println(str);
+        } else System.out.println(-1);
+    }
+
+    static StringBuilder flip (int s, int count) {
+        StringBuilder str = new StringBuilder();
+        for (int i = s + count - 1; i >= s; i--)
+            str.append(i + " ");
+        return str;
     }
 }
