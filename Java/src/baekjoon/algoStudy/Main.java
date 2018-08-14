@@ -16,15 +16,19 @@ public class Main {
             int i = k + 1;
             m--;
             n -= k;
-            boolean flag = true;
+            boolean before = true;
 
-            while (m > 0 && n >= m) {
+            while (m > 0) {
+                if (n < m) {
+                    str = new StringBuilder("-1");
+                    break;
+                }
                 int h = n / m;
                 m--;
                 if (h == 1) {
-                    if (flag) {
+                    if (before) {
                         str.append((i++) + " ");
-                        flag = false;
+                        before = false;
                         n -= 1;
                         continue;
                     }
@@ -33,9 +37,8 @@ public class Main {
                 str.append(flip(i, h));
                 i += h;
                 n -= h;
-                flag = true;
+                before = true;
             }
-
             System.out.println(str);
         } else System.out.println(-1);
     }
