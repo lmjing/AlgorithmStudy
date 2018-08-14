@@ -10,7 +10,7 @@ public class Main {
         int k = sc.nextInt();
 
         StringBuilder str = new StringBuilder();
-        if (n < m * k && n + 1 >= m + k) {
+        if (n <= m * k && n + 1 >= m + k) {
             str.append(flip(1, k));
 
             int i = k + 1;
@@ -19,7 +19,6 @@ public class Main {
             boolean flag = true;
 
             while (m > 0 && n >= m) {
-                System.out.println(n + " " + m + " " + i);
                 int h = n / m;
                 m--;
                 if (h == 1) {
