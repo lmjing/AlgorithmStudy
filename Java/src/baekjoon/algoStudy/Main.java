@@ -16,28 +16,13 @@ public class Main {
             int i = k + 1;
             m--;
             n -= k;
-            boolean before = true;
 
             while (m > 0) {
-                if (n < m) {
-                    str = new StringBuilder("-1");
-                    break;
-                }
                 int h = n / m;
-                m--;
-                if (h == 1) {
-                    if (before) {
-                        str.append((i++) + " ");
-                        before = false;
-                        n -= 1;
-                        continue;
-                    }
-                    h++;
-                }
                 str.append(flip(i, h));
                 i += h;
                 n -= h;
-                before = true;
+                m--;
             }
             System.out.println(str);
         } else System.out.println(-1);
