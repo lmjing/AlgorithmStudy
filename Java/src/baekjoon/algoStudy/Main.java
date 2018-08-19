@@ -12,7 +12,8 @@ public class Main {
         int[][] temp = new int[2][n + 1];
         int[] count = new int[2];
 
-        temp[0][0] = 1;
+        temp[0][1] = 1;
+        count[0] = 1;
 
         for (int i = 1; i < n; i++) {
             for (int j = 0; j < 2; j++) {
@@ -21,6 +22,7 @@ public class Main {
                 if (temp[j][i + 1] == 1) count[j]++;
             }
         }
+
         for (int j = 0; j < 2; j++) {
             int sum = temp[j][n - 1] + temp[j][n];
             boolean same = before.charAt(n - 1) == after.charAt(n - 1);
