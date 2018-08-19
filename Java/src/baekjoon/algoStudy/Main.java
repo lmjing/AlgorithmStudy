@@ -29,7 +29,7 @@ public class Main {
             boolean odd = sum % 2 == 1;
             if (!(same ^ odd)) count[j] = n + 1;
         }
-        System.out.println(Math.min(count[0], count[1]));
+        System.out.println(count[0] + count[1] == 2 * (n + 1) ? -1 : Math.min(count[0], count[1]));
     }
 
     static int nextInt (int sum, char before, char after) {
