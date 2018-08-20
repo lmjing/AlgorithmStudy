@@ -22,8 +22,6 @@ public class Main {
 
     static int gcd (int a, int b) {
         // a < b 일 경우 a % b = a; 이므로 gcd(b, a);를 호출함
-        int r = a % b;
-        if (r == 0) return b;
-        return gcd(b, r);
+        return b == 0 ? a : gcd(b, a % b);
     }
 }
