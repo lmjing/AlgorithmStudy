@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5048580E1F71044B00D57AD5 /* AlgorithmTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5048580D1F71044B00D57AD5 /* AlgorithmTest.swift */; };
 		50501CDD1F98C49900A2BEAC /* Baekjoon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50501CDC1F98C49900A2BEAC /* Baekjoon.swift */; };
+		5078D87F212AC024007E4CE4 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5078D87E212AC024007E4CE4 /* Math.swift */; };
 		5084A6C61F68FC3400629A59 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5084A6C51F68FC3400629A59 /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,7 @@
 /* Begin PBXFileReference section */
 		5048580D1F71044B00D57AD5 /* AlgorithmTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlgorithmTest.swift; sourceTree = "<group>"; };
 		50501CDC1F98C49900A2BEAC /* Baekjoon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Baekjoon.swift; sourceTree = "<group>"; };
+		5078D87E212AC024007E4CE4 /* Math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
 		5084A6C21F68FC3400629A59 /* AlgorithmExercise */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = AlgorithmExercise; sourceTree = BUILT_PRODUCTS_DIR; };
 		5084A6C51F68FC3400629A59 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -42,12 +44,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		50501CDB1F98C47E00A2BEAC /* Exercise */ = {
+		50501CDB1F98C47E00A2BEAC /* Baekjoon */ = {
 			isa = PBXGroup;
 			children = (
 				50501CDC1F98C49900A2BEAC /* Baekjoon.swift */,
+				5078D87E212AC024007E4CE4 /* Math.swift */,
 			);
-			name = Exercise;
+			name = Baekjoon;
 			sourceTree = "<group>";
 		};
 		5084A6B91F68FC3400629A59 = {
@@ -71,7 +74,7 @@
 			children = (
 				5084A6C51F68FC3400629A59 /* main.swift */,
 				5048580D1F71044B00D57AD5 /* AlgorithmTest.swift */,
-				50501CDB1F98C47E00A2BEAC /* Exercise */,
+				50501CDB1F98C47E00A2BEAC /* Baekjoon */,
 			);
 			path = AlgorithmExercise;
 			sourceTree = "<group>";
@@ -137,6 +140,7 @@
 				5048580E1F71044B00D57AD5 /* AlgorithmTest.swift in Sources */,
 				50501CDD1F98C49900A2BEAC /* Baekjoon.swift in Sources */,
 				5084A6C61F68FC3400629A59 /* main.swift in Sources */,
+				5078D87F212AC024007E4CE4 /* Math.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
