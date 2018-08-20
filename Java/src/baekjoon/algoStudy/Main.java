@@ -8,12 +8,13 @@ public class Main {
         int n = sc.nextInt();
         int b = sc.nextInt();
 
-        while (n > 1) {
+        String str = new String();
+        while (n > 0) {
             int r = n % b;
-            if (r < 10) System.out.print(r);
-            else System.out.print((char) (r + 55));
+            str = (char)(r + (r < 10 ? 48 : 55)) + str;
             n -= r;
             n /= b;
         }
+        System.out.print(str);
     }
 }
