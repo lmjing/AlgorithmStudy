@@ -12,7 +12,7 @@ import java.util.regex.Matcher;
  */
 class num1929
 {
-    public static void main (String[] args)
+    public static void solution1 (String[] args)
     {
         Scanner sc = new Scanner(System.in);
         int m = sc.nextInt();
@@ -48,5 +48,28 @@ class num1929
             }
         }
         return prime;
+    }
+
+    public static void solution2 (String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int m = sc.nextInt();
+        int n = sc.nextInt();
+        int[] check = new int[n + 1];
+
+        int i = 1;
+        while (++i * i <= n) {
+            if (check[i] == 0) {
+                if (i >= m)
+                    System.out.println(i);
+                for (int j = i * i; j <= n; j += i) {
+                    check[j] = -1;
+                }
+            }
+        }
+        while (i <= n) {
+            if (check[i] == 0 && i >= m)
+                System.out.println(i);
+            i++;
+        }
     }
 }
