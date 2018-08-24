@@ -8,16 +8,13 @@ public class Main {
         int n = sc.nextInt();
         ArrayList<Integer> primes = getprime(n);
 
-        long diff = 1;
-
         Iterator<Integer> iterator = primes.iterator();
         int p = iterator.hasNext() ? iterator.next() : 0;
 
         while (n > 1) {
-            while (n % p == 0) {
+            while (n > 1 && n % p == 0) {
                 System.out.println(p);
                 n /= p;
-                diff *= p;
             }
 
             if (iterator.hasNext()) p = iterator.next();
@@ -26,23 +23,25 @@ public class Main {
                 break;
             }
         }
-        System.out.println(diff * n);
     }
 
     static ArrayList<Integer> getprime(int n){
-        int max = (int) Math.sqrt(n);
         ArrayList<Integer> prime = new ArrayList<Integer>();
-        for(int i=2;i<=max;i++){
-            boolean flag = true;
-            for(int a=0;a<prime.size();a++){
-                if(i%prime.get(a)==0){
-                    flag = false;
-                    break;
+        int[] check = new int[n + 1];
+
+        int i = 1;
+        while (++i * i <= n) {
+            if (check[i] == 0) {
+                prime.add(i);
+                for (int j = i * i; j <= n; j += i) {
+                    check[j] = -1;
                 }
             }
-            if(flag == true){
+        }
+        while (i <= n) {
+            if (check[i] == 0)
                 prime.add(i);
-            }
+            i++;
         }
         return prime;
     }
