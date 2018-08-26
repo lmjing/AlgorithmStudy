@@ -13,7 +13,7 @@ public class Main {
         for (int i = 1; i <= n; i++)
             list.add(i);
 
-        list.printAll();
+        System.out.println(list.answer(m));
     }
 
     static class CircleLinkedList {
@@ -39,17 +39,20 @@ public class Main {
             size++;
         }
 
-        public void printAll () {
+        public StringBuilder answer (int m) {
             Node cur = front;
-            while (cur.next != front) {
-                System.out.println(cur.vaule + " ");
+            StringBuilder str = new StringBuilder("<");
+            while (size > 0) {
+                cur = removeAt(cur, m);
+                str.append(cur.vaule + ", ");
                 cur = cur.next;
             }
-            System.out.println(cur.vaule);
+            str.delete(str.length() - 2, str.length());
+           return str.append(">");
         }
 
-        public int removeAt (Node node, int i) {
-            if (size == 0) return -1;
+        public Node removeAt (Node node, int i) {
+            if (size == 0) return null;
 
             Node before = node;
             while (--i > 0) {
@@ -59,12 +62,10 @@ public class Main {
             return remove(before, node);
         }
 
-        public int remove (Node before, Node node) {
+        public Node remove (Node before, Node node) {
+            if (size > 1) before.next = node.next;
             size--;
-            int v = node.vaule;
-            if (size > 0) before.next = node.next;
-            node = null;
-            return v;
+            return node;
         }
 
         class Node {
@@ -77,6 +78,4 @@ public class Main {
             }
         }
     }
-
-
 }
