@@ -35,12 +35,12 @@ public class UseArray {
         private int pointCount(int x, int y) {
             int same = 0;
             for (int dir = 0; dir < 2; dir++) {
-                ArrayList<Long> left = getRevenue(x + dx[dir], y + dy[dir], dir);
+                ArrayList<Integer> left = getRevenue(x + dx[dir], y + dy[dir], dir);
                 int rd = 3 - dir;
-                ArrayList<Long> right = getRevenue(x + dx[rd], y + dy[rd], rd);
+                ArrayList<Integer> right = getRevenue(x + dx[rd], y + dy[rd], rd);
 
-                for (long l : left) {
-                    for (long r : right) {
+                for (int l : left) {
+                    for (int r : right) {
                         if (l == r) same++;
                     }
                 }
@@ -49,9 +49,9 @@ public class UseArray {
             return same;
         }
 
-        private ArrayList<Long> getRevenue(int x, int y, int dir) {
-            long[][] revMap = new long[n + 1][n + 1];
-            ArrayList<Long> revenue = new ArrayList<>();
+        private ArrayList<Integer> getRevenue(int x, int y, int dir) {
+            int[][] revMap = new int[n + 1][n + 1];
+            ArrayList<Integer> revenue = new ArrayList<>();
             for (int i = x; fx[dir] > 0 ? i <= n : i > 0; i += fx[dir]) {
                 int horSum = 0;
                 for (int j = y; fy[dir] > 0 ? j <= n : j > 0; j += fy[dir]) {
