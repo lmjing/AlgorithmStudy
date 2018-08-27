@@ -20,18 +20,20 @@ public class Main {
             }
         }
 
-        long allCount = 0;
+        int allCount = 0;
         // 교차점 순회
         for (int i = 2; i <= n; i++) {
             for (int j = 1; j < n; j++) {
+                System.out.println("point : " + i + ", " + j);
                 allCount += pointCount(i, j);
+                System.out.println("---------------");
             }
         }
         System.out.println(allCount);
     }
 
-    private static long pointCount(int x, int y) {
-        long same = 0;
+    private static int pointCount(int x, int y) {
+        int same = 0;
         for (int dir = 0; dir < 2; dir++) {
             ArrayList<Long> left = getRevenue(x + dx[dir], y + dy[dir], dir);
             int rd = 3 - dir;
@@ -42,6 +44,7 @@ public class Main {
                     if (l == r) same++;
                 }
             }
+            System.out.println("same : " + same);
         }
 
         return same;
@@ -49,13 +52,17 @@ public class Main {
 
     private static ArrayList<Long> getRevenue(int x, int y, int dir) {
         long[][] revMap = new long[n + 1][n + 1];
+        System.out.println("dir : " + dir);
         ArrayList<Long> revenue = new ArrayList<>();
         for (int i = x; fx[dir] > 0 ? i <= n : i > 0; i += fx[dir]) {
-            long horSum = 0;
+            int horSum = 0;
             for (int j = y; fy[dir] > 0 ? j <= n : j > 0; j += fy[dir]) {
                 horSum += map[i][j];
-                revMap[i][j] = horSum;
-                revenue.add(revMap[i - fx[dir]][j] + horSum);
+                revMap[i][j] = revMap[i - fx[dir]][j] + horSum;
+                revenue.add(revMap[i][j]);
+//                revenue.add(revMap[i - fx[dir]][j] + horSum);
+//                System.out.println("horSum : " + horSum + ", revMap : " + revMap[i - fx[dir]][j]);
+                System.out.println(revMap[i - fx[dir]][j] + horSum);
             }
         }
         return revenue;
