@@ -24,9 +24,7 @@ public class Main {
         // 교차점 순회
         for (int i = 2; i <= n; i++) {
             for (int j = 1; j < n; j++) {
-                System.out.println("point : " + i + ", " + j);
                 allCount += pointCount(i, j);
-                System.out.println("---------------");
             }
         }
         System.out.println(allCount);
@@ -44,7 +42,6 @@ public class Main {
                     if (l == r) same++;
                 }
             }
-            System.out.println("same : " + same);
         }
 
         return same;
@@ -52,7 +49,6 @@ public class Main {
 
     private static ArrayList<Long> getRevenue(int x, int y, int dir) {
         long[][] revMap = new long[n + 1][n + 1];
-        System.out.println("dir : " + dir);
         ArrayList<Long> revenue = new ArrayList<>();
         for (int i = x; fx[dir] > 0 ? i <= n : i > 0; i += fx[dir]) {
             int horSum = 0;
@@ -60,9 +56,6 @@ public class Main {
                 horSum += map[i][j];
                 revMap[i][j] = revMap[i - fx[dir]][j] + horSum;
                 revenue.add(revMap[i][j]);
-//                revenue.add(revMap[i - fx[dir]][j] + horSum);
-//                System.out.println("horSum : " + horSum + ", revMap : " + revMap[i - fx[dir]][j]);
-                System.out.println(revMap[i - fx[dir]][j] + horSum);
             }
         }
         return revenue;
