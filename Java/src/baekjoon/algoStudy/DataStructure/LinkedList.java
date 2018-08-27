@@ -17,7 +17,7 @@ public class LinkedList {
             System.out.println(list.answer(m));
         }
 
-        static class CircleLinkedList {
+        class CircleLinkedList {
             Node front;
             Node rear;
             int size;
