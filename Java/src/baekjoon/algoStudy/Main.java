@@ -5,43 +5,114 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int n = 1000000;
-        int[] prime = new int[1000001];
+        int n = sc.nextInt();
+        int m = sc.nextInt();
 
-        // 소수 체크
-        int i = 1;
-        int lastPrime = -1;
-        boolean end = false;
-        while (++i <= n) {
-            if (prime[i] == 0) {
-                lastPrime = i;
-                if (end || i * i > n) {
-                    end = true;
-                    continue;
-                }
-                for (int j = i * i; j <= n; j += i) {
-                    prime[j] = lastPrime;
-                }
-            } else
-                prime[i] = lastPrime;
+        DoubleLinkedList list = new DoubleLinkedList();
+
+        // 이중 연결리스트 초기화
+        for (int i = 1; i <= n; i++)
+            list.addLast(i);
+
+        list.printAll();
+
+        // 입력 연산 수행
+        for (int i = 0; i < m; i++) {
+            list.move(sc.next(), sc.nextInt(), sc.nextInt());
         }
-        prime[2] = prime[1] = -1;
 
-        int input = sc.nextInt();
-        while (input != 0) {
-            int b = prime[input];
-            int a = input - b;
-            while (b > 0 && prime[a] != 0) {
-                b = prime[b - 1];
-                a = input - b;
+        list.printAll();
+    }
+
+    public static class DoubleLinkedList {
+        Node front;
+        Node rear;
+        int size;
+
+        public DoubleLinkedList () {
+            front = null;
+            rear = null;
+        }
+
+        public void addLast (int v) {
+            Node newNode = new Node(v, rear);
+            if (size == 0) {
+                rear = newNode;
+                front = newNode;
+            } else {
+                rear.next = newNode;
+                rear = newNode;
             }
-            if (b > 0)
-                System.out.println(input + " = " + a + " + " + b);
-            else
-                System.out.println("Goldbach's conjecture is wrong.");
-
-            input = sc.nextInt();
+            size++;
         }
 
+        private Node remove (int i) {
+            Node cur = get(i);
+            if (cur == front) {
+                front = cur.next;
+                front.before = null;
+            } else cur.before.next = cur.next;
+
+            if (cur == rear) {
+                rear = cur.before;
+                rear.next = null;
+            } else cur.next.before = cur.before;
+
+            cur.before = null;
+            cur.next = null;
+
+            return cur;
+        }
+
+        private Node get (int i) {
+            Node cur = front;
+            while (cur.vaule != i)
+                cur = cur.next;
+            return cur;
+        }
+
+        public void move (String flag, int i, int j) {
+            Node node = remove(i);
+            Node target = get(j);
+            if (flag.equals("A")) {
+                node.before = target.before;
+                node.next = target;
+                target.before.next = node;
+                target.before = node;
+            }else {
+                node.before = target;
+                node.next = target.next;
+                target.next.before = node;
+                target.next = node;
+            }
+        }
+
+        public void printAll () {
+            Node cur = front;
+            while (cur != null) {
+                System.out.println(cur.vaule);
+                cur = cur.next;
+            }
+        }
+
+        public void printAllBack () {
+            Node cur = rear;
+            while (cur != null) {
+                System.out.println(cur.vaule);
+                cur = cur.before;
+            }
+        }
+
+        class Node {
+            int vaule;
+            Node before;
+            public Node next;
+
+            public Node (int v, Node b) {
+                vaule = v;
+                before = b;
+                next = null;
+            }
+        }
     }
 }
