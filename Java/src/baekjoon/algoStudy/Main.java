@@ -10,10 +10,18 @@ public class Main {
 
         DoubleLinkedList list = new DoubleLinkedList();
 
+        // 이중 연결리스트 초기화
         for (int i = 1; i <= n; i++)
             list.addLast(i);
 
-        list.printAllBack();
+        list.printAll();
+
+        // 입력 연산 수행
+        for (int i = 0; i < m; i++) {
+            list.move(sc.next(), sc.nextInt(), sc.nextInt());
+        }
+
+        list.printAll();
     }
 
     public static class DoubleLinkedList {
@@ -36,6 +44,47 @@ public class Main {
                 rear = newNode;
             }
             size++;
+        }
+
+        private Node remove (int i) {
+            Node cur = get(i);
+            if (cur == front) {
+                front = cur.next;
+                front.before = null;
+            } else cur.before.next = cur.next;
+
+            if (cur == rear) {
+                rear = cur.before;
+                rear.next = null;
+            } else cur.next.before = cur.before;
+
+            cur.before = null;
+            cur.next = null;
+
+            return cur;
+        }
+
+        private Node get (int i) {
+            Node cur = front;
+            while (cur.vaule != i)
+                cur = cur.next;
+            return cur;
+        }
+
+        public void move (String flag, int i, int j) {
+            Node node = remove(i);
+            Node target = get(j);
+            if (flag.equals("A")) {
+                node.before = target.before;
+                node.next = target;
+                target.before.next = node;
+                target.before = node;
+            }else {
+                node.before = target;
+                node.next = target.next;
+                target.next.before = node;
+                target.next = node;
+            }
         }
 
         public void printAll () {
