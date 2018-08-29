@@ -97,27 +97,25 @@ public class Main {
 
         // 최대로 증가하는 수열 먼저 찾고
         // 그 처음과 끝부터 한칸씩 이동하며 비교 후, 삽입하는 방식.
-        public void solve () {
+        public void findLongArray () {
             Node cur = front;
-            DoubleLinkedList temp = new DoubleLinkedList();
-            temp.size++;
-            temp.rear = temp.front = front;
-
-            DoubleLinkedList maxList = temp;
+            int max = 1;
+            Node maxNode = cur;
+            int cnt = 1;
             while (cur != null) {
                 if (cur.next != null && cur.vaule < cur.next.vaule) {
-                    temp.size++;
+                    cnt++;
                 } else {
-                    if (maxList.size < temp.size) {
-                        temp.rear = cur;
-                        maxList = temp;
-                        temp.front = cur.next;
+                    System.out.println("* :" + cur.vaule);
+                    if (max < cnt) {
+                        max = cnt;
+                        maxNode = cur;
                     }
+                    cnt = 1;
                 }
-                System.out.println(cur.vaule);
-                cur = cur.before;
+                cur = cur.next;
             }
-            System.out.println(maxList.size + " : " + maxList.front.vaule + " ~ " + maxList.rear.vaule);
+            System.out.println(maxNode.vaule + " " + max);
         }
 
         public void printAll () {
