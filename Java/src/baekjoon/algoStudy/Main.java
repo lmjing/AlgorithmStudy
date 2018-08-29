@@ -11,17 +11,25 @@ public class Main {
         DoubleLinkedList list = new DoubleLinkedList();
 
         // 이중 연결리스트 초기화
-        for (int i = 1; i <= n; i++)
-            list.addLast(i);
+//        for (int i = 1; i <= n; i++)
+//            list.addLast(i);
+//
+//        list.printAll();
+//
+//        // 입력 연산 수행
+//        for (int i = 0; i < m; i++) {
+//            list.move(sc.next(), sc.nextInt(), sc.nextInt());
+//        }
 
+        list.addLast(4);
+        list.addLast(5);
+        list.addLast(1);
+        list.addLast(2);
+        list.addLast(3);
         list.printAll();
 
-        // 입력 연산 수행
-        for (int i = 0; i < m; i++) {
-            list.move(sc.next(), sc.nextInt(), sc.nextInt());
-        }
-
-        list.printAll();
+        list.solve();
+//        list.printAll();
     }
 
     public static class DoubleLinkedList {
@@ -85,6 +93,31 @@ public class Main {
                 target.next.before = node;
                 target.next = node;
             }
+        }
+
+        // 최대로 증가하는 수열 먼저 찾고
+        // 그 처음과 끝부터 한칸씩 이동하며 비교 후, 삽입하는 방식.
+        public void solve () {
+            Node cur = front;
+            DoubleLinkedList temp = new DoubleLinkedList();
+            temp.size++;
+            temp.rear = temp.front = front;
+
+            DoubleLinkedList maxList = temp;
+            while (cur != null) {
+                if (cur.next != null && cur.vaule < cur.next.vaule) {
+                    temp.size++;
+                } else {
+                    if (maxList.size < temp.size) {
+                        temp.rear = cur;
+                        maxList = temp;
+                        temp.front = cur.next;
+                    }
+                }
+                System.out.println(cur.vaule);
+                cur = cur.before;
+            }
+            System.out.println(maxList.size + " : " + maxList.front.vaule + " ~ " + maxList.rear.vaule);
         }
 
         public void printAll () {
