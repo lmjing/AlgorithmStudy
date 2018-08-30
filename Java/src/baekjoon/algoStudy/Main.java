@@ -11,25 +11,16 @@ public class Main {
         DoubleLinkedList list = new DoubleLinkedList();
 
         // 이중 연결리스트 초기화
-//        for (int i = 1; i <= n; i++)
-//            list.addLast(i);
-//
-//        list.printAll();
-//
-//        // 입력 연산 수행
-//        for (int i = 0; i < m; i++) {
-//            list.move(sc.next(), sc.nextInt(), sc.nextInt());
-//        }
+        for (int i = 1; i <= n; i++)
+            list.addLast(i);
 
-        list.addLast(4);
-        list.addLast(5);
-        list.addLast(1);
-        list.addLast(2);
-        list.addLast(3);
+        // 입력 연산 수행
+        for (int i = 0; i < m; i++) {
+            list.move(sc.next(), sc.nextInt(), sc.nextInt());
+        }
         list.printAll();
 
         list.solve();
-//        list.printAll();
     }
 
     public static class DoubleLinkedList {
@@ -83,24 +74,28 @@ public class Main {
             Node node = remove(i);
             Node target = get(j);
             if (flag.equals("A")) {
-                node.before = target.before;
-                node.next = target;
-                target.before.next = node;
+                if (target != front) {
+                    target.before.next = node;
+                    node.before = target.before;
+                }
                 target.before = node;
+                node.next = target;
             }else {
-                node.before = target;
-                node.next = target.next;
-                target.next.before = node;
+                if (target != rear) {
+                    target.next.before = node;
+                    node.next = target.next;
+                }
                 target.next = node;
+                node.before = target;
+
             }
         }
 
         public void solve () {
-            Node f = findLongArray();
-            Node b = f.next;
+            Node b = findLongArray();
+            Node f = b.before;
 
             // 앞으로 검사
-            f = f.before;
             while (f != null) {
                 if (f.vaule > f.next.vaule) {
                     Node temp = b;
@@ -116,6 +111,7 @@ public class Main {
             }
 
             // 뒤로 검사
+            b = b.next;
             while (b != null) {
                 if (b.before.vaule > b.vaule) {
                     Node temp = f;
