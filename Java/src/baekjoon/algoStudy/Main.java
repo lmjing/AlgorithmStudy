@@ -18,6 +18,7 @@ public class Main {
         for (int i = 0; i < m; i++) {
             list.move(sc.next(), sc.nextInt(), sc.nextInt());
         }
+        list.printAll();
 
         System.out.print(list.solve());
     }
@@ -44,8 +45,7 @@ public class Main {
             size++;
         }
 
-        private Node remove (int i) {
-            Node cur = get(i);
+        private void remove (Node cur) {
             if (cur == front) {
                 front = cur.next;
                 front.before = null;
@@ -58,8 +58,6 @@ public class Main {
 
             cur.before = null;
             cur.next = null;
-
-            return cur;
         }
 
         private Node get (int i) {
@@ -70,20 +68,23 @@ public class Main {
         }
 
         public void move (String flag, int i, int j) {
-            Node node = remove(i);
-            Node target = get(j);
+            move(flag, get(i), get(j));
+        }
+
+        public void move (String flag, Node node, Node target) {
+            remove(node);
             if (flag.equals("A")) {
                 if (target != front) {
                     target.before.next = node;
                     node.before = target.before;
-                }
+                } else front = node;
                 target.before = node;
                 node.next = target;
             }else {
                 if (target != rear) {
                     target.next.before = node;
                     node.next = target.next;
-                }
+                } else rear = node;
                 target.next = node;
                 node.before = target;
 
@@ -95,40 +96,42 @@ public class Main {
             int count = 0;
 
             Node b = findLongArray();
-            Node f = b;
+            Node f = b.before;
 
             // 앞으로 검사
-            while (f.before != null) {
+            while (f != null) {
+                Node r = f;
                 f = f.before;
-                if (f.vaule > f.next.vaule) {
-                    Node temp = b;
-                    while (temp.vaule > f.vaule)
-                        temp = temp.before;
+                if (r.vaule > r.next.vaule) {
+                    Node temp = r.next;
+                    while (temp != b && temp.next.vaule < r.vaule)
+                        temp = temp.next;
 
-                    int x = f.vaule;
-                    f = f.before;
                     count++;
-                    answer.append("\nB " + x + " " + temp.vaule);
-                    move("B", x, temp.vaule);
+                    answer.append("\nB " + r.vaule + " " + temp.vaule);
+                    move("B", r, temp);
                 }
             }
+
+            System.out.println("b : " + b.vaule);
+            printAll();
 
             // 뒤로 검사
             b = b.next;
             while (b != null) {
-                if (b.before.vaule > b.vaule) {
-                    Node temp = f;
-                    while (temp.vaule < b.vaule)
-                        temp = temp.next;
+                Node r = b;
+                b = b.next;
+                if (r.before.vaule > r.vaule) {
+                    Node temp = r.before;
+                    while (temp != front && temp.before.vaule > r.vaule)
+                        temp = temp.before;
 
-                    int x = b.vaule;
-                    b = b.next;
                     count++;
-                    answer.append("\nA " + x + " " + temp.vaule);
-                    move("A", x, temp.vaule);
-                } else
-                    b = b.next;
+                    answer.append("\nA " + r.vaule + " " + temp.vaule);
+                    move("A", r, temp);
+                }
             }
+
             System.out.print(count);
             return answer;
         }
@@ -158,9 +161,10 @@ public class Main {
         public void printAll () {
             Node cur = front;
             while (cur != null) {
-                System.out.println(cur.vaule);
+                System.out.print(cur.vaule + " ");
                 cur = cur.next;
             }
+            System.out.println();
         }
 
         class Node {
