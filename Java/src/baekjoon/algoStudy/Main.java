@@ -18,7 +18,6 @@ public class Main {
         for (int i = 0; i < m; i++) {
             list.move(sc.next(), sc.nextInt(), sc.nextInt());
         }
-        list.printAll();
 
         System.out.print(list.solve());
     }
@@ -113,9 +112,6 @@ public class Main {
                 }
             }
 
-            System.out.println("b : " + b.vaule);
-            printAll();
-
             // 뒤로 검사
             b = b.next;
             while (b != null) {
@@ -156,15 +152,6 @@ public class Main {
                 cur = cur.next;
             }
             return maxNode;
-        }
-
-        public void printAll () {
-            Node cur = front;
-            while (cur != null) {
-                System.out.print(cur.vaule + " ");
-                cur = cur.next;
-            }
-            System.out.println();
         }
 
         class Node {
