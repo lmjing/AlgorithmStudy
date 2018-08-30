@@ -93,10 +93,11 @@ public class Main {
 
         public void solve () {
             Node b = findLongArray();
-            Node f = b.before;
+            Node f = b;
 
             // 앞으로 검사
-            while (f != null) {
+            while (f.before != null) {
+                f = f.before;
                 if (f.vaule > f.next.vaule) {
                     Node temp = b;
                     while (temp.vaule > f.vaule)
@@ -106,8 +107,7 @@ public class Main {
                     f = f.before;
                     System.out.println("B " + x + " " + temp.vaule);
                     move("B", x, temp.vaule);
-                } else
-                    f = f.before;
+                }
             }
 
             // 뒤로 검사
