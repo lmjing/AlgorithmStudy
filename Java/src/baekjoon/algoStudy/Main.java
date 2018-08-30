@@ -95,9 +95,45 @@ public class Main {
             }
         }
 
+        public void solve () {
+            Node f = findLongArray();
+            Node b = f.next;
+
+            // 앞으로 검사
+            f = f.before;
+            while (f != null) {
+                if (f.vaule > f.next.vaule) {
+                    Node temp = b;
+                    while (temp.vaule > f.vaule)
+                        temp = temp.before;
+
+                    int x = f.vaule;
+                    f = f.before;
+                    System.out.println("B " + x + " " + temp.vaule);
+                    move("B", x, temp.vaule);
+                } else
+                    f = f.before;
+            }
+
+            // 뒤로 검사
+            while (b != null) {
+                if (b.before.vaule > b.vaule) {
+                    Node temp = f;
+                    while (temp.vaule < b.vaule)
+                        temp = temp.next;
+
+                    int x = b.vaule;
+                    b = b.next;
+                    System.out.println("A " + x + " " + temp.vaule);
+                    move("A", x, temp.vaule);
+                } else
+                    b = b.next;
+            }
+        }
+
         // 최대로 증가하는 수열 먼저 찾고
         // 그 처음과 끝부터 한칸씩 이동하며 비교 후, 삽입하는 방식.
-        public void findLongArray () {
+        public Node findLongArray () {
             Node cur = front;
             int max = 1;
             Node maxNode = cur;
@@ -106,7 +142,6 @@ public class Main {
                 if (cur.next != null && cur.vaule < cur.next.vaule) {
                     cnt++;
                 } else {
-                    System.out.println("* :" + cur.vaule);
                     if (max < cnt) {
                         max = cnt;
                         maxNode = cur;
@@ -115,7 +150,7 @@ public class Main {
                 }
                 cur = cur.next;
             }
-            System.out.println(maxNode.vaule + " " + max);
+            return maxNode;
         }
 
         public void printAll () {
