@@ -18,9 +18,8 @@ public class Main {
         for (int i = 0; i < m; i++) {
             list.move(sc.next(), sc.nextInt(), sc.nextInt());
         }
-        list.printAll();
 
-        list.solve();
+        System.out.print(list.solve());
     }
 
     public static class DoubleLinkedList {
@@ -91,7 +90,10 @@ public class Main {
             }
         }
 
-        public void solve () {
+        public StringBuilder solve () {
+            StringBuilder answer = new StringBuilder();
+            int count = 0;
+
             Node b = findLongArray();
             Node f = b;
 
@@ -105,7 +107,8 @@ public class Main {
 
                     int x = f.vaule;
                     f = f.before;
-                    System.out.println("B " + x + " " + temp.vaule);
+                    count++;
+                    answer.append("\nB " + x + " " + temp.vaule);
                     move("B", x, temp.vaule);
                 }
             }
@@ -120,11 +123,14 @@ public class Main {
 
                     int x = b.vaule;
                     b = b.next;
-                    System.out.println("A " + x + " " + temp.vaule);
+                    count++;
+                    answer.append("\nA " + x + " " + temp.vaule);
                     move("A", x, temp.vaule);
                 } else
                     b = b.next;
             }
+            System.out.print(count);
+            return answer;
         }
 
         // 최대로 증가하는 수열 먼저 찾고
@@ -154,14 +160,6 @@ public class Main {
             while (cur != null) {
                 System.out.println(cur.vaule);
                 cur = cur.next;
-            }
-        }
-
-        public void printAllBack () {
-            Node cur = rear;
-            while (cur != null) {
-                System.out.println(cur.vaule);
-                cur = cur.before;
             }
         }
 
