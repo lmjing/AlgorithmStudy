@@ -8,11 +8,7 @@ public class Main {
         int n = sc.nextInt();
         int m = sc.nextInt();
 
-        DoubleLinkedList list = new DoubleLinkedList();
-
-        // 이중 연결리스트 초기화
-        for (int i = 1; i <= n; i++)
-            list.addLast(i);
+        DoubleLinkedList list = new DoubleLinkedList(n);
 
         // 입력 연산 수행
         for (int i = 0; i < m; i++) {
@@ -25,23 +21,39 @@ public class Main {
     public static class DoubleLinkedList {
         Node front;
         Node rear;
-        int size;
+        Node[] list;
 
-        public DoubleLinkedList () {
-            front = null;
-            rear = null;
+        class Node {
+            int vaule;
+            Node before;
+            public Node next;
+
+            public Node(int v, int b) {
+                vaule = v;
+                before = list[b];
+            }
         }
 
-        public void addLast (int v) {
-            Node newNode = new Node(v, rear);
-            if (size == 0) {
-                rear = newNode;
-                front = newNode;
-            } else {
-                rear.next = newNode;
-                rear = newNode;
+        public DoubleLinkedList (int n) {
+            list = new Node[n + 1];
+            for (int i = 1; i <= n; i++) {
+                list[i] = new Node(i, i - 1);
+                if (list[i].before != null) list[i].before.next = list[i];
             }
-            size++;
+            front = list[1];
+            rear = list[n];
+        }
+        public DoubleLinkedList (Node f, Node r) {
+            front = f;
+            rear = r;
+        }
+
+        public void printAll () {
+            Node cur = front;
+            while (cur != null) {
+                System.out.println(cur.vaule);
+                cur = cur.next;
+            }
         }
 
         private void remove (Node cur) {
@@ -59,18 +71,9 @@ public class Main {
             cur.next = null;
         }
 
-        private Node get (int i) {
-            Node cur = front;
-            while (cur.vaule != i)
-                cur = cur.next;
-            return cur;
-        }
-
         public void move (String flag, int i, int j) {
-            move(flag, get(i), get(j));
-        }
-
-        public void move (String flag, Node node, Node target) {
+            Node node = list[i];
+            Node target = list[j];
             remove(node);
             if (flag.equals("A")) {
                 if (target != front) {
@@ -86,90 +89,24 @@ public class Main {
                 } else rear = node;
                 target.next = node;
                 node.before = target;
-
             }
         }
 
-//        public StringBuilder solve () {
-//            StringBuilder answer = new StringBuilder();
-//            int count = 0;
-//
-//            Node b = findLongArray();
-//            Node f = b.before;
-//
-//            // 앞으로 검사
-//            while (f != null) {
-//                Node r = f;
-//                f = f.before;
-//                if (r.vaule > r.next.vaule) {
-//                    Node temp = r.next;
-//                    while (temp != b && temp.next.vaule < r.vaule)
-//                        temp = temp.next;
-//
-//                    count++;
-//                    answer.append("\nB " + r.vaule + " " + temp.vaule);
-//                    move("B", r, temp);
-//                }
-//            }
-//
-//            // 뒤로 검사
-//            b = b.next;
-//            while (b != null) {
-//                Node r = b;
-//                b = b.next;
-//                if (r.before.vaule > r.vaule) {
-//                    Node temp = r.before;
-//                    while (temp != front && temp.before.vaule > r.vaule)
-//                        temp = temp.before;
-//
-//                    count++;
-//                    answer.append("\nA " + r.vaule + " " + temp.vaule);
-//                    move("A", r, temp);
-//                }
-//            }
-//
-//            System.out.print(count);
-//            return answer;
-//        }
-
-        // 최대로 증가하는 수열 먼저 찾고
-        // 그 처음과 끝부터 한칸씩 이동하며 비교 후, 삽입하는 방식.
-//        public Node findLongArray () {
-//            Node cur = front;
-//            int max = 1;
-//            Node maxNode = cur;
-//            int cnt = 1;
-//            while (cur != null) {
-//                if (cur.next != null && cur.vaule < cur.next.vaule) {
-//                    cnt++;
-//                } else {
-//                    if (max < cnt) {
-//                        max = cnt;
-//                        maxNode = cur;
-//                    }
-//                    cnt = 1;
-//                }
-//                cur = cur.next;
-//            }
-//            return maxNode;
-//        }
-
         public void solve () {
-            StringBuilder answer = new StringBuilder();
-
-            DoubleLinkedList max = new DoubleLinkedList();
+            DoubleLinkedList maxNode = new DoubleLinkedList(list[1], list[1]);
 
             Node cur = front;
             Node curF = front;
             int cnt = 1;
+            int max = 1;
             while (cur.next != null) {
                 if (cur.vaule < cur.next.vaule) {
                     cnt++;
                 } else {
-                    if (cnt > max.size) {
-                        max.size = cnt;
-                        max.rear = cur;
-                        max.front = curF;
+                    if (cnt > max) {
+                        max = cnt;
+                        maxNode.front = curF;
+                        maxNode.rear = cur;
                     }
                     cnt = 1;
                     curF = cur.next;
@@ -177,7 +114,7 @@ public class Main {
                 cur = cur.next;
             }
 
-            System.out.print(solve2(max.front, max.rear));
+            System.out.print(solve2(maxNode.front, maxNode.rear));
         }
 
         public StringBuilder solve2 (Node f, Node b) {
@@ -196,7 +133,7 @@ public class Main {
 
                     count++;
                     answer.append("\nB " + r.vaule + " " + temp.vaule);
-                    move("B", r, temp);
+                    move("B", r.vaule, temp.vaule);
                 }
             }
 
@@ -212,24 +149,12 @@ public class Main {
 
                     count++;
                     answer.append("\nA " + r.vaule + " " + temp.vaule);
-                    move("A", r, temp);
+                    move("A", r.vaule, temp.vaule);
                 }
             }
 
             System.out.print(count);
             return answer;
-        }
-
-        class Node {
-            int vaule;
-            Node before;
-            public Node next;
-
-            public Node (int v, Node b) {
-                vaule = v;
-                before = b;
-                next = null;
-            }
         }
     }
 }
