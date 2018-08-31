@@ -14,7 +14,6 @@ public class Main {
         for (int i = 0; i < m; i++) {
             list.move(sc.next(), sc.nextInt(), sc.nextInt());
         }
-
         list.solve();
     }
 
@@ -32,6 +31,16 @@ public class Main {
                 vaule = v;
                 before = list[b];
             }
+        }
+
+        public DoubleLinkedList (int n) {
+            list = new Node[n + 1];
+            for (int i = 1; i <= n; i++) {
+                list[i] = new Node(i, i - 1);
+                if (list[i].before != null) list[i].before.next = list[i];
+            }
+            front = list[1];
+            rear = list[n];
         }
 
         public void solve () {
@@ -63,34 +72,23 @@ public class Main {
             }
             // 최대값 기준으로 거꾸로 추적하며 방문 해제
             while (max > 0) {
-                check[max][2] = 0;
+                remove(list[max]);
                 max = check[max][0];
             }
             // 옮겨야 하는 노드들 옮기기
-            for (int i = 1; i < check.length; i++) {
-                if (check[i][2] == 1) {
-                    int target = i - 1; // 우선 왼쪽 (0이 아닌 이상 이미 방문함)
-                    if (target == 0) { // 오른쪽 확인
-                        target = i + 1;
-                        while (check[target][2] == 1) target++;
-                    }
-                    answerCnt++;
-                    answer.append("\n" + (target == i - 1 ? "B " : "A ") + i + " " + target);
-                    check[i][2] = 0;
-                }
+            cur = rear;
+            while (cur != null && cur.vaule < list.length - 1) { // n 보다 작을 때만
+                answer.append("\nA " + cur.vaule + " " + (cur.vaule + 1));
+                cur = cur.before;
+                answerCnt++;
             }
+            if (front != null && front.vaule == list.length - 1) {
+                answer.append("\nB " + front.vaule + " " + (front.vaule - 1));
+                answerCnt++;
+            }
+
             System.out.print(answerCnt);
             System.out.print(answer);
-        }
-
-        public DoubleLinkedList (int n) {
-            list = new Node[n + 1];
-            for (int i = 1; i <= n; i++) {
-                list[i] = new Node(i, i - 1);
-                if (list[i].before != null) list[i].before.next = list[i];
-            }
-            front = list[1];
-            rear = list[n];
         }
 
         private void remove (Node cur) {
