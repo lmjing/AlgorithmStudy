@@ -36,9 +36,12 @@ public class Main {
         }
 
         public void solve () {
-            // 0 : before, 1 : cnt, 2 : (0 : 방문X, 1 : 방문)
-            int[][] check = new int[list.length + 1][3];
+            StringBuilder answer = new StringBuilder();
+            int answerCnt = 0;
 
+            // 0 : before, 1 : cnt, 2 : (0 : 방문X, 1 : 방문)
+            int[][] check = new int[list.length][3];
+            // 앞부터 증가하는 수열 구함
             Node cur = front;
             int max = 0;
             check[0][2] = 1;
@@ -56,12 +59,29 @@ public class Main {
 
                 if (check[max][1] < check[i][1])
                     max = i;
-                cur = cur.next;
 
-                System.out.print(check[i][1] + " ");
+                cur = cur.next;
             }
-            System.out.println();
-            System.out.println("max : " + max);
+            // 최대값 기준으로 거꾸로 추적하며 방문 해제
+            while (max > 0) {
+                check[max][2] = 0;
+                max = check[max][0];
+            }
+            // 옮겨야 하는 노드들 옮기기
+            for (int i = 1; i < check.length; i++) {
+                if (check[i][2] == 1) {
+                    int target = i - 1; // 우선 왼쪽 (0이 아닌 이상 이미 방문함)
+                    if (target == 0) { // 오른쪽 확인
+                        target = i + 1;
+                        while (check[target][2] == 1) target++;
+                    }
+                    answerCnt++;
+                    answer.append("\n" + (target == i - 1 ? "B " : "A ") + i + " " + target);
+                    check[i][2] = 0;
+                }
+            }
+            System.out.print(answerCnt);
+            System.out.print(answer);
         }
 
         public DoubleLinkedList (int n) {
