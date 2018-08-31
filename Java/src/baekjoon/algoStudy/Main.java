@@ -15,7 +15,6 @@ public class Main {
             list.move(sc.next(), sc.nextInt(), sc.nextInt());
         }
 
-        list.printAll();
         list.solve();
     }
 
@@ -92,15 +91,6 @@ public class Main {
             }
             front = list[1];
             rear = list[n];
-        }
-
-        public void printAll () {
-            Node cur = front;
-            while (cur != null) {
-                System.out.print(cur.vaule + " ");
-                cur = cur.next;
-            }
-            System.out.println();
         }
 
         private void remove (Node cur) {
