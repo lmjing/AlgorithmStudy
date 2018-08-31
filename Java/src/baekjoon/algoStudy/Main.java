@@ -19,7 +19,7 @@ public class Main {
             list.move(sc.next(), sc.nextInt(), sc.nextInt());
         }
 
-        System.out.print(list.solve());
+        list.solve();
     }
 
     public static class DoubleLinkedList {
@@ -90,13 +90,101 @@ public class Main {
             }
         }
 
-        public StringBuilder solve () {
+//        public StringBuilder solve () {
+//            StringBuilder answer = new StringBuilder();
+//            int count = 0;
+//
+//            Node b = findLongArray();
+//            Node f = b.before;
+//
+//            // 앞으로 검사
+//            while (f != null) {
+//                Node r = f;
+//                f = f.before;
+//                if (r.vaule > r.next.vaule) {
+//                    Node temp = r.next;
+//                    while (temp != b && temp.next.vaule < r.vaule)
+//                        temp = temp.next;
+//
+//                    count++;
+//                    answer.append("\nB " + r.vaule + " " + temp.vaule);
+//                    move("B", r, temp);
+//                }
+//            }
+//
+//            // 뒤로 검사
+//            b = b.next;
+//            while (b != null) {
+//                Node r = b;
+//                b = b.next;
+//                if (r.before.vaule > r.vaule) {
+//                    Node temp = r.before;
+//                    while (temp != front && temp.before.vaule > r.vaule)
+//                        temp = temp.before;
+//
+//                    count++;
+//                    answer.append("\nA " + r.vaule + " " + temp.vaule);
+//                    move("A", r, temp);
+//                }
+//            }
+//
+//            System.out.print(count);
+//            return answer;
+//        }
+
+        // 최대로 증가하는 수열 먼저 찾고
+        // 그 처음과 끝부터 한칸씩 이동하며 비교 후, 삽입하는 방식.
+//        public Node findLongArray () {
+//            Node cur = front;
+//            int max = 1;
+//            Node maxNode = cur;
+//            int cnt = 1;
+//            while (cur != null) {
+//                if (cur.next != null && cur.vaule < cur.next.vaule) {
+//                    cnt++;
+//                } else {
+//                    if (max < cnt) {
+//                        max = cnt;
+//                        maxNode = cur;
+//                    }
+//                    cnt = 1;
+//                }
+//                cur = cur.next;
+//            }
+//            return maxNode;
+//        }
+
+        public void solve () {
+            StringBuilder answer = new StringBuilder();
+
+            DoubleLinkedList max = new DoubleLinkedList();
+
+            Node cur = front;
+            Node curF = front;
+            int cnt = 1;
+            while (cur.next != null) {
+                if (cur.vaule < cur.next.vaule) {
+                    cnt++;
+                } else {
+                    if (cnt > max.size) {
+                        max.size = cnt;
+                        max.rear = cur;
+                        max.front = curF;
+                    }
+                    cnt = 1;
+                    curF = cur.next;
+                }
+                cur = cur.next;
+            }
+
+            System.out.print(solve2(max.front, max.rear));
+        }
+
+        public StringBuilder solve2 (Node f, Node b) {
             StringBuilder answer = new StringBuilder();
             int count = 0;
 
-            Node b = findLongArray();
-            Node f = b.before;
-
+            f = f.before;
             // 앞으로 검사
             while (f != null) {
                 Node r = f;
@@ -130,28 +218,6 @@ public class Main {
 
             System.out.print(count);
             return answer;
-        }
-
-        // 최대로 증가하는 수열 먼저 찾고
-        // 그 처음과 끝부터 한칸씩 이동하며 비교 후, 삽입하는 방식.
-        public Node findLongArray () {
-            Node cur = front;
-            int max = 1;
-            Node maxNode = cur;
-            int cnt = 1;
-            while (cur != null) {
-                if (cur.next != null && cur.vaule < cur.next.vaule) {
-                    cnt++;
-                } else {
-                    if (max < cnt) {
-                        max = cnt;
-                        maxNode = cur;
-                    }
-                    cnt = 1;
-                }
-                cur = cur.next;
-            }
-            return maxNode;
         }
 
         class Node {
