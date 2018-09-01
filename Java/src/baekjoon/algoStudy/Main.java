@@ -92,6 +92,10 @@ public class Main {
         }
 
         private void remove (Node cur) {
+            if (front == rear) {
+                front = rear = null;
+                return;
+            }
             if (cur == front) {
                 front = cur.next;
                 front.before = null;
