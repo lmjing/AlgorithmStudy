@@ -14,17 +14,21 @@ public class Main {
             textTree.add(sc.next());
 
         int count = 0;
-        StringBuilder answer = new StringBuilder();
+        ArrayList<String> answer = new ArrayList();
 
         for (int i = 0; i < m; i++) {
             String str = sc.next();
             if (textTree.check(str)) {
                 count++;
-                answer.append("\n" + str);
+                answer.add(str);
             }
         }
-        System.out.print(count);
-        System.out.print(answer);
+
+        Collections.sort(answer);
+        System.out.println(count);
+        for (String s : answer) {
+            System.out.println(s);
+        }
     }
 
     static class TextTree {
