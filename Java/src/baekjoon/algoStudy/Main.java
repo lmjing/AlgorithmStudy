@@ -8,29 +8,24 @@ public class Main {
         int n = sc.nextInt();
         int m = sc.nextInt();
 
-        TextTree textTree = new TextTree();
+        HashMap<String, Boolean> checkList = new HashMap<>();
 
         for (int i = 0; i < n; i++)
-            textTree.add(sc.next());
+            checkList.put(sc.next(), true);
 
-        int count = 0;
         ArrayList<String> answer = new ArrayList();
 
         for (int i = 0; i < m; i++) {
             String str = sc.next();
-            if (textTree.check(str)) {
-                count++;
+            if (checkList.containsKey(str)) {
                 answer.add(str);
             }
         }
-        System.out.println(count);
+        System.out.println(answer.size());
 
         Collections.sort(answer);
-        String before = null;
         for (String s : answer) {
-            if (!s.equals(before))
                 System.out.println(s);
-            before = s;
         }
     }
 
