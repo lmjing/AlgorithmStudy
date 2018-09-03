@@ -42,7 +42,7 @@ public class Main {
             while (i < str.length()) {
                 int c = chars[i++] - 97;
                 if (cur.alphabets[c] == null)
-                    cur.alphabets[c] = new Node(c);
+                    cur.addSub(c);
                 cur = cur.alphabets[c];
             }
         }
@@ -58,16 +58,23 @@ public class Main {
                     return false;
                 cur = cur.alphabets[c];
             }
-            return true;
+            return cur.last ? true : false;
         }
 
         class Node {
             int v;
+            boolean last;
             Node[] alphabets;
 
             public Node (int v) {
                 this.v = v;
+                last = true;
                 alphabets = new Node[26];
+            }
+
+            public void addSub (int i) {
+                alphabets[i] = new Node(i);
+                last = false;
             }
         }
     }
