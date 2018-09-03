@@ -23,11 +23,14 @@ public class Main {
                 answer.add(str);
             }
         }
+        System.out.println(count);
 
         Collections.sort(answer);
-        System.out.println(count);
+        String before = null;
         for (String s : answer) {
-            System.out.println(s);
+            if (!s.equals(before))
+                System.out.println(s);
+            before = s;
         }
     }
 
