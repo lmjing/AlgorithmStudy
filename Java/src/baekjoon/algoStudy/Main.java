@@ -15,8 +15,8 @@ public class Main {
         }
 
         if (sum > 0) {
-            System.out.println((int)Math.pow(min, 2));
             System.out.println(sum);
+            System.out.println((int)Math.pow(min, 2));
         } else System.out.println(-1);
 
     }
