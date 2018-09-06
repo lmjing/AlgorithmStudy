@@ -18,4 +18,16 @@ public class D2 {
             System.out.println("#" + i + " " + sum);
         }
     }
+
+    public static void num2357() {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        for (int i = 1; i <= t; i ++) {
+            int su = sc.nextInt();
+            System.out.print("#" + i + " ");
+            if (su % 10 == 9 || su / 10 == 9)
+                System.out.println("Yes");
+            else System.out.println("No");
+        }
+    }
 }
