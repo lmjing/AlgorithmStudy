@@ -6,6 +6,22 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 public class D3 {
+    public static void num2386() {
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();
+        for (int t = 1; t <= T; t++) {
+            int n = sc.nextInt();
+            ArrayList<Integer> list = new ArrayList<>();
+            for (int i = 0; i < n; i++) {
+                int num = sc.nextInt();
+                if (list.contains(num))
+                    list.remove(Integer.valueOf(num));
+                else
+                    list.add(num);
+            }
+            System.out.println("#" + t + " " + list.size());
+        }
+    }
 
     // 거듭제곱
     public static void square_question() {
