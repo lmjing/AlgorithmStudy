@@ -6,6 +6,15 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 public class D3 {
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();
+        sc.nextLine();
+        for (int t = 1; t <= T; t++) {
+            String[] input = sc.nextLine().split(" ");
+        }
+    }
+
     public static void num2386() {
         Scanner sc = new Scanner(System.in);
         int T = sc.nextInt();
