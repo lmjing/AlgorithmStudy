@@ -26,8 +26,9 @@ public class Hash {
         return new String();
     }
 
-    // Q.
+    // Q. 전화번호 목록
     // TIME : start 4:56, end 5:20
+    // TODO : String 함수를 활용해 쉽게 구하는 방법으로!
     static public boolean my_solution2(String[] phone_book) {
         boolean answer = true;
         Map<Character, ArrayList<String>> temp = new HashMap<>();
@@ -55,6 +56,5 @@ public class Hash {
     }
 
     static public void main (String[] args) {
-        
     }
 }
