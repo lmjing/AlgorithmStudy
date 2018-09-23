@@ -1,5 +1,6 @@
 package programmers;
 
+import javax.swing.text.html.HTMLDocument;
 import java.util.*;
 
 // programmers 코딩테스트 고득점 kit
@@ -87,10 +88,7 @@ public class Hash {
         ArrayList<Integer> result = new ArrayList<>();
 
         // value들 따로 담는 작업
-        ArrayList<Genre> values = new ArrayList<>();
-        Iterator iter = playlist.values().iterator();
-        while (iter.hasNext())
-            values.add((Genre)iter.next());
+        ArrayList<Genre> values = getGenreList(playlist);
 
         // value들 정렬 후 2개씩 담음
         Collections.sort(values);
@@ -103,14 +101,25 @@ public class Hash {
         }
 
         // 정답 배열로 다시 담음
-        int[] answer = new int[result.size()];
-        iter = result.iterator();
+        return convertToArray(result);
+    }
+
+    static ArrayList<Genre> getGenreList (HashMap<String, Genre> playlist) {
+        ArrayList<Genre> values = new ArrayList<>();
+        Iterator iter = playlist.values().iterator();
+        while (iter.hasNext())
+            values.add((Genre)iter.next());
+        return values;
+    }
+
+    static int[] convertToArray(ArrayList<Integer> arrayList) {
+        int[] answer = new int[arrayList.size()];
+        Iterator iter = arrayList.iterator();
         int i = 0;
         while (iter.hasNext()) {
             answer[i++] = (int)iter.next();
             System.out.println(answer[i - 1]);
         }
-
         return answer;
     }
 
