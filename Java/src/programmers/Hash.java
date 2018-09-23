@@ -72,36 +72,49 @@ public class Hash {
         return answer - 1;
     }
 
-
-    // TIME : start 2:47, end 2:46 (알바라서 손님 응대 시간 포함)
-    public int[] solution4(String[] genres, int[] plays) {
-        HashMap<String, ArrayList<Music>> playlist = new HashMap<>();
-        HashMap<String, Integer> playTimes = new HashMap<>();
-
+    // 베스트 앨범
+    // TIME : start 2:47, end 3:54 (알바라서 손님 응대 시간 포함 + 아빠 전화 시간....)
+    static public int[] solution4(String[] genres, int[] plays) {
+        // 일단 장르별로 분류
+        HashMap<String, Genre> playlist = new HashMap<>();
         for (int i = 0; i < genres.length; i++) {
-            ArrayList<Music> list = playlist.getOrDefault(genres[i], new ArrayList<>());
-            list.add(new Music(plays[i], i));
-            playlist.put(genres[i], list);
+            Genre genre = playlist.getOrDefault(genres[i], new Genre());
+            genre.addMusic(plays[i], i);
+            playlist.put(genres[i], genre);
         }
 
-        // 장르
-        ArrayList<ArrayList<Music>> values = (ArrayList<ArrayList<Music>>) playlist.values();
-        Collections.sort(values, new Comparator<ArrayList<Music>>() {
-            @Override
-            public int compare(ArrayList<Music> o1, ArrayList<Music> o2) {
-                return o1.size() - o2.size();
-            }
-        });
+        // 결과 값 몇개 나올지 모르니 일단 저장
+        ArrayList<Integer> result = new ArrayList<>();
 
-        int[] answer = {};
+        // value들 따로 담는 작업
+        ArrayList<Genre> values = new ArrayList<>();
+        Iterator iter = playlist.values().iterator();
+        while (iter.hasNext())
+            values.add((Genre)iter.next());
+
+        // value들 정렬 후 2개씩 담음
+        Collections.sort(values);
+        for (Genre genre : values) {
+            Collections.sort(genre.list);
+            int i = 0;
+            while (i < 2 && i < genre.list.size()) {
+                result.add(genre.list.get(i++).num);
+            }
+        }
+
+        // 정답 배열로 다시 담음
+        int[] answer = new int[result.size()];
+        iter = result.iterator();
+        int i = 0;
+        while (iter.hasNext()) {
+            answer[i++] = (int)iter.next();
+            System.out.println(answer[i - 1]);
+        }
+
         return answer;
     }
 
-    void printSorted (HashMap<String, ArrayList<Music>> playlist) {
-
-    }
-
-    class Genre {
+    static class Genre implements Comparable<Genre> {
         int allPlay;
         ArrayList<Music> list;
 
@@ -115,7 +128,12 @@ public class Hash {
             allPlay += play;
         }
 
-        class Music {
+        @Override
+        public int compareTo(Genre o) {
+            return o.allPlay - this.allPlay;
+        }
+
+        class Music implements Comparable<Music> {
             int play;
             int num;
 
@@ -123,10 +141,18 @@ public class Hash {
                 this.play = play;
                 this.num = num;
             }
+
+            @Override
+            public int compareTo(Music o) {
+                if (o.play == this.play) {
+                    return this.num - o.num;
+                } else
+                    return o.play - this.play;
+            }
         }
     }
 
     static public void main (String[] args) {
-
+        solution4(new String[]{"classic", "pop", "classic", "classic", "pop"}, new int[]{500, 600, 150, 800, 2500});
     }
 }
