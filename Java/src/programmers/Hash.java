@@ -1,8 +1,6 @@
 package programmers;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 // programmers 코딩테스트 고득점 kit
 public class Hash {
@@ -55,7 +53,7 @@ public class Hash {
         return true;
     }
 
-    // Q. 위장
+    // Q. 위
     // TIME : start 2:35, end 2:46 (알바라서 손님 응대 시간 포함)
     static public int solution3(String[][] clothes) {
         // 옷 종류별로 분류해서 카운팅
@@ -72,6 +70,60 @@ public class Hash {
             answer *= count + 1;
         }
         return answer - 1;
+    }
+
+
+    // TIME : start 2:47, end 2:46 (알바라서 손님 응대 시간 포함)
+    public int[] solution4(String[] genres, int[] plays) {
+        HashMap<String, ArrayList<Music>> playlist = new HashMap<>();
+        HashMap<String, Integer> playTimes = new HashMap<>();
+
+        for (int i = 0; i < genres.length; i++) {
+            ArrayList<Music> list = playlist.getOrDefault(genres[i], new ArrayList<>());
+            list.add(new Music(plays[i], i));
+            playlist.put(genres[i], list);
+        }
+
+        // 장르
+        ArrayList<ArrayList<Music>> values = (ArrayList<ArrayList<Music>>) playlist.values();
+        Collections.sort(values, new Comparator<ArrayList<Music>>() {
+            @Override
+            public int compare(ArrayList<Music> o1, ArrayList<Music> o2) {
+                return o1.size() - o2.size();
+            }
+        });
+
+        int[] answer = {};
+        return answer;
+    }
+
+    void printSorted (HashMap<String, ArrayList<Music>> playlist) {
+
+    }
+
+    class Genre {
+        int allPlay;
+        ArrayList<Music> list;
+
+        public Genre() {
+            this.allPlay = 0;
+            this.list = new ArrayList<>();
+        }
+
+        public void addMusic (int play, int num) {
+            list.add(new Music(play, num));
+            allPlay += play;
+        }
+
+        class Music {
+            int play;
+            int num;
+
+            public Music(int play, int num) {
+                this.play = play;
+                this.num = num;
+            }
+        }
     }
 
     static public void main (String[] args) {
