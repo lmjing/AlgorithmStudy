@@ -55,6 +55,26 @@ public class Hash {
         return true;
     }
 
+    // Q. 위장
+    // TIME : start 2:35, end 2:46 (알바라서 손님 응대 시간 포함)
+    static public int solution3(String[][] clothes) {
+        // 옷 종류별로 분류해서 카운팅
+        HashMap<String, Integer> clothesMap = new HashMap<>();
+        for (String[] c : clothes) {
+            clothesMap.put(c[1], clothesMap.getOrDefault(c[1], 0) + 1);
+        }
+
+        // 모든 경우의 수는 (카운트 + 1)들의 곱 - 1
+        // 카운트에 +1 하는 이유는 자신이 포함하지 않을 경우 포함
+        // -1 하는 이유는 전체 선택안한 경우 제외
+        int answer = 0;
+        for (int count : clothesMap.values()) {
+            answer *= count + 1;
+        }
+        return answer - 1;
+    }
+
     static public void main (String[] args) {
+
     }
 }
