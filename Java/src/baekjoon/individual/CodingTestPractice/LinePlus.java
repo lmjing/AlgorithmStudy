@@ -13,15 +13,15 @@ public class LinePlus {
         friends = new int[n + 1][n + 1];
 
         for (int i = 1; i <= n; i++) {
-            int x = lines[i][0] = sc.nextInt();
-            int y = lines[i][1] = sc.nextInt();
+            lines[i][0] = sc.nextInt();
+            lines[i][1] = sc.nextInt();
 
             for (int j = 1; j < i; j++) {
-                if ((lines[j][0] >= x && lines[j][0] <= y) || (lines[j][1] >= x && lines[j][1] <= y)) {
+                if (!(lines[i][1] < lines[j][0] || lines[j][1] < lines[i][0])) {
                     friends[i][j] = friends[j][i] = 1;
+                    System.out.println("f : " + i + "-" + j);
                 }
             }
-
         }
 
         int q = sc.nextInt();
@@ -31,28 +31,34 @@ public class LinePlus {
 
             boolean[] visited = new boolean[n + 1];
             visited[0] = visited[s] = true;
+            System.out.println("*" + s +  " " + e);
             System.out.println(getFriends(s, e, visited, 0));
         }
     }
 
     static int getFriends (int s, int e, boolean[] visited, int vCnt) {
         if (friends[s][e] != 0) {
-            return vCnt + friends[s][e];
+            System.out.println(s + "->" + e + " return : " + (vCnt + friends[s][e]));
+            return friends[s][e] + (friends[s][e] == -1 ? 0 : vCnt);
         }
-
 
         int min = visited.length;
         for (int i = 1; i < friends.length; i++) {
             if (!visited[i] && friends[s][i] == 1) {
                 visited[i] = true;
+                System.out.println(s + "->" + i + " : " + (vCnt + 1));
                 int fCnt = getFriends(i, e, visited, vCnt + 1);
                 if (min > fCnt && fCnt != -1) min = fCnt;
                 visited[i] = false;
             }
         }
 
-        if (min == visited.length) min = -1; // 연결 고리 없는 경우
-        friends[s][e] = friends[e][s] = min;
+        if (min == visited.length) { // 연결 고리 없는 경우
+            System.out.println("no : " + s + "->" + e);
+            min = -1;
+            vCnt = 0;
+        }
+        friends[s][e] = friends[e][s] = min - vCnt;
         return min;
     }
 
