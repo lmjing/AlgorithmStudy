@@ -49,11 +49,31 @@ public class LinePlus {
             }
         }
 
+        if (vCnt == 0)
+            friends[s][e] = friends[e][s] = min;
         if (min == visited.length) { // 연결 고리 없는 경우
             min = -1;
-            vCnt = 0;
         }
-        friends[s][e] = friends[e][s] = min - vCnt;
+
         return min;
     }
+
+//    int getFriends (int s, int e, boolean[] visited) {
+//        if (s == e) return 0;
+//        //if () // 다 방문했으면 리턴 -1
+//        if (friends[s][e] > 0) return friends[s][e];
+//
+//        int min = friends.length;
+//        int sx = lines[s][0], sy = lines[s][1];
+//        for (int i = 1; i <= friends.length; i++) {
+//            if (i == s) continue; // 자신은 건너 뜀
+//
+//            if ((lines[i][0] >= sx && lines[i][0] <= sy) || (lines[i][1] >= sx && lines[i][1] <= sy)) {
+//                friends[s][i] = friends[i][s] = 1;
+//                visited[i] = true;
+////                int f = 1 + getFriends(i, e, )
+//            }
+//        }
+//
+//    }
 }
