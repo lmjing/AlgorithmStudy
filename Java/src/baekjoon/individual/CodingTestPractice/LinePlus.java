@@ -19,7 +19,6 @@ public class LinePlus {
             for (int j = 1; j < i; j++) {
                 if (!(lines[i][1] < lines[j][0] || lines[j][1] < lines[i][0])) {
                     friends[i][j] = friends[j][i] = 1;
-                    System.out.println("f : " + i + "-" + j);
                 }
             }
         }
@@ -31,14 +30,12 @@ public class LinePlus {
 
             boolean[] visited = new boolean[n + 1];
             visited[0] = visited[s] = true;
-            System.out.println("*" + s +  " " + e);
             System.out.println(getFriends(s, e, visited, 0));
         }
     }
 
     static int getFriends (int s, int e, boolean[] visited, int vCnt) {
         if (friends[s][e] != 0) {
-            System.out.println(s + "->" + e + " return : " + (vCnt + friends[s][e]));
             return friends[s][e] + (friends[s][e] == -1 ? 0 : vCnt);
         }
 
@@ -46,7 +43,6 @@ public class LinePlus {
         for (int i = 1; i < friends.length; i++) {
             if (!visited[i] && friends[s][i] == 1) {
                 visited[i] = true;
-                System.out.println(s + "->" + i + " : " + (vCnt + 1));
                 int fCnt = getFriends(i, e, visited, vCnt + 1);
                 if (min > fCnt && fCnt != -1) min = fCnt;
                 visited[i] = false;
@@ -54,30 +50,10 @@ public class LinePlus {
         }
 
         if (min == visited.length) { // 연결 고리 없는 경우
-            System.out.println("no : " + s + "->" + e);
             min = -1;
             vCnt = 0;
         }
         friends[s][e] = friends[e][s] = min - vCnt;
         return min;
     }
-
-//    int getFriends (int s, int e, boolean[] visited) {
-//        if (s == e) return 0;
-//        //if () // 다 방문했으면 리턴 -1
-//        if (friends[s][e] > 0) return friends[s][e];
-//
-//        int min = friends.length;
-//        int sx = lines[s][0], sy = lines[s][1];
-//        for (int i = 1; i <= friends.length; i++) {
-//            if (i == s) continue; // 자신은 건너 뜀
-//
-//            if ((lines[i][0] >= sx && lines[i][0] <= sy) || (lines[i][1] >= sx && lines[i][1] <= sy)) {
-//                friends[s][i] = friends[i][s] = 1;
-//                visited[i] = true;
-////                int f = 1 + getFriends(i, e, )
-//            }
-//        }
-//
-//    }
 }
