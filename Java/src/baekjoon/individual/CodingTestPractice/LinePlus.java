@@ -13,32 +13,65 @@ public class LinePlus {
         friends = new int[n + 1][n + 1];
 
         for (int i = 1; i <= n; i++) {
-            lines[i][0] = sc.nextInt();
-            lines[i][1] = sc.nextInt();
+            int x = lines[i][0] = sc.nextInt();
+            int y = lines[i][1] = sc.nextInt();
+
+            for (int j = 1; j < i; j++) {
+                if ((lines[j][0] >= x && lines[j][0] <= y) || (lines[j][1] >= x && lines[j][1] <= y)) {
+                    friends[i][j] = friends[j][i] = 1;
+                }
+            }
+
         }
 
         int q = sc.nextInt();
         for (int i = 0; i < q; i++) {
-            int min = n;
+            int s = sc.nextInt();
+            int e = sc.nextInt();
+
+            boolean[] visited = new boolean[n + 1];
+            visited[0] = visited[s] = true;
+            System.out.println(getFriends(s, e, visited, 0));
         }
     }
 
-    int getFriends (int s, int e, boolean[] visited) {
-        if (s == e) return 0;
-        //if () // 다 방문했으면 리턴 -1
-        if (friends[s][e] > 0) return friends[s][e];
+    static int getFriends (int s, int e, boolean[] visited, int vCnt) {
+        if (friends[s][e] != 0) {
+            return vCnt + friends[s][e];
+        }
 
-        int min = friends.length;
-        int sx = lines[s][0], sy = lines[s][1];
-        for (int i = 1; i <= friends.length; i++) {
-            if (i == s) continue; // 자신은 건너 뜀
 
-            if ((lines[i][0] >= sx && lines[i][0] <= sy) || (lines[i][1] >= sx && lines[i][1] <= sy)) {
-                friends[s][i] = friends[i][s] = 1;
+        int min = visited.length;
+        for (int i = 1; i < friends.length; i++) {
+            if (!visited[i] && friends[s][i] == 1) {
                 visited[i] = true;
-                int f = 1 + getFriends(i, e, )
+                int fCnt = getFriends(i, e, visited, vCnt + 1);
+                if (min > fCnt && fCnt != -1) min = fCnt;
+                visited[i] = false;
             }
         }
 
+        if (min == visited.length) min = -1; // 연결 고리 없는 경우
+        friends[s][e] = friends[e][s] = min;
+        return min;
     }
+
+//    int getFriends (int s, int e, boolean[] visited) {
+//        if (s == e) return 0;
+//        //if () // 다 방문했으면 리턴 -1
+//        if (friends[s][e] > 0) return friends[s][e];
+//
+//        int min = friends.length;
+//        int sx = lines[s][0], sy = lines[s][1];
+//        for (int i = 1; i <= friends.length; i++) {
+//            if (i == s) continue; // 자신은 건너 뜀
+//
+//            if ((lines[i][0] >= sx && lines[i][0] <= sy) || (lines[i][1] >= sx && lines[i][1] <= sy)) {
+//                friends[s][i] = friends[i][s] = 1;
+//                visited[i] = true;
+////                int f = 1 + getFriends(i, e, )
+//            }
+//        }
+//
+//    }
 }
