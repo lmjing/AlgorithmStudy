@@ -38,4 +38,4 @@ function concatZipStr(str, cnt, before) {
     } else {
         return str + cnt.toString() + before;
     }
-}}
+};
