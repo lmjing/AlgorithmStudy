@@ -80,3 +80,13 @@ function solution(a, b) {
 }
 let date3 = new Date(95,11,17);
 console.log(date3.toString());
+
+// 같은 숫자는 싫어
+function solution(arr)
+{
+    return arr.reduce((acc, e) => {
+        if (acc[acc.length-1] !== e) acc.push(e);
+        return acc;
+    }, []);
+    // return arr.filter((e, i) => arr[i+1] !== e);
+}
