@@ -90,3 +90,21 @@ function solution(arr)
     }, []);
     // return arr.filter((e, i) => arr[i+1] !== e);
 }
+
+// 문자열 내 p와 y의 개수
+function solution(s){
+    /*
+    let cntResult = s.split("").reduce((cnt, e) => {
+        let str = e.toUpperCase();
+        if (str === 'Y') cnt[0]++;
+        else if (str === 'P') cnt[1]++;
+        return cnt;
+    }, [0, 0]);
+    return cntResult[0] === cntResult[1];
+    */
+    let result = s.split("").reduce((cnt, e) => {
+        cnt[e.toUpperCase()]++;
+        return cnt;
+    }, {P: 0, Y: 0});
+    return result['P'] === result['Y'];
+}
