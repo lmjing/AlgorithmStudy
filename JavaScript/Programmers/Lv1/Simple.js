@@ -93,7 +93,7 @@ function solution(arr)
 
 // 문자열 내 p와 y의 개수
 function solution(s){
-    /*
+    /* 배열 사용
     let cntResult = s.split("").reduce((cnt, e) => {
         let str = e.toUpperCase();
         if (str === 'Y') cnt[0]++;
@@ -102,9 +102,12 @@ function solution(s){
     }, [0, 0]);
     return cntResult[0] === cntResult[1];
     */
+    /* object 사용
     let result = s.split("").reduce((cnt, e) => {
         cnt[e.toUpperCase()]++;
         return cnt;
     }, {P: 0, Y: 0});
     return result['P'] === result['Y'];
+     */
+    return (s.match(/y/gi)||[]).length === (s.match(/p/gi)||[]).length;
 }
